@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+output_blocklist="/etc/dnscrypt-proxy/blocked-names.txt"
+date_generate="$(awk 'NR==9' $output_blocklist | awk '{print $3}')"
+current_date=$(date +%d)
+
+if [[ $current_date != ${date_generate:8:2} ]]
+then
+  curl -o $output_blocklist https://dblw.oisd.nl/
+fi
+

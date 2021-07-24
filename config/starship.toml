@@ -1,0 +1,28 @@
+add_newline = false
+
+[character]
+success_symbol = "[](fg:#fee074)[](fg:#e68183)[](fg:#7ad88e)"
+# success_symbol = "[](fg:#fee074)[](fg:#e68183)[](fg:#bb98eb)"
+# success_symbol = "[](fg:#bb98eb)[](fg:#8accfe)[](fg:#7ad88e)"
+error_symbol = "[✗](bold red)"
+
+#[python]
+#symbol = "  "
+#scan_for_pyfiles = false
+
+#[rust]
+#symbol = " "
+
+#[dart]
+#format = "via [ $version](bold fg:#00b4aa) "
+
+[directory.substitutions]
+"~/Escritorio" = "\uF6C3 "
+"~/Descargas" = "\uf019 "
+"~/Documentos" = "\uf719 "
+"~/Imágenes" = "\ue244 "
+"~/Música" = "\ufc58 "
+"~/Vídeos" = "\uf191 "
+"~/Git" = "\uf7a1 "
+"/run/media/crag" = "\ufa52"
+
