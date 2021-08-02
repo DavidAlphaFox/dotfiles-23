@@ -67,28 +67,21 @@ utils.map(
     opt
 )
 
-utils.map("n", "<Leader>b", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
-utils.map("n", "<Leader>fh", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
+utils.map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
+utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
 utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
-utils.map('n', 'ł',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opts)
---AltGr .
-utils.map('n', '·', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]], opts)
--- Find files
---AltGr p
-utils.map('n', 'þ' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-utils.map('i', 'þ' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-utils.map('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opts)
+utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]], opts)
+utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opts)
 utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], opts)
--- Grep Files
+utils.map('n', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
+utils.map('i', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
+utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opts)
+utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opts)
 utils.map('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
 utils.map('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opts)
-utils.map('n', '<leader>h', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opts)
-
 
 -- highlights
-
 local cmd = vim.cmd
-
 cmd "hi TelescopeBorder   guifg=#2a2e36"
 cmd "hi TelescopePromptBorder   guifg=#2a2e36"
 cmd "hi TelescopeResultsBorder  guifg=#2a2e36"

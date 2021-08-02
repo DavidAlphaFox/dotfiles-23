@@ -1,6 +1,6 @@
 -- Global
 vim.o.fillchars = vim.o.fillchars .. 'vert: '
-vim.o.showtabline = 2
+vim.o.showtabline = 0
 vim.o.scrolloff = 10
 vim.o.mouse = 'a'
 vim.o.smartindent = true
@@ -78,7 +78,6 @@ vim.wo.relativenumber = true
 vim.wo.foldenable = false
 vim.wo.cursorline = true
 
-vim.cmd[[autocmd BufReadPost * lua goto_last_pos()]]
 function goto_last_pos()
   local last_pos = vim.fn.line("'\"")
   if last_pos > 0 and last_pos <= vim.fn.line("$") then
@@ -86,9 +85,10 @@ function goto_last_pos()
   end
 end
 
-vim.cmd [[autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab]]
-vim.cmd 'au TextYankPost * silent! lua vim.highlight.on_yank()'
-vim.cmd[[au BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)]]
-vim.cmd[[au BufEnter * :let @/=""]]
-vim.cmd[[au BufWritePre * :%s/\s\+$//e]]
-vim.cmd[[au BufEnter * silent! lcd %:p:h]]
+vim.cmd[[au BufReadPost * lua goto_last_pos()
+au Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+au TextYankPost * silent! lua vim.highlight.on_yank()
+au BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+au BufEnter * :let @/=""
+au BufWritePre * :%s/\s\+$//e
+au BufEnter * silent! lcd %:p:h]]

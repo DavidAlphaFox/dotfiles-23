@@ -158,6 +158,7 @@ alias grubc="sudoedit /etc/default/grub"
 alias vimc='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugs.lua'
 alias vimm='vim ~/.config/nvim/lua/keymappings.lua'
+alias vims='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
 alias vimcp='vim ~/.config/nvim/lua/config'
 # HACK: Jump alias

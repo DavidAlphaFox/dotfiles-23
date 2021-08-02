@@ -76,10 +76,6 @@ noscript.enable_plugins = true
 --  allow access to audio & video devices for capture.
 -- settings.on['discord.com'].webview.enable_media_stream = true
 
---  twitter is a bitch & cries about your browser type
-settings.on['twitter.com'].webview.user_agent = twitter_UA
-settings.on['mobile.twitter.com'].webview.user_agent = twitter_UA
-
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 --  :lua settings .on['love2d.org'] .webview .auto_load_images = true
 
@@ -108,9 +104,10 @@ downloads.add_signal( 'download-location',  function( uri, file )
 end)
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-local matches = { 'about:blank',  'luakit://newtab/',  'https://www1.watch-series.la/' }
+local matches = { 'about:blank',  'luakit://newtab/'}
 local begins  = { 'adblock-blocked:' }
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 webview.add_signal( 'init',  function( view )  --  during initialization of a new tab
     --  open certain schemes w/ other apps?  luakit.github.io/docs/pages/02-faq.html
     view:add_signal('navigation-request', function( v, uri, reason)
@@ -121,13 +118,11 @@ webview.add_signal( 'init',  function( view )  --  during initialization of a ne
         if low:match( 'youtube%.com/watch%?v=' ) then
             local video_cmd_fmt = "mpv --ytdl '%s'"
             local str = string.gsub(uri or "", " ", "%%20")
-            print("Entre")
             luakit.spawn(string.format(video_cmd_fmt, str))
             return false
 
-        -- elseif low:match( 'youtube%.com/%?app=desktop' ) then
+        -- if low:match( 'youtube%.com/%?app=desktop' ) then
             -- return false  --  no redirects from mobile
-
         elseif low:match( 'www%.reddit%.com/chat/minimize' ) then
             return false  --  skip reddit's slow-@ss chat
 
@@ -178,9 +173,10 @@ webview.add_signal( 'init',  function( view )  --  during initialization of a ne
                     local certain = false  --  make sure tab is still blank
 
                     for i=1, #matches do  --  test for full matches
-                        if v .uri == matches[i] then
+                        if v.uri == matches[i] then
                             certain = true ; break
-                    end;end
+                    end
+                end
 
                     if not certain then  --  attempt "beginswith"
                         for i=1, #begins do

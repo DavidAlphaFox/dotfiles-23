@@ -24,7 +24,6 @@ set $second_monitor DP-2
 font pango: JetBrainsMono Nerd Font 9
 
 #  xwayland disabled
-
 default_border none
 default_floating_border none
 
@@ -139,7 +138,7 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
-    #  floating_superifier $super normal
+    # floating_superifier $super normal
 
     # Reload the configuration file
     bindsym $super+Shift+r reload
@@ -150,6 +149,8 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
     # Move your focus around
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
+    bindsym $alt+l workspace next
+    bindsym $alt+h workspace prev
 
     bindsym $super+$left focus left
     bindsym $super+$down focus down
@@ -227,10 +228,10 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
     bindsym $super+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $super+Shift+space floating toggle
+    bindsym $super+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $super+space focus mode_toggle
+    bindsym $super+Shift+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $super+p focus parent

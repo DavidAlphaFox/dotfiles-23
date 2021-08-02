@@ -81,11 +81,6 @@ return require('packer').startup(function(use)
 
   --UI
   use {'glepnir/galaxyline.nvim', branch = 'main'}
-  -- use 'akinsho/nvim-bufferline.lua'
-  -- use 'jose-elias-alvarez/buftabline.nvim'
-  -- use {'seblj/nvim-tabline',
-    -- requires = {'kyazdani42/nvim-web-devicons'}
-  -- }
   use {'alvarosevilla95/luatab.nvim',requires='kyazdani42/nvim-web-devicons'}
   use 'karb94/neoscroll.nvim'
   use {
@@ -99,7 +94,6 @@ return require('packer').startup(function(use)
 
   -- Text edition
   use {'mg979/vim-visual-multi', branch = 'master'}
-  -- use 'b3nj5m1n/kommentary'
   use 'winston0410/commented.nvim'
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'DougBeney/pickachu'
