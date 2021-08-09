@@ -24,7 +24,10 @@ vim.o.errorbells = false
 vim.o.joinspaces = false
 vim.o.title = true
 vim.o.lazyredraw = true
-vim.o.listchars = 'tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣'
+-- vim.o.completeopt = 'menu,menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
+-- vim.o.listchars = ",precedes:←,extends:→,nbsp:␣"
+vim.opt.listchars = {eol = '↲', tab = '▸ ', trail = '·', precedes = '←', extends = '→', nbsp = '␣'}
 vim.o.encoding = 'UTF-8'
 -- Format options
 vim.o.textwidth = 79
@@ -32,8 +35,6 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.autoindent = true
 vim.o.smarttab = true
--- vim.o.completeopt = 'menu,menuone,noselect'
-vim.o.completeopt = "menuone,noselect"
 vim.o.clipboard = 'unnamedplus'
 vim.o.grepformat = '%f:%l:%c:%m'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'

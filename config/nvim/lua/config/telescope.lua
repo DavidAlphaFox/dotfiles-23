@@ -74,10 +74,9 @@ utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.com
 utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opts)
 utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], opts)
 utils.map('n', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-utils.map('i', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
 utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opts)
 utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opts)
-utils.map('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
+utils.map('n', '<leader>gl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
 utils.map('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opts)
 
 -- highlights

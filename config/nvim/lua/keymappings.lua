@@ -1,13 +1,13 @@
 local utils = require('utils')
 local opts = { noremap = true, silent = true }
 
-utils.map('i', 'jk', '<Esc>', opts)           -- jk to escape
 utils.map('n', 'Y', 'y$', opts)
 utils.map('n', 'ñ', ':')
 utils.map('n', '<leader><Space>', '/')
-utils.map('n', '<leader>a', '?')
-utils.map('n', 'ñs', ':%s/')
-utils.map('n', '<leader>s', ':s/')
+utils.map('n', '<leader>s', '?')
+utils.map('n', 'ñs', ':s/')
+utils.map('n', 'ñc', ':%s/')
+utils.map('n', '<leader>c', [[:%s/\<<C-r><C-w>\>/]])
 
 --Python Docstring
 vim.cmd [[autocmd FileType python nnoremap <buffer> <leader>pd :Pydocstring<CR>]]
@@ -23,16 +23,15 @@ utils.map('n', 'td', ':tabclose<CR>', opts)
 utils.map('n', 'tm', ':tabmove<CR>', opts)
 for i = 9,1,-1
 do
-   kmap = string.format("<leader>%d", i)
-   command = string.format("%dgt", i)
+   local kmap = string.format("<leader>%d", i)
+   local command = string.format("%dgt", i)
    utils.map('n', kmap, command)
 end
 
 -- Buffer mappings
 -- utils.map('n', '<c-j>', ':bnext<cr>', opts)
 -- utils.map('n', '<c-k>', ':bprev<cr>', opts)
-utils.map('n', 'ĸ', ':bd<CR>', opts)
-
+-- utils.map('n', 'ĸ', ':bd<CR>', opts)
 -- Terminal open
 -- utils.map('n', '<leader>t', ':split<CR>:ter<CR>:resize 8<CR>'
 
@@ -79,4 +78,8 @@ utils.map('n', '<leader>v', ':let @/=""<cr>', opts)
 
 -- Leader for multi cursors
 -- vim.g.VM_leader =
-vim.g.VM_maps = {["Select All"] = 'ña'}
+vim.g.VM_maps = {
+   ["Select All"] = 'ña',
+   ["Select Cursor Up"]   = '<C-k>',
+   ["Select Cursor Down"]   = '<C-j>',
+}

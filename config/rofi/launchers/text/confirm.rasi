@@ -5,7 +5,7 @@
 * {
     background-color:       @bg;
     text-color:             @fg;
-    font:		    "Comfortaa 12";
+    font:		    "Comfortaa 16";
 }
 
 window {

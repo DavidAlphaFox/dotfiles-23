@@ -1,18 +1,23 @@
-require('config.treesitter')
-require('config.colorizer')
+local package = {
+	'config.treesitter',
+	'config.colorizer',
+	'config.gitstatussigns',
+	'config.tabline',
+	'config.telescope',
+	'config.lsp'
+}
+for _, pkg in ipairs(package) do
+	require(pkg)
+end
 require('nvim-autopairs').setup()
-require('config.gitstatussigns')
-require('config.tabline')
-require('config.telescope')
-require('config.floatTerm')
-require('config.lsp')
 require("todo-comments").setup {}
-require('config.codeRunner')
+require('code_runner').setup({})
 -- require('config.devicon')
 require('neoscroll').setup()
 require('commented').setup({
 	comment_padding = " ",
 	keybindings = {n = "gc", v = "gc", nl = "gcc"},
+	prefer_block_comment = true,
 	set_keybindings = true,
 	ex_mode_cmd = "Comment"
 })

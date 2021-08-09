@@ -35,4 +35,3 @@ utils.map('n', '<leader>t', ':ToggleBuftabline<cr>', opts)
 --     right_separator = false,                    -- Show right separator on the last tab
 -- }
 vim.o.tabline = '%!v:lua.require\'luatab\'.tabline()'
-

@@ -26,6 +26,9 @@ settings.window.home_page = 'https://randsearch.daniel.priv.no/'
 settings.webview.default_charset = "utf-8"
 settings.webview.default_font_family = "Lucida MAC"
 settings.webview.cursive_font_family = "Lucida MAC"
+settings.webview.default_font_size = 18
+settings.webview.minimum_font_size = 16
+settings.webview.default_monospace_font_size = 16
 
 
 --  deprecated in favour of tablist.visibility
@@ -40,7 +43,6 @@ settings.webview.load_icons_ignoring_image_load_setting = true  --  favicons
 settings.webview.enable_media_stream = false
 settings.webview.media_playback_requires_gesture = true
 
-settings.webview.minimum_font_size = 9
 settings.webview.enable_fullscreen = false
 settings.webview.enable_developer_extras = false
 settings.webview.enable_xss_auditor = true  --  cross-scripting

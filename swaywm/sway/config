@@ -21,7 +21,7 @@ set $gnome-schema org.gnome.desktop.interface
 # Second monitor config
 set $second_monitor DP-2
 # Font settings
-font pango: JetBrainsMono Nerd Font 9
+font pango: JetBrainsMono Nerd Font 14
 
 #  xwayland disabled
 default_border none
@@ -46,7 +46,8 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Sweet-mars'
     gsettings set $gnome-schema icon-theme 'Macjaro-master'
     gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
-    gsettings set $gnome-schema font-name 'Lucida MAC 10'
+    gsettings set $gnome-schema font-name 'Lucida MAC 14'
+    gsettings set org.gnome.desktop.wm.preferences button-layout :
 }
 
 ### Output configuration
@@ -57,7 +58,7 @@ output * bg ~/.wallpaper.jpg fill
 
 # Monitors configuration:
 #
-output eDP-1 resolution 1366x768 position 0,0
+output eDP-1 resolution --custom 1920x1080 position 0,0
 output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest subpixel rgb
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -146,6 +147,7 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
 #
 # Moving around:
 #
+    floating_modifier $super
     # Move your focus around
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
@@ -314,6 +316,25 @@ bar {
 }
 include /etc/sway/config.d/*
 
+# Floating windows
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [window_role="task_dialog|bubble|page-info|Preferences|pop-up"] floating enable
+for_window [window_role="Open Files"] floating enable sticky
+for_window [window_role="File Operation Progress"] floating enable sticky
+for_window [window_role="Save As"] floating enable
+
+for_window [class="qBittorrent" window_role="pop-up"] floating enable
+for_window [class="mtp-ng-qt" window_role="Open"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [app_id="spotify"] floating enable
+
+#for_window [class="VirtualBox"] floating enable
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 0
 for_window [app_id="floating"] floating enable

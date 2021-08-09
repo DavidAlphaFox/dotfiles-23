@@ -16,11 +16,11 @@ require('packer').init({display = {auto_clean = false}})
 return require('packer').startup(function(use)
   -- Packer can manage itself as an optional plugin
   use 'wbthomason/packer.nvim'
+  use 'folke/lua-dev.nvim'
 
   -- Autocomplete
   use 'windwp/nvim-autopairs'
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets'
+  use 'L3MON4D3/LuaSnip'
 
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -40,7 +40,6 @@ return require('packer').startup(function(use)
   -- Syntax
   use 'sheerun/vim-polyglot'
   use 'zinit-zsh/zplugin-vim-syntax'
-  use 'editorconfig/editorconfig-vim'
   use 'elixir-editors/vim-elixir'
 
   -- Icons
@@ -74,7 +73,6 @@ return require('packer').startup(function(use)
   -- Tim Pope docet
   use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
-  use 'tpope/vim-fugitive'
 
   -- General Plugins
   use 'jeffkreeftmeijer/vim-numbertoggle'
@@ -100,7 +98,6 @@ return require('packer').startup(function(use)
   use 'AndrewRadev/splitjoin.vim'
 
   --Utils
-  use 'numtostr/FTerm.nvim'
   use 'CRAG666/code_runner.nvim'
 
   -- Themes

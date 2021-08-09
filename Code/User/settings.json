@@ -257,7 +257,6 @@
   "workbench.editor.restoreViewState": false,
   "editor.codeLens": false,
   "editor.linkedEditing": true,
-  "window.zoomLevel": -1,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/node_modules/**": true,

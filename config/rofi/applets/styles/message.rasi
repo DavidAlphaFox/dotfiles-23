@@ -5,11 +5,11 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"Comfortaa 12";
+	font:				 	"Comfortaa 14";
 }
 
 window {
-    width:      			360px;
+    width:      			390px;
     padding:    			25px;
     border:					0px;
     border-radius:          0px;

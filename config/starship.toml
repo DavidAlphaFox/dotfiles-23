@@ -1,7 +1,7 @@
 add_newline = false
 
 [character]
-success_symbol = "[](fg:#fee074)[](fg:#e68183)[](fg:#7ad88e)"
+success_symbol = "[»](fg:#fee074)[»](fg:#e68183)[»](fg:#7ad88e)"
 # success_symbol = "[](fg:#fee074)[](fg:#e68183)[](fg:#bb98eb)"
 # success_symbol = "[](fg:#bb98eb)[](fg:#8accfe)[](fg:#7ad88e)"
 error_symbol = "[✗](bold red)"
