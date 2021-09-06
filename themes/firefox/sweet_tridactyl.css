@@ -43,7 +43,7 @@
 #tridactyl-input {    padding: 1rem;
     color: var(--tridactyl-fg);
     width: 90%;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1;
     background: var(--tridactyl-bg);
     padding-left: unset;
@@ -132,7 +132,7 @@
     background: var(--tridactyl-bg) !important;
     border: unset !important;
     border: 1px var(--base0B) solid !important;
-    font-size: 14pt !important;
+    font-size: 12pt !important;
     /*font-weight: 200 !important;*/
     padding: 0.8ex !important;
 }
