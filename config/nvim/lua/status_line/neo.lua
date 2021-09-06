@@ -97,6 +97,7 @@ gls.left[getNum()] = { FileName = { -- {{{2
 	highlight = {colors.white, colors.bg_statusline, 'bold'},
 	provider  = 'FileName',
 }}
+
 -- }}}2
 
 gls.left[getNum()] = { FileSep = { -- {{{2
@@ -135,7 +136,7 @@ gls.left[getNum()] = { EFSep = { -- {{{2
 
 gls.left[getNum()] = { Git = { -- {{{2
 	condition = condition.check_git_workspace,
-	highlight = {colors.blue, colors.bg_statusline, 'bold'},
+	highlight = {colors.bg_statusline, colors.bg_statusline, 'bold'},
 
 	provider = function ()
 		vim.api.nvim_command('hi GalaxyGit guifg='..mode_color[vim.fn.mode()])
@@ -149,15 +150,26 @@ gls.left[getNum()] = { Git = { -- {{{2
 
 -- Centered modules {{{1
 --[[ gls.mid[0] = { Empty = {
-	highlight = {colors.bg, colors.bg},
-	provider  = function() return end,
+	highlight = {colors.bg_statusline, colors.bg_statusline},
+	provider  = function()
+		vim.api.nvim_command('hi GalaxyEmpty guifg='..mode_color[vim.fn.mode()])
+		return
+	end
 }} --]]
 -- }}}1
 
 -- Right hand side modules {{{1
 position = 0
-gls.right[position] = { LspClient = { -- {{{2
-	highlight = {colors.fg, colors.bg_statusline, 'bold'},
+gls.right[position] = { FileNumTab = { -- {{{2
+	highlight = {colors.bg_statusline, colors.bg_statusline, 'bold'},
+	provider  = function()
+		vim.api.nvim_command('hi GalaxyFileNumTab guifg='..mode_color[vim.fn.mode()])
+		return string.format("%d/%d ", vim.fn.tabpagenr(), vim.fn.tabpagenr('$'))
+	end
+}}
+
+gls.right[getNum()] = { LspClient = { -- {{{2
+	highlight = {colors.bg_statusline, colors.bg_statusline, 'bold'},
 
 	provider = function ()
 		local icon = ' '
@@ -273,7 +285,7 @@ gls.right[getNum()] = { Right = { -- {{{2
 position = 0
 -- Short line left hand side modules {{{1
 gls.short_line_left[position] = { Left = { -- {{{2
-	highlight = {colors.blue, colors.bg},
+	highlight = {colors.bg_statusline, colors.bg},
 
 	provider = function ()
 		vim.api.nvim_command('hi GalaxyLeft guifg='..mode_color[vim.fn.mode()])

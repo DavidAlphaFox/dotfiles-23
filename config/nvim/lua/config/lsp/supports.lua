@@ -1,6 +1,6 @@
-local utils = require 'utils'
 local lspc = require 'lspconfig'
-require'lspkind'.init({})
+local coq = require 'coq'
+-- require'lspkind'.init({})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -86,11 +86,22 @@ local flake8 = {
 }
 -- capabilities = capabilities,
 local servers = {"pyright", "elixirls", "ccls", "tsserver", "dockerls", "bashls"}
-for _, lsp in ipairs(servers) do
-  lspc[lsp].setup{
+for _, server in ipairs(servers) do
+  --[[ lspc[server].setup{
     on_attach = on_attach,
     capabilities = make_capabilities()
-  }
+  } --]]
+  lspc[server].setup(coq.lsp_ensure_capabilities(
+    vim.tbl_deep_extend("force", {
+      on_attach = on_attach,
+      capabilities = make_capabilities(),
+      flags = {debounce_text_changes = 150},
+      -- init_options = config
+      }, {})))
+    local cfg = lspc[server]
+    if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
+        print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+    end
 end
 
 lspc.efm.setup {
@@ -112,33 +123,35 @@ lspc.efm.setup {
 local sumneko_binary = "/usr/bin/lua-language-server"
 local sumneko_root_path = "/usr/share/lua-language-server"
 -- lua-dev.nvim
-local luadev = require("lua-dev").setup({
-    library = {vimruntime = true, types = true, plugins = true},
-    lspconfig = {
-        capabilities = make_capabilities(),
-        on_attach = on_attach,
-        cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-        settings = {
-            Lua = {
-                runtime = {
-                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                    version = 'LuaJIT',
-                    -- Setup your lua path
-                    path = vim.split(package.path, ';')
-                },
-                diagnostics = {
-                    -- Get the language server to recognize the `vim` global
-                    globals = {'vim'}
-                },
-                workspace = {
-                    -- Make the server aware of Neovim runtime files
-                    library = {
-                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                    }
-                }
-            }
-        }
-    }
-})
+local luadev = require("lua-dev").setup(
+  coq.lsp_ensure_capabilities(
+    vim.tbl_deep_extend("force", {
+      library = {vimruntime = true, types = true, plugins = true},
+      lspconfig = {
+          capabilities = make_capabilities(),
+          on_attach = on_attach,
+          cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+          settings = {
+              Lua = {
+                  runtime = {
+                      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                      version = 'LuaJIT',
+                      -- Setup your lua path
+                      path = vim.split(package.path, ';')
+                  },
+                  diagnostics = {
+                      -- Get the language server to recognize the `vim` global
+                      globals = {'vim'}
+                  },
+                  workspace = {
+                      -- Make the server aware of Neovim runtime files
+                      library = {
+                          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                      }
+                  }
+              }
+          }
+      }
+}, {})))
 lspc.sumneko_lua.setup(luadev)

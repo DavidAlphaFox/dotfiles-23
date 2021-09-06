@@ -20,16 +20,16 @@ return require('packer').startup(function(use)
 
   -- Autocomplete
   use 'windwp/nvim-autopairs'
-  use 'L3MON4D3/LuaSnip'
+  -- use 'norcalli/snippets.nvim'
 
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'folke/lsp-colors.nvim'
   use 'glepnir/lspsaga.nvim'
-  use 'onsails/lspkind-nvim'
-  use 'hrsh7th/nvim-compe'
+  -- use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
-  use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
+  use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
+  use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -39,7 +39,6 @@ return require('packer').startup(function(use)
 
   -- Syntax
   use 'sheerun/vim-polyglot'
-  use 'zinit-zsh/zplugin-vim-syntax'
   use 'elixir-editors/vim-elixir'
 
   -- Icons
@@ -71,7 +70,6 @@ return require('packer').startup(function(use)
   -- use 'akinsho/flutter-tools.nvim'
 
   -- Tim Pope docet
-  use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
 
   -- General Plugins
@@ -96,15 +94,19 @@ return require('packer').startup(function(use)
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'DougBeney/pickachu'
   use 'AndrewRadev/splitjoin.vim'
+  use {
+    "blackCauldron7/surround.nvim",
+    config = function()
+      require "surround".setup {}
+    end
+  }
 
   --Utils
-  use 'CRAG666/code_runner.nvim'
+  use { 'CRAG666/code_runner.nvim', branch =  'new_features'}
 
   -- Themes
   use 'franbach/miramare'
   use 'sainnhe/sonokai'
   use 'folke/tokyonight.nvim'
-  use 'Matt-Gleich/blackbird.vim'
-  use 'lmburns/kimbox'
-  use 'eddyekofo94/gruvbox-flat.nvim'
+  use 'i3d/vim-jimbothemes'
 end)

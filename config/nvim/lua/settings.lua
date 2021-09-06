@@ -24,8 +24,8 @@ vim.o.errorbells = false
 vim.o.joinspaces = false
 vim.o.title = true
 vim.o.lazyredraw = true
--- vim.o.completeopt = 'menu,menuone,noselect'
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = 'menu,menuone,noselect'
+-- vim.o.completeopt = "menuone,noselect"
 -- vim.o.listchars = ",precedes:←,extends:→,nbsp:␣"
 vim.opt.listchars = {eol = '↲', tab = '▸ ', trail = '·', precedes = '←', extends = '→', nbsp = '␣'}
 vim.o.encoding = 'UTF-8'
@@ -79,15 +79,16 @@ vim.wo.relativenumber = true
 vim.wo.foldenable = false
 vim.wo.cursorline = true
 
-function goto_last_pos()
+function Goto_last_pos()
   local last_pos = vim.fn.line("'\"")
   if last_pos > 0 and last_pos <= vim.fn.line("$") then
     vim.api.nvim_win_set_cursor(0, {last_pos, 0})
   end
 end
 
-vim.cmd[[au BufReadPost * lua goto_last_pos()
+vim.cmd[[au BufReadPost * lua Goto_last_pos()
 au Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+au Filetype lua setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 au TextYankPost * silent! lua vim.highlight.on_yank()
 au BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 au BufEnter * :let @/=""

@@ -34,4 +34,15 @@ utils.map('n', '<leader>t', ':ToggleBuftabline<cr>', opts)
 --     always_show_tabs = false,                   -- Always show tabline
 --     right_separator = false,                    -- Show right separator on the last tab
 -- }
-vim.o.tabline = '%!v:lua.require\'luatab\'.tabline()'
+local formatTab = require'luatab'.formatTab
+Tabline = function()
+    local i = 1
+    local line = ''
+    while i <= vim.fn.tabpagenr('$') do
+        line = line .. formatTab(i)
+        i = i + 1
+    end
+    local infoTabs = string.format("%d/%d ", vim.fn.tabpagenr(), vim.fn.tabpagenr('$'))
+    return  infoTabs .. line .. '%T%#TabLineFill#%='
+end
+vim.o.tabline = '%!v:lua.Tabline()'

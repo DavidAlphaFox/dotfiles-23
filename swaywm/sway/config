@@ -19,13 +19,15 @@ set $bookmarks ~/.config/rofi/bin/bookmarks
 # Gnome Settings
 set $gnome-schema org.gnome.desktop.interface
 # Second monitor config
-set $second_monitor DP-2
+# set $second_monitor DP-2
 # Font settings
-font pango: JetBrainsMono Nerd Font 14
+font pango: JetBrainsMono Nerd Font 12
 
 #  xwayland disabled
 default_border none
 default_floating_border none
+# titlebar_border_thickness 0
+# titlebar_padding 0
 
 # AutoStart
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -40,15 +42,7 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec wlsunset -l 17.5565300 -L -93.3810400 -t 2500 -T 4500
-
-# User theme
-exec_always {
-    gsettings set $gnome-schema gtk-theme 'Sweet-mars'
-    gsettings set $gnome-schema icon-theme 'Macjaro-master'
-    gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
-    gsettings set $gnome-schema font-name 'Lucida MAC 14'
-    gsettings set org.gnome.desktop.wm.preferences button-layout :
-}
+exec thunar --daemon
 
 ### Output configuration
 #
@@ -59,7 +53,7 @@ output * bg ~/.wallpaper.jpg fill
 # Monitors configuration:
 #
 output eDP-1 resolution --custom 1920x1080 position 0,0
-output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest subpixel rgb
+# output $second_monitor mode 1280x1024 pos 1366,0 scale_filter nearest subpixel rgb
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -97,12 +91,25 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# Config Cursors and Themes
+seat seat0 xcursor_theme Sweet-cursors 24
+# User theme
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Sweet-mars'
+    gsettings set $gnome-schema icon-theme 'Macjaro-master'
+    gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
+    gsettings set $gnome-schema font-name 'Lucida MAC 12'
+    gsettings set org.gnome.desktop.wm.preferences button-layout :
+    gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+}
+
 ### Key bindings
 #
 # Basics:
 #
     # Toggle bar
     # bindsym Control+space bar mode toggle
+    bindsym Control+space exec pkill -SIGUSR1 '^waybar$'
 
     # Start a terminal
     bindsym $super+Return exec $term
@@ -148,6 +155,8 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
 # Moving around:
 #
     floating_modifier $super
+    popup_during_fullscreen leave_fullscreen
+    show_marks yes
     # Move your focus around
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
@@ -174,6 +183,11 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
     bindsym $super+Shift+Down move down
     bindsym $super+Shift+Up move up
     bindsym $super+Shift+Right move right
+
+    # move to last workspace
+    bindsym $super+z workspace back_and_forth
+    # move workspace between outputs
+    bindsym $super+y move workspace to output left
 #
 # Workspaces:
 #
@@ -224,7 +238,8 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
     # Switch the current container between different layout styles
     bindsym $super+s layout stacking
     bindsym $super+w layout tabbed
-    bindsym $super+e layout toggle split
+    # bindsym $super+e layout toggle split
+    bindsym $super+e layout toggle all
 
     # Make the current focus fullscreen
     bindsym $super+f fullscreen
@@ -253,33 +268,21 @@ output $second_monitor mode 1280x1024 pos 1366,0 scale 1 scale_filter nearest su
 #
 # Login Mode:
 #
-set $goo sleep 0.4 && /home/crag/.scripts/passMan.sh -e google
-set $gmail sleep 0.4 && /home/crag/.scripts/passMan.sh -p gmail
-set $gitlab sleep 0.4 && /home/crag/.scripts/passMan.sh -p gitlab
-set $mediaf sleep 0.4 && /home/crag/.scripts/passMan.sh -p mediafire
-set $mega sleep 0.4 && /home/crag/.scripts/passMan.sh -p mega
-set $proton sleep 0.4 && /home/crag/.scripts/passMan.sh -e protonmail
-set $pmail sleep 0.4 && /home/crag/.scripts/passMan.sh -p protonmail
 
-mode "login" {
-    # for google account
-    bindsym $super+q exec $goo
-    bindsym $super+w exec $gmail
-    bindsym $super+e exec $gitlab
-    bindsym $super+r exec $mediaf
-    bindsym $super+t exec $mega
-    # for protonmail account
-    bindsym $super+a exec $proton
-    bindsym $super+s exec $pmail
+set $passman ~/.config/rofi/bin/passman
+
+mode "LOGIN" {
+    bindsym p exec $passman
+    bindsym t exec $passman --type
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $AltGr+l mode "login"
+bindsym $AltGr+p mode "LOGIN"
 
 #
 # Resizing containers:
 #
-mode "resize" {
+mode "RESIZE" {
     # left will shrink the containers width
     # right will grow the containers width
     # up will shrink the containers height
@@ -306,38 +309,41 @@ mode "CAPSLOCK" {
 }
 bindsym Caps_Lock mode "CAPSLOCK"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    swaybar_command waybar
-    workspace_buttons yes
-}
-include /etc/sway/config.d/*
-
 # Floating windows
 
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
+for_window [class="^.*"] border pixel 0
+# for_window [class=".*"] border pixel 0
+for_window [app_id="^.*"] border pixel 0
 
-for_window [window_role="task_dialog|bubble|page-info|Preferences|pop-up"] floating enable
-for_window [window_role="Open Files"] floating enable sticky
-for_window [window_role="File Operation Progress"] floating enable sticky
-for_window [window_role="Save As"] floating enable
+# chrome extension popups
+for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
+for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
 
-for_window [class="qBittorrent" window_role="pop-up"] floating enable
-for_window [class="mtp-ng-qt" window_role="Open"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
-for_window [app_id="spotify"] floating enable
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Lightdm-settings"] floating enable
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
 
-#for_window [class="VirtualBox"] floating enable
+# Wayland apps
+for_window [app_id="zenity"] floating enable
+for_window [app_id="wdisplays"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="io.crow_translate.CrowTranslate"] floating enable
+
+# Prepend title with program name
+for_window [title="."] title_format "%app_id%class - %title (%shell)"
+
 # window rules, you can find the window class using xprop
-for_window [class=".*"] border pixel 0
-for_window [app_id="floating"] floating enable
 assign [class=Transmission-gtk|Code|jetbrains*] number 2
 assign [class=Thunar|Pcmanfm|pcmanfm|File-roller|Insomnia|DB*|Genymotion*] number 3
 assign [class=Geany|Evince|org.pwmt.zathura|Zathura|Gucharmap|Soffice|libreoffice*|Wps|Et|Wpp|Typora] number 4
@@ -347,9 +353,20 @@ for_window [class=feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|Colo
 for_window [class=Color-picker|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|vlc|Lxappearance|Audacity] focus
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
 
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+
+bar {
+    swaybar_command waybar
+}
+
 client.focused              #bf616a #111416 #d8dee8 #bf616a #d8dee8
 client.focused_inactive     #111416 #111416 #d8dee8 #111416 #111416
 client.unfocused            #111416 #111416 #d8dee8 #111416 #111416
 client.urgent               #111416 #111416 #d8dee8 #111416 #111416
 client.placeholder          #111416 #111416 #d8dee8 #111416 #111416
 client.background           #111416
+
+include /etc/sway/config.d/*

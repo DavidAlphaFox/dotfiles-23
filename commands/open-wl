@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+flags='--enable-features=UseOzonePlatform --enable-gpu --ozone-platform=wayland --js-flags="--max-old-space-size=12288"'
+$1 $flags $2

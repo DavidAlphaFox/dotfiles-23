@@ -1,0 +1,8 @@
+{
+    "~/Git/app1": {
+        "name": "App1",
+        "description": "Tmx frontend api",
+        "file_name": "run.py",
+        "filetype": "python"
+    }
+}

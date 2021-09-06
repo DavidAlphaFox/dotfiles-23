@@ -70,14 +70,14 @@ utils.map(
 utils.map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
 utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
 utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
-utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]], opts)
-utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opts)
-utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], opts)
+utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]], opt)
+utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opt)
+utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], opt)
 utils.map('n', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opts)
-utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opts)
-utils.map('n', '<leader>gl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opts)
-utils.map('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opts)
+utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opt)
+utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opt)
+utils.map('n', '<leader>gl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
+utils.map('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opt)
 
 -- highlights
 local cmd = vim.cmd

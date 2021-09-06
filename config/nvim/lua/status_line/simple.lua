@@ -1,34 +1,17 @@
 local gl = require('galaxyline')
 local utils = require('utils')
 local condition = require('galaxyline.condition')
+local fileinfo  = require('galaxyline.provider_fileinfo')
+local vcs       = require('galaxyline.provider_vcs')
+local theme = require('status_line.colorschemes')
+local colors = theme.colors
+local mode_colors = theme.mode_colors
 
 local gls = gl.section
 gl.short_line_list = {'defx', 'packager', 'vista', 'NvimTree'}
 
-local colors = {
-    bg = '#111416',
-    fg = '#aab2bf',
-    section_bg = '#38393f',
-    blue = '#61afef',
-    green = '#98c379',
-    purple = '#c678dd',
-    orange = '#ffb86c',
-    red1 = '#e06c75',
-    red2 = '#be5046',
-    yellow = '#e5c07b',
-    gray1 = '#5c6370',
-    gray2 = '#2c323d',
-    gray3 = '#3e4452',
-    darkgrey = '#5c6370',
-    grey = '#848586',
-    middlegrey = '#8791A5'
-}
-
--- Local helper functions
-local buffer_not_empty = function() return not utils.is_buffer_empty() end
-
 local checkwidth = function()
-    return utils.has_width_gt(35) and buffer_not_empty()
+    return utils.has_width_gt(35) and condition.buffer_not_empty()
 end
 
 local function has_value(tab, val)
@@ -39,22 +22,9 @@ local function has_value(tab, val)
 end
 
 local mode_color = function()
-    local mode_colors = {
-        [110] = colors.green,
-        [105] = colors.blue,
-        [99] = colors.orange,
-        [116] = colors.blue,
-        [118] = colors.purple,
-        [22] = colors.purple,
-        [86] = colors.purple,
-        [82] = colors.red1,
-        [115] = colors.red1,
-        [83] = colors.red1
-    }
-
-    local mode_color = mode_colors[vim.fn.mode():byte()]
-    if mode_color ~= nil then
-        return mode_color
+    local color = mode_colors[vim.fn.mode():byte()]
+    if color ~= nil then
+        return color
     else
         return colors.purple
     end
@@ -76,36 +46,14 @@ local function get_current_file_name()
     return file .. ' '
 end
 
--- local function trailing_whitespace()
---     local trail = vim.fn.search('\\s$', 'nw')
---     if trail ~= 0 then
---         return '  '
---     else
---         return nil
---     end
--- end
-
--- local function tab_indent()
---     local tab = vim.fn.search('^\\t', 'nw')
---     if tab ~= 0 then
---         return ' → '
---     else
---         return nil
---     end
--- end
-
---[[ local function buffers_count()
-    local buffers = {}
-    for _, val in ipairs(vim.fn.range(1, vim.fn.bufnr('$'))) do
-        if vim.fn.bufexists(val) == 1 and vim.fn.buflisted(val) == 1 then
-            table.insert(buffers, val)
-        end
-    end
-    return #buffers
-end --]]
+local position = 0
+local function getNum()
+	position = position + 1
+	return position
+end
 
 -- Left side
-gls.left[1] = {
+gls.left[position] = {
     ViMode = {
         provider = function()
             local aliases = {
@@ -132,68 +80,69 @@ gls.left[1] = {
             else
                 mode = vim.fn.mode():byte()
             end
-            return '  ' .. mode .. ' '
+            return '  ' .. mode .. ' '
         end,
-        highlight = {colors.bg, colors.bg, 'bold'}
+        highlight = {colors.bg, colors.bg, 'bold'},
     }
 }
-gls.left[2] = {
+
+gls.left[getNum()] = {
     FileIcon = {
-        provider = {function() return '  ' end, 'FileIcon'},
-	condition = condition.buffer_not_empty,
-        highlight = {
-            require('galaxyline.provider_fileinfo').get_file_icon,
-            colors.section_bg
-        }
+        condition = condition.buffer_not_empty,
+        highlight = {fileinfo.get_file_icon_color, colors.bg},
+        provider = { function() return '  ' end, 'FileIcon' }
     }
 }
-gls.left[3] = {
+
+gls.left[getNum()] = {
     FileName = {
-        provider = get_current_file_name,
-	condition = condition.buffer_not_empty,
-        highlight = {colors.fg, colors.section_bg},
-        separator = '',
-        separator_highlight = {colors.section_bg, colors.bg}
+        condition = condition.buffer_not_empty,
+        highlight = {colors.fg, colors.bg},
+        provider  = function()
+            vim.api.nvim_command('hi GalaxyFileName guifg='..mode_color())
+            return get_current_file_name()
+        end
     }
 }
-gls.left[9] = {
+gls.left[getNum()] = {
     DiagnosticError = {
         provider = 'DiagnosticError',
         icon = '  ',
         highlight = {colors.red1, colors.bg}
     }
 }
-gls.left[10] = {
+gls.left[getNum()] = {
     Space = {
         provider = function() return ' ' end,
-        highlight = {colors.section_bg, colors.bg}
+        highlight = {colors.bg, colors.bg}
     }
 }
-gls.left[11] = {
+gls.left[getNum()] = {
     DiagnosticWarn = {
         provider = 'DiagnosticWarn',
         icon = '  ',
         highlight = {colors.orange, colors.bg}
     }
 }
-gls.left[12] = {
+gls.left[getNum()] = {
     Space = {
         provider = function() return ' ' end,
-        highlight = {colors.section_bg, colors.bg}
+        highlight = {colors.bg, colors.bg}
     }
 }
-gls.left[13] = {
+gls.left[getNum()] = {
     DiagnosticInfo = {
         provider = 'DiagnosticInfo',
         icon = '  ',
-        highlight = {colors.blue, colors.section_bg},
+        highlight = {colors.blue, colors.bg},
         separator = ' ',
-        separator_highlight = {colors.section_bg, colors.bg}
+        separator_highlight = {colors.bg, colors.bg}
     }
 }
 
+position = 1
 -- Right side
-gls.right[1] = {
+gls.right[position] = {
     DiffAdd = {
         provider = 'DiffAdd',
         condition = checkwidth,
@@ -201,7 +150,7 @@ gls.right[1] = {
         highlight = {colors.green, colors.bg}
     }
 }
-gls.right[2] = {
+gls.right[getNum()] = {
     DiffModified = {
         provider = 'DiffModified',
         condition = checkwidth,
@@ -209,7 +158,7 @@ gls.right[2] = {
         highlight = {colors.orange, colors.bg}
     }
 }
-gls.right[3] = {
+gls.right[getNum()] = {
     DiffRemove = {
         provider = 'DiffRemove',
         condition = checkwidth,
@@ -217,35 +166,38 @@ gls.right[3] = {
         highlight = {colors.red1, colors.bg}
     }
 }
-gls.right[4] = {
+gls.right[getNum()] = {
     Space = {
         provider = function() return ' ' end,
         highlight = {colors.section_bg, colors.bg}
     }
 }
-gls.right[5] = {
+gls.right[getNum()] = {
     GitIcon = {
         provider = function() return '  ' end,
-        condition = buffer_not_empty and
-            require('galaxyline.provider_vcs').check_git_workspace,
-        highlight = {colors.middlegrey, colors.bg}
+        condition = condition.buffer_not_empty and
+            vcs.check_git_workspace,
+        highlight = {colors.red2, colors.bg}
     }
 }
-gls.right[6] = {
+gls.right[getNum()] = {
     GitBranch = {
-        provider = 'GitBranch',
-	condition = condition.buffer_not_empty,
+        provider = function()
+            vim.api.nvim_command('hi GalaxyGitBranch guifg='..mode_color())
+            return vcs.get_git_branch()
+        end,
+        condition = condition.buffer_not_empty,
         highlight = {colors.middlegrey, colors.bg}
     }
 }
-gls.right[7] = {
+--[[ gls.right[getNum()] = {
     PerCent = {
         provider = 'LinePercent',
         separator = '',
-        separator_highlight = {colors.blue, colors.bg},
+        separator_highlight = {colors.blue, mode_color()},
         highlight = {colors.gray2, colors.blue}
     }
-}
+} --]]
 -- gls.right[8] = {
 --     ScrollBar = {
 --         provider = 'ScrollBar',
@@ -253,12 +205,13 @@ gls.right[7] = {
 --     }
 -- }
 
+position = 1
 -- Short status line
-gls.short_line_left[1] = {
+gls.short_line_left[position] = {
     FileIcon = {
         provider = {function() return '  ' end, 'FileIcon'},
         condition = function()
-            return buffer_not_empty and
+            return condition.buffer_not_empty and
                        has_value(gl.short_line_list, vim.bo.filetype)
         end,
         highlight = {
@@ -267,7 +220,7 @@ gls.short_line_left[1] = {
         }
     }
 }
-gls.short_line_left[2] = {
+gls.short_line_left[getNum()] = {
     FileName = {
         provider = get_current_file_name,
 	condition = condition.buffer_not_empty,
@@ -277,7 +230,7 @@ gls.short_line_left[2] = {
     }
 }
 
-gls.short_line_right[1] = {
+gls.short_line_right[getNum()] = {
     BufferIcon = {
         provider = 'BufferIcon',
         highlight = {colors.yellow, colors.section_bg},

@@ -2,7 +2,7 @@
     border:        none;
     border-radius: 0;
     font-family:   Inconsolata;
-    font-size:     20px;
+    font-size:     16px;
     font-weight:     bold;
     box-shadow:    none;
     text-shadow:   none;
@@ -10,6 +10,7 @@
 }
 window#waybar {
     background: #111416;
+    /* background: transparent; */
     border-bottom: 1px solid @unfocused_borders;
     color: #f2f2f2;
 }
@@ -45,7 +46,7 @@ window#waybar {
 #mode {
     /* background: #64727D; */
     border-bottom: 3px solid #e68183;
-    color: #e68183
+    color: #e68183;
 }
 
 #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
@@ -56,23 +57,22 @@ window#waybar {
 #clock {
     /* border-bottom: 3px solid #d3a0ce; */
     /* color: #d3a0ce; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #battery {
-    /* background : transparent; */
     /* border-bottom: 3px solid #ffffff; */
     /* color: #ffffff; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #battery.charging {
     /* border-bottom: 3px solid #7ad88e; */
     /* color: #7ad88e; */
-    background: #7ad88e;
-    color: #111416;
+    border-bottom: 3px solid #7ad88e;
+    color: #7ad88e;
 }
 
 @keyframes blink {
@@ -85,8 +85,8 @@ window#waybar {
 #battery.warning:not(.charging) {
     /* border-bottom: 3px solid #f53c3c; */
     /* color: #f53c3c; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #f53c3c;
+    color: #f53c3c;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -97,8 +97,8 @@ window#waybar {
 #battery.critical:not(.charging) {
     /* border-bottom: 3px solid #f53c3c; */
     /* color: #f53c3c; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #f53c3c;
+    color: #f53c3c;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -109,66 +109,66 @@ window#waybar {
 #cpu {
     /* border-bottom: 3px solid #87c095; */
     /* color: #87c095; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #memory {
     /* border-bottom: 3px solid #bb98eb; */
     /* color: #bb98eb; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #backlight {
     /* border-bottom: 3px solid #ffd866; */
     /* color: #ffd866; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #network {
     /* border-bottom: 3px solid #8accfe; */
     /* color: #8accfe; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 
 }
 
 #network.disconnected {
     /* border-bottom: 3px solid #f53c3c; */
     /* color: #f53c3c; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #pulseaudio {
     /* border-bottom: 3px solid #e39b7b; */
     /* color: #e39b7b; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 
 }
 
 #pulseaudio.muted {
     /* border-bottom: 3px solid #f53c3c; */
     /* color: #f53c3c; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #custom-media {
     /* background: #66cc99; */
     /* color: #2a5c45; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 .custom-spotify {
     /* border-bottom: 3px solid #66cc99; */
     /* color: #66cc99; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 .custom-vlc {
@@ -178,15 +178,15 @@ window#waybar {
 #temperature {
     /* border-bottom: 3px solid #f0932b; */
     /* color: #f0932b; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 #temperature.critical {
     /* border-bottom: 3px solid #eb4d4b; */
     /* color: #eb4d4b; */
-    background: #e68183;
-    color: #111416;
+    border-bottom: 3px solid #e68183;
+    color: #e68183;
 }
 
 /* #tray { */

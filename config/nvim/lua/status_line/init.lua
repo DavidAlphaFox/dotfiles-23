@@ -1,1 +1,1 @@
-require 'status_line.neo'
+require 'status_line.simple'

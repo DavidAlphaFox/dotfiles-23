@@ -1,5 +1,4 @@
 -- -> Miramare <-
-local utils = require('utils')
 local cmd = vim.cmd
 
 if vim.fn.has("termguicolors") == 1 then
@@ -8,18 +7,11 @@ if vim.fn.has("termguicolors") == 1 then
   vim.go.termguicolors = true
 end
 
--- cmd 'colorscheme blackbird'
--- cmd 'colorscheme oblivion-dark'
+-- cmd 'colorscheme matrix'
+-- cmd 'colorscheme darkmatrix'
 
 --[[ vim.g.tokyonight_transparent = true
-cmd 'colorscheme tokyonight'
-vim.api.nvim_command('hi StatusLineNC guibg=#111416') --]]
-
---[[ vim.g.kimbox_transparent_background = 1
-cmd 'colorscheme kimbox' --]]
-
---[[ vim.g.gruvbox_transparent = true
-cmd 'colorscheme gruvbox-flat' --]]
+cmd 'colorscheme tokyonight' --]]
 
 vim.g.miramare_cursor = 'purple'
 vim.g.miramare_enable_italic = 1

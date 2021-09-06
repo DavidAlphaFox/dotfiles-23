@@ -4,12 +4,16 @@ local package = {
   'settings',
   'netrw',
   'plugs',
+  'keymappings',
   'colorscheme',
   'status_line',
-  'keymappings',
-  'config'
+  -- 'config'
 }
 for _, pkg in ipairs(package) do
-  require(pkg)
+  local status, _  = pcall(require, pkg)
+  if not status then
+    print(vim.inspect("Error in module " .. pkg))
+  end
 end
+require('config')
 vim.g.pydocstring_formatter = 'google'

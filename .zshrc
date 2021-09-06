@@ -1,13 +1,18 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh
-
+export ZSH="/home/crag/.oh-my-zsh"
 autoload -U compinit
 compinit
 
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#  ZSH_THEME="robbyrussell"
+
 # Uncomment the following line to use case-sensitive completion.
-#CASE_SENSITIVE="true"
+# CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -16,8 +21,14 @@ HYPHEN_INSENSITIVE="true"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -29,6 +40,8 @@ DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -36,11 +49,33 @@ ENABLE_CORRECTION="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
 plugins=(
-  git
+  zsh-vi-mode
+  zoxide
+  copybuffer
+  copydir
+  copyfile
+  ripgrep
+  genpass
   python
   history
-  npm
   colored-man-pages
   extract
   sudo
@@ -49,10 +84,20 @@ plugins=(
   cargo
   dircycle
   docker
-  virtualenv
   systemd
   fzf
+  fzf-tab
+  zsh_reload
 )
+
+# -< Source files or scripts >-
+source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/.zshplugins/poetry/_poetry
+
+zvm_after_init_commands+=('enable-fzf-tab')
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -126,14 +171,6 @@ gitignore() {
     fi
 }
 
-# -< Source files or scripts >-
-source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zshplugins/fzf-tab/fzf-tab.plugin.zsh
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-#source ~/.zshplugins/poetry/_poetry
 
 # -> Config <-
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -161,6 +198,8 @@ alias vimp='vim ~/.config/nvim/lua/plugs.lua'
 alias vimm='vim ~/.config/nvim/lua/keymappings.lua'
 alias vims='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
+alias vimf='vim ~/.config/nvim/lua/config/lsp/snippets'
+alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
 alias vimcp='vim ~/.config/nvim/lua/config'
 # HACK: Jump alias
 alias applications="cd /usr/share/applications"
@@ -178,16 +217,17 @@ alias ping="prettyping"
 alias cerrar="sh ~/.scripts/cerrar_ventana"
 alias cerrar_todo="sh ~/.scripts/cerrar_todo.sh"
 alias node="/usr/bin/node ~/.noderc"
-alias ll="ls-icons -l"
-alias ls="ls-icons"
+alias ls="logo-ls"
 alias cp="rsync -P"
-alias tree="ls-icons -R"
+alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
 # HACK: HACK: fzf alias
 alias fpm="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fpmr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+# HACK: sway wm alias
+alias aid="swaymsg -t get_tree | grep "app_id""
 
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
@@ -204,9 +244,11 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export BAT_THEME="gruvbox-dark"
 export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='⮞'"
+export FZF_BASE=/bin
+export FZF_DEFAULT_COMMAND='rg'
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 source ~/.passmaria.zsh
 
 #-< Evals >-
-eval "$(zoxide init zsh)"
 eval $(thefuck --alias)
 eval "$(starship init zsh)"

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=ElectronMail wayland
-Exec=/opt/ElectronMail/electron-mail --enable-features=UseOzonePlatform --enable-gpu --ozone-platform=wayland --js-flags="--max-old-space-size=12288" %U
+Exec=open-wl /opt/ElectronMail/electron-mail %U
 Terminal=false
 Type=Application
 Icon=electron-mail

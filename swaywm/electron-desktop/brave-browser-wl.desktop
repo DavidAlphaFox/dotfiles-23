@@ -11,7 +11,7 @@ Comment[es]=Accede a Internet.
 StartupNotify=true
 StartupWMClass=brave-browser
 TryExec=brave
-Exec=brave --enable-features=UseOzonePlatform --enable-gpu --ozone-platform=wayland %U
+Exec=open-wl brave %U
 Terminal=false
 Icon=brave-desktop
 Type=Application
@@ -22,10 +22,10 @@ Actions=new-window;new-private-window;
 [Desktop Action new-window]
 Name=New Window
 Name[es]=Nueva ventana
-Exec=brave --enable-features=UseOzonePlatform --enable-gpu --ozone-platform=wayland
+Exec=open-wl brave
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
 Name[es]=Nueva ventana de incógnito
-Exec=brave --enable-features=UseOzonePlatform --enable-gpu --ozone-platform=wayland --incognito
+Exec=open-wl brave --incognito
 MimeType=x-scheme-handler/unknown;x-scheme-handler/about;text/html;text/xml;application/xhtml_xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;
