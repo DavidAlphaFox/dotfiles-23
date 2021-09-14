@@ -12,7 +12,16 @@ for _, pkg in ipairs(package) do
     print(vim.inspect("Error in module " .. pkg))
   end
 end
+require('treesitter-context').setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    throttle = true, -- Throttles plugin updates (may improve performance)
+}
 require('nvim-autopairs').setup()
+require("nvim_comment").setup({
+  hook = function()
+    require("ts_context_commentstring.internal").update_commentstring()
+  end,
+})
 require("todo-comments").setup {}
 require('code_runner').setup({
   filetype = {
@@ -24,10 +33,3 @@ require('code_runner').setup({
 })
 -- require('config.devicon')
 require('neoscroll').setup()
-require('commented').setup({
-	comment_padding = " ",
-	keybindings = {n = "gc", v = "gc", nl = "gcc"},
-	prefer_block_comment = true,
-	set_keybindings = true,
-	ex_mode_cmd = "Comment"
-})

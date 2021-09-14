@@ -85,7 +85,7 @@ local flake8 = {
   formatStdin = true
 }
 -- capabilities = capabilities,
-local servers = {"pyright", "elixirls", "ccls", "tsserver", "dockerls", "bashls"}
+local servers = {"pyright", "elixirls", "ccls", "tsserver", "dockerls", "bashls", "sqls"}
 for _, server in ipairs(servers) do
   --[[ lspc[server].setup{
     on_attach = on_attach,

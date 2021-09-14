@@ -20,7 +20,6 @@ return require('packer').startup(function(use)
 
   -- Autocomplete
   use 'windwp/nvim-autopairs'
-  -- use 'norcalli/snippets.nvim'
 
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -35,6 +34,7 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'p00f/nvim-ts-rainbow'
   use 'romgrk/nvim-treesitter-context'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'windwp/nvim-ts-autotag'
 
   -- Syntax
@@ -90,8 +90,8 @@ return require('packer').startup(function(use)
 
   -- Text edition
   use {'mg979/vim-visual-multi', branch = 'master'}
-  use 'winston0410/commented.nvim'
   use {'heavenshell/vim-pydocstring', run = 'make install' }
+  use 'terrortylor/nvim-comment'
   use 'DougBeney/pickachu'
   use 'AndrewRadev/splitjoin.vim'
   use {
