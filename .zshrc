@@ -95,7 +95,6 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source ~/.zshplugins/poetry/_poetry
 
 zvm_after_init_commands+=('enable-fzf-tab')
 
@@ -104,6 +103,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# Util funtions
 encrypt(){
   openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
 }
@@ -112,7 +112,6 @@ decrypt(){
   openssl enc -d -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
 }
 
-# Util funtions
 acp() {
   git add .
   git commit -m "$1"
@@ -150,7 +149,7 @@ fkill() {
   fi
 }
 
-tmuxkillf () {
+tmuxkillf() {
     local sessions
     sessions="$(tmux ls|fzf --exit-0 --multi)"  || return $?
     local i
@@ -185,22 +184,22 @@ alias alacric="vim ~/.config/alacritty/alacritty.yml"
 alias swayc="vim ~/.config/sway/config"
 alias i3c="vim ~/.config/i3/config"
 alias i3barc="~/.config/i3status/config"
-alias dnsc="sudoedit /etc/resolv.conf"
 alias zshc="vim ~/.zshrc"
 alias tmuxc="vim ~/.tmux.conf"
 alias firefoxc="vim ~/.mozilla/firefox/profiles.ini"
 alias kittyc="vim ~/.config/kitty/kitty.conf"
+alias dnsc="sudoedit /etc/resolv.conf"
 alias nftc="sudoedit /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
 # HACK: Config Nvim Aliases
 alias vimc='vim ~/.config/nvim/init.lua'
-alias vimp='vim ~/.config/nvim/lua/plugs.lua'
+alias vimp='vim ~/.config/nvim/lua/plugins/manage.lua'
 alias vimm='vim ~/.config/nvim/lua/keymappings.lua'
 alias vims='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
-alias vimf='vim ~/.config/nvim/lua/config/lsp/snippets'
+alias vimf='vim ~/.config/nvim/lua/config/snippets'
 alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
-alias vimcp='vim ~/.config/nvim/lua/config'
+alias vimcp='vim ~/.config/nvim/lua/plugins'
 # HACK: Jump alias
 alias applications="cd /usr/share/applications"
 alias Escritorio="cd /$HOME/Escritorio"
@@ -231,17 +230,15 @@ alias aid="swaymsg -t get_tree | grep "app_id""
 
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH="$HOME/.local/bin:$HOME/.poetry/bin:$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 export MYSQL_PS1="\n \d  ﯐ "
 export LC_ALL=es_MX.UTF-8
 export LANG=es_MX.UTF-8
 export LANGUAGE=es_MX.UTF-8
-export PYTHONSTARTUP=~/.pyrc
 export TERM="xterm-256color"
-export PATH="$HOME/.poetry/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=$VISUAL
+export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
 export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='⮞'"
 export FZF_BASE=/bin
@@ -249,6 +246,6 @@ export FZF_DEFAULT_COMMAND='rg'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 source ~/.passmaria.zsh
 
-#-< Evals >-
+# -< Evals >-
 eval $(thefuck --alias)
 eval "$(starship init zsh)"

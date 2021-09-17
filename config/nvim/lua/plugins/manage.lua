@@ -77,8 +77,10 @@ return require('packer').startup(function(use)
 
   --UI
   use {'glepnir/galaxyline.nvim', branch = 'main'}
-  use {'alvarosevilla95/luatab.nvim',requires='kyazdani42/nvim-web-devicons'}
-  use 'karb94/neoscroll.nvim'
+  -- use {'alvarosevilla95/luatab.nvim',requires='kyazdani42/nvim-web-devicons'}
+  use {'seblj/nvim-tabline',
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
   use {
   "folke/todo-comments.nvim",
   requires = "nvim-lua/plenary.nvim",
@@ -92,7 +94,6 @@ return require('packer').startup(function(use)
   use {'mg979/vim-visual-multi', branch = 'master'}
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'terrortylor/nvim-comment'
-  use 'DougBeney/pickachu'
   use 'AndrewRadev/splitjoin.vim'
   use {
     "blackCauldron7/surround.nvim",
@@ -102,7 +103,10 @@ return require('packer').startup(function(use)
   }
 
   --Utils
-  use { 'CRAG666/code_runner.nvim', branch =  'new_features'}
+  use 'CRAG666/code_runner.nvim'
+  use 'tamago324/lir.nvim'
+  use 'tamago324/lir-mmv.nvim'
+  use 'tamago324/lir-git-status.nvim'
 
   -- Themes
   use 'franbach/miramare'

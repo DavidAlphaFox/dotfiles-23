@@ -8,7 +8,7 @@ install: ## Install arch linux packages using yay
 	cat ${PWD}/pkglist.txt | xargs -L 1 yay -S --needed --noconfirm
 
 cli-tools: ## Add cli tools to local bin
-	ln -vsf ${PWD}/commands/* ${HOME}/local/bin/
+	ln -vsf ${PWD}/commands/* ${HOME}/.local/bin/
 
 init: ## Initial deploy dotfiles
 	ln -vsf ${PWD}/.zshrc ${HOME}/.zshrc

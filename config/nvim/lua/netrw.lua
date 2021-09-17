@@ -22,5 +22,5 @@ function ToggleNetrw()
     end
 end
 local opts = { noremap = true, silent = true }
-utils.map('n', 'ø', ':lua ToggleNetrw()<CR>')           -- open explorer in vertical split
+-- utils.map('n', 'ø', ':lua ToggleNetrw()<CR>')           -- open explorer in vertical split
 utils.map('n', 'ññ', ':lua ToggleNetrw()<CR>', opts)           -- open explorer in vertical split

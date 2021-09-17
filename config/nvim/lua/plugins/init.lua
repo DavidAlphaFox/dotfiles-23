@@ -1,10 +1,13 @@
 local package = {
-	'config.treesitter',
-	'config.colorizer',
-	'config.gitstatussigns',
-	'config.tabline',
-	'config.telescope',
-	'config.lsp'
+	'plugins.manage',
+	'plugins.treesitter',
+	'plugins.colorizer',
+	'plugins.gitstatussigns',
+	'plugins.tabline',
+	'plugins.telescope',
+	'plugins.file_manager',
+	'plugins.multi_cursors',
+	'plugins.devicon'
 }
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)
@@ -31,5 +34,4 @@ require('code_runner').setup({
     json_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
   }
 })
--- require('config.devicon')
-require('neoscroll').setup()
+-- require('plugins.devicon')

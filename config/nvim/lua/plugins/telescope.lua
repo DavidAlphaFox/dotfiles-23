@@ -57,27 +57,23 @@ require("telescope").setup {
 
 require("telescope").load_extension("media_files")
 
-local opt = {noremap = true, silent = true}
-
 -- mappings
 utils.map(
     "n",
-    "µ",
-    [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]],
-    opt
-)
+    "<leader>fm",
+    [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]])
 
-utils.map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
-utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
-utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
-utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]], opt)
-utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], opt)
-utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]], opt)
-utils.map('n', '<leader>fm' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], opt)
-utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]], opt)
-utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opt)
-utils.map('n', '<leader>gl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
-utils.map('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], opt)
+utils.map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]])
+utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]])
+utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
+utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').builtin.commands()<CR>]])
+utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
+utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').git_files()<CR>]])
+utils.map('n', '<leader>f' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
+utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]])
+utils.map('n', '<leader>gt',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]])
+utils.map('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
+utils.map('n', '<leader>gs', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]])
 
 -- highlights
 local cmd = vim.cmd

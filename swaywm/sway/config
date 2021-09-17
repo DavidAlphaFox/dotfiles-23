@@ -75,7 +75,7 @@ output eDP-1 resolution --custom 1920x1080 position 0,0
 # Keyboard thinkpad l450 configuration:
 #
     input "1:1:AT_Translated_Set_2_keyboard" {
-        xkb_layout latam
+        xkb_layout es
         xkb_options caps:swapescape
     }
 #
@@ -118,19 +118,19 @@ exec_always {
     bindsym $super+c kill
 
     # Start your launcher
-    bindsym $super+a exec $menu
     bindsym $alt+space exec $clipboard
     bindsym $super+n exec $network
-    bindsym $super+x exec $favorites
     bindsym $super+q exec $powermenu
     bindsym $AltGr+space exec $bookmarks
 
     # keybinds replaces
-    bindsym $super+d exec sleep 0.4 && ydotool key delete
+    # bindsym $super+d exec sleep 0.4 && ydotool key delete
 
     # Screenshot
     bindsym Print exec grim ~/screen-"$(date +%s)".png
     bindsym $super+Print exec grim -g "$(slurp)" ~/screen-"$(date +%s)".png
+
+    ############################# XF86 keys #############################
 
     # Change volume
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
@@ -140,6 +140,22 @@ exec_always {
     # Change brightness
     bindsym XF86MonBrightnessDown exec brightnessctl specific 3-
     bindsym XF86MonBrightnessUp exec brightnessctl specific +3
+
+    # Toggle Camera driver
+    bindsym XF86Display exec toggle_wcam uvcvideo
+
+    # Settings
+    bindsym XF86Tools exec kitty vim ~/.config/sway/config
+
+    # Search
+    bindsym XF86Search exec librewolf
+
+    # Launch Most used Apps
+    # bindsym XF86LaunchA exec $favorites
+
+    # Launch all apps
+    bindsym XF86Explorer exec $menu
+    ####################################################################
 
     # Drag floating windows by holding down $super and left mouse button.
     # Resize them with right mouse button + $super.

@@ -1,11 +1,10 @@
-require('config.lsp.supports')
+require('lsp_config.supports')
 local package = {
-  'config.lsp.supports',
-  'config.lsp.diagnostics',
-  'config.lsp.diagnostics-colors',
-  'config.lsp.saga',
-  -- 'config.lsp.completion',
-  -- 'config.lsp.snippets'
+  'lsp_config.supports',
+  'lsp_config.diagnostics',
+  'lsp_config.diagnostics-colors',
+  'lsp_config.saga',
+  -- 'lsp_config.completion',
 }
 for _, pkg in ipairs(package) do
   require(pkg)

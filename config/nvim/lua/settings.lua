@@ -1,6 +1,5 @@
 -- Global
 vim.o.fillchars = vim.o.fillchars .. 'vert: '
-vim.o.showtabline = 0
 vim.o.scrolloff = 10
 vim.o.mouse = 'a'
 vim.o.smartindent = true
@@ -78,6 +77,8 @@ vim.wo.list = false
 vim.wo.relativenumber = true
 vim.wo.foldenable = false
 vim.wo.cursorline = true
+
+vim.o.lazyredraw = true
 
 function Goto_last_pos()
   local last_pos = vim.fn.line("'\"")
