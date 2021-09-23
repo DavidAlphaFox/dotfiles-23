@@ -60,9 +60,9 @@
 
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
+        "format": "{volume}% 墳",
         "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
+        "format-muted": "婢",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
@@ -72,17 +72,6 @@
             "car": "",
             "default": ["", ""]
         },
-        "on-click": "pavucontrol-qt"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "on-click": "pavucontrol"
     }
 }

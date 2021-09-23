@@ -230,7 +230,6 @@ alias aid="swaymsg -t get_tree | grep "app_id""
 
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
-export PATH="$HOME/.local/bin:$HOME/.poetry/bin:$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 export MYSQL_PS1="\n \d  ﯐ "
 export LC_ALL=es_MX.UTF-8
 export LANG=es_MX.UTF-8
@@ -247,5 +246,4 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 source ~/.passmaria.zsh
 
 # -< Evals >-
-eval $(thefuck --alias)
 eval "$(starship init zsh)"

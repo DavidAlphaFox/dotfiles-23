@@ -21,7 +21,7 @@ require'lir'.setup {
     ['Y']     = actions.yank_path,
     ['.']     = actions.toggle_show_hidden,
     ['D']     = actions.delete,
-    ['M']     = require'lir.mmv.actions'.mmv,
+    -- ['M']     = require'lir.mmv.actions'.mmv,
 
     ['J'] = function()
       mark_actions.toggle_mark()

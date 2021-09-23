@@ -13,7 +13,7 @@ set $term kitty
 set $menu ~/.config/rofi/bin/launcher_misc
 set $clipboard ~/.config/rofi/bin/clipboard
 set $network ~/.config/rofi/bin/applet_network
-set $favorites ~/.config/rofi/bin/menu_apps
+set $favorites ~/.config/rofi/bin/apps
 set $powermenu ~/.config/rofi/bin/menu_powermenu
 set $bookmarks ~/.config/rofi/bin/bookmarks
 # Gnome Settings
@@ -98,7 +98,7 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Sweet-mars'
     gsettings set $gnome-schema icon-theme 'Macjaro-master'
     gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
-    gsettings set $gnome-schema font-name 'Lucida MAC 12'
+    gsettings set $gnome-schema font-name 'Lucida MAC 11'
     gsettings set org.gnome.desktop.wm.preferences button-layout :
     gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 }
@@ -136,6 +136,7 @@ exec_always {
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
     bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
     bindsym XF86AudioMute exec amixer set Master toggle
+    bindsym XF86AudioMicMute exec amixer set Capture toggle
 
     # Change brightness
     bindsym XF86MonBrightnessDown exec brightnessctl specific 3-
@@ -151,7 +152,7 @@ exec_always {
     bindsym XF86Search exec librewolf
 
     # Launch Most used Apps
-    # bindsym XF86LaunchA exec $favorites
+    bindsym XF86LaunchA exec $favorites
 
     # Launch all apps
     bindsym XF86Explorer exec $menu
@@ -318,7 +319,7 @@ mode "RESIZE" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $super+r mode "resize"
+bindsym $super+r mode "RESIZE"
 
 mode "CAPSLOCK" {
     bindsym Caps_Lock mode "default"

@@ -105,7 +105,7 @@ return require('packer').startup(function(use)
   --Utils
   use 'CRAG666/code_runner.nvim'
   use 'tamago324/lir.nvim'
-  use 'tamago324/lir-mmv.nvim'
+  -- use 'tamago324/lir-mmv.nvim'
   use 'tamago324/lir-git-status.nvim'
 
   -- Themes
