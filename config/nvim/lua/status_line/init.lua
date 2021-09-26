@@ -1,1 +1,1 @@
-require 'status_line.simple'
+require 'status_line.classic'

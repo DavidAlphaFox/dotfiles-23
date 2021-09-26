@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'folke/lsp-colors.nvim'
   use 'glepnir/lspsaga.nvim'
+  use 'nvim-lua/lsp-status.nvim'
   -- use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
   use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one

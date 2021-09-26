@@ -1,20 +1,13 @@
 add_newline = false
 
 [character]
-success_symbol = "[»](fg:#fee074)[»](fg:#e68183)[»](fg:#7ad88e)"
-# success_symbol = "[](fg:#fee074)[](fg:#e68183)[](fg:#bb98eb)"
+success_symbol = "[»](fg:#fee074)[»](fg:#f34f4d)[»](fg:#7ad88e)"
+vicmd_symbol = "[«](fg:#7ad88e)[«](fg:#f34f4d)[«](fg:#fee074)"
 # success_symbol = "[](fg:#bb98eb)[](fg:#8accfe)[](fg:#7ad88e)"
 error_symbol = "[✗](bold red)"
 
-#[python]
-#symbol = "  "
-#scan_for_pyfiles = false
-
-#[rust]
-#symbol = " "
-
-#[dart]
-#format = "via [ $version](bold fg:#00b4aa) "
+[git_metrics]
+disabled = false
 
 [directory.substitutions]
 "~/Escritorio" = "\uF6C3 "

@@ -33,14 +33,14 @@ background_opacity: 1
 font:
   normal:
     family: JetBrainsMono Nerd Font
-    style: Italic
+    style: Normal
   bold:
     family: mononoki Nerd Font
     style: Bold
   italic:
     family: VictorMono Nerd Font
     style: Italic
-  size: 13
+  size: 14
   offset:
     x: 0
     y: 0
@@ -54,37 +54,38 @@ draw_bold_text_with_bright_colors: true
 colors:
   primary:
     background: "#111416"
-    foreground: "#e6e6e6"
+    foreground: "#e6d6ac"
 
   normal:
-    black: "#444444"
-    red: "#f6819a"
-    green: "#87af87"
-    yellow: "#d9bb80"
-    blue: "#e39b7b"
-    magenta: "#d3a0bc"
-    cyan: "#89beba"
+    black: "#292a2b"
+    red: "#f67e7d"
+    green: "#7ad88e"
+    yellow: "#ffda45"
+    blue: "#ec9867"
+    magenta: "#bb98eb"
+    cyan: "#7cb7ff"
     white: "#d8caac"
 
   bright:
     black: "#5b5b5b"
-    red: "#e68183"
+    red: "#f34f4d"
     green: "#87c095"
-    yellow: "#fee074"
+    yellow: "#ffd866"
     blue: "#e49c7a"
     magenta: "#d3a0ce"
-    cyan: "#89bfbc"
+    cyan: "#8accfe"
     white: "#c8cccc"
 
   dim:
-    black: "#292a2b"
-    red: "#f681ac"
-    green: "#7ad88e"
-    yellow: "#FFD866"
-    blue: "#eC9867"
-    magenta: "#bb98eb"
-    cyan: "#8accfe"
+    black: "#444444"
+    red: "#fbc5c5"
+    green: "#cae7b9"
+    yellow: "#fee074"
+    blue: "#f79f79"
+    magenta: "#bbabeb"
+    cyan: "#b4d5ff"
     white: "#f2f2f2"
+
 
 mouse:
   hide_when_typing: false

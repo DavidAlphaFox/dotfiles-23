@@ -12,7 +12,6 @@ set $term kitty
 # Your preferred applications launcher
 set $menu ~/.config/rofi/bin/launcher_misc
 set $clipboard ~/.config/rofi/bin/clipboard
-set $network ~/.config/rofi/bin/applet_network
 set $favorites ~/.config/rofi/bin/apps
 set $powermenu ~/.config/rofi/bin/menu_powermenu
 set $bookmarks ~/.config/rofi/bin/bookmarks
@@ -31,18 +30,21 @@ default_floating_border none
 
 # AutoStart
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id sworkstyle &> /tmp/sworkstyle.log
-exec nm-applet --indicator
-exec ydotoold
 # exec Mount_GDrive
-exec libinput-gestures-setup start
-exec wl-paste -t text --watch clipman store
 # exec nwg-dock -d -i 32 -p "left" -nows
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec ydotoold
+exec sworkstyle &> /tmp/sworkstyle.log
 exec wlsunset -l 17.5565300 -L -93.3810400 -t 2500 -T 4500
+exec wl-paste -t text --watch clipman store
+exec nm-applet --indicator
 exec thunar --daemon
+exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
+exec autotiling-rs -w 2 4 6 8 0
+# stacki3
+exec libinput-gestures-setup start
 
 ### Output configuration
 #
@@ -108,20 +110,19 @@ exec_always {
 # Basics:
 #
     # Toggle bar
-    # bindsym Control+space bar mode toggle
-    bindsym Control+space exec pkill -SIGUSR1 '^waybar$'
+    # bindsym bar mode toggle
+    bindsym $alt+space exec pkill -SIGUSR1 '^waybar$'
 
     # Start a terminal
-    bindsym $super+Return exec $term
+    bindsym $alt+Return exec $term
 
     # Kill focused window
-    bindsym $super+c kill
+    bindsym $AltGr+x kill
 
     # Start your launcher
-    bindsym $alt+space exec $clipboard
-    bindsym $super+n exec $network
-    bindsym $super+q exec $powermenu
-    bindsym $AltGr+space exec $bookmarks
+    bindsym $AltGr+c exec $clipboard
+    bindsym $AltGr+q exec $powermenu
+    bindsym $AltGr+m exec $bookmarks
 
     # keybinds replaces
     # bindsym $super+d exec sleep 0.4 && ydotool key delete
@@ -149,7 +150,7 @@ exec_always {
     bindsym XF86Tools exec kitty vim ~/.config/sway/config
 
     # Search
-    bindsym XF86Search exec librewolf
+    bindsym XF86Search exec catapult --show
 
     # Launch Most used Apps
     bindsym XF86LaunchA exec $favorites
@@ -177,13 +178,16 @@ exec_always {
     # Move your focus around
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
-    bindsym $alt+l workspace next
-    bindsym $alt+h workspace prev
+    bindsym $AltGr+l workspace next
+    bindsym $AltGr+h workspace prev
 
     bindsym $super+$left focus left
     bindsym $super+$down focus down
     bindsym $super+$up focus up
     bindsym $super+$right focus right
+    bindsym $alt+Tab focus right
+    bindsym $AltGr+k focus left
+    bindsym $AltGr+j focus right
     # Or use $super+[up|down|left|right]
     bindsym $super+Left focus left
     bindsym $super+Down focus down
@@ -202,13 +206,28 @@ exec_always {
     bindsym $super+Shift+Right move right
 
     # move to last workspace
-    bindsym $super+z workspace back_and_forth
+    bindsym $super+u workspace back_and_forth
     # move workspace between outputs
-    bindsym $super+y move workspace to output left
+    bindsym $super+m move workspace to output left
+
+    #··· No native ····
+    bindsym $super+Tab exec env RUST_BACKTRACE=1 \
+    swayr switch-to-urgent-or-lru-window >> /tmp/swayr.log 2>&1
 #
 # Workspaces:
 #
     # Switch to workspace
+    bindsym Control+1 workspace number 1
+    bindsym Control+2 workspace number 2
+    bindsym Control+3 workspace number 3
+    bindsym Control+4 workspace number 4
+    bindsym Control+5 workspace number 5
+    bindsym $alt+6 workspace number 6
+    bindsym $alt+7 workspace number 7
+    bindsym $alt+8 workspace number 8
+    bindsym $alt+9 workspace number 9
+    bindsym $alt+0 workspace number 10
+
     bindsym $super+1 workspace number 1
     bindsym $super+2 workspace number 2
     bindsym $super+3 workspace number 3
@@ -219,7 +238,19 @@ exec_always {
     bindsym $super+8 workspace number 8
     bindsym $super+9 workspace number 9
     bindsym $super+0 workspace number 10
+
     # Move focused container to workspace
+    bindsym Control+Shift+1 move container to workspace number 1
+    bindsym Control+Shift+2 move container to workspace number 2
+    bindsym Control+Shift+3 move container to workspace number 3
+    bindsym Control+Shift+4 move container to workspace number 4
+    bindsym Control+Shift+5 move container to workspace number 5
+    bindsym $alt+Shift+6 move container to workspace number 6
+    bindsym $alt+Shift+7 move container to workspace number 7
+    bindsym $alt+Shift+8 move container to workspace number 8
+    bindsym $alt+Shift+9 move container to workspace number 9
+    bindsym $alt+Shift+0 move container to workspace number 10
+
     bindsym $super+Shift+1 move container to workspace number 1
     bindsym $super+Shift+2 move container to workspace number 2
     bindsym $super+Shift+3 move container to workspace number 3
@@ -230,6 +261,7 @@ exec_always {
     bindsym $super+Shift+8 move container to workspace number 8
     bindsym $super+Shift+9 move container to workspace number 9
     bindsym $super+Shift+0 move container to workspace number 10
+
     # Assign Workspaces
     # workspace 1 output eDP-1
     # workspace 2 output eDP-1
@@ -249,14 +281,14 @@ exec_always {
     # You can "split" the current object of your focus with
     # $super+b or $super+v, for horizontal and vertical splits
     # respectively.
-    bindsym $super+b splith
-    bindsym $super+v splitv
+    bindsym $AltGr+b layout splith
+    bindsym $AltGr+v layout splitv
 
     # Switch the current container between different layout styles
-    bindsym $super+s layout stacking
-    bindsym $super+w layout tabbed
+    bindsym $AltGr+s layout stacking
+    bindsym $AltGr+w layout tabbed
     # bindsym $super+e layout toggle split
-    bindsym $super+e layout toggle all
+    bindsym $AltGr+a layout toggle all
 
     # Make the current focus fullscreen
     bindsym $super+f fullscreen
@@ -345,7 +377,6 @@ for_window [class="Lightdm-settings"] floating enable
 for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
