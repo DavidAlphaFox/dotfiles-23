@@ -1,13 +1,13 @@
 local utils = require('utils')
 local opts = { noremap = true, silent = false }
 
-utils.map('n', 'Y', 'y$')
+utils.map('n', '<leader>y', 'y$')
 utils.map('n', 'ñ', ':', opts)
-utils.map('n', '<leader><Space>', '/', opts)
-utils.map('n', '<leader>s', '?', opts)
-utils.map('n', 'ñc', ':s/', opts)
-utils.map('n', 'ñs', ':%s/', opts)
-utils.map('n', '<leader>c', [[:%s/\<<C-r><C-w>\>/]], opts)
+utils.map('n', '<leader>s', '/', opts)
+utils.map('n', '<leader><leader>s', '?', opts)
+utils.map('n', '<A-r>', ':s/', opts)
+utils.map('n', '¶', ':%s/', opts)
+utils.map('n', '<leader>rw', [[:%s/\<<C-r><C-w>\>/]], opts)
 
 --Python Docstring
 vim.cmd [[autocmd FileType python nnoremap <buffer> <leader>pd :Pydocstring<CR>]]
@@ -43,10 +43,10 @@ utils.map('n', '<leader><Left>', ':vertical resize -5<CR>')
 utils.map('n', '<leader><Up>', ':resize +5<CR>')
 utils.map('n', '<leader><Down>', ':resize -5<CR>')
 
-utils.map('n', 'đ', ':vertical resize +5<CR>')
-utils.map('n', 'æ', ':vertical resize -5<CR>')
-utils.map('n', 'ß', ':resize +5<CR>')
-utils.map('n', 'ð', ':resize -5<CR>')
+utils.map('n', ',h', ':vertical resize +5<CR>')
+utils.map('n', ',l', ':vertical resize -5<CR>')
+utils.map('n', ',j', ':resize +5<CR>')
+utils.map('n', ',k', ':resize -5<CR>')
 
 --Move line to up or down
 utils.map('n', '<A-Down>', ':m .+1<CR>==')
@@ -69,4 +69,4 @@ utils.map('t', '<M-[>', '<Esc>')
 utils.map('t', '<C-v><Esc>', '<Esc>')
 
 --Delete search result
-utils.map('n', '<leader>v', ':let @/=""<cr>')
+utils.map('n', '<leader>c', ':let @/=""<cr>')

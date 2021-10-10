@@ -33,7 +33,8 @@ local package = {
   'plugins',
   'keymappings',
   'status_line',
-  'lsp_config'
+  'lsp_config',
+  'debug'
 }
 
 for _, pkg in ipairs(package) do

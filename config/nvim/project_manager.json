@@ -8,6 +8,6 @@
     "~/Git/ecosur/frontcei/frontComite/ClientApp": {
         "name": "Projecto Frontend ecosur",
         "description": "Projecto echo en react, redux y mui para evaluacion de projectos",
-        "command": "npm start"
+        "command": "npm test"
     }
 }

@@ -84,7 +84,12 @@ plugins=(
   cargo
   dircycle
   docker
+  docker-compose
+  dotnet
   systemd
+  ripgrep
+  ag
+  fd
   fzf
   fzf-tab
   zsh_reload
@@ -122,7 +127,7 @@ mss(){
   sudo systemctl $1 mysqld
 }
 
-ds(){
+function ds(){
   sudo systemctl $1 docker
 }
 
@@ -213,9 +218,8 @@ alias usb="cd /run/media/crag"
 # HACK: Command alternatives
 alias sys="watch -ct -n0 sys.sh"
 alias ping="prettyping"
-alias cerrar="sh ~/.scripts/cerrar_ventana"
-alias cerrar_todo="sh ~/.scripts/cerrar_todo.sh"
-alias node="/usr/bin/node ~/.noderc"
+alias icat="kitty +kitten icat"
+alias js="/usr/bin/node ~/.noderc"
 alias ls="logo-ls"
 alias cp="rsync -P"
 alias tree="ls -R"
@@ -227,6 +231,7 @@ alias fpmr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: sway wm alias
 alias aid="swaymsg -t get_tree | grep "app_id""
+alias ztua="zathura"
 
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
@@ -234,7 +239,9 @@ export MYSQL_PS1="\n \d  ﯐ "
 export LC_ALL=es_MX.UTF-8
 export LANG=es_MX.UTF-8
 export LANGUAGE=es_MX.UTF-8
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
+export TERM="xterm-kitty"
+# export TERM="kitty"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc

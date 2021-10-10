@@ -4,7 +4,7 @@
     "height": 10,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["memory", "cpu", "temperature", "network", "pulseaudio", "backlight", "battery", "clock", "tray"],
+    "modules-right": ["memory", "cpu", "temperature", "network", "tray", "pulseaudio", "backlight", "battery", "clock"],
     "sway/mode": {
         "format": " {}"
     },
@@ -52,7 +52,7 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid}({signalStrength}%)",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠",
         "interval" : 7,

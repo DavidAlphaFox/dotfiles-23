@@ -17,8 +17,6 @@ set $powermenu ~/.config/rofi/bin/menu_powermenu
 set $bookmarks ~/.config/rofi/bin/bookmarks
 # Gnome Settings
 set $gnome-schema org.gnome.desktop.interface
-# Second monitor config
-# set $second_monitor DP-2
 # Font settings
 font pango: JetBrainsMono Nerd Font 12
 
@@ -41,21 +39,32 @@ exec wlsunset -l 17.5565300 -L -93.3810400 -t 2500 -T 4500
 exec wl-paste -t text --watch clipman store
 exec nm-applet --indicator
 exec thunar --daemon
-exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
-exec autotiling-rs -w 2 4 6 8 0
-# stacki3
-exec libinput-gestures-setup start
+exec systemctl --user start libinput-gestures.service
 
 ### Output configuration
 #
 # Wallpaper
-output * bg ~/.wallpaper.jpg fill
+output * bg ~/.cache/wallpaper fill
 #
 
 # Monitors configuration:
 #
-output eDP-1 resolution --custom 1920x1080 position 0,0
-# output $second_monitor mode 1280x1024 pos 1366,0 scale_filter nearest subpixel rgb
+output eDP-1 res --custom 1920x1080 pos 1600,0
+
+# Second monitor config
+set $second_monitor DP-2
+output $second_monitor res --custom 1280x800@60Hz pos 0,0 scale 0.8
+# Assign Workspaces
+    workspace 1 output eDP-1
+    workspace 2 output eDP-1
+    workspace 3 output eDP-1
+    workspace 4 output eDP-1
+    workspace 5 output eDP-1
+    workspace 6 output $second_monitor
+    workspace 7 output $second_monitor
+    workspace 9 output $second_monitor
+    workspace 8 output $second_monitor
+    workspace 10 output $second_monitor
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -76,6 +85,8 @@ output eDP-1 resolution --custom 1920x1080 position 0,0
 #
 # Keyboard thinkpad l450 configuration:
 #
+    # repeat_delay 500
+    # repeat_rate 5
     input "1:1:AT_Translated_Set_2_keyboard" {
         xkb_layout es
         xkb_options caps:swapescape
@@ -98,7 +109,9 @@ seat seat0 xcursor_theme Sweet-cursors 24
 # User theme
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Sweet-mars'
-    gsettings set $gnome-schema icon-theme 'Macjaro-master'
+    # gsettings set $gnome-schema icon-theme 'Macjaro-master'
+    gsettings set $gnome-schema icon-theme 'candy-icons'
+    # gsettings set $gnome-schema icon-theme 'BeautyLine'
     gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
     gsettings set $gnome-schema font-name 'Lucida MAC 11'
     gsettings set org.gnome.desktop.wm.preferences button-layout :
@@ -168,6 +181,7 @@ exec_always {
 
     # Reload the configuration file
     bindsym $super+Shift+r reload
+    bindsym $AltGr+Shift+r reload
 
 #
 # Moving around:
@@ -178,6 +192,7 @@ exec_always {
     # Move your focus around
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
+    bindsym $super+Tab workspace next
     bindsym $AltGr+l workspace next
     bindsym $AltGr+h workspace prev
 
@@ -186,8 +201,8 @@ exec_always {
     bindsym $super+$up focus up
     bindsym $super+$right focus right
     bindsym $alt+Tab focus right
-    bindsym $AltGr+k focus left
-    bindsym $AltGr+j focus right
+    bindsym $AltGr+j focus left
+    bindsym $AltGr+k focus right
     # Or use $super+[up|down|left|right]
     bindsym $super+Left focus left
     bindsym $super+Down focus down
@@ -209,10 +224,6 @@ exec_always {
     bindsym $super+u workspace back_and_forth
     # move workspace between outputs
     bindsym $super+m move workspace to output left
-
-    #··· No native ····
-    bindsym $super+Tab exec env RUST_BACKTRACE=1 \
-    swayr switch-to-urgent-or-lru-window >> /tmp/swayr.log 2>&1
 #
 # Workspaces:
 #
@@ -240,11 +251,11 @@ exec_always {
     bindsym $super+0 workspace number 10
 
     # Move focused container to workspace
-    bindsym Control+Shift+1 move container to workspace number 1
-    bindsym Control+Shift+2 move container to workspace number 2
-    bindsym Control+Shift+3 move container to workspace number 3
-    bindsym Control+Shift+4 move container to workspace number 4
-    bindsym Control+Shift+5 move container to workspace number 5
+    bindsym $AltGr+Shift+1 move container to workspace number 1
+    bindsym $AltGr+Shift+2 move container to workspace number 2
+    bindsym $AltGr+Shift+3 move container to workspace number 3
+    bindsym $AltGr+Shift+4 move container to workspace number 4
+    bindsym $AltGr+Shift+5 move container to workspace number 5
     bindsym $alt+Shift+6 move container to workspace number 6
     bindsym $alt+Shift+7 move container to workspace number 7
     bindsym $alt+Shift+8 move container to workspace number 8
@@ -261,18 +272,6 @@ exec_always {
     bindsym $super+Shift+8 move container to workspace number 8
     bindsym $super+Shift+9 move container to workspace number 9
     bindsym $super+Shift+0 move container to workspace number 10
-
-    # Assign Workspaces
-    # workspace 1 output eDP-1
-    # workspace 2 output eDP-1
-    # workspace 3 output eDP-1
-    # workspace 4 output eDP-1
-    # workspace 5 output eDP-1
-    # workspace 6 output $second_monitor
-    # workspace 7 output $second_monitor
-    # workspace 9 output $second_monitor
-    # workspace 8 output $second_monitor
-    # workspace 10 output $second_monitor
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -358,28 +357,34 @@ mode "CAPSLOCK" {
 }
 bindsym Caps_Lock mode "CAPSLOCK"
 
-# Floating windows
 
 for_window [class="^.*"] border pixel 0
 # for_window [class=".*"] border pixel 0
 for_window [app_id="^.*"] border pixel 0
 
+# Floating windows
 # chrome extension popups
+for_window [window_role="pop-up"] floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
 
+# set floating for window roles
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="About"] floating enable
+for_window [title="File Operation Progress"] floating enable, sticky enable, resize set width 40 ppt height 30 ppt
+for_window [app_id="floating_shell_portrait"] floating enable 1, sticky enable, resize set width 30 ppt height 40 ppt
+for_window [title="Picture in picture"] floating enable, sticky enable
+for_window [title="nmtui"] floating enable,  resize set width 50 ppt height 70 ppt
+for_window [title="Save File"] floating enable
+
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="Lightdm-settings"] floating enable
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [title="About Pale Moon"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [class="(?i)virtualbox"] floating enable border normal
 
 # Wayland apps
@@ -387,9 +392,14 @@ for_window [app_id="zenity"] floating enable
 for_window [app_id="wdisplays"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="io.crow_translate.CrowTranslate"] floating enable
+for_window [app_id="catapult"] floating enable; move up 400
+for_window [app_id="blueman-manager"] floating enable,  resize set width 40 ppt height 30 ppt
 
 # Prepend title with program name
-for_window [title="."] title_format "%app_id%class - %title (%shell)"
+for_window [title="."] title_format "%app_id%class - %title"
+
+# set floating (nontiling)for apps needing it:
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 
 # window rules, you can find the window class using xprop
 assign [class=Transmission-gtk|Code|jetbrains*] number 2

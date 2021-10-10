@@ -1,7 +1,7 @@
 M = {}
 local colors = {
-    bg = '#111416',
-    fg = '#111416',
+    bg = '#1a1e21',
+    fg = '#1a1e21',
     section_bg = '#040404',
     -- section_bg = '#1b1f22',
     -- section_bg = '#1e2327',
@@ -12,7 +12,7 @@ local colors = {
     red = '#f67e7d',
     red2 = '#f34f4d',
     yellow = '#fee074',
-    middlegrey = '#8791A5'
+    middlegrey = '#8791a5'
 }
 
 local mode_colors = {

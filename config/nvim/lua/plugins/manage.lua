@@ -31,6 +31,11 @@ return require('packer').startup(function(use)
   use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
 
+  -- Debug
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+  use {'nvim-telescope/telescope-dap.nvim'}
+  use {'mfussenegger/nvim-dap-python'}
+
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'p00f/nvim-ts-rainbow'
@@ -108,10 +113,12 @@ return require('packer').startup(function(use)
   use 'tamago324/lir.nvim'
   -- use 'tamago324/lir-mmv.nvim'
   use 'tamago324/lir-git-status.nvim'
+  use 'wellle/targets.vim'
 
   -- Themes
   use 'franbach/miramare'
   use 'sainnhe/sonokai'
   use 'folke/tokyonight.nvim'
   use 'i3d/vim-jimbothemes'
+  use {'frenzyexists/aquarium-vim', branch = 'develop' }
 end)
