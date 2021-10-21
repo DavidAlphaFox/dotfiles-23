@@ -18,18 +18,15 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'folke/lua-dev.nvim'
 
-  -- Autocomplete
-  use 'windwp/nvim-autopairs'
-
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'folke/lsp-colors.nvim'
   use 'glepnir/lspsaga.nvim'
   use 'nvim-lua/lsp-status.nvim'
-  -- use 'onsails/lspkind-nvim'
   use 'ray-x/lsp_signature.nvim'
-  use { 'ms-jpq/coq_nvim', branch = 'coq'} -- main one
+  use { 'ms-jpq/coq_nvim', branch = 'coq' } -- main one
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
+  use "folke/trouble.nvim"
 
   -- Debug
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
@@ -38,10 +35,11 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter-refactor'
   use 'p00f/nvim-ts-rainbow'
-  use 'romgrk/nvim-treesitter-context'
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'windwp/nvim-ts-autotag'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'romgrk/nvim-treesitter-context'
 
   -- Syntax
   use 'sheerun/vim-polyglot'
@@ -83,42 +81,25 @@ return require('packer').startup(function(use)
 
   --UI
   use {'glepnir/galaxyline.nvim', branch = 'main'}
-  -- use {'alvarosevilla95/luatab.nvim',requires='kyazdani42/nvim-web-devicons'}
-  use {'seblj/nvim-tabline',
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
-  use {
-  "folke/todo-comments.nvim",
-  requires = "nvim-lua/plenary.nvim",
-  }
-  use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  }
+  use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'alvarosevilla95/luatab.nvim', requires ='kyazdani42/nvim-web-devicons' }
 
   -- Text edition
-  use {'mg979/vim-visual-multi', branch = 'master'}
+  use { 'mg979/vim-visual-multi', branch = 'master' }
   use {'heavenshell/vim-pydocstring', run = 'make install' }
-  use 'terrortylor/nvim-comment'
   use 'AndrewRadev/splitjoin.vim'
-  use {
-    "blackCauldron7/surround.nvim",
-    config = function()
-      require "surround".setup {}
-    end
-  }
+  use 'wellle/targets.vim'
+  use "tpope/vim-surround"
+  use 'numToStr/Comment.nvim'
 
   --Utils
-  use 'CRAG666/code_runner.nvim'
-  use 'tamago324/lir.nvim'
-  -- use 'tamago324/lir-mmv.nvim'
-  use 'tamago324/lir-git-status.nvim'
-  use 'wellle/targets.vim'
+  use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
+  -- use 'tamago324/lir.nvim'
+  -- use 'tamago324/lir-git-status.nvim'
+  use 'is0n/fm-nvim'
 
   -- Themes
   use 'franbach/miramare'
-  use 'sainnhe/sonokai'
-  use 'folke/tokyonight.nvim'
   use 'i3d/vim-jimbothemes'
   use {'frenzyexists/aquarium-vim', branch = 'develop' }
 end)

@@ -1,1 +1,1 @@
-require 'status_line.classic'
+require 'status_line.nerd'

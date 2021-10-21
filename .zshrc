@@ -123,21 +123,17 @@ acp() {
   git push
 }
 
-mss(){
-  sudo systemctl $1 mysqld
-}
-
-function ds(){
-  sudo systemctl $1 docker
-}
-
-smb(){
-  sudo systemctl $1 smb
-  sudo systemctl $1 nmb
+dhg() {
+  git checkout --orphan latest_branch
+  git add -A
+  git commit -am "$1"
+  git branch -D master
+  git branch -m master
+  git push -f origin master
 }
 
 fapp() {
-	selected="$(ls /usr/share/applications | fzf -e)"
+	selected="$(/bin/ls /usr/share/applications | fzf -e)"
 	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
 }
 
@@ -250,6 +246,7 @@ export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --poin
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_BASE=/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
+export PATH="$HOME/.poetry/bin:$PATH"
 source ~/.passmaria.zsh
 
 # -< Evals >-

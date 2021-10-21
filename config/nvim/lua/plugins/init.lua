@@ -1,13 +1,13 @@
+-- Packer Plugins more complex
 local package = {
 	'plugins.manage',
 	'plugins.treesitter',
 	'plugins.colorizer',
 	'plugins.gitstatussigns',
-	'plugins.tabline',
+	-- 'plugins.tabline',
 	'plugins.telescope',
-	'plugins.file_manager',
 	'plugins.multi_cursors',
-	'plugins.devicon'
+	'plugins.file_manager',
 }
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)
@@ -15,17 +15,12 @@ for _, pkg in ipairs(package) do
     print(vim.inspect("Error in module " .. pkg))
   end
 end
-require('treesitter-context').setup{
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-    throttle = true, -- Throttles plugin updates (may improve performance)
-}
-require('nvim-autopairs').setup()
-require("nvim_comment").setup({
-  hook = function()
-    require("ts_context_commentstring.internal").update_commentstring()
-  end,
-})
-require("todo-comments").setup {}
+
+-- Packer Plugins minimal
+require('treesitter-context').setup()
+
+require("todo-comments").setup()
+
 require('code_runner').setup({
   filetype = {
     json_path = vim.fn.expand('~/.config/nvim/code_runner.json'),
@@ -34,4 +29,23 @@ require('code_runner').setup({
     json_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
   }
 })
--- require('plugins.devicon')
+
+require('Comment').setup(
+  {
+      ---@param ctx Ctx
+      pre_hook = function(ctx)
+          -- Only update commentstring for tsx filetypes
+          if vim.bo.filetype == 'typescriptreact' then
+              require('ts_context_commentstring.internal').update_commentstring()
+          end
+      end
+  }
+)
+
+-- native prlugins
+require('plugins.pairs').setup({})
+
+require('plugins.tabline').setup({
+  show_icons = true,
+  set_vim_settings = true
+})

@@ -20,6 +20,9 @@ local disabled_built_ins = {
   "rrhelper",
   "spellfile_plugin",
   "matchit",
+  "tutor_mode_plugin",
+  "remote_plugins",
+  "shada_plugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do

@@ -12,24 +12,13 @@ end
 -- cmd 'colorscheme matrix'
 -- cmd 'colorscheme darkmatrix'
 
---[[ vim.g.tokyonight_transparent = true
-cmd 'colorscheme tokyonight' --]]
+vim.g.miramare_cursor = 'purple'
+vim.g.miramare_enable_italic = 1
+vim.g.miramare_enable_italic_string = 0
+vim.g.miramare_disable_italic_comment = 1
+vim.g.miramare_transparent_background = 1
+cmd 'colorscheme miramare'
 
--- vim.g.miramare_cursor = 'purple'
--- vim.g.miramare_enable_italic = 1
--- vim.g.miramare_enable_italic_string = 0
--- vim.g.miramare_disable_italic_comment = 1
--- vim.g.miramare_transparent_background = 1
--- cmd 'colorscheme miramare'
-
-vim.g.aqua_bold = 1
-vim.g.aquarium_style="dark"
-cmd 'colorscheme aquarium'
-
---[[ vim.g.sonokai_style = 'atlantis'
-vim.g.sonokai_enable_italic = 1
-vim.g.sonokai_disable_italic_comment = 1
-vim.g.sonokai_cursor = 'green'
-vim.g.sonokai_transparent_background = 1
-vim.g.sonokai_current_word = 'bold'
-cmd 'colorscheme sonokai' --]]
+-- vim.g.aqua_bold = 1
+-- vim.g.aquarium_style="dark"
+-- cmd 'colorscheme aquarium'

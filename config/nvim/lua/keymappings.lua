@@ -31,11 +31,12 @@ end
 utils.map('n', '<leader>ñ', ':split<CR>:ter<CR>:resize 8<CR>')
 
 -- Move between splits
+-- Better window navigation
 utils.map('n', '<leader>m', '<C-w><C-w>')
-utils.map('n', '<leader>h', '<C-w>h')
-utils.map('n', '<leader>j', '<C-w>j')
-utils.map('n', '<leader>k', '<C-w>k')
-utils.map('n', '<leader>l', '<C-w>l')
+utils.map("n", "<Leader>k", ":wincmd k<CR>")
+utils.map("n", "<Leader>l", ":wincmd l<CR>")
+utils.map("n", "<Leader>j", ":wincmd j<CR>")
+utils.map("n", "<Leader>h", ":wincmd h<CR>")
 
 -- Resize pane
 utils.map('n', '<leader><Right>', ':vertical resize +5<CR>')

@@ -1,6 +1,5 @@
 local lspc = require 'lspconfig'
 local coq = require 'coq'
--- require'lspkind'.init({})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
