@@ -32,12 +32,12 @@ end
 local package = {
   'settings',
   -- 'netrw',
-  'colorscheme',
   'plugins',
   'keymappings',
-  'status_line',
   'lsp_config',
-  'debug'
+  'debug',
+  'status_line',
+  'colorscheme',
 }
 
 for _, pkg in ipairs(package) do

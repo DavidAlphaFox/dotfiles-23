@@ -1,10 +1,10 @@
 -- Packer Plugins more complex
 local package = {
 	'plugins.manage',
+  'plugins.tabline',
 	'plugins.treesitter',
 	'plugins.colorizer',
 	'plugins.gitstatussigns',
-	-- 'plugins.tabline',
 	'plugins.telescope',
 	'plugins.multi_cursors',
 	'plugins.file_manager',
@@ -22,12 +22,11 @@ require('treesitter-context').setup()
 require("todo-comments").setup()
 
 require('code_runner').setup({
-  filetype = {
-    json_path = vim.fn.expand('~/.config/nvim/code_runner.json'),
+  term = {
+    size = 15,
   },
-  project_context = {
-    json_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
-  }
+  filetype_path = vim.fn.expand('~/.config/nvim/code_runner.json'),
+  project_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
 })
 
 require('Comment').setup(
@@ -43,9 +42,4 @@ require('Comment').setup(
 )
 
 -- native prlugins
-require('plugins.pairs').setup({})
-
-require('plugins.tabline').setup({
-  show_icons = true,
-  set_vim_settings = true
-})
+-- require "pears".setup()

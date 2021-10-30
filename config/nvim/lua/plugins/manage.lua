@@ -23,7 +23,6 @@ return require('packer').startup(function(use)
   use 'folke/lsp-colors.nvim'
   use 'glepnir/lspsaga.nvim'
   use 'nvim-lua/lsp-status.nvim'
-  use 'ray-x/lsp_signature.nvim'
   use { 'ms-jpq/coq_nvim', branch = 'coq' } -- main one
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
   use "folke/trouble.nvim"
@@ -83,6 +82,10 @@ return require('packer').startup(function(use)
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
   use { 'alvarosevilla95/luatab.nvim', requires ='kyazdani42/nvim-web-devicons' }
+  use {
+    'noib3/cokeline.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+  }
 
   -- Text edition
   use { 'mg979/vim-visual-multi', branch = 'master' }
@@ -91,12 +94,14 @@ return require('packer').startup(function(use)
   use 'wellle/targets.vim'
   use "tpope/vim-surround"
   use 'numToStr/Comment.nvim'
+  use "steelsojka/pears.nvim"
 
   --Utils
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
   -- use 'tamago324/lir.nvim'
   -- use 'tamago324/lir-git-status.nvim'
   use 'is0n/fm-nvim'
+  use 'ThePrimeagen/harpoon'
 
   -- Themes
   use 'franbach/miramare'

@@ -91,6 +91,11 @@ output $second_monitor res --custom 1280x800@60Hz pos 0,0 scale 0.8
         xkb_layout es
         xkb_options caps:swapescape
     }
+
+    input "6700:11555:USB_USB_Keyboard" {
+        xkb_layout es
+        xkb_options caps:swapescape
+    }
 #
 # Tuchpad thinkpad l450 configuration:
 #
@@ -164,12 +169,14 @@ exec_always {
 
     # Search
     bindsym XF86Search exec catapult --show
+    bindsym Menu exec catapult --show
 
     # Launch Most used Apps
     bindsym XF86LaunchA exec $favorites
 
     # Launch all apps
     bindsym XF86Explorer exec $menu
+    bindsym Scroll_lock exec $menu
     ####################################################################
 
     # Drag floating windows by holding down $super and left mouse button.
@@ -193,16 +200,18 @@ exec_always {
     bindsym $super+Next workspace next
     bindsym $super+Prior workspace prev
     bindsym $super+Tab workspace next
-    bindsym $AltGr+l workspace next
-    bindsym $AltGr+h workspace prev
+    bindsym $super+Shift+Tab workspace prev
+    bindsym $AltGr+f workspace next
+    bindsym $AltGr+a workspace prev
 
     bindsym $super+$left focus left
     bindsym $super+$down focus down
     bindsym $super+$up focus up
     bindsym $super+$right focus right
     bindsym $alt+Tab focus right
-    bindsym $AltGr+j focus left
-    bindsym $AltGr+k focus right
+    bindsym $alt+Shift+Tab focus left
+    bindsym $AltGr+s focus left
+    bindsym $AltGr+d focus right
     # Or use $super+[up|down|left|right]
     bindsym $super+Left focus left
     bindsym $super+Down focus down
@@ -284,10 +293,10 @@ exec_always {
     bindsym $AltGr+v layout splitv
 
     # Switch the current container between different layout styles
-    bindsym $AltGr+s layout stacking
+    bindsym $AltGr+e layout stacking
     bindsym $AltGr+w layout tabbed
     # bindsym $super+e layout toggle split
-    bindsym $AltGr+a layout toggle all
+    bindsym $AltGr+t layout toggle all
 
     # Make the current focus fullscreen
     bindsym $super+f fullscreen
@@ -383,17 +392,16 @@ for_window [title="Save File"] floating enable
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
-for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
 for_window [class="(?i)virtualbox"] floating enable border normal
 
 # Wayland apps
 for_window [app_id="zenity"] floating enable
 for_window [app_id="wdisplays"] floating enable
-for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="io.crow_translate.CrowTranslate"] floating enable
 for_window [app_id="catapult"] floating enable; move up 400
-for_window [app_id="blueman-manager"] floating enable,  resize set width 40 ppt height 30 ppt
+for_window [app_id="pavucontrol"] floating enable, resize set width 40 ppt height 60 ppt
+for_window [app_id="blueman-manager"] floating enable, resize set width 40 ppt height 60 ppt
 
 # Prepend title with program name
 for_window [title="."] title_format "%app_id%class - %title"
@@ -402,12 +410,8 @@ for_window [title="."] title_format "%app_id%class - %title"
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 
 # window rules, you can find the window class using xprop
-assign [class=Transmission-gtk|Code|jetbrains*] number 2
-assign [class=Thunar|Pcmanfm|pcmanfm|File-roller|Insomnia|DB*|Genymotion*] number 3
-assign [class=Geany|Evince|org.pwmt.zathura|Zathura|Gucharmap|Soffice|libreoffice*|Wps|Et|Wpp|Typora] number 4
-assign [class=Audacity|vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape|Spotify*|bluejeans*] number 5
-assign [class=Lxappearance|System-config-printer.py|Lxtask|GParted|Pavucontrol|Exo-helper*|Lxrandr|Arandr|Gestures] number 6
-for_window [class=feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|Color-picker] floating enable
+# assign [class=Transmission-gtk|Code|jetbrains*] number 2
+for_window [class=feh|Audacious|File-roller|Lxappearance|Lxtask|Color-picker] floating enable
 for_window [class=Color-picker|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|vlc|Lxappearance|Audacity] focus
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
 
@@ -420,11 +424,11 @@ bar {
     swaybar_command waybar
 }
 
-client.focused              #bf616a #111416 #d8dee8 #bf616a #d8dee8
-client.focused_inactive     #111416 #111416 #d8dee8 #111416 #111416
-client.unfocused            #111416 #111416 #d8dee8 #111416 #111416
-client.urgent               #111416 #111416 #d8dee8 #111416 #111416
-client.placeholder          #111416 #111416 #d8dee8 #111416 #111416
-client.background           #111416
+client.focused              #1a1e21 #1a1e21 #e6d6ac #1a1e21 #1a1e21
+client.focused_inactive     #1a1e21 #1a1e21 #d8dee8 #1a1e21 #1a1e21
+client.unfocused            #1a1e21 #1a1e21 #bbbbbb #1a1e21 #1a1e21
+client.urgent               #1a1e21 #1a1e21 #f34f4d #1a1e21 #1a1e21
+client.placeholder          #1a1e21 #1a1e21 #d8dee8 #1a1e21 #1a1e21
+client.background           #1a1e21
 
 include /etc/sway/config.d/*

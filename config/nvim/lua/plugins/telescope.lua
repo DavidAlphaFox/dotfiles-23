@@ -72,18 +72,18 @@ utils.map(
 -- File Pickers
 utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
 utils.map('n', '<leader>fb' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
-utils.map('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]])
+utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
+utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]])
 utils.map('n', '<leader>fl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
 
 -- Vim Pickers
 utils.map("n", "<Leader>b", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]])
-utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
 utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').commands()<CR>]])
--- utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]])
 utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]])
-utils.map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').colorscheme()<CR>]])
+utils.map('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').colorscheme()<CR>]])
 utils.map('n', '<leader>fk', [[<cmd>lua require('telescope.builtin').keymaps()<CR>]])
-utils.map('n', '<leader>fy', [[<cmd>lua require('telescope.builtin').filetypes()<CR>]])
+utils.map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').filetypes()<CR>]])
+-- utils.map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]])
 -- utils.map('n', '<leader>bt', [[<cmd>lua require('telescope.builtin').current_buffer_tags()<CR>]])
 
 -- LSP Pickers
@@ -103,8 +103,8 @@ utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status
 
 
 -- highlights
-local cmd = vim.cmd
-cmd "hi TelescopeBorder   guifg=#111416"
-cmd "hi TelescopePromptBorder   guifg=#111416"
-cmd "hi TelescopeResultsBorder  guifg=#111416"
-cmd "hi TelescopePreviewBorder  guifg=#111416"
+-- local cmd = vim.cmd
+-- cmd "hi TelescopeBorder   guifg=#111416"
+-- cmd "hi TelescopePromptBorder   guifg=#111416"
+-- cmd "hi TelescopeResultsBorder  guifg=#111416"
+-- cmd "hi TelescopePreviewBorder  guifg=#111416"

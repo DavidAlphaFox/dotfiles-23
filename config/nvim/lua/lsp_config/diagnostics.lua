@@ -31,21 +31,8 @@ require("trouble").setup {
 }
 
 
-utils.map("n", "<leader>dx", "<cmd>Trouble<cr>",
-  {silent = true, noremap = true}
-)
-utils.map("n", "<leader>dw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-utils.map("n", "<leader>dd", "<cmd>Trouble lsp_document_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-utils.map("n", "<leader>dl", "<cmd>Trouble loclist<cr>",
-  {silent = true, noremap = true}
-)
-utils.map("n", "<leader>dq", "<cmd>Trouble quickfix<cr>",
-  {silent = true, noremap = true}
-)
-utils.map("n", "gR", "<cmd>Trouble lsp_references<cr>",
-  {silent = true, noremap = true}
-)
+utils.map("n", "<leader>dx", "<cmd>Trouble<cr>")
+utils.map("n", "<leader>dw", "<cmd>Trouble lsp_workspace_diagnostics<cr>")
+utils.map("n", "<leader>dd", "<cmd>Trouble lsp_document_diagnostics<cr>")
+utils.map("n", "<leader>dl", "<cmd>Trouble loclist<cr>")
+utils.map("n", "<leader>dq", "<cmd>Trouble quickfix<cr>")
