@@ -1,6 +1,8 @@
 local utils = require('utils')
 local opts = { noremap = true, silent = false }
 
+utils.map('n', 'k', 'gk')
+utils.map('n', 'j', 'gj')
 utils.map('n', 'ñ', ':', opts)
 utils.map('n', 'ñf', '/', opts)
 utils.map('n', '<leader><leader>f', '?', opts)
@@ -9,14 +11,14 @@ utils.map('n', '¶', ':s/', opts)
 utils.map('n', '<leader>cw', [[:%s/\<<C-r><C-w>\>/]], opts)
 
 --Python Docstring
-vim.cmd [[autocmd FileType python utils.map(" <buffer> <leader>pd :Pydocstring<CR>]]
+vim.cmd [[autocmd FileType python noremap <buffer> <leader>pd :Pydocstring<CR>]]
 
 -- Tab mappings
 utils.map('n',
           '<leader>t',
           [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
-utils.map('n', 'gl', ':tabnext<CR>')
-utils.map('n', 'gh', ':tabprev<CR>')
+utils.map('n', 'tl', ':tabnext<CR>')
+utils.map('n', 'th', ':tabprev<CR>')
 utils.map('n', 'tn', ':tabnew<CR>')
 utils.map('n', 'to', ':tabonly<CR>')
 utils.map('n', 'td', ':tabclose<CR>')
@@ -27,8 +29,9 @@ do
    local command = string.format("%dgt", i)
    utils.map('n', kmap, command)
 end
-utils.map('n', 'gk', ':bnext<CR>')
-utils.map('n', 'gj', ':bprev<CR>')
+utils.map('n', '<leader>bd', ':bd<CR>')
+utils.map('n', 'tk', ':bnext<CR>')
+utils.map('n', 'tj', ':bprev<CR>')
 
 -- Terminal open
 -- utils.map('n', '<leader>ñ', ':split<CR>:ter<CR>:resize 8<CR>')
@@ -70,8 +73,11 @@ utils.map('n', 'n', 'nzzzv', opts)
 utils.map('n', 'N', 'Nzzzv', opts)
 
 utils.map('n', '<leader>a', '=ip', opts)
+utils.map('n', '<leader>i', '=G', opts)
 utils.map('n', '<Tab>', '>>', opts)
 utils.map('n', '<S-Tab>', '<<', opts)
+utils.map('v', '<Tab>', '>', opts)
+utils.map('v', '<S-Tab>', '<', opts)
 
 -- Plugins
 

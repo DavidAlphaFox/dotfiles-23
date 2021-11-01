@@ -29,8 +29,9 @@ for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
 
+require'settings'
 local package = {
-  'settings',
+  -- 'settings',
   -- 'netrw',
   'plugins',
   'keymappings',
@@ -46,4 +47,4 @@ for _, pkg in ipairs(package) do
     print(vim.inspect("Error in module " .. pkg))
   end
 end
-vim.g.pydocstring_formatter = 'google'
+vim.g.pydocstring_formatter = 'google' -- sphinx, numpy, google

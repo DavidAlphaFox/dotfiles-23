@@ -74,6 +74,7 @@ return require('packer').startup(function(use)
 
   -- Tim Pope docet
   use 'tpope/vim-endwise'
+  use "tpope/vim-surround"
 
   -- General Plugins
   use 'jeffkreeftmeijer/vim-numbertoggle'
@@ -81,7 +82,6 @@ return require('packer').startup(function(use)
   --UI
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
-  use { 'alvarosevilla95/luatab.nvim', requires ='kyazdani42/nvim-web-devicons' }
   use {
     'noib3/cokeline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -92,14 +92,11 @@ return require('packer').startup(function(use)
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'AndrewRadev/splitjoin.vim'
   use 'wellle/targets.vim'
-  use "tpope/vim-surround"
   use 'numToStr/Comment.nvim'
-  use "steelsojka/pears.nvim"
+  use 'windwp/nvim-autopairs'
 
   --Utils
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
-  -- use 'tamago324/lir.nvim'
-  -- use 'tamago324/lir-git-status.nvim'
   use 'is0n/fm-nvim'
   use 'ThePrimeagen/harpoon'
 

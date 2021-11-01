@@ -1,0 +1,55 @@
+local utils = require'utils'
+local npairs = require('nvim-autopairs')
+
+vim.g.coq_settings = {
+  auto_start = 'shut-up',
+  keymap = {
+    recommended = false,
+    jump_to_mark = "ñn"
+  },
+  clients = {
+    tabnine = {
+      enabled = true
+    }
+  },
+  display = {
+    icons = {
+      mode = "short"
+    }
+  }
+}
+
+npairs.setup({ map_bs = false, map_cr = false })
+
+local opts = { expr = true, noremap = true }
+
+-- these mappings are coq recommended mappings unrelated to nvim-autopairs
+utils.map('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], opts)
+utils.map('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], opts)
+utils.map('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], opts)
+utils.map('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], opts)
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+MUtils.CR = function()
+  if vim.fn.pumvisible() ~= 0 then
+    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+      return npairs.esc('<c-y>')
+    else
+      return npairs.esc('<c-e>') .. npairs.autopairs_cr()
+    end
+  else
+    return npairs.autopairs_cr()
+  end
+end
+utils.map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
+
+MUtils.BS = function()
+  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+    return npairs.esc('<c-e>') .. npairs.autopairs_bs()
+  else
+    return npairs.autopairs_bs()
+  end
+end
+utils.map('i', '<bs>', 'v:lua.MUtils.BS()', opts)

@@ -25,7 +25,7 @@ set.undolevels = 1000
 -- Spaces & Tabsset
 set.softtabstop = 2
 set.shiftwidth = 2
--- set.tabstop = 2
+set.tabstop = 2
 set.expandtab = true
 set.autoindent = true
 set.copyindent = true
@@ -36,13 +36,15 @@ set.joinspaces = false
 set.textwidth = 79
 
 -- UI Config
+set.pumheight = 10
 set.showmode = false
 set.title = true
-set.hidden = true
+set.hidden = false
 set.number = true
 set.relativenumber = true
 set.showcmd = true
 set.cursorline = true
+set.cursorcolumn = true
 set.wildmenu = true
 set.showmatch = true
 set.errorbells = false
@@ -76,12 +78,10 @@ set.foldenable = false
 -- set.foldmethod = 'indent'
 
 --Backup
-set.nobackup = true
-set.noswapfile = true
+set.swapfile = false
 set.backup = false
 set.writebackup = false
 set.backupcopy = 'yes'
-set.swapfile = false
 
 function Goto_last_pos()
   local last_pos = vim.fn.line("'\"")
@@ -91,7 +91,6 @@ function Goto_last_pos()
 end
 
 vim.cmd[[
-  filetype plugin indent on
   au BufReadPost * lua Goto_last_pos()
   au Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
   au Filetype lua setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
