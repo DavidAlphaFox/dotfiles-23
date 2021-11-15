@@ -1,5 +1,22 @@
+vim.g.coq_settings = {
+  auto_start = 'shut-up',
+  keymap = {
+    jump_to_mark = "ñn"
+  },
+  clients = {
+    tabnine = {
+      enabled = true
+    }
+  },
+  display = {
+    icons = {
+      mode = "short"
+    }
+  }
+}
+
 local package = {
-  'lsp_config.pairs',
+  -- 'lsp_config.pairs',
   'lsp_config.supports',
   'lsp_config.diagnostics',
   'lsp_config.saga'

@@ -183,6 +183,7 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=
 alias starshipc="vim ~/.config/starship.toml"
 alias alacric="vim ~/.config/alacritty/alacritty.yml"
 alias swayc="vim ~/.config/sway/config"
+alias newmc="vim ~/.config/newm/config.py"
 alias i3c="vim ~/.config/i3/config"
 alias i3barc="~/.config/i3status/config"
 alias zshc="vim ~/.zshrc"
@@ -200,6 +201,7 @@ alias vims='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
 alias vimf='vim ~/.config/nvim/lua/config/snippets'
 alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
+alias vimls='vim ~/.config/nvim/lua/lsp_config/supports.lua'
 alias vimcp='vim ~/.config/nvim/lua/plugins'
 # HACK: Jump alias
 alias applications="cd /usr/share/applications"
@@ -227,8 +229,8 @@ alias fpmr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: sway wm alias
 alias aid="swaymsg -t get_tree | grep "app_id""
-alias ztua="zathura"
-
+alias zt="zathura"
+alias portal="/usr/lib/xdg-desktop-portal-wlr -r -c ~/.config/newm/portal.conf &"
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "

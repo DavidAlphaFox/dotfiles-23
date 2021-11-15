@@ -16,7 +16,7 @@ set.encoding = 'utf-8'
 set.fileformat = 'unix'
 set.formatoptions = 'tcqrn1'
 set.spelllang = 'es'
-set.completeopt = 'menu,menuone,noselect'
+set.completeopt = 'menuone,noselect'
 set.errorformat:append('%f|%l col %c|%m')
 set.wildignore = {'*.pyc', '*.pyo', '*/__pycache__/*', '*.beam', '*.swp,~*', '*.zip', '*.tar' }
 set.undofile = false

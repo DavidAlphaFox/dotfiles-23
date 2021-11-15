@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
 
   -- Tim Pope docet
   use 'tpope/vim-endwise'
-  use "tpope/vim-surround"
+  use 'tpope/vim-surround'
 
   -- General Plugins
   use 'jeffkreeftmeijer/vim-numbertoggle'
@@ -82,26 +82,23 @@ return require('packer').startup(function(use)
   --UI
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
-  use {
-    'noib3/cokeline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-  }
 
   -- Text edition
   use { 'mg979/vim-visual-multi', branch = 'master' }
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'AndrewRadev/splitjoin.vim'
   use 'wellle/targets.vim'
-  use 'numToStr/Comment.nvim'
-  use 'windwp/nvim-autopairs'
+  use 'terrortylor/nvim-comment'
 
   --Utils
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'is0n/fm-nvim'
   use 'ThePrimeagen/harpoon'
+  use 'ggandor/lightspeed.nvim'
 
   -- Themes
   use 'franbach/miramare'
   use 'i3d/vim-jimbothemes'
-  use {'frenzyexists/aquarium-vim', branch = 'develop' }
+  use 'katawful/kat.vim'
+  use 'Neur1n/neucs.vim'
 end)

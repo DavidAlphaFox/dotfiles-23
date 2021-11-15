@@ -1,7 +1,6 @@
 -- Packer Plugins more complex
 local package = {
 	'plugins.manage',
-  'plugins.tabline',
 	'plugins.treesitter',
 	'plugins.colorizer',
 	'plugins.gitstatussigns',
@@ -29,17 +28,16 @@ require('code_runner').setup({
   project_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
 })
 
-require('Comment').setup(
-  {
-      ---@param ctx Ctx
-      pre_hook = function(ctx)
-          -- Only update commentstring for tsx filetypes
-          if vim.bo.filetype == 'typescriptreact' then
-              require('ts_context_commentstring.internal').update_commentstring()
-          end
-      end
-  }
-)
-
+require("nvim_comment").setup({
+  hook = function()
+    require("ts_context_commentstring.internal").update_commentstring()
+  end,
+})
 -- native prlugins
 -- require "pears".setup()
+require'lightspeed'.setup {
+  limit_ft_matches = 10,
+}
+
+require'plugins.pairs'.setup()
+require'plugins.tabline'.setup()

@@ -1,5 +1,6 @@
-local lspc = require 'lspconfig'
+local nvim_lsp = require 'lspconfig'
 local coq = require 'coq'
+
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -44,103 +45,90 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local function make_capabilities()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.codeAction = {
+
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.codeAction = {
     dynamicRegistration = true,
     codeActionLiteralSupport = {
-        codeActionKind = {
-            valueSet = (function()
-                local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
-                table.sort(res)
-                return res
-            end)()
-        }
+      codeActionKind = {
+        valueSet = (function()
+          local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
+          table.sort(res)
+          return res
+        end)()
       }
     }
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-        properties = {"documentation", "detail", "additionalTextEdits"}
-    }
-    return capabilities
+  }
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {"documentation", "detail", "additionalTextEdits"}
+  }
+  return {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
 end
 
-local flake8 = {
-  lintCommand = "flake8 ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "black --line-length 79 ${INPUT}",
-  formatStdin = true
+
+-- Especific config for lsp servers
+local function omnisharp()
+  local pid = vim.fn.getpid()
+  return {
+    cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid)},
+    root_dir = nvim_lsp.util.root_pattern("*.csproj","*.sln");
+  }
+end
+
+local especific_config = {
+  omnisharp = omnisharp()
 }
--- capabilities = capabilities,
-local servers = {"pyright", "ccls", "tsserver", "dockerls", "bashls", "sqls"}
+
+
+local servers = {"pylsp", "ccls", "tsserver", "dockerls", "bashls", "sqls", "omnisharp"}
 for _, server in ipairs(servers) do
-  --[[ lspc[server].setup{
-    on_attach = on_attach,
-    capabilities = make_capabilities()
-  } --]]
-  lspc[server].setup(coq.lsp_ensure_capabilities(
-    vim.tbl_deep_extend("force", {
-      on_attach = on_attach,
-      capabilities = make_capabilities(),
-      flags = {debounce_text_changes = 150},
-      -- init_options = config
-      }, {})))
-    local cfg = lspc[server]
+  nvim_lsp[server].setup(coq.lsp_ensure_capabilities(
+    vim.tbl_deep_extend("force", make_config(), especific_config[server] or {}, {})))
+    local cfg = nvim_lsp[server]
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
         print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
     end
 end
 
-lspc.efm.setup {
-  init_options = {documentFormatting = true},
-  --[[ root_dir = function()
-    return vim.fn.getcwd()
-  end, ]]
-  settings = {
-    rootMarkers = {".git/"},
-    languages = {
-      python = {flake8},
-    }
-  },
-  filetypes = {
-    "python",
-  },
-}
 
 local sumneko_binary = "/usr/bin/lua-language-server"
 local sumneko_root_path = "/usr/share/lua-language-server"
+local config = make_config()
+local luaconfig = vim.tbl_deep_extend("force", config, {
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';')
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'}
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+        }
+      }
+    }
+  }
+})
+
 -- lua-dev.nvim
 local luadev = require("lua-dev").setup(
   coq.lsp_ensure_capabilities(
     vim.tbl_deep_extend("force", {
       library = {vimruntime = true, types = true, plugins = true},
-      lspconfig = {
-          capabilities = make_capabilities(),
-          on_attach = on_attach,
-          cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-          settings = {
-              Lua = {
-                  runtime = {
-                      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                      version = 'LuaJIT',
-                      -- Setup your lua path
-                      path = vim.split(package.path, ';')
-                  },
-                  diagnostics = {
-                      -- Get the language server to recognize the `vim` global
-                      globals = {'vim'}
-                  },
-                  workspace = {
-                      -- Make the server aware of Neovim runtime files
-                      library = {
-                          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                      }
-                  }
-              }
-          }
-      }
+      lspconfig = luaconfig
 }, {})))
-lspc.sumneko_lua.setup(luadev)
+nvim_lsp.sumneko_lua.setup(luadev)

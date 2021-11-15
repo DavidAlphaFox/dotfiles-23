@@ -19,15 +19,13 @@ vim.g.coq_settings = {
   }
 }
 
-npairs.setup({ map_bs = false, map_cr = false })
-
-local opts = { expr = true, noremap = true }
+npairs.setup({ map_bs = false })
 
 -- these mappings are coq recommended mappings unrelated to nvim-autopairs
-utils.map('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], opts)
-utils.map('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], opts)
-utils.map('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], opts)
-utils.map('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], opts)
+utils.map('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+utils.map('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+utils.map('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+utils.map('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
 
 -- skip it, if you use another global object
 _G.MUtils= {}
@@ -43,7 +41,7 @@ MUtils.CR = function()
     return npairs.autopairs_cr()
   end
 end
-utils.map('i', '<cr>', 'v:lua.MUtils.CR()', opts)
+utils.map('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
 
 MUtils.BS = function()
   if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
@@ -52,4 +50,4 @@ MUtils.BS = function()
     return npairs.autopairs_bs()
   end
 end
-utils.map('i', '<bs>', 'v:lua.MUtils.BS()', opts)
+utils.map('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })

@@ -4,8 +4,8 @@ local opts = { noremap = true, silent = false }
 utils.map('n', 'k', 'gk')
 utils.map('n', 'j', 'gj')
 utils.map('n', 'ñ', ':', opts)
-utils.map('n', 'ñf', '/', opts)
-utils.map('n', '<leader><leader>f', '?', opts)
+utils.map('n', 'ñs', '/', opts)
+utils.map('n', '<leader>s', '?', opts)
 utils.map('n', '<leader>r', ':%s/', opts)
 utils.map('n', '¶', ':s/', opts)
 utils.map('n', '<leader>cw', [[:%s/\<<C-r><C-w>\>/]], opts)
@@ -91,5 +91,5 @@ do
    utils.map('n', kmap, command)
 end
 utils.map('n', 'ñe', [[:lua require("harpoon.term").sendCommand(1, require"code_runner".get_filetype_command() .. "\n")<CR>]])
-utils.map('n', '<leader>s', ':lua require("harpoon.term").gotoTerminal(1)<CR>')
+utils.map('n', 'ñt', ':lua require("harpoon.term").gotoTerminal(10)<CR>')
 utils.map('n', '<leader>e', ':RunCode<CR>', opts)
