@@ -23,16 +23,17 @@ set.undofile = false
 set.undolevels = 1000
 
 -- Spaces & Tabsset
-set.softtabstop = 2
-set.shiftwidth = 2
 set.tabstop = 2
-set.expandtab = true
-set.autoindent = true
-set.copyindent = true
-set.smartindent = true
-set.smarttab = true
-set.shiftround = true
-set.joinspaces = false
+set.shiftwidth=2
+set.expandtab = false
+-- set.ts=2
+-- set.softtabstop = 4
+-- set.autoindent = true
+-- set.smartindent = true
+-- set.smarttab = true
+-- set.copyindent = true
+-- set.shiftround = true
+-- set.joinspaces = false
 set.textwidth = 79
 
 -- UI Config
@@ -59,7 +60,7 @@ if vim.fn.has("termguicolors") == 1 then
   -- vim.go.t_8b = "[[48;2;%lu;%lu;%lum"
   -- vim.go.t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
   -- vim.go.t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"
-  vim.opt.termguicolors = true
+  set.termguicolors = true
 end
 
 -- Searchset incsearch
@@ -92,10 +93,12 @@ end
 
 vim.cmd[[
   au BufReadPost * lua Goto_last_pos()
-  au Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
-  au Filetype lua setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  au FileType make setlocal noexpandtab
+  au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+  au FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
+  au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
+  au BufEnter *.py set ai sw=4 ts=4 sta et fo=croq
   au TextYankPost * silent! lua vim.highlight.on_yank()
-  au BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
   au BufEnter * :let @/=""
   au BufWritePre * :%s/\s\+$//e
   au BufEnter * silent! lcd %:p:h

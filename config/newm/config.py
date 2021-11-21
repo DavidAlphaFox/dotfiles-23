@@ -1,40 +1,29 @@
 from __future__ import annotations
-from typing import Callable, Any
-from subprocess import check_output
-
 import os
 import pwd
 import time
 import psutil
-import logging
-
+from typing import Callable, Any
+from subprocess import check_output
 from newm.layout import Layout
-
 from newm import (
     SysBackendEndpoint_alsa,
     SysBackendEndpoint_sysfs
 )
-
 from pywm import (
     PYWM_MOD_LOGO,
-    # PYWM_MOD_ALT
 )
-
-logging.basicConfig(
-    filename='open_windows.log',
-    encoding='utf-8',
-    level=logging.INFO)
 
 OUTPUT_MANAGER = True
 outputs = [
     {'name': 'eDP-1', 'scale': 0.7},
-    {'name': 'DP-2', 'scale': 0.8},
+    # {'name': 'eDP-1', 'pos_x': 1833, 'pos_y': 0, 'scale': 0.7},
+    # {'name': 'DP-2', 'pos_x': 0, 'pos_y': 0, 'scale': 0.7},
 ]
-
 
 pywm = {
     'xkb_layout': "es",
-    'xkb_options': "caps:escape",
+    'xkb_options': "caps:swapescape",
 
     'encourage_csd': False,
     'debug_f1': True,
@@ -49,15 +38,14 @@ pywm = {
 
 
 def should_float(view):
-    size = (900, 800)
-    position = (0.5, 0.1)
-    logging.info(f"{view.app_id}")
+    size = (700, 700)
+    position = (0.5, 0.35)
     if view.app_id == "pavucontrol":
         return True, size, position
     if view.app_id == "blueman-manager":
         return True, size, position
     if view.app_id == "catapult":
-        return True, (0, 0), position
+        return True, (700, 700), (0.5, 0.1)
     return None
 
 
@@ -69,12 +57,10 @@ view = {
     'should_float': should_float
 }
 
-
 swipe_zoom = {
     'grid_m': 1,
     'grid_ovr': 0.02,
 }
-
 
 mod = PYWM_MOD_LOGO
 wallpaper = os.environ["HOME"] + "/.cache/wallpaper.jpg"
@@ -85,6 +71,11 @@ term = 'kitty'
 
 
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
+    menu = '~/.config/rofi/bin/launcher_misc'
+    clipboard = '~/.config/rofi/bin/clipboard'
+    favorites = '~/.config/rofi/bin/apps'
+    powermenu = '~/.config/rofi/bin/menu_powermenu'
+    bookmarks = '~/.config/rofi/bin/bookmarks'
     return [
         ("M-h", lambda: layout.move(-1, 0)),
         ("M-j", lambda: layout.move(0, 1)),
@@ -105,7 +96,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("M-C-l", lambda: layout.resize_focused_view(1, 0)),
 
         ("M-Return", lambda: os.system(f"{term} &")),
-        ("M-x", lambda: layout.close_view()),
+        ("M-e", lambda: layout.close_view()),
 
         ("M-p", lambda: layout.ensure_locked(dim=True)),
         ("M-P", lambda: layout.terminate()),
@@ -115,69 +106,58 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
 
         ("ModPress", lambda: layout.toggle_overview()),
 
-        ("M-q", lambda: os.system("nwg-bar &")),
+        ("M-q", lambda: os.system(f"{powermenu} &")),
         ("M-m", lambda: os.system("playerctl previous")),
         ("M-i", lambda: os.system("playerctl next")),
         ("M-ñ", lambda: os.system("playerctl play-pause")),
-        ("M-c", lambda: os.system('clipman pick --tool=CUSTOM \
-            --tool-args="wofi --dmenu -n" &')),
-
-        # Change volume
+        ("M-c", lambda: os.system(f'{clipboard} &')),
+        ("M-b", lambda: os.system(f'{bookmarks} &')),
         ("XF86AudioRaiseVolume", lambda: os.system("amixer -q \
             set Master 5%+")),
         ("XF86AudioLowerVolume", lambda: os.system("amixer -q \
             set Master 5%-")),
         ("XF86AudioMute", lambda: os.system("amixer set Master toggle")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
-
-        # Change brightness
         ("XF86MonBrightnessDown", lambda: os.system("brightnessctl \
             specific 3-")),
         ("XF86MonBrightnessUp", lambda: os.system("brightnessctl \
             specific +3")),
-
-        # Toggle Camera driver
         ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
-
-        # Settings
-        ("XF86Tools", lambda: os.system("kitty vim ~/.config/newm/config.py")),
-
-        # Search
+        ("XF86Tools", lambda: os.system("kitty vim \
+                                        ~/.config/newm/config.py &")),
         ("XF86Search", lambda: os.system("catapult --show &")),
         ("Menu", lambda: os.system("catapult --show &")),
-        ("XF86Explorer", lambda: os.system("nwg-drawer &")),
-        ("Scroll_lock", lambda: os.system("nwg-drawer &")),
-        # XF86LaunchA
-
-        # Screenshot
+        ("XF86Explorer", lambda: os.system(f"{menu} &")),
+        ("Scroll_lock", lambda: os.system(f"{menu} &")),
+        ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
-        ("M-Print", lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date +%s)".png')),
+        ("M-Print", lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date\
+            +%s)".png &')),
     ]
 
 
 def on_startup():
-    init_services = (
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &",
+    gnome_schema = 'org.gnome.desktop.interface'
+    init_service = (
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY",
         "hash dbus-update-activation-environment 2>/dev/null && \
             dbus-update-activation-environment --systemd DISPLAY \
-            WAYLAND_DISPLAY"
-        "wl-paste -t text --watch clipman store &",
-        "thunar --daemon &"
-        "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000 &"
+            WAYLAND_DISPLAY",
+        f"gsettings set {gnome_schema} gtk-theme 'Sweet-mars'",
+        f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
+        f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
+        f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
+        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
+        "wl-paste -t text --watch clipman store",
+        "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
+        "thunar --daemon",
+        "/home/crag/Git/dotfiles/etc/dnscrypt-proxy"
     )
 
-    for service in init_services:
-        os.system(f"{service} &")
-
-    gnome_schema = 'org.gnome.desktop.interface'
-    os.system(f"gsettings set {gnome_schema} gtk-theme 'Sweet-mars'")
-    os.system(f"gsettings set {gnome_schema} icon-theme 'candy-icons'")
-    os.system(f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'")
-    os.system(f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'")
-    os.system("gsettings set org.gnome.desktop.wm.preferences button-layout :")
-    # os.system("gsettings set org.gnome.mutter experimental-features \
-    #  \"['scale-monitor-framebuffer']\"")
+    for service in init_service:
+        service = f"{service} &"
+        os.system(service)
 
 
 sys_backend_endpoints = [
@@ -201,6 +181,7 @@ panels = {
 
 ssid = "nmcli -t -f active,ssid dev wifi | egrep '^sí'\
     | cut -d\\: -f2"
+
 brightness = "brightnessctl i | grep 'Current' | cut -d\\( -f2"
 
 volume = "awk -F\"[][]\" '/Left:/ { print $2 }' <(amixer sget Master)"

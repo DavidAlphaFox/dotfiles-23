@@ -97,8 +97,7 @@ return require('packer').startup(function(use)
   use 'ggandor/lightspeed.nvim'
 
   -- Themes
-  use 'franbach/miramare'
   use 'i3d/vim-jimbothemes'
-  use 'katawful/kat.vim'
-  use 'Neur1n/neucs.vim'
+  use 'owozsh/Amora'
+  use 'franbach/miramare'
 end)

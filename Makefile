@@ -18,11 +18,15 @@ init: ## Initial deploy dotfiles
 	ln -vsf ${PWD}/.gitconfig ${HOME}/.gitconfig
 	ln -vsf ${PWD}/.pyrc ${HOME}/.pyrc
 	ln -vsf ${PWD}/.noderc ${HOME}/.noderc
+	ln -vsf ${PWD}/config/* ${HOME}/.config/
 
 i3wm: ## config i3
 	ln -vsf ${PWD}/i3wm/* ${HOME}/.config/
 	yay -S --needed --noconfirm corrupter-bin \
 		flameshot insomnia-git i3wsr i3status-rust
+
+wayland:
+	sudo ln -vsf ${PWD}/waylan/* /usr/local/bin/
 
 swaywm: ## config sway
 	ln -vsf ${PWD}/swaywm/* ${HOME}/.config/
@@ -35,9 +39,6 @@ zsh: ## install oh my zsh
 		zsh-sintax-highlighting
 	chsh -s $(which zsh)
 
-npm-cli-tools: ## Install fx and speedtest-net
-	sudo npm install -g speedtest-net
-
 code: ## Install and configure VScode
 	yay -S --needed --noconfirm visual-studio-code-bin
 	mkdir -p ${HOME}/.config/Code/
@@ -47,12 +48,6 @@ code: ## Install and configure VScode
 	cd ${PWD}/Code/miramare/ && vsce package .
 	code --install-extension ${PWD}/Code/miramare/miramare-0.0.2.vsix
 
-android-studio: ## Install and configure Android Studio
-	yay -S --noconfirm android-studio
-
-intellij-idea: ## Install and configure IDEA
-	sudo pacman -S --noconfirm intellij-idea-community-edition
-
 rustinstall: ## Install rust and rust language server
 	sudo pacman -S rustup
 	rustup default stable
@@ -61,9 +56,6 @@ rustinstall: ## Install rust and rust language server
 docker: ## Docker initial setup
 	sudo pacman -S docker
 	sudo usermod -aG docker ${USER}
-
-docker-compose: ## Set up docker-compose
-	sudo pacman -S docker-compose
 
 maria-db: ## Mariadb initial setup
 	sudo ln -vsf ${PWD}/etc/sysctl.d/40-max-user-watches.conf /etc/sysctl.d/40-max-user-watches.conf
@@ -75,22 +67,15 @@ maria-db: ## Mariadb initial setup
 	mysql_secure_installation
 	mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
 
-mongodb: ## Mongodb initial setup
-	sudo pacman -S mongodb mongodb-tools
-
 testpath: ## Echo PATH
 	PATH=$$PATH
 	@echo $$PATH
 	GOPATH=$$GOPATH
 	@echo $$GOPATH
 
-allinstall: yay install init cli-tools i3wm zsh npm-cli-tools
+allinstall: yay install init cli-tools zsh
 
 nextinstall: rustinstall maria-db mongodb docker docker-compose
-
-intellij: android-studio intellij-idea
-
-ideinstall: code intellij
 
 .PHONY: allinstall nextinstall ideinstall
 

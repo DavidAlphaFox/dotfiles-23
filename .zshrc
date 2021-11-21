@@ -231,6 +231,7 @@ alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 alias aid="swaymsg -t get_tree | grep "app_id""
 alias zt="zathura"
 alias portal="/usr/lib/xdg-desktop-portal-wlr -r -c ~/.config/newm/portal.conf &"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
