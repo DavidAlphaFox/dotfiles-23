@@ -545,4 +545,5 @@ dmypy.json
 miramare-0.0.2.vsix
 workspaceStorage/
 globalStorage/
+blocked-names.txt
 # End of https://www.toptal.com/developers/gitignore/api/node,python,intellij+all,intellij+iml,intellij,pycharm,visualstudiocode
