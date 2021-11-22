@@ -42,7 +42,7 @@
 
 #tridactyl-input {    padding: 1rem;
     color: var(--tridactyl-fg);
-    width: 90%;
+    width: 70%;
     font-size: 1.2rem;
     line-height: 1;
     background: var(--tridactyl-bg);
@@ -50,7 +50,8 @@
     padding: 1rem;
 }
 
-#completions table {    font-size: 0.8rem;
+#completions table {
+    font-size: 1rem;
     font-weight: 200;
     border-spacing: 0;
     table-layout: fixed;
