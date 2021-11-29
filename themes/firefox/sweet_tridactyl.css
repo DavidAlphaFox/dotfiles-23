@@ -71,7 +71,7 @@
     color: var(--tridactyl-fg);
     background: var(--tridactyl-bg);
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
     font-weight: 200;
     overflow: hidden;
     width: 100%;
