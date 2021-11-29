@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
-flags='--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-gpu \
+
+flags='--enable-features=UseOzonePlatform \
+--ozone-platform=wayland \
 --enable-features=WebRTCPipeWireCapturer \
---ignore-gpu-blocklist --enable-gpu-rasterization \
---disable-gpu-driver-bug-workarounds --enable-zero-copy \
---disable-software-rasterizer --start-maximized \
+--enable-gpu \
+--ignore-gpu-blocklist \
+--enable-gpu-rasterization \
+--enable-zero-copy \
+--disable-gpu-driver-bug-workarounds \
+--enable-features=VaapiVideoDecoder \
+--disable-software-rasterizer \
+--start-maximized \
 --js-flags="--max-old-space-size=5120"'
+
 $1 $flags $2

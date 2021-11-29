@@ -21,44 +21,8 @@ HYPHEN_INSENSITIVE="true"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -92,7 +56,6 @@ plugins=(
   fd
   fzf
   fzf-tab
-  zsh_reload
 )
 
 # -< Source files or scripts >-
@@ -150,7 +113,7 @@ fkill() {
   fi
 }
 
-tmuxkillf() {
+fktmux() {
     local sessions
     sessions="$(tmux ls|fzf --exit-0 --multi)"  || return $?
     local i
@@ -179,7 +142,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
 
 # -< Aliases >-
-# TODO: Config alias
+# HACK: Config alias
 alias starshipc="vim ~/.config/starship.toml"
 alias alacric="vim ~/.config/alacritty/alacritty.yml"
 alias swayc="vim ~/.config/sway/config"
@@ -190,8 +153,8 @@ alias zshc="vim ~/.zshrc"
 alias tmuxc="vim ~/.tmux.conf"
 alias firefoxc="vim ~/.mozilla/firefox/profiles.ini"
 alias kittyc="vim ~/.config/kitty/kitty.conf"
-alias dnsc="sudoedit /etc/resolv.conf"
-alias nftc="sudoedit /etc/nftables.conf"
+alias dnsc="vim /etc/resolv.conf"
+alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
 # HACK: Config Nvim Aliases
 alias vimc='vim ~/.config/nvim/init.lua'
@@ -204,17 +167,16 @@ alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
 alias vimls='vim ~/.config/nvim/lua/lsp_config/supports.lua'
 alias vimcp='vim ~/.config/nvim/lua/plugins'
 # HACK: Jump alias
-alias applications="cd /usr/share/applications"
-alias Escritorio="cd /$HOME/Escritorio"
-alias Descargas="cd /$HOME/Descargas"
-alias Documentos="cd /$HOME/Documentos"
-alias Imágenes="cd /$HOME/Imágenes"
-alias Música="cd /$HOME/Música"
-alias Vídeos="cd /$HOME/Vídeos"
+alias Applications="cd /usr/share/applications"
+alias Desktop="cd /$HOME/Escritorio"
+alias Download="cd /$HOME/Descargas"
+alias Document="cd /$HOME/Documentos"
+alias Images="cd /$HOME/Imágenes"
+alias Music="cd /$HOME/Música"
+alias Videos="cd /$HOME/Vídeos"
 alias Git="cd /$HOME/Git"
-alias usb="cd /run/media/crag"
+alias Usb="cd /run/media/crag"
 # HACK: Command alternatives
-alias sys="watch -ct -n0 sys.sh"
 alias ping="prettyping"
 alias icat="kitty +kitten icat"
 alias js="/usr/bin/node ~/.noderc"
@@ -224,14 +186,14 @@ alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
 # HACK: HACK: fzf alias
-alias fpm="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias fpmr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-# HACK: sway wm alias
+# HACK: short alias
 alias aid="swaymsg -t get_tree | grep "app_id""
 alias zt="zathura"
-alias portal="/usr/lib/xdg-desktop-portal-wlr -r -c ~/.config/newm/portal.conf &"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias music="musikcube"
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
@@ -245,8 +207,8 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='⮞'"
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='»'"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_BASE=/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 export PATH="$HOME/.poetry/bin:$PATH"

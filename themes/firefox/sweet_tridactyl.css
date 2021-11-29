@@ -51,7 +51,7 @@
 }
 
 #completions table {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 200;
     border-spacing: 0;
     table-layout: fixed;
@@ -66,7 +66,8 @@
 
 /* COMPLETIONS */
 
-#completions {    --option-height: 1.4em;
+#completions {
+    --option-height: 1.4em;
     color: var(--tridactyl-fg);
     background: var(--tridactyl-bg);
     display: inline-block;
@@ -83,7 +84,8 @@
     min-height: unset;
 }
 
-#completions .HistoryCompletionSource table {    width: 100%;
+#completions .HistoryCompletionSource table {
+    width: 100%;
     font-size: 14pt;
     border-spacing: 0;
     table-layout: fixed;
@@ -114,7 +116,7 @@
 #completions .sectionHeader {    background: unset;
     font-weight: 200;
     border-bottom: unset;
-    padding: 1rem !important;
+    padding: 1.2rem !important;
     padding-left: unset;
     padding-bottom: 0.2rem;
 }

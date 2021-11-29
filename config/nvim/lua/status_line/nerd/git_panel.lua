@@ -25,7 +25,7 @@ M.insert_left({
 	DiffAdd = {
 		provider = "DiffAdd",
 		condition = M.checkwidth,
-    icon = '✚ ',
+    icon = ' ',
 		highlight = { M.colors.green, M.colors.bg },
 	},
 })
@@ -34,7 +34,10 @@ M.insert_left({
 	DiffModified = {
 		provider = "DiffModified",
 		condition = M.checkwidth,
-    icon = '✹ ',
+    -- icon = ' ',
+		-- ﯷ
+		-- ﱪ
+    icon = ' ',
 		highlight = { M.colors.deep_blue, M.colors.bg },
 	},
 })
@@ -43,7 +46,7 @@ M.insert_left({
 	DiffRemove = {
 		provider = "DiffRemove",
 		condition = M.checkwidth,
-    icon = '✖ ',
+    icon = ' ',
 		highlight = { M.colors.red, M.colors.bg },
 	},
 })

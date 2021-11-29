@@ -1,9 +1,9 @@
 local M = require("status_line.nerd.definitions")
 
 -- Lsp panel
-M.insert_mid({ Start = M.transparent_border })
+-- M.insert_mid({ Start = M.transparent_border })
 
-M.insert_blank_line_at_mid()
+-- M.insert_blank_line_at_mid()
 
 --M.insert_mid({
 --  TrailingWhiteSpace = {
@@ -37,6 +37,6 @@ M.insert_mid({
 	},
 })
 
-M.insert_blank_line_at_mid()
+-- M.insert_blank_line_at_mid()
 
-M.insert_mid({ Start = M.transparent_border })
+-- M.insert_mid({ Start = M.transparent_border })

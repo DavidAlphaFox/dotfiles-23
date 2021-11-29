@@ -3,21 +3,38 @@ local gls = gl.section
 
 local M = {}
 
+-- M.colors = {
+-- 	bg = '#1a1e21',
+-- 	blue = '#7cb7ff',
+-- 	deep_blue = "#b4d5ff",
+-- 	fg = '#e6d6ac',
+-- 	fg_green = "#cae7b9",
+-- 	gray = "#8791a5",
+-- 	green = '#7ad88e',
+-- 	magenta = "#f9adad",
+-- 	orange = '#f47d49',
+-- 	purple = '#bb98eb',
+-- 	red = '#f67e7d',
+-- 	yellow = '#fee074',
+-- 	violet= '#d3a0bc',
+-- }
+
 M.colors = {
-	bg = '#1a1e21',
-	blue = '#7cb7ff',
-	deep_blue = "#b4d5ff",
-	fg = '#e6d6ac',
-	fg_green = "#cae7b9",
-	gray = "#8791a5",
-	green = '#7ad88e',
-	magenta = "#f9adad",
+	bg = '#1a1a2e',
+	blue = '#b3dfef',
+	deep_blue = "#aabae7",
+	fg = '#eacac0',
+	fg_green = "#bfd1c3",
+	gray = "#512a53",
+	green = '#b2c491',
+	magenta = "#edabd2",
 	orange = '#f47d49',
-	purple = '#bb98eb',
-	red = '#f67e7d',
-	yellow = '#fee074',
-	violet= '#d3a0bc',
+	purple = '#9985d1',
+	red = '#dd5289',
+	yellow = '#fff0b8',
+	violet= '#a29dff',
 }
+
 
 M.icons = {
 	n = " ",
