@@ -95,6 +95,7 @@ vim.cmd[[
   au BufReadPost * lua Goto_last_pos()
   au FileType make setlocal noexpandtab
   au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+  au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
   au FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
   au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
   au BufEnter *.py set ai sw=4 ts=4 sta et fo=croq

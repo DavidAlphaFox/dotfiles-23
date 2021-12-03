@@ -28,7 +28,10 @@
 ##
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare']
+# server_names = ['dns.ryan-palmer']
+# server_names = ['uncensoreddns-ipv4']
+# server_names = ['dns.digitale-gesellschaft.ch']
+server_names = ['publicarray-au2-doh', 'pf-doh']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
@@ -312,7 +315,7 @@ log_files_max_backups = 1
 ## This makes things faster when there is no IPv6 connectivity, but can
 ## also cause reliability issues with some stub resolvers.
 
-block_ipv6 = false
+block_ipv6 = true
 
 
 ## Immediately respond to A and AAAA queries for host names without a domain name
@@ -436,8 +439,8 @@ path = '/dns-query'
 ## Certificate file and key - Note that the certificate has to be trusted.
 ## See the documentation (wiki) for more information.
 
-cert_file = '/var/lib/dnscrypt-proxy/localhost.pem'
-cert_key_file = '/var/lib/dnscrypt-proxy/localhost-key.pem'
+cert_file = '/etc/dnscrypt-proxy/localhost.pem'
+cert_key_file = '/etc/dnscrypt-proxy/localhost.pem'
 
 
 
@@ -512,7 +515,7 @@ cert_key_file = '/var/lib/dnscrypt-proxy/localhost-key.pem'
 
   ## Optional path to a file logging blocked queries
 
-  log_file = '/var/log/dnscrypt-proxy/blocked-names.log'
+  log_file = '/tmp/blocked-names.log'
 
 
   ## Optional log format: tsv or ltsv (default: tsv)

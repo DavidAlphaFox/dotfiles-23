@@ -8,16 +8,20 @@ saga.init_lsp_saga {
   infor_sign = '',
   -- dianostic_header_icon = '   ',
   code_action_icon = 'ﯦ',
+  code_action_prompt = {
+    enable = false,
+  },
   finder_action_keys = {
     open = 'o', vsplit = 'v', split = 's', quit = 'q', scroll_down = '<C-j>', scroll_up = '<C-k>' -- quit can be a table
   },
-  border_style = "round"
+  border_style = "round",
+  rename_prompt_prefix = '»»'
 }
 
 -- lspsaga
 -- lsp provider to find the cursor word definition and reference
 -- lsp provider to find the cursor word definition and reference
-utils.map('n', '<leader>lf', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]])
+utils.map('n', 'ñlf', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]])
 -- show hover doc
 utils.map('n', '<leader>hd', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]])
 -- scroll down hover doc or scroll in definition preview

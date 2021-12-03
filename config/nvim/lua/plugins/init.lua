@@ -6,7 +6,7 @@ local package = {
 	'plugins.gitstatussigns',
 	'plugins.telescope',
 	'plugins.multi_cursors',
-	'plugins.file_manager',
+	-- 'plugins.file_manager',
 }
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)

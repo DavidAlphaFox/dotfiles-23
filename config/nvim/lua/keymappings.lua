@@ -6,19 +6,24 @@ utils.map('n', 'j', 'gj')
 utils.map('n', 'ñ', ':', opts)
 utils.map('n', 'ñs', '/', opts)
 utils.map('n', '<leader>s', '?', opts)
-utils.map('n', '<leader>r', ':%s/', opts)
-utils.map('n', '¶', ':s/', opts)
-utils.map('n', '<leader>cw', [[:%s/\<<C-r><C-w>\>/]], opts)
+utils.map('n', 'ñr', ':%s/', opts)
+utils.map('n', '<leader>r', ':s/', opts)
+
+-- Search and replace
+utils.map('n', '<leader>rw', [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
+utils.map('n', '<Leader>cn', [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
+utils.map('n', '<Leader>cp', [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
 
 --Python Docstring
 vim.cmd [[autocmd FileType python noremap <buffer> <leader>pd :Pydocstring<CR>]]
+vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
 
 -- Tab mappings
 utils.map('n',
           '<leader>t',
           [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
-utils.map('n', 'tl', ':tabnext<CR>')
-utils.map('n', 'th', ':tabprev<CR>')
+utils.map('n', 'tl', 'gt')
+utils.map('n', 'th', 'gT')
 utils.map('n', 'tn', ':tabnew<CR>')
 utils.map('n', 'to', ':tabonly<CR>')
 utils.map('n', 'td', ':tabclose<CR>')
@@ -29,7 +34,7 @@ do
    local command = string.format("%dgt", i)
    utils.map('n', kmap, command)
 end
-utils.map('n', '<leader>bd', ':bd<CR>')
+utils.map('n', 'ñd', ':bd<CR>')
 utils.map('n', 'tk', ':bnext<CR>')
 utils.map('n', 'tj', ':bprev<CR>')
 
@@ -69,8 +74,10 @@ utils.map('t', '<C-v><Esc>', '<Esc>')
 
 --Delete search result
 utils.map('n', '<leader>c', ':let @/=""<cr>')
-utils.map('n', 'n', 'nzzzv', opts)
-utils.map('n', 'N', 'Nzzzv', opts)
+utils.map('n', 'n', 'nzzzv')
+utils.map('n', 'N', 'Nzzzv')
+-- utils.map('n', '<bs>', '<c-^>`”zz')
+utils.map('n', '<bs>', ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
 
 utils.map('n', '<leader>a', '=ip', opts)
 utils.map('n', '<leader>i', '=G', opts)
@@ -83,13 +90,16 @@ utils.map('v', '<S-Tab>', '<', opts)
 
 -- harpoon
 utils.map('n', '<leader>m', ':lua require("harpoon.mark").add_file()<CR>')
-utils.map('n', '<leader>n', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+utils.map('n', 'g ', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+utils.map('n', 'ñc', ':lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
+utils.map('n', '<C-Tab>', ':lua require("harpoon.ui").nav_next()<CR>')
+utils.map('n', '<C-S-Tab>', ':lua require("harpoon.ui").nav_prev()<CR>')
 for i = 9,1,-1
 do
-   local kmap = string.format("<leader>m%d", i)
+   local kmap = string.format(",%d", i)
    local command = string.format(':lua require("harpoon.ui").nav_file(%d)<CR>', i)
    utils.map('n', kmap, command)
 end
-utils.map('n', 'ñe', [[:lua require("harpoon.term").sendCommand(1, require"code_runner".get_filetype_command() .. "\n")<CR>]])
+utils.map('n', 'ñe', [[:lua require("harpoon.term").sendCommand(10, require"code_runner".get_filetype_command() .. "\n")<CR>]])
 utils.map('n', 'ñt', ':lua require("harpoon.term").gotoTerminal(10)<CR>')
 utils.map('n', '<leader>e', ':RunCode<CR>', opts)

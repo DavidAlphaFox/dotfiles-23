@@ -546,4 +546,5 @@ miramare-0.0.2.vsix
 workspaceStorage/
 globalStorage/
 blocked-names.txt
+localhost.pem
 # End of https://www.toptal.com/developers/gitignore/api/node,python,intellij+all,intellij+iml,intellij,pycharm,visualstudiocode

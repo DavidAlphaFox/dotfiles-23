@@ -1,10 +1,6 @@
 from __future__ import annotations
 import os
-import pwd
-import time
-import psutil
 from typing import Callable, Any
-from subprocess import check_output
 from newm.layout import Layout
 from pywm import (
     PYWM_MOD_LOGO,
@@ -39,16 +35,18 @@ def on_startup():
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
         f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
-        f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30"
-        f"gsettings set {gnome_peripheral}.keyboard delay 500"
-        f"gsettings set {gnome_peripheral}.mouse natural-scroll false"
-        f"gsettings set {gnome_peripheral}.mouse speed 0.0"
-        f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'"
+        f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
+        f"gsettings set {gnome_peripheral}.keyboard delay 500",
+        f"gsettings set {gnome_peripheral}.mouse natural-scroll false",
+        f"gsettings set {gnome_peripheral}.mouse speed 0.0",
+        f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
         "gsettings set org.gnome.desktop.wm.preferences button-layout :",
         "wl-paste -t text --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "thunar --daemon",
-        "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist"
+        "waybar",
+        "nm-applet --indicator",
+        "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
     )
 
     for service in init_service:
@@ -108,7 +106,7 @@ swipe_zoom = {
 
 mod = PYWM_MOD_LOGO
 background = {
-    'path': os.environ["HOME"] + "/.cache/wallpaper.jpg",
+    'path': os.environ["HOME"] + "/.cache/wallpaper.jpeg",
     'time_scale': 0.125,
 }
 corner_radius = 0
@@ -142,17 +140,19 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("M-C-k", lambda: layout.resize_focused_view(0, -1)),
         ("M-C-l", lambda: layout.resize_focused_view(1, 0)),
 
+        ("M-W", lambda: layout.change_focused_view_workspace()),
+        ("M-v", lambda: layout.toggle_focused_view_floating()),
+        ("M-w", lambda: layout.move_workspace()),
+        ("A-Tab", lambda: layout.move_next_view(active_workspace=False)),
+
         ("M-u", lambda: layout.basic_scale(1)),
         ("M-n", lambda: layout.basic_scale(-1)),
-
-        ("M-v", lambda: layout.toggle_focused_view_floating()),
-        ("M-w", lambda: layout.change_focused_view_workspace()),
 
         ("M-f", lambda: layout.toggle_fullscreen()),
         ("M-p", lambda: layout.ensure_locked(dim=True)),
 
         ("M-P", lambda: layout.terminate()),
-        ("M-e", lambda: layout.close_view()),
+        ("M-e", lambda: layout.close_focused_view()),
 
         ("M-R", lambda: layout.update_config()),
         # ("ModPress", lambda: layout.toggle_overview()),
@@ -213,42 +213,5 @@ panels = {
     },
 }
 
-ssid = "nmcli -t -f active,ssid dev wifi | egrep '^sí'\
-    | cut -d\\: -f2"
 
-brightness = "brightnessctl i | grep 'Current' | cut -d\\( -f2"
-
-volume = "awk -F\"[][]\" '/Left:/ { print $2 }' <(amixer sget Master)"
-
-
-def get_nw():
-    ifdevice = "wlan0"
-    ip = ""
-    try:
-        ip = psutil.net_if_addrs()[ifdevice][0].address
-    except Exception:
-        ip = "-/-"
-    ssid_string = check_output(ssid, shell=True).decode("utf-8")
-    return f"  {ifdevice}: {ssid_string[:-1]} / {ip}"
-
-
-bar = {
-    'font': 'JetBrainsMono Nerd Font',
-    'font_size': 15,
-    'height': 20,
-    'top_texts': lambda: [
-        pwd.getpwuid(os.getuid())[0],
-        f" {psutil.cpu_percent(interval=1)}",
-        f" {psutil.virtual_memory().percent}%",
-        f"/ {psutil.disk_usage('/').percent}%\
-            /home {psutil.disk_usage('/home').percent}%"
-    ],
-    'bottom_texts': lambda: [
-        # f'{psutil.sensors_battery().percent} \
-        # {"↑" if psutil.sensors_battery().power_plugged else "↓"}',
-        f' {check_output(brightness, shell=True).decode("utf-8")[:-2]}',
-        f'墳 {check_output(volume, shell=True).decode("utf-8")[:-1]}',
-        get_nw(),
-        f' {time.strftime("%c")}'
-    ]
-}
+bar = {'enabled': False}

@@ -1,5 +1,7 @@
 local utils = require('utils')
 
+local actions = require "telescope.actions"
+
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -39,11 +41,6 @@ require("telescope").setup {
         border = {},
         results_title = '',
         preview_title = '',
-        borderchars = {
-            prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
-            results = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
-            preview = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
-        },
         color_devicons = true,
         use_less = true,
         set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
@@ -51,7 +48,19 @@ require("telescope").setup {
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
         -- Developer configurations: Not meant for general override
-        buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+        buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+        mappings = {
+            i = {
+                ["<CR>"] = actions.select_tab,
+                ["<C-l>"] = actions.select_default,
+                ["<C-h>"] = actions.select_horizontal,
+            },
+            n = {
+                ["<CR>"] = actions.select_tab,
+                ["l"] = actions.select_default,
+                ["<C-h>"] = actions.select_horizontal,
+            }
+        },
     },
     extensions = {
         media_files = {
@@ -70,14 +79,14 @@ utils.map(
     [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]])
 
 -- File Pickers
-utils.map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
-utils.map('n', '<leader>fb' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
+utils.map('n', 'ññ', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
+utils.map('n', 'ñ ' , [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
 utils.map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
 utils.map('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]])
 utils.map('n', '<leader>fl', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
 
 -- Vim Pickers
-utils.map("n", "<Leader>b", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]])
+utils.map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]])
 utils.map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').commands()<CR>]])
 utils.map('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').command_history()<CR>]])
 utils.map('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').colorscheme()<CR>]])
@@ -93,6 +102,7 @@ utils.map('n', '<leader>fa', [[<cmd>lua require('telescope.builtin').lsp_code_ac
 -- utils.map('n', '<leader>fd', [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]])
 utils.map('n', '<leader>fd', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]])
 utils.map('n', '<leader>fwd', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]])
+utils.map('n', '<leader>fi', [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]])
 
 -- Git Pickers
 utils.map('n', '<leader>gf', [[<cmd>lua require('telescope.builtin').git_files()<CR>]])
@@ -103,8 +113,8 @@ utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status
 
 
 -- highlights
--- local cmd = vim.cmd
--- cmd "hi TelescopeBorder   guifg=#111416"
--- cmd "hi TelescopePromptBorder   guifg=#111416"
--- cmd "hi TelescopeResultsBorder  guifg=#111416"
--- cmd "hi TelescopePreviewBorder  guifg=#111416"
+local cmd = vim.cmd
+cmd "hi TelescopeBorder   guifg=#111416"
+cmd "hi TelescopePromptBorder   guifg=#111416"
+cmd "hi TelescopeResultsBorder  guifg=#111416"
+cmd "hi TelescopePreviewBorder  guifg=#111416"

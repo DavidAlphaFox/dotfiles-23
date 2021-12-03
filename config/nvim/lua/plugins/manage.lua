@@ -92,7 +92,7 @@ return require('packer').startup(function(use)
 
   --Utils
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
-  use 'is0n/fm-nvim'
+  -- use 'is0n/fm-nvim'
   use 'ThePrimeagen/harpoon'
   use 'ggandor/lightspeed.nvim'
 
