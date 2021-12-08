@@ -23,24 +23,13 @@ OUTPUT_MANAGER = True
 
 
 def on_startup():
-    gnome_schema = 'org.gnome.desktop.interface'
-    gnome_peripheral = 'org.gnome.desktop.peripherals'
     init_service = (
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY",
+        "systemctl --user import-environment \
+        DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "hash dbus-update-activation-environment 2>/dev/null && \
-            dbus-update-activation-environment --systemd DISPLAY \
-            WAYLAND_DISPLAY",
-        f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
-        f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
-        f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
-        f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
-        f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
-        f"gsettings set {gnome_peripheral}.keyboard delay 500",
-        f"gsettings set {gnome_peripheral}.mouse natural-scroll false",
-        f"gsettings set {gnome_peripheral}.mouse speed 0.0",
-        f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
-        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
+        dbus-update-activation-environment --systemd \
+        DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "wl-paste -t text --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "thunar --daemon",
@@ -52,6 +41,27 @@ def on_startup():
     for service in init_service:
         service = f"{service} &"
         os.system(service)
+
+
+def on_reconfigure():
+    gnome_schema = 'org.gnome.desktop.interface'
+    gnome_peripheral = 'org.gnome.desktop.peripherals'
+    wm_service_extra_config = (
+        f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
+        f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
+        f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
+        f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
+        f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
+        f"gsettings set {gnome_peripheral}.keyboard delay 500",
+        f"gsettings set {gnome_peripheral}.mouse natural-scroll false",
+        f"gsettings set {gnome_peripheral}.mouse speed 0.0",
+        f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
+        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
+    )
+
+    for config in wm_service_extra_config:
+        config = f"{config} &"
+        os.system(config)
 
 
 outputs = [
@@ -96,6 +106,8 @@ view = {
     'fullscreen_padding': 0,
     'send_fullscreen': False,
     'should_float': should_float,
+    'floating_min_size': True,
+    'debug_scaling': True,
     'border_ws_switch': 100
 }
 
@@ -108,10 +120,11 @@ mod = PYWM_MOD_LOGO
 background = {
     'path': os.environ["HOME"] + "/.cache/wallpaper.jpeg",
     'time_scale': 0.125,
+    'anim': False,
 }
 corner_radius = 0
+anim_time = .25
 blend_time = 0.5
-power_times = [7000, 7000, 7000]
 term = 'kitty'
 
 

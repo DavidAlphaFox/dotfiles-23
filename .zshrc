@@ -148,8 +148,8 @@ alias starshipc="vim ~/.config/starship.toml"
 alias alacric="vim ~/.config/alacritty/alacritty.yml"
 alias swayc="vim ~/.config/sway/config"
 alias newmc="vim ~/.config/newm/config.py"
-alias i3c="vim ~/.config/i3/config"
-alias i3barc="~/.config/i3status/config"
+# alias i3c="vim ~/.config/i3/config"
+# alias i3barc="~/.config/i3status/config"
 alias zshc="vim ~/.zshrc"
 alias tmuxc="vim ~/.tmux.conf"
 alias firefoxc="vim ~/.mozilla/firefox/profiles.ini"
@@ -191,26 +191,23 @@ alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro su
 alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: short alias
-alias aid="swaymsg -t get_tree | grep "app_id""
+# alias aid="swaymsg -t get_tree | grep "app_id""
 alias zt="zathura"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias music="musikcube"
+alias music="termusic"
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
 export LC_ALL=es_MX.UTF-8
 export LANG=es_MX.UTF-8
 export LANGUAGE=es_MX.UTF-8
-# export TERM="xterm-256color"
 export TERM="xterm-kitty"
-# export TERM="kitty"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
 export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='»'"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export FZF_BASE=/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 export PATH="$HOME/.poetry/bin:$PATH"
 source ~/.passmaria.zsh
