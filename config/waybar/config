@@ -2,9 +2,7 @@
     "layer": "bottom",
     "position": "bottom",
     "height": 10,
-    "modules-left": ["cpu", "memory", "temperature"],
-    "modules-center": ["custom/media"],
-    "modules-right": ["network", "tray", "pulseaudio", "backlight", "battery", "clock"],
+    "modules-right": ["cpu", "memory", "temperature", "network", "tray", "pulseaudio", "backlight", "battery", "clock"],
     "tray": {
         "icon-size": 16,
         "spacing": 10

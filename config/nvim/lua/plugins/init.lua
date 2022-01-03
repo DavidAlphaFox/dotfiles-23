@@ -28,16 +28,13 @@ require('code_runner').setup({
   project_path = vim.fn.expand('~/.config/nvim/project_manager.json'),
 })
 
-require("nvim_comment").setup({
-  hook = function()
-    require("ts_context_commentstring.internal").update_commentstring()
-  end,
-})
 -- native prlugins
 -- require "pears".setup()
 require'lightspeed'.setup {
   limit_ft_matches = 10,
 }
 
+require('Comment').setup()
 require'plugins.pairs'.setup()
 require'plugins.tabline'.setup()
+require('package-info').setup({package_manager = 'npm'})

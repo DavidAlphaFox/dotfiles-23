@@ -88,13 +88,18 @@ return require('packer').startup(function(use)
   use {'heavenshell/vim-pydocstring', run = 'make install' }
   use 'AndrewRadev/splitjoin.vim'
   use 'wellle/targets.vim'
-  use 'terrortylor/nvim-comment'
+  use 'numToStr/Comment.nvim'
 
   --Utils
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
   -- use 'is0n/fm-nvim'
   use 'ThePrimeagen/harpoon'
   use 'ggandor/lightspeed.nvim'
+  use {
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+  }
+  use 'nathom/filetype.nvim'
 
   -- Themes
   use 'i3d/vim-jimbothemes'

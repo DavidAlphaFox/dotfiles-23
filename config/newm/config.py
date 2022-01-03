@@ -5,7 +5,6 @@ from newm.layout import Layout
 from pywm import (
     PYWM_MOD_LOGO,
     PYWM_MOD_ALT,
-
     PYWM_TRANSFORM_90,
     PYWM_TRANSFORM_180,
     PYWM_TRANSFORM_270,
@@ -65,8 +64,8 @@ def on_reconfigure():
 
 
 outputs = [
-    {'name': 'eDP-1', 'pos_x': 1833, 'pos_y': 0, 'scale': 0.7},
-    {'name': 'DP-2', 'pos_x': 0, 'pos_y': 0, 'scale': 0.7},
+    {'name': 'eDP-1', 'scale': 0.65},
+    {'name': 'DP-2', 'scale': 0.65},
 ]
 
 pywm = {
@@ -80,7 +79,7 @@ pywm = {
     'xcursor_theme': "Sweet-cursors",
     'xcursor_size': 12,
     'focus_follows_mouse': True,
-    'contstrain_popups_to_toplevel': True,
+    # 'contstrain_popups_to_toplevel': True,
     'enable_xwayland': True,
 }
 
@@ -106,7 +105,7 @@ view = {
     'fullscreen_padding': 0,
     'send_fullscreen': False,
     'should_float': should_float,
-    'floating_min_size': True,
+    # 'floating_min_size': True,
     'debug_scaling': True,
     'border_ws_switch': 100
 }
@@ -118,7 +117,7 @@ swipe_zoom = {
 
 mod = PYWM_MOD_LOGO
 background = {
-    'path': os.environ["HOME"] + "/.cache/wallpaper.jpeg",
+    'path': os.environ["HOME"] + "/.cache/wallpaper.jpg",
     'time_scale': 0.125,
     'anim': False,
 }

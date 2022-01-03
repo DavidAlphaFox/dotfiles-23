@@ -9,4 +9,4 @@ source /usr/local/bin/wayland_enablement.sh
 
 sleep 0.5;
 
-start-newm
+start-newm -d

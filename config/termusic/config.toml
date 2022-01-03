@@ -1,0 +1,109 @@
+music_dir = "~/Música"
+loop_mode = "Playlist"
+volume = 100
+add_playlist_front = false
+disable_exit_confirmation = true
+theme_selected = "default"
+
+[style_color_symbol]
+library_foreground = "Foreground"
+library_background = "Reset"
+library_border = "Magenta"
+library_highlight = "LightYellow"
+library_highlight_symbol = "🦄"
+playlist_foreground = "Foreground"
+playlist_background = "Reset"
+playlist_border = "Magenta"
+playlist_highlight = "Red"
+playlist_highlight_symbol = "🚀"
+progress_foreground = "LightGreen"
+progress_background = "Reset"
+progress_border = "Cyan"
+lyric_foreground = "Foreground"
+lyric_background = "Reset"
+lyric_border = "Blue"
+
+[style_color_symbol.alacritty_theme]
+path = ""
+name = "default"
+author = "Crag"
+background = "#1a1a2e"
+foreground = "#e2d5bc"
+cursor = "#bbbbbb"
+text = "#e2d5bc"
+black = "#212121"
+red = "#fb5c8e"
+green = "#84c49b"
+yellow = "#f6e08b"
+blue = "#93c5e6"
+magenta = "#a29dff"
+cyan = "#e68ac1"
+white = "#e5e9f0"
+light_black = "#565393"
+light_red = "#dd5289"
+light_green = "#9fd3b3"
+light_yellow = "#fff0b8"
+light_blue = "#aed9f6"
+light_magenta = "#b2aeff"
+light_cyan = "#edabd2"
+light_white = "#f2f2f2"
+
+[album_photo_xywh]
+x_between_1_100 = 2
+y_between_1_100 = 98
+width_between_1_100 = 30
+align = "BottomLeft"
+[keys.quit]
+type = "KeyEvent"
+
+[keys.quit.code]
+type = "Char"
+args = "q"
+
+[keys.quit.modifiers]
+type = "KeyModifiers"
+bits = 0
+
+[keys.vim_h]
+type = "KeyEvent"
+
+[keys.vim_h.code]
+type = "Char"
+args = "h"
+
+[keys.vim_h.modifiers]
+type = "KeyModifiers"
+bits = 0
+
+[keys.vim_j]
+type = "KeyEvent"
+
+[keys.vim_j.code]
+type = "Char"
+args = "j"
+
+[keys.vim_j.modifiers]
+type = "KeyModifiers"
+bits = 0
+
+[keys.vim_k]
+type = "KeyEvent"
+
+[keys.vim_k.code]
+type = "Char"
+args = "k"
+
+[keys.vim_k.modifiers]
+type = "KeyModifiers"
+bits = 0
+
+[keys.vim_l]
+type = "KeyEvent"
+
+[keys.vim_l.code]
+type = "Char"
+args = "l"
+
+[keys.vim_l.modifiers]
+type = "KeyModifiers"
+bits = 0

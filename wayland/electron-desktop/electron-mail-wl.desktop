@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=ElectronMail wayland
-Exec=open-wl /opt/ElectronMail/electron-mail %U
+Exec=/opt/ElectronMail/electron-mail --enable-features=UseOzonePlatform --ozone-platform=wayland %U
 Terminal=false
 Type=Application
 Icon=electron-mail

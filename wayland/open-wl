@@ -3,10 +3,13 @@
 flags='--enable-features=UseOzonePlatform \
 --ozone-platform=wayland \
 --enable-features=WebRTCPipeWireCapturer \
---enable-gpu \
---ignore-gpu-blocklist \
+--ignore-gpu-blacklist \
 --enable-gpu-rasterization \
+--enable-native-gpu-memory-buffers \
 --enable-zero-copy \
+--enable-accelerated-mjpeg-decode \
+--enable-accelerated-video \
+--use-gl=egl \
 --disable-gpu-driver-bug-workarounds \
 --enable-features=VaapiVideoDecoder \
 --disable-software-rasterizer \

@@ -547,4 +547,5 @@ workspaceStorage/
 globalStorage/
 blocked-names.txt
 localhost.pem
+playlist.log
 # End of https://www.toptal.com/developers/gitignore/api/node,python,intellij+all,intellij+iml,intellij,pycharm,visualstudiocode

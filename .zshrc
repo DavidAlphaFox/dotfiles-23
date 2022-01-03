@@ -72,6 +72,10 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+sr(){
+rg "$1" -l | xargs sed -i "s/$1/$2/g"
+}
+
 # Util funtions
 encrypt(){
   openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
@@ -210,6 +214,7 @@ export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --poin
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 export PATH="$HOME/.poetry/bin:$PATH"
+export MESA_LOADER_DRIVER_OVERRIDE=iris
 source ~/.passmaria.zsh
 
 # -< Evals >-
