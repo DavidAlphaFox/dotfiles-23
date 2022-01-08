@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/coq_nvim",
     url = "https://github.com/ms-jpq/coq_nvim"
   },
+  ["filetype.nvim"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/filetype.nvim",
+    url = "https://github.com/nathom/filetype.nvim"
+  },
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/galaxyline.nvim",
@@ -134,10 +139,20 @@ _G.packer_plugins = {
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/lua-dev.nvim",
     url = "https://github.com/folke/lua-dev.nvim"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   miramare = {
     loaded = true,
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/miramare",
     url = "https://github.com/franbach/miramare"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -203,6 +218,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["package-info.nvim"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/package-info.nvim",
+    url = "https://github.com/vuki656/package-info.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,

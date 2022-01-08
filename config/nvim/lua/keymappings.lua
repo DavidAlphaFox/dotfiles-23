@@ -87,13 +87,11 @@ utils.map('v', '<Tab>', '>', opts)
 utils.map('v', '<S-Tab>', '<', opts)
 
 -- Plugins
-
 -- harpoon
-utils.map('n', '<leader>m', ':lua require("harpoon.mark").add_file()<CR>')
+utils.map('n', 'ñc', ':lua require("harpoon.mark").add_file()<CR>')
 utils.map('n', 'g ', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
-utils.map('n', 'ñc', ':lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>')
-utils.map('n', '<C-Tab>', ':lua require("harpoon.ui").nav_next()<CR>')
-utils.map('n', '<C-S-Tab>', ':lua require("harpoon.ui").nav_prev()<CR>')
+utils.map('n', 'ñ<Tab>', ':lua require("harpoon.ui").nav_next()<CR>')
+utils.map('n', 'ñ <Tab>', ':lua require("harpoon.ui").nav_prev()<CR>')
 for i = 9,1,-1
 do
    local kmap = string.format(",%d", i)

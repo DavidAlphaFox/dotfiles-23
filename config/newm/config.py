@@ -13,12 +13,11 @@ from pywm import (
     PYWM_TRANSFORM_FLIPPED_180,
     PYWM_TRANSFORM_FLIPPED_270,
 )
-from newm import (
-    SysBackendEndpoint_alsa,
-    SysBackendEndpoint_sysfs
-)
 
-OUTPUT_MANAGER = True
+# from newm import (
+#     SysBackendEndpoint_alsa,
+#     SysBackendEndpoint_sysfs
+# )
 
 
 def on_startup():
@@ -65,22 +64,30 @@ def on_reconfigure():
 
 outputs = [
     {'name': 'eDP-1', 'scale': 0.65},
-    {'name': 'DP-2', 'scale': 0.65},
+    {'name': 'DP-2', 'scale': 0.65, "pos_x": 0, "pos_y": 0},
 ]
 
 pywm = {
     'xkb_layout': "es",
     'xkb_options': "caps:swapescape",
-
     'encourage_csd': False,
-    'debug_f1': True,
-
-    # 'enable_output_manager': OUTPUT_MANAGER,
-    'xcursor_theme': "Sweet-cursors",
-    'xcursor_size': 12,
-    'focus_follows_mouse': True,
-    # 'contstrain_popups_to_toplevel': True,
     'enable_xwayland': True,
+    'natural_scroll': True,
+    'texture_shaders': 'basic',
+    'focus_follows_mouse': True,
+    'xcursor_size': 16,
+    'contstrain_popups_to_toplevel': True
+}
+
+# focus = {
+#     'distance': 0,
+#     'width': 0,
+#     'animate_on_change': False,
+#     'anim_time': 0
+# }
+focus = {
+    # 'color': '#FFBB0011', # change color
+    'enabled': False
 }
 
 
@@ -100,12 +107,11 @@ def should_float(view):
 
 
 view = {
-    # 'xwayland_handle_scale_clientside': not OUTPUT_MANAGER,
     'padding': 6,
     'fullscreen_padding': 0,
     'send_fullscreen': False,
     'should_float': should_float,
-    # 'floating_min_size': True,
+    'floating_min_size': False,
     'debug_scaling': True,
     'border_ws_switch': 100
 }
@@ -121,6 +127,7 @@ background = {
     'time_scale': 0.125,
     'anim': False,
 }
+
 corner_radius = 0
 anim_time = .25
 blend_time = 0.5
@@ -164,7 +171,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("M-p", lambda: layout.ensure_locked(dim=True)),
 
         ("M-P", lambda: layout.terminate()),
-        ("M-e", lambda: layout.close_focused_view()),
+        ("M-e", lambda: layout.close_view()),
 
         ("M-R", lambda: layout.update_config()),
         # ("ModPress", lambda: layout.toggle_overview()),
@@ -203,18 +210,29 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     ]
 
 
-sys_backend_endpoints = [
-    SysBackendEndpoint_sysfs(
-        "backlight",
-        "/sys/class/backlight/intel_backlight/brightness",
-        "/sys/class/backlight/intel_backlight/max_brightness"),
-    SysBackendEndpoint_sysfs(
-        "kbdlight",
-        "/sys/class/leds/smc::kbd_backlight/brightness",
-        "/sys/class/leds/smc::kbd_backlight/max_brightness"),
-    SysBackendEndpoint_alsa(
-        "volume")
-]
+# sys_backend_endpoints = [
+#     SysBackendEndpoint_sysfs(
+#         "backlight",
+#         "/sys/class/backlight/intel_backlight/brightness",
+#         "/sys/class/backlight/intel_backlight/max_brightness"),
+#     SysBackendEndpoint_sysfs(
+#         "kbdlight",
+#         "/sys/class/leds/smc::kbd_backlight/brightness",
+#         "/sys/class/leds/smc::kbd_backlight/max_brightness"),
+#     SysBackendEndpoint_alsa(
+#         "volume")
+# ]
+
+bar = {'enabled': False}
+
+gestures = {
+    'lp_freq': 120.,
+    'lp_inertia': 0.4
+}
+
+swipe = {
+    'gesture_factor': 3
+}
 
 panels = {
     'lock': {
@@ -226,4 +244,8 @@ panels = {
 }
 
 
-bar = {'enabled': False}
+grid = {
+    'throw_ps': [2, 10]
+}
+
+power_times = [180, 600]

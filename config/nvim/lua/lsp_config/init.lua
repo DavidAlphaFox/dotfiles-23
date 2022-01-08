@@ -16,7 +16,6 @@ vim.g.coq_settings = {
 }
 
 local package = {
-  -- 'lsp_config.pairs',
   'lsp_config.supports',
   'lsp_config.diagnostics',
   'lsp_config.saga'
@@ -24,7 +23,6 @@ local package = {
 for _, pkg in ipairs(package) do
   require(pkg)
 end
--- vim.cmd [[ autocmd VimEnter * COQnow --shut-up ]]
 
 require("lsp-colors").setup({
   Error = "#f34f4d",

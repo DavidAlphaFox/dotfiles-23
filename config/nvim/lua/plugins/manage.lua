@@ -67,7 +67,12 @@ return require('packer').startup(function(use)
   'nvim-telescope/telescope.nvim',
   requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
+  use {
+  "nvim-telescope/telescope-frecency.nvim",
+  requires = {"tami5/sqlite.lua"}
+  }
   use 'nvim-telescope/telescope-media-files.nvim'
+  use "nvim-telescope/telescope-file-browser.nvim"
 
   -- Flutter
   -- use 'akinsho/flutter-tools.nvim'
@@ -80,7 +85,10 @@ return require('packer').startup(function(use)
   use 'jeffkreeftmeijer/vim-numbertoggle'
 
   --UI
-  use {'glepnir/galaxyline.nvim', branch = 'main'}
+  use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
   use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- Text edition
