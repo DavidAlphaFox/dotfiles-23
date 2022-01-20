@@ -45,7 +45,6 @@ plugins=(
   sudo
   command-not-found
   node
-  cargo
   dircycle
   docker
   docker-compose

@@ -20,6 +20,7 @@ vim.cmd [[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWrit
 
 require("trouble").setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right
+    auto_close = true,
     signs = {
         -- icons / text used for a diagnostic
         error = " ",
@@ -30,9 +31,9 @@ require("trouble").setup {
     },
 }
 
-
-utils.map("n", "<leader>dx", "<cmd>Trouble<cr>")
-utils.map("n", "<leader>dw", "<cmd>Trouble lsp_workspace_diagnostics<cr>")
-utils.map("n", "<leader>dd", "<cmd>Trouble lsp_document_diagnostics<cr>")
-utils.map("n", "<leader>dl", "<cmd>Trouble loclist<cr>")
-utils.map("n", "<leader>dq", "<cmd>Trouble quickfix<cr>")
+utils.map("n", "<leader>dx", "<cmd>TroubleToggle<cr>")
+utils.map("n", "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>")
+utils.map("n", "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>")
+utils.map("n", "<leader>dq", "<cmd>TroubleToggle quickfix<cr>")
+utils.map("n", "<leader>dl", "<cmd>TroubleToggle loclist<cr>")
+utils.map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>")

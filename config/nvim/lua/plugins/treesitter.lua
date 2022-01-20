@@ -5,22 +5,8 @@ require'nvim-treesitter.configs'.setup {
     use_languagetree = true,
     additional_vim_regex_highlighting = true
   },
-  indent = {
-    enable = false
-  },
-  refactor = {
-    highlight_definitions = { enable = true },
-    navigation = {
-      enable = true,
-      keymaps = {
-        goto_definition = "gnd",
-        list_definitions = "gnD",
-        list_definitions_toc = "gO",
-        goto_next_usage = "<a-*>",
-        goto_previous_usage = "<a-#>",
-      },
-    },
-  },
+  indent = { enable = false },
+  yati = { enable = true },
   rainbow = {
     enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean

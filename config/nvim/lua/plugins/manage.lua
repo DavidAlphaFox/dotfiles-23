@@ -22,7 +22,6 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'folke/lsp-colors.nvim'
   use 'glepnir/lspsaga.nvim'
-  use 'nvim-lua/lsp-status.nvim'
   use { 'ms-jpq/coq_nvim', branch = 'coq' } -- main one
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts'} -- 9000+ Snippets
   use "folke/trouble.nvim"
@@ -34,11 +33,11 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/nvim-treesitter-refactor'
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-ts-autotag'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'romgrk/nvim-treesitter-context'
+  use { "yioneko/nvim-yati", requires = "nvim-treesitter/nvim-treesitter" }
 
   -- Syntax
   use 'sheerun/vim-polyglot'
@@ -57,9 +56,7 @@ return require('packer').startup(function(use)
   -- Git
   use {
     'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
+    requires = { 'nvim-lua/plenary.nvim' }
   }
 
   -- Telescope
@@ -81,9 +78,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-endwise'
   use 'tpope/vim-surround'
 
-  -- General Plugins
-  use 'jeffkreeftmeijer/vim-numbertoggle'
-
   --UI
   use {
   'nvim-lualine/lualine.nvim',
@@ -103,11 +97,11 @@ return require('packer').startup(function(use)
   -- use 'is0n/fm-nvim'
   use 'ThePrimeagen/harpoon'
   use 'ggandor/lightspeed.nvim'
-  use {
-    "vuki656/package-info.nvim",
-    requires = "MunifTanjim/nui.nvim",
-  }
+  use { "vuki656/package-info.nvim", requires = "MunifTanjim/nui.nvim" }
   use 'nathom/filetype.nvim'
+
+  -- General Plugins
+  use 'jeffkreeftmeijer/vim-numbertoggle'
 
   -- Themes
   use 'i3d/vim-jimbothemes'

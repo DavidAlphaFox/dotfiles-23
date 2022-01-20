@@ -1,7 +1,10 @@
 from __future__ import annotations
+import logging
 import os
 from typing import Callable, Any
 from newm.layout import Layout
+from newm.helper import BacklightManager, WobRunner, PaCtl
+
 from pywm import (
     PYWM_MOD_LOGO,
     PYWM_MOD_ALT,
@@ -14,10 +17,7 @@ from pywm import (
     PYWM_TRANSFORM_FLIPPED_270,
 )
 
-# from newm import (
-#     SysBackendEndpoint_alsa,
-#     SysBackendEndpoint_sysfs
-# )
+logger = logging.getLogger(__name__)
 
 
 def on_startup():
@@ -48,7 +48,7 @@ def on_reconfigure():
         f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
-        f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
+        f"gsettings set {gnome_schema} font-name 'Lucida MAC 15'",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
         f"gsettings set {gnome_peripheral}.keyboard delay 500",
         f"gsettings set {gnome_peripheral}.mouse natural-scroll false",
@@ -62,9 +62,11 @@ def on_reconfigure():
         os.system(config)
 
 
+corner_radius = 0
+
 outputs = [
-    {'name': 'eDP-1', 'scale': 0.65},
-    {'name': 'DP-2', 'scale': 0.65, "pos_x": 0, "pos_y": 0},
+    {'name': 'eDP-1', 'scale': 0.6},
+    {'name': 'DP-2', 'scale': 0.6, 'pos_x': 0, 'pos_y': 0},
 ]
 
 pywm = {
@@ -75,29 +77,19 @@ pywm = {
     'natural_scroll': True,
     'texture_shaders': 'basic',
     'focus_follows_mouse': True,
+    'xcursor_theme': 'Sweet-cursors',
     'xcursor_size': 16,
-    'contstrain_popups_to_toplevel': True
-}
-
-# focus = {
-#     'distance': 0,
-#     'width': 0,
-#     'animate_on_change': False,
-#     'anim_time': 0
-# }
-focus = {
-    # 'color': '#FFBB0011', # change color
-    'enabled': False
+    # 'contstrain_popups_to_toplevel': True
 }
 
 
 def should_float(view):
     size = (700, 700)
     position = (0.5, 0.35)
-    standard_float_apps = [
+    float_apps = [
         "pavucontrol", "blueman-manager"
     ]
-    if view.app_id in standard_float_apps:
+    if view.app_id in float_apps:
         return True, size, position
     if view.app_id == "catapult":
         return True, None, (0.5, 0.1)
@@ -128,10 +120,24 @@ background = {
     'anim': False,
 }
 
-corner_radius = 0
 anim_time = .25
 blend_time = 0.5
 term = 'kitty'
+
+wob_runner = WobRunner("wob -a top -M 100")
+backlight_manager = BacklightManager(anim_time=1., bar_display=wob_runner)
+kbdlight_manager = BacklightManager(
+    args="--device='*::kbd_backlight'",
+    anim_time=1.,
+    bar_display=wob_runner)
+
+
+def synchronous_update() -> None:
+    backlight_manager.update()
+    kbdlight_manager.update()
+
+
+pactl = PaCtl(0, wob_runner)
 
 
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
@@ -177,6 +183,8 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         # ("ModPress", lambda: layout.toggle_overview()),
         ("ModPress", lambda: layout.toggle_overview(only_active_workspace=True)),
 
+        ("M-z", lambda: layout.swallow_focused_view()),
+
         ("M-Return", lambda: os.system(f"{term} &")),
 
         ("M-q", lambda: os.system(f"{powermenu} &")),
@@ -186,16 +194,15 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("M-c", lambda: os.system(f'{clipboard} &')),
         ("M-b", lambda: os.system(f'{bookmarks} &')),
         ("A-l", lambda: os.system(f'{passman} &')),
-        ("XF86AudioRaiseVolume", lambda: os.system("amixer -q \
-            set Master 5%+")),
-        ("XF86AudioLowerVolume", lambda: os.system("amixer -q \
-            set Master 5%-")),
-        ("XF86AudioMute", lambda: os.system("amixer set Master toggle")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
-        ("XF86MonBrightnessDown", lambda: os.system("brightnessctl \
-            specific 3-")),
-        ("XF86MonBrightnessUp", lambda: os.system("brightnessctl \
-            specific +3")),
+        ("XF86MonBrightnessUp", lambda: backlight_manager.set(backlight_manager.get() + 0.1)),
+        ("XF86MonBrightnessDown", lambda: backlight_manager.set(backlight_manager.get() - 0.1)),
+        ("XF86KbdBrightnessUp", lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
+        ("XF86KbdBrightnessDown", lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
+        ("XF86AudioRaiseVolume", lambda: pactl.volume_adj(5)),
+        ("XF86AudioLowerVolume", lambda: pactl.volume_adj(-5)),
+        ("XF86AudioMute", lambda: pactl.mute()),
+
         ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
         ("XF86Tools", lambda: os.system("kitty vim \
                                         ~/.config/newm/config.py &")),
@@ -210,19 +217,6 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     ]
 
 
-# sys_backend_endpoints = [
-#     SysBackendEndpoint_sysfs(
-#         "backlight",
-#         "/sys/class/backlight/intel_backlight/brightness",
-#         "/sys/class/backlight/intel_backlight/max_brightness"),
-#     SysBackendEndpoint_sysfs(
-#         "kbdlight",
-#         "/sys/class/leds/smc::kbd_backlight/brightness",
-#         "/sys/class/leds/smc::kbd_backlight/max_brightness"),
-#     SysBackendEndpoint_alsa(
-#         "volume")
-# ]
-
 bar = {'enabled': False}
 
 gestures = {
@@ -230,9 +224,7 @@ gestures = {
     'lp_inertia': 0.4
 }
 
-swipe = {
-    'gesture_factor': 3
-}
+swipe = {'gesture_factor': 3}
 
 panels = {
     'lock': {
@@ -248,4 +240,18 @@ grid = {
     'throw_ps': [2, 10]
 }
 
-power_times = [180, 600]
+energy = {
+    'idle_times': [60, 180],
+    'idle_callback': backlight_manager.callback
+}
+
+# focus = {
+# }
+focus = {
+    # 'color': '#FFBB0011', # change color
+    # 'distance': 0,
+    # 'width': 0,
+    # 'animate_on_change': false,
+    # 'anim_time': 0
+    'enabled': False
+}

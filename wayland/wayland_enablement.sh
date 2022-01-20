@@ -10,11 +10,13 @@ export BEMENU_BACKEND=wayland
 
 # Firefox
 export MOZ_ENABLE_WAYLAND=1
+# export MOZ_WEBRENDER=1
 
 #
 # Qt environment
 #
-export QT_QPA_PLATFORM=wayland-egl
+# export QT_QPA_PLATFORM=wayland-egl
+export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_FORCE_DPI=physical
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
@@ -47,3 +49,4 @@ export DBUS_SESSION_BUS_PID
 # LibreOffice
 #
 # export SAL_USE_VCLPLUGIN=gtk3
+export VDPAU_DRIVER=va_gl

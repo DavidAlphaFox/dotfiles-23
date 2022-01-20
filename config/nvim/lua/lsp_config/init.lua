@@ -14,7 +14,6 @@ vim.g.coq_settings = {
     }
   }
 }
-
 local package = {
   'lsp_config.supports',
   'lsp_config.diagnostics',

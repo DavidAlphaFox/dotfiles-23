@@ -90,6 +90,7 @@ utils.map(
 utils.map('n', ' ñ' , [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>]])
 utils.map('n', 'ñf', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
 utils.map("n", "ño", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
+utils.map("n", " m", [[<Cmd>lua require('telescope.builtin').marks()<CR>]])
 
 -- Search
 utils.map("n", ",f", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>")
@@ -114,7 +115,7 @@ utils.map('n', '<leader>lr', [[<cmd>lua require('telescope.builtin').lsp_referen
 utils.map('n', '<leader>ls', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]])
 utils.map('n', '<leader>la', [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]])
 -- utils.map('n', '<leader>fd', [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]])
-utils.map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]])
+utils.map('n', '<leader>ld', [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]])
 utils.map('n', '<leader>li', [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]])
 
 -- Git Pickers
@@ -123,11 +124,3 @@ utils.map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits
 utils.map('n', '<leader>gbc', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]])
 utils.map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]])
 utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]])
-
-
--- highlights
-local cmd = vim.cmd
-cmd "hi TelescopeBorder   guifg=#111416"
-cmd "hi TelescopePromptBorder   guifg=#111416"
-cmd "hi TelescopeResultsBorder  guifg=#111416"
-cmd "hi TelescopePreviewBorder  guifg=#111416"

@@ -67,12 +67,19 @@ local function omnisharp()
   }
 end
 
+local function cssls()
+  return {
+    cmd = { "vscode-css-languageserver", "--stdio" },
+  }
+end
+
 local especific_config = {
-  omnisharp = omnisharp()
+  omnisharp = omnisharp(),
+  cssls = cssls()
 }
 
-
-local servers = {"pylsp", "ccls", "tsserver", "dockerls", "bashls", "sqls", "omnisharp"}
+-- Setup all lenguage server
+local servers = {"pylsp", "ccls", "tsserver", "dockerls", "bashls", "sqls", "omnisharp", "cssls"}
 for _, server in ipairs(servers) do
   nvim_lsp[server].setup(coq.lsp_ensure_capabilities(
     vim.tbl_deep_extend("force", make_config(), especific_config[server] or {}, {})))
@@ -115,7 +122,7 @@ local luaconfig = vim.tbl_deep_extend("force", config, {
 -- lua-dev.nvim
 local luadev = require("lua-dev").setup(
   coq.lsp_ensure_capabilities({
-      library = {vimruntime = true, types = true, plugins = true},
+      library = { vimruntime = true, types = true, plugins = true },
       lspconfig = luaconfig
 }))
 

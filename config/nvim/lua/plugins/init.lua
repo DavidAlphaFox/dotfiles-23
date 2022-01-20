@@ -29,9 +29,8 @@ require('code_runner').setup({
 })
 
 -- native prlugins
--- require "pears".setup()
 require'lightspeed'.setup {
-  limit_ft_matches = 10,
+  limit_ft_matches = 30,
 }
 
 require('Comment').setup()
