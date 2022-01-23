@@ -1,12 +1,10 @@
--- Packer Plugins more complex
+-- Packer config more complex
 local package = {
-	'plugins.manage',
-	'plugins.treesitter',
-	'plugins.colorizer',
-	'plugins.gitstatussigns',
-	'plugins.telescope',
-	'plugins.multi_cursors',
-	-- 'plugins.file_manager',
+	'config.colorizer',
+	'config.gitstatussigns',
+	'config.telescope',
+	'config.multi_cursors',
+	-- 'config.file_manager',
 }
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)
@@ -15,8 +13,8 @@ for _, pkg in ipairs(package) do
   end
 end
 
--- Packer Plugins minimal
-require('treesitter-context').setup()
+-- Packer config minimal
+
 
 require("todo-comments").setup()
 
@@ -29,11 +27,7 @@ require('code_runner').setup({
 })
 
 -- native prlugins
-require'lightspeed'.setup {
-  limit_ft_matches = 30,
-}
 
-require('Comment').setup()
-require'plugins.pairs'.setup()
-require'plugins.tabline'.setup()
+-- require'config.pairs'.setup()
+require'config.tabline'.setup()
 require('package-info').setup({package_manager = 'npm'})

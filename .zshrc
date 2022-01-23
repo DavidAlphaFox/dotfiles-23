@@ -39,6 +39,7 @@ plugins=(
   ripgrep
   genpass
   python
+  # poetry
   history
   colored-man-pages
   extract
@@ -162,14 +163,14 @@ alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
 # HACK: Config Nvim Aliases
 alias vimc='vim ~/.config/nvim/init.lua'
-alias vimp='vim ~/.config/nvim/lua/plugins/manage.lua'
+alias vimp='vim ~/.config/nvim/lua/plugins.lua'
 alias vimm='vim ~/.config/nvim/lua/keymappings.lua'
 alias vims='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
 alias vimf='vim ~/.config/nvim/lua/config/snippets'
 alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
 alias vimls='vim ~/.config/nvim/lua/lsp_config/supports.lua'
-alias vimcp='vim ~/.config/nvim/lua/plugins'
+alias vimcp='vim ~/.config/nvim/lua/config'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
 alias Desktop="cd /$HOME/Escritorio"
@@ -221,5 +222,7 @@ eval "$(starship init zsh)"
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION
-if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
+if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
+  source "/usr/lib/kitty/shell-integration/zsh/kitty.zsh";
+fi
 # END_KITTY_SHELL_INTEGRATION

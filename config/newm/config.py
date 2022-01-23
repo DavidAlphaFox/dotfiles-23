@@ -48,6 +48,7 @@ def on_reconfigure():
         f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
+        f"gsettings set {gnome_schema} cursor-size 150",
         f"gsettings set {gnome_schema} font-name 'Lucida MAC 15'",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
         f"gsettings set {gnome_peripheral}.keyboard delay 500",
@@ -78,7 +79,7 @@ pywm = {
     'texture_shaders': 'basic',
     'focus_follows_mouse': True,
     'xcursor_theme': 'Sweet-cursors',
-    'xcursor_size': 16,
+    'xcursor_size': 24,
     # 'contstrain_popups_to_toplevel': True
 }
 
@@ -126,15 +127,16 @@ term = 'kitty'
 
 wob_runner = WobRunner("wob -a top -M 100")
 backlight_manager = BacklightManager(anim_time=1., bar_display=wob_runner)
-kbdlight_manager = BacklightManager(
-    args="--device='*::kbd_backlight'",
-    anim_time=1.,
-    bar_display=wob_runner)
+# Config for keyboard light
+# kbdlight_manager = BacklightManager(
+#     args="--device='*::kbd_backlight'",
+#     anim_time=1.,
+#     bar_display=wob_runner)
 
 
 def synchronous_update() -> None:
     backlight_manager.update()
-    kbdlight_manager.update()
+#     kbdlight_manager.update()
 
 
 pactl = PaCtl(0, wob_runner)
@@ -197,8 +199,8 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         ("XF86MonBrightnessUp", lambda: backlight_manager.set(backlight_manager.get() + 0.1)),
         ("XF86MonBrightnessDown", lambda: backlight_manager.set(backlight_manager.get() - 0.1)),
-        ("XF86KbdBrightnessUp", lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
-        ("XF86KbdBrightnessDown", lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
+        # ("XF86KbdBrightnessUp", lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
+        # ("XF86KbdBrightnessDown", lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
         ("XF86AudioRaiseVolume", lambda: pactl.volume_adj(5)),
         ("XF86AudioLowerVolume", lambda: pactl.volume_adj(-5)),
         ("XF86AudioMute", lambda: pactl.mute()),
@@ -240,10 +242,10 @@ grid = {
     'throw_ps': [2, 10]
 }
 
-energy = {
-    'idle_times': [60, 180],
-    'idle_callback': backlight_manager.callback
-}
+# energy = {
+#     'idle_times': [60, 180],
+#     # 'idle_callback': backlight_manager.callback
+# }
 
 # focus = {
 # }

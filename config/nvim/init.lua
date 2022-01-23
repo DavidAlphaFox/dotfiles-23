@@ -32,13 +32,14 @@ end
 local package = {
   'settings',
   -- 'netrw',
-  'plugins',
+  -- 'plugins',
   'keymappings',
-  'lsp_config',
+  -- 'lsp_config',
   'debug',
-  'status_line',
   'colorscheme',
 }
+
+require("plugins").setup()
 
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)
@@ -47,3 +48,5 @@ for _, pkg in ipairs(package) do
   end
 end
 vim.g.pydocstring_formatter = 'google' -- sphinx, numpy, google
+require'lsp_config'
+require'config'
