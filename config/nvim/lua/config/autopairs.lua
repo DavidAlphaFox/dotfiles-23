@@ -5,6 +5,8 @@ function M.setup()
   local npairs = require('nvim-autopairs')
 
   npairs.setup({ map_bs = false, map_cr = false, check_ts = true })
+  npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
+  npairs.add_rules(require('nvim-autopairs.rules.endwise-elixir'))
 
   vim.g.coq_settings = {
     keymap = {
@@ -53,7 +55,6 @@ function M.setup()
     end
   end
   remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
-  npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
 end
 
 return M

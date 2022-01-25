@@ -22,8 +22,10 @@ saga.init_lsp_saga {
 -- lsp provider to find the cursor word definition and reference
 -- lsp provider to find the cursor word definition and reference
 utils.map('n', 'ñlf', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]])
+utils.map('n', 'ñca', "<cmd>lua require('lspsaga.codeaction').code_action()<CR>")
 -- show hover doc
-utils.map('n', '<leader>hd', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]])
+utils.map('n', 'ñhd', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]])
+utils.map('n', ',sh', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>")
 -- scroll down hover doc or scroll in definition preview
 utils.map('n', 'C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]])
 -- scroll up hover doc

@@ -22,9 +22,6 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
-    endwise = {
-      enable = true,
-    },
   }
 end
 return M

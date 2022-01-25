@@ -3,6 +3,7 @@ loop_mode = "Playlist"
 volume = 100
 add_playlist_front = true
 disable_exit_confirmation = true
+playlist_display_symbol = true
 theme_selected = "default"
 
 [album_photo_xywh]
@@ -53,6 +54,7 @@ light_blue = "#aed9f6"
 light_magenta = "#b2aeff"
 light_cyan = "#edabd2"
 light_white = "#f2f2f2"
+
 [keys.global_esc.code]
 type = "Esc"
 

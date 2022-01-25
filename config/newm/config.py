@@ -8,6 +8,8 @@ from newm.helper import BacklightManager, WobRunner, PaCtl
 from pywm import (
     PYWM_MOD_LOGO,
     PYWM_MOD_ALT,
+    PLACEHOLDER_c_gestures,
+    PLACEHOLDER_pyevdev_gestures,
     PYWM_TRANSFORM_90,
     PYWM_TRANSFORM_180,
     PYWM_TRANSFORM_270,
@@ -48,7 +50,7 @@ def on_reconfigure():
         f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
-        f"gsettings set {gnome_schema} cursor-size 150",
+        f"gsettings set {gnome_schema} cursor-size 35",
         f"gsettings set {gnome_schema} font-name 'Lucida MAC 15'",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
         f"gsettings set {gnome_peripheral}.keyboard delay 500",
@@ -71,6 +73,7 @@ outputs = [
 ]
 
 pywm = {
+    'xkb_model': "PLACEHOLDER_xkb_model",
     'xkb_layout': "es",
     'xkb_options': "caps:swapescape",
     'encourage_csd': False,
@@ -223,7 +226,10 @@ bar = {'enabled': False}
 
 gestures = {
     'lp_freq': 120.,
-    'lp_inertia': 0.4
+    'lp_inertia': 0.4,
+
+    'c': PLACEHOLDER_c_gestures,
+    'pyevdev': PLACEHOLDER_pyevdev_gestures,
 }
 
 swipe = {'gesture_factor': 3}

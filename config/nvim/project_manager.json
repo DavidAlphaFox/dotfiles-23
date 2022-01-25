@@ -8,5 +8,10 @@
         "name": "Projecto Frontend ecosur",
         "description": "Projecto echo en react, redux y mui para evaluacion de projectos",
         "command": "npm test"
+    },
+    "~/prueba": {
+        "name": "App1",
+        "description": "Tmx frontend api",
+        "file_name": "run.py"
     }
 }

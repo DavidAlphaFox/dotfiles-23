@@ -115,17 +115,42 @@ function M.setup()
       end,
     }
     use {
-      "RRethy/nvim-treesitter-endwise",
-      wants = "nvim-treesitter",
-      event = "InsertEnter",
-      disable = false,
-    }
-    use {
       "windwp/nvim-autopairs",
       wants = "nvim-treesitter",
       config = function()
         require("config.autopairs").setup()
       end,
+    }
+    use {
+      "danymat/neogen",
+      config = function()
+          require('neogen').setup {
+              enabled = true,
+              languages = {
+                  lua = {
+                    template = {
+                      annotation_convention = "emmylua" -- for a full list of annotation_conventions, see supported-languages below,
+                  }
+              },
+              csharp = {
+                template = {
+                  annotation_convention = "xmldoc"
+                }
+              },
+              python = {
+                template = {
+                  annotation_convention = "google_docstrings"
+                }
+              },
+              typescript = {
+                template = {
+                  annotation_convention = "jsdoc"
+                }
+              },
+            }
+          }
+      end,
+      requires = "nvim-treesitter/nvim-treesitter"
     }
 
     -- Syntax
@@ -165,12 +190,13 @@ function M.setup()
 
     -- Tim Pope docet
     use { "tpope/vim-surround", event = "InsertEnter" }
+    use 'tpope/vim-repeat'
 
     -- Motions
     use { "andymass/vim-matchup", event = "CursorMoved" }
     use { "wellle/targets.vim", event = "CursorMoved" }
     use { "unblevable/quick-scope", event = "CursorMoved", disable = false }
-    use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
+    use { "chaoren/vim-wordmotion" }
     use {
       'ggandor/lightspeed.nvim',
       keys = { "s", "S", "f", "F", "t", "T" },
@@ -186,7 +212,7 @@ function M.setup()
       "nvim-lualine/lualine.nvim",
       after = "nvim-treesitter",
       config = function()
-        require("config.lualine").setup{}
+        require("config.lualine").setup()
       end,
       wants = "nvim-web-devicons",
     }
@@ -194,7 +220,6 @@ function M.setup()
 
     -- Text edition
     use { 'mg979/vim-visual-multi', branch = 'master' }
-    use {'heavenshell/vim-pydocstring', run = 'make install' }
     use 'AndrewRadev/splitjoin.vim'
     use {
       "numToStr/Comment.nvim",
@@ -218,6 +243,7 @@ function M.setup()
     use 'i3d/vim-jimbothemes'
     use 'owozsh/Amora'
     use 'franbach/miramare'
+    use 'sainnhe/sonokai'
     -- Bootstrap Neovim
     if packer_bootstrap then
       print "Restart Neovim required after installation!"

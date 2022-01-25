@@ -32,9 +32,9 @@ end
 local package = {
   'settings',
   -- 'netrw',
-  -- 'plugins',
+  'config',
   'keymappings',
-  -- 'lsp_config',
+  'lsp_config',
   'debug',
   'colorscheme',
 }
@@ -47,6 +47,3 @@ for _, pkg in ipairs(package) do
     print(vim.inspect("Error in module " .. pkg))
   end
 end
-vim.g.pydocstring_formatter = 'google' -- sphinx, numpy, google
-require'lsp_config'
-require'config'

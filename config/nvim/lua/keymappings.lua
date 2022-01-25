@@ -10,12 +10,11 @@ utils.map('n', 'ñr', ':%s/', opts)
 utils.map('n', '<leader>r', ':s/', opts)
 
 -- Search and replace
-utils.map('n', '<leader>rw', [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
-utils.map('n', '<Leader>cn', [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
-utils.map('n', '<Leader>cp', [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
+utils.map('n', 'ñrw', [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
+utils.map('n', '<Leader>rw', [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
+utils.map('n', '<Leader>rp', [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
 
---Python Docstring
-vim.cmd [[autocmd FileType python noremap <buffer> <leader>pd :Pydocstring<CR>]]
+-- sudo
 vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
 
 -- Tab mappings
@@ -74,8 +73,8 @@ utils.map('t', '<C-v><Esc>', '<Esc>')
 
 --Delete search result
 utils.map('n', '<leader>c', ':let @/=""<cr>')
-utils.map('n', 'n', 'nzzzv')
-utils.map('n', 'N', 'Nzzzv')
+utils.map('n', 'n', 'nzzzv', opts)
+utils.map('n', 'N', 'Nzzzv', opts)
 -- utils.map('n', '<bs>', '<c-^>`”zz')
 utils.map('n', '<bs>', ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
 
@@ -85,6 +84,9 @@ utils.map('n', '<Tab>', '>>', opts)
 utils.map('n', '<S-Tab>', '<<', opts)
 utils.map('v', '<Tab>', '>', opts)
 utils.map('v', '<S-Tab>', '<', opts)
+
+-- Motions
+utils.map('n', 'ñj', '%')
 
 -- PLUGINS
 -- harpoon
@@ -101,3 +103,8 @@ end
 utils.map('n', 'ñe', [[:lua require("harpoon.term").sendCommand(10, require"code_runner".get_filetype_command() .. "\n")<CR>]])
 utils.map('n', 'ñt', ':lua require("harpoon.term").gotoTerminal(10)<CR>')
 utils.map('n', '<leader>e', ':RunCode<CR>', opts)
+utils.map("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>")
+utils.map("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>")
+utils.map("n", "<Leader>ng", ":lua require('neogen').generate({ type = 'file' })<CR>")
+utils.map("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>")
+
