@@ -48,5 +48,4 @@ export DBUS_SESSION_BUS_PID
 #
 # LibreOffice
 #
-# export SAL_USE_VCLPLUGIN=gtk3
-export VDPAU_DRIVER=va_gl
+export SAL_USE_VCLPLUGIN=gtk3

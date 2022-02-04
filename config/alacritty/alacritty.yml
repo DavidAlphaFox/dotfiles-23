@@ -20,6 +20,7 @@ window:
     y: 70
   decorations: none
   dynamic_title: true
+  opacity: 1
 
 class:
   gtk_theme_variant: dark
@@ -27,8 +28,6 @@ class:
 scrolling:
   history: 10000
   multiplier: 3
-
-background_opacity: 1
 
 font:
   normal:

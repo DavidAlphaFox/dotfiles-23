@@ -1,6 +1,7 @@
 local utils = require('utils')
 local opts = { noremap = true, silent = false }
 
+utils.map('n', 'Y', 'yg$')
 utils.map('n', 'k', 'gk')
 utils.map('n', 'j', 'gj')
 utils.map('n', 'ñ', ':', opts)
@@ -48,10 +49,10 @@ utils.map("n", "<Leader>j", ":wincmd j<CR>")
 utils.map("n", "<Leader>h", ":wincmd h<CR>")
 
 -- Resize pane
-utils.map('n', '<leader><Right>', ':vertical resize +5<CR>')
-utils.map('n', '<leader><Left>', ':vertical resize -5<CR>')
-utils.map('n', '<leader><Up>', ':resize +5<CR>')
-utils.map('n', '<leader><Down>', ':resize -5<CR>')
+utils.map('n', '<leader>+', ':vertical resize +5<CR>')
+utils.map('n', '<leader>-', ':vertical resize -5<CR>')
+utils.map('n', '<leader><leader>+', ':resize +5<CR>')
+utils.map('n', '<leader><leader>-', ':resize -5<CR>')
 
 utils.map('n', ',h', ':vertical resize +5<CR>')
 utils.map('n', ',l', ':vertical resize -5<CR>')
@@ -91,7 +92,7 @@ utils.map('n', 'ñj', '%')
 -- PLUGINS
 -- harpoon
 utils.map('n', 'ñm', ':lua require("harpoon.mark").add_file()<CR>')
-utils.map('n', 'g ', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
+utils.map('n', 'ñ ', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
 utils.map('n', 'ñ<Tab>', ':lua require("harpoon.ui").nav_next()<CR>')
 utils.map('n', 'ñ <Tab>', ':lua require("harpoon.ui").nav_prev()<CR>')
 for i = 9,1,-1
@@ -100,7 +101,7 @@ do
    local command = string.format(':lua require("harpoon.ui").nav_file(%d)<CR>', i)
    utils.map('n', kmap, command)
 end
-utils.map('n', 'ñe', [[:lua require("harpoon.term").sendCommand(10, require"code_runner".get_filetype_command() .. "\n")<CR>]])
+utils.map('n', 'ñ.', [[:lua require("harpoon.term").sendCommand(10, require"code_runner".get_filetype_command() .. "\n")<CR>]])
 utils.map('n', 'ñt', ':lua require("harpoon.term").gotoTerminal(10)<CR>')
 utils.map('n', '<leader>e', ':RunCode<CR>', opts)
 utils.map("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>")

@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup()
+  require("lsp_config.supports").setup()
   local coq = require "coq"
   coq.Now() -- Start coq
 
@@ -19,7 +20,6 @@ function M.setup()
       unsafe = { "rm", "poweroff", "mv" },
     },
   }
-  require("lsp_config.supports").setup()
 end
 
 return M

@@ -40,6 +40,11 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim'
+
+    -- SpeedUp
+    use 'lewis6991/impatient.nvim'
+    use 'nathom/filetype.nvim'
+
     use 'folke/lua-dev.nvim'
 
     -- LSP
@@ -59,7 +64,7 @@ function M.setup()
     use {
       "ms-jpq/coq_nvim",
       branch = "coq",
-      event = "InsertEnter",
+      event = 'InsertEnter *',
       opt = true,
       run = ":COQdeps",
       config = function()
@@ -130,23 +135,23 @@ function M.setup()
                   lua = {
                     template = {
                       annotation_convention = "emmylua" -- for a full list of annotation_conventions, see supported-languages below,
-                  }
-              },
-              csharp = {
-                template = {
-                  annotation_convention = "xmldoc"
-                }
-              },
-              python = {
-                template = {
-                  annotation_convention = "google_docstrings"
-                }
-              },
-              typescript = {
-                template = {
-                  annotation_convention = "jsdoc"
-                }
-              },
+                  	}
+              		},
+									csharp = {
+										template = {
+											annotation_convention = "xmldoc"
+										}
+									},
+									python = {
+										template = {
+											annotation_convention = "google_docstrings"
+										}
+									},
+									typescript = {
+										template = {
+											annotation_convention = "jsdoc"
+										}
+									},
             }
           }
       end,
@@ -154,7 +159,6 @@ function M.setup()
     }
 
     -- Syntax
-    use 'sheerun/vim-polyglot'
     use 'elixir-editors/vim-elixir'
 
     -- Icons
@@ -223,9 +227,33 @@ function M.setup()
     use 'AndrewRadev/splitjoin.vim'
     use {
       "numToStr/Comment.nvim",
-      keys = { "gc", "gcc", "gbc" },
       config = function()
-        require("Comment").setup {}
+        -- NOTE: The example below is a proper integration and it is RECOMMENDED.
+        require('Comment').setup{
+            ---@param ctx Ctx
+            pre_hook = function(ctx)
+                -- Only calculate commentstring for tsx filetypes
+                if vim.bo.filetype == 'typescriptreact' then
+                    local U = require('Comment.utils')
+
+                    -- Detemine whether to use linewise or blockwise commentstring
+                    local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+
+                    -- Determine the location where to calculate commentstring from
+                    local location = nil
+                    if ctx.ctype == U.ctype.block then
+                        location = require('ts_context_commentstring.utils').get_cursor_location()
+                    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+                        location = require('ts_context_commentstring.utils').get_visual_start_location()
+                    end
+
+                    return require('ts_context_commentstring.internal').calculate_commentstring({
+                        key = type,
+                        location = location,
+                    })
+                end
+            end,
+        }
       end,
     }
 
@@ -234,16 +262,18 @@ function M.setup()
     -- use 'is0n/fm-nvim'
     use 'ThePrimeagen/harpoon'
     use { "vuki656/package-info.nvim", requires = "MunifTanjim/nui.nvim" }
-    use 'nathom/filetype.nvim'
+    use { 'kshenoy/vim-signature', config = [[require('config.signature')]] }
 
     -- General Plugins
     use 'jeffkreeftmeijer/vim-numbertoggle'
 
     -- Themes
     use 'i3d/vim-jimbothemes'
-    use 'owozsh/Amora'
+    use 'owozsh/amora'
     use 'franbach/miramare'
     use 'sainnhe/sonokai'
+    use 'RRethy/nvim-base16'
+    -- use 'CRAG666/amora.vim'
     -- Bootstrap Neovim
     if packer_bootstrap then
       print "Restart Neovim required after installation!"

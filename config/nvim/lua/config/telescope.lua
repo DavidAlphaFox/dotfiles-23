@@ -4,15 +4,15 @@ local actions = require "telescope.actions"
 
 require("telescope").setup {
     defaults = {
-        vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case"
-        },
+      vimgrep_arguments = {
+         "rg",
+         "--color=never",
+         "--no-heading",
+         "--with-filename",
+         "--line-number",
+         "--column",
+         "--smart-case",
+      },
         prompt_prefix = " ",
         selection_caret = " ",
         entry_prefix = "  ",
@@ -20,8 +20,10 @@ require("telescope").setup {
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "bottom_pane",
+        -- layout_strategy = "horizontal",
         layout_config={
             horizontal = {
+                prompt_position = "top",
                 mirror = false,
                 height = 0.70,
                 width = 0.70,
@@ -36,7 +38,8 @@ require("telescope").setup {
         generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
         path_display = { "smart", },
         winblend = 0,
-        border = false,
+        border = {},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         results_title = '',
         preview_title = '',
         color_devicons = true,
@@ -76,6 +79,8 @@ require("telescope").setup {
     }
 }
 
+-- require("telescope").load_extension("themes")
+require("telescope").load_extension("frecency")
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("file_browser")
 require("telescope").load_extension("frecency")
@@ -87,7 +92,7 @@ utils.map(
     [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]])
 
 -- File Pickers
-utils.map('n', ' ñ' , [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>]])
+utils.map('n', 'ñe' , [[<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>]])
 utils.map('n', 'ñf', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
 utils.map("n", "ño", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]])
 utils.map("n", " m", [[<Cmd>lua require('telescope.builtin').marks()<CR>]])
@@ -124,3 +129,17 @@ utils.map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits
 utils.map('n', '<leader>gbc', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]])
 utils.map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]])
 utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]])
+
+-- Telescope
+utils.fg_bg("TelescopeBorder", "#1a1a2e", "NONE")
+utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
+utils.fg_bg("TelescopePromptNormal", "white", "NONE")
+utils.fg_bg("TelescopePromptPrefix", "#84c49b", "NONE")
+
+utils.fg_bg("TelescopePromptTitle", "black", "#fb5c8e")
+utils.fg_bg("TelescopePreviewTitle", "black", "#a29dff")
+utils.fg_bg("TelescopeResultsTitle", "black", "#f79f79")
+
+utils.bg("TelescopeResults", "NONE")
+utils.bg("TelescopeNormal", "NONE")
+utils.bg("TelescopeSelection", "#565393")

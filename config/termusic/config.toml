@@ -1,7 +1,7 @@
 music_dir = "~/Música"
 loop_mode = "Playlist"
 volume = 100
-add_playlist_front = true
+add_playlist_front = false
 disable_exit_confirmation = true
 playlist_display_symbol = true
 theme_selected = "default"
@@ -15,7 +15,7 @@ align = "BottomLeft"
 [style_color_symbol]
 library_foreground = "Foreground"
 library_background = "Reset"
-library_border = "Magenta"
+library_border = "Red"
 library_highlight = "LightYellow"
 library_highlight_symbol = "🦄"
 playlist_foreground = "Foreground"
@@ -23,12 +23,12 @@ playlist_background = "Reset"
 playlist_border = "Magenta"
 playlist_highlight = "Red"
 playlist_highlight_symbol = "🚀"
-progress_foreground = "LightGreen"
+progress_foreground = "LightMagenta"
 progress_background = "Reset"
 progress_border = "Cyan"
 lyric_foreground = "Foreground"
 lyric_background = "Reset"
-lyric_border = "Blue"
+lyric_border = "Green"
 
 [style_color_symbol.alacritty_theme]
 path = ""
@@ -54,7 +54,6 @@ light_blue = "#aed9f6"
 light_magenta = "#b2aeff"
 light_cyan = "#edabd2"
 light_white = "#f2f2f2"
-
 [keys.global_esc.code]
 type = "Esc"
 

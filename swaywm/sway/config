@@ -53,7 +53,7 @@ output eDP-1 res --custom 1920x1080 pos 1600,0
 
 # Second monitor config
 set $second_monitor DP-2
-output $second_monitor res --custom 1280x800@60Hz pos 0,0 scale 0.8
+output $second_monitor res --custom 1280x800@60Hz pos 0,0
 # Assign Workspaces
     workspace 1 output eDP-1
     workspace 2 output eDP-1

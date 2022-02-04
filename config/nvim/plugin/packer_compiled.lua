@@ -69,19 +69,16 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  Amora = {
-    loaded = true,
-    path = "/home/crag/.local/share/nvim/site/pack/packer/start/Amora",
-    url = "https://github.com/owozsh/Amora"
-  },
   ["Comment.nvim"] = {
-    config = { "\27LJ\1\0029\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\fComment\frequire\0" },
-    keys = { { "", "gc" }, { "", "gcc" }, { "", "gbc" } },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/crag/.local/share/nvim/site/pack/packer/opt/Comment.nvim",
+    config = { "\27LJ\1\2ß\3\0\1\6\0\22\00064\1\0\0007\1\1\0017\1\2\1\a\1\3\0T\0010€4\1\4\0%\2\5\0>\1\2\0027\2\6\0007\3\6\0017\3\a\3\5\2\3\0T\2\2€%\2\b\0T\3\1€%\2\t\0)\3\0\0007\4\6\0007\5\6\0017\5\n\5\5\4\5\0T\4\a€4\4\4\0%\5\v\0>\4\2\0027\4\f\4>\4\1\2\16\3\4\0T\4\16€7\4\r\0007\5\r\0017\5\14\5\4\4\5\0T\4\5€7\4\r\0007\5\r\0017\5\15\5\5\4\5\0T\4\6€4\4\4\0%\5\v\0>\4\2\0027\4\16\4>\4\1\2\16\3\4\0004\4\4\0%\5\17\0>\4\2\0027\4\18\0043\5\19\0:\2\20\5:\3\21\5@\4\2\0G\0\1\0\rlocation\bkey\1\0\0\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\16__multiline\14__default\tline\nctype\18Comment.utils\frequire\20typescriptreact\rfiletype\abo\bvimN\1\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0001\2\3\0:\2\5\1>\0\2\1G\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0" },
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
+  },
+  amora = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/amora",
+    url = "https://github.com/owozsh/amora"
   },
   ["code_runner.nvim"] = {
     loaded = true,
@@ -130,6 +127,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["lightspeed.nvim"] = {
     config = { "\27LJ\1\2R\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\21limit_ft_matches\3\30\nsetup\15lightspeed\frequire\0" },
@@ -187,6 +189,11 @@ _G.packer_plugins = {
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs",
     wants = { "nvim-treesitter" }
+  },
+  ["nvim-base16"] = {
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/nvim-base16",
+    url = "https://github.com/RRethy/nvim-base16"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -377,15 +384,16 @@ _G.packer_plugins = {
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/vim-numbertoggle",
     url = "https://github.com/jeffkreeftmeijer/vim-numbertoggle"
   },
-  ["vim-polyglot"] = {
-    loaded = true,
-    path = "/home/crag/.local/share/nvim/site/pack/packer/start/vim-polyglot",
-    url = "https://github.com/sheerun/vim-polyglot"
-  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/crag/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
+  },
+  ["vim-signature"] = {
+    config = { "require('config.signature')" },
+    loaded = true,
+    path = "/home/crag/.local/share/nvim/site/pack/packer/start/vim-signature",
+    url = "https://github.com/kshenoy/vim-signature"
   },
   ["vim-surround"] = {
     loaded = false,
@@ -435,10 +443,6 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\1\2f\0\0\2\0\4\0\v4\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\0014\0\0\0%\1\3\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\23treesitter-context\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
 -- Config for: neogen
 time([[Config for neogen]], true)
 try_loadstring("\27LJ\1\2Ö\2\0\0\5\0\19\0\0254\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\a\0003\3\5\0003\4\4\0:\4\6\3:\3\b\0023\3\n\0003\4\t\0:\4\6\3:\3\v\0023\3\r\0003\4\f\0:\4\6\3:\3\14\0023\3\16\0003\4\15\0:\4\6\3:\3\17\2:\2\18\1>\0\2\1G\0\1\0\14languages\15typescript\1\0\0\1\0\1\26annotation_convention\njsdoc\vpython\1\0\0\1\0\1\26annotation_convention\22google_docstrings\vcsharp\1\0\0\1\0\1\26annotation_convention\vxmldoc\blua\1\0\0\rtemplate\1\0\0\1\0\1\26annotation_convention\femmylua\1\0\1\fenabled\2\nsetup\vneogen\frequire\0", "config", "neogen")
@@ -447,10 +451,22 @@ time([[Config for neogen]], false)
 time([[Config for lsp-colors.nvim]], true)
 try_loadstring("\27LJ\1\2~\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\4\16Information\f#8accfe\tHint\f#7ad88e\nError\f#f34f4d\fWarning\f#ffda45\nsetup\15lsp-colors\frequire\0", "config", "lsp-colors.nvim")
 time([[Config for lsp-colors.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\1\2f\0\0\2\0\4\0\v4\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\0014\0\0\0%\1\3\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\23treesitter-context\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\1\2ß\3\0\1\6\0\22\00064\1\0\0007\1\1\0017\1\2\1\a\1\3\0T\0010€4\1\4\0%\2\5\0>\1\2\0027\2\6\0007\3\6\0017\3\a\3\5\2\3\0T\2\2€%\2\b\0T\3\1€%\2\t\0)\3\0\0007\4\6\0007\5\6\0017\5\n\5\5\4\5\0T\4\a€4\4\4\0%\5\v\0>\4\2\0027\4\f\4>\4\1\2\16\3\4\0T\4\16€7\4\r\0007\5\r\0017\5\14\5\4\4\5\0T\4\5€7\4\r\0007\5\r\0017\5\15\5\5\4\5\0T\4\6€4\4\4\0%\5\v\0>\4\2\0027\4\16\4>\4\1\2\16\3\4\0004\4\4\0%\5\17\0>\4\2\0027\4\18\0043\5\19\0:\2\20\5:\3\21\5@\4\2\0G\0\1\0\rlocation\bkey\1\0\0\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\16__multiline\14__default\tline\nctype\18Comment.utils\frequire\20typescriptreact\rfiletype\abo\bvimN\1\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0001\2\3\0:\2\5\1>\0\2\1G\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\1\2>\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\21config.autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
+-- Config for: vim-signature
+time([[Config for vim-signature]], true)
+require('config.signature')
+time([[Config for vim-signature]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd lualine.nvim ]]
@@ -461,23 +477,20 @@ try_loadstring("\27LJ\1\2<\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G
 time([[Sequenced loading]], false)
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> t <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "t", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> S <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "S", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> F <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "F", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> T <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "T", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> s <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "s", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> f <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "f", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gcc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gcc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> F <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "F", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> gbc <cmd>lua require("packer.load")({'Comment.nvim'}, { keys = "gbc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> S <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "S", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> t <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "t", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> T <cmd>lua require("packer.load")({'lightspeed.nvim'}, { keys = "T", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'vim-surround', 'coq_nvim', 'nvim-ts-autotag'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-matchup', 'targets.vim', 'quick-scope'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'vim-surround', 'nvim-ts-autotag', 'coq_nvim'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'targets.vim', 'vim-matchup', 'quick-scope'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles(1) end

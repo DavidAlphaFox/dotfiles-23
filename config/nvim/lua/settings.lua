@@ -83,25 +83,3 @@ set.swapfile = false
 set.backup = false
 set.writebackup = false
 set.backupcopy = 'yes'
-
-function Goto_last_pos()
-  local last_pos = vim.fn.line("'\"")
-  if last_pos > 0 and last_pos <= vim.fn.line("$") then
-    vim.api.nvim_win_set_cursor(0, {last_pos, 0})
-  end
-end
-
--- au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
--- au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
--- au FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
--- au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
--- au BufEnter *.py set ai sw=4 ts=4 sta et fo=croq
-
-vim.cmd[[
-  au BufReadPost * lua Goto_last_pos()
-  au FileType make setlocal noexpandtab
-  au TextYankPost * silent! lua vim.highlight.on_yank()
-  au BufEnter * :let @/=""
-  au BufWritePre * :%s/\s\+$//e
-  au BufEnter * silent! lcd %:p:h
-]]
