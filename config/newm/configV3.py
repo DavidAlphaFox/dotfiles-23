@@ -34,7 +34,7 @@ def on_startup():
 
 def on_reconfigure():
     gnome_schema = 'org.gnome.desktop.interface'
-    # gnome_peripheral = 'org.gnome.desktop.peripherals'
+    gnome_peripheral = 'org.gnome.desktop.peripherals'
     wm_service_extra_config = (
         f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
@@ -58,38 +58,43 @@ corner_radius = 0
 
 outputs = [
     {'name': 'eDP-1', 'scale': 0.6},
-    # {'name': 'DP-2', 'scale': 0.6, 'pos_x': 0, 'pos_y': 0},
-    # {'name': 'DP-2', 'scale': 0.6},
+    {'name': 'DP-2', 'scale': 0.6, 'pos_x': 0, 'pos_y': 0},
 ]
 
 pywm = {
-    # 'renderer_mode': 'passthrough',
     'xkb_model': "PLACEHOLDER_xkb_model",
     'xkb_layout': "es",
     'xkb_options': "caps:swapescape",
-    'encourage_csd': False,
-    'enable_xwayland': True,
-    'natural_scroll': True,
-    # 'texture_shaders': 'basic',
     'focus_follows_mouse': True,
     'xcursor_theme': 'Sweet-cursors',
     'xcursor_size': 24,
+    'encourage_csd': False,
+    'enable_xwayland': True,
+    'natural_scroll': True,
+    'texture_shaders': 'basic',
+    'renderer_mode': 'indirect',
     # 'contstrain_popups_to_toplevel': True
 }
 
 
-def should_float(view):
-    size = (700, 700)
-    position = (0.5, 0.35)
-    float_apps = [
+def rules(view):
+    common_rules = {
+        'float': True,
+        'float_size': (750, 750),
+        'float_pos': (0.5, 0.35)
+    }
+    float_apps = (
         "pavucontrol", "blueman-manager"
-    ]
+    )
+    blur_apps = (
+        "kitty", "rofi", "waybar"
+    )
     if view.app_id in float_apps:
-        return True, size, position
+        return common_rules
     if view.app_id == "catapult":
-        return True, None, (0.5, 0.1)
-    if view.title is not None and view.title.strip() == "Firefox — Sharing Indicator":
-        return True, (100, 40), (0.5, 0.1)
+        return {'float': True, 'float_pos': (0.5, 0.1)}
+    if view.app_id in blur_apps:
+        return {'blur': {'radius': 5, 'passes': 3}}
     return None
 
 
@@ -97,7 +102,7 @@ view = {
     'padding': 6,
     'fullscreen_padding': 0,
     'send_fullscreen': False,
-    'should_float': should_float,
+    'rules': rules,
     'floating_min_size': False,
     'debug_scaling': True,
     'border_ws_switch': 100
@@ -221,7 +226,7 @@ bar = {'enabled': False}
 gestures = {
     'lp_freq': 120.,
     'lp_inertia': 0.4,
-    'pyevdev': {"enabled": True},
+    # 'pyevdev': {"enabled": True},
 }
 
 swipe = {'gesture_factor': 3}

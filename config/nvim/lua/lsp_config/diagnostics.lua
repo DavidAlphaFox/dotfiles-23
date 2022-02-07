@@ -19,7 +19,6 @@ vim.fn.sign_define('LspDiagnosticsSignHint', { text = "", texthl = "LspDiagno
 vim.cmd [[ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * silent! TroubleRefresh ]]
 
 require("trouble").setup {
-    position = "bottom", -- position of the list can be: bottom, top, left, right
     auto_close = true,
     signs = {
         -- icons / text used for a diagnostic

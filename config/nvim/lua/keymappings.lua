@@ -108,4 +108,4 @@ utils.map("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' }
 utils.map("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>")
 utils.map("n", "<Leader>ng", ":lua require('neogen').generate({ type = 'file' })<CR>")
 utils.map("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>")
-
+utils.map("n", "<Leader>fo", ":TodoTelescope<CR>")

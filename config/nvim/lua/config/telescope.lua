@@ -79,7 +79,7 @@ require("telescope").setup {
     }
 }
 
--- require("telescope").load_extension("themes")
+require("telescope").load_extension("themes")
 require("telescope").load_extension("frecency")
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("file_browser")
@@ -129,17 +129,3 @@ utils.map('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits
 utils.map('n', '<leader>gbc', [[<cmd>lua require('telescope.builtin').git_bcommits()<CR>]])
 utils.map('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<CR>]])
 utils.map('n', '<leader>gs',  [[<Cmd>lua require('telescope.builtin').git_status()<CR>]])
-
--- Telescope
-utils.fg_bg("TelescopeBorder", "#1a1a2e", "NONE")
-utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
-utils.fg_bg("TelescopePromptNormal", "white", "NONE")
-utils.fg_bg("TelescopePromptPrefix", "#84c49b", "NONE")
-
-utils.fg_bg("TelescopePromptTitle", "black", "#fb5c8e")
-utils.fg_bg("TelescopePreviewTitle", "black", "#a29dff")
-utils.fg_bg("TelescopeResultsTitle", "black", "#f79f79")
-
-utils.bg("TelescopeResults", "NONE")
-utils.bg("TelescopeNormal", "NONE")
-utils.bg("TelescopeSelection", "#565393")

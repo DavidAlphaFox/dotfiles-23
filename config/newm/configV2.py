@@ -33,13 +33,14 @@ def on_reconfigure():
         f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
-        f"gsettings set {gnome_schema} font-name 'Lucida MAC 11'",
+        f"gsettings set {gnome_schema} cursor-size 35",
+        f"gsettings set {gnome_schema} font-name 'Lucida MAC 15'",
+        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
         f"gsettings set {gnome_peripheral}.keyboard delay 500",
-        f"gsettings set {gnome_peripheral}.mouse natural-scroll false",
+        f"gsettings set {gnome_peripheral}.mouse natural-scroll true",
         f"gsettings set {gnome_peripheral}.mouse speed 0.0",
         f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
-        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
     )
 
     for config in wm_service_extra_config:

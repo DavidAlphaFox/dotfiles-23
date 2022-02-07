@@ -35,11 +35,11 @@ end
 
 --
 -- Init settings
---
+
 local package = {
   'settings',
   -- 'netrw',
-  'colorscheme',
+  -- 'colorscheme',
   'config',
   'keymappings',
   'debug',
