@@ -190,6 +190,7 @@ alias cp="rsync -P"
 alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
+alias help=cht.sh
 # HACK: HACK: fzf alias
 alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"

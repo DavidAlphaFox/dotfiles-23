@@ -230,6 +230,7 @@ function M.setup()
 		use {
 			'CRAG666/code_runner.nvim',
 			requires = 'nvim-lua/plenary.nvim',
+			-- branch = 'enhancement',
 			config = function()
 				require('config.code_runner').setup()
 			end

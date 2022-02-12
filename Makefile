@@ -20,13 +20,11 @@ init: ## Initial deploy dotfiles
 	ln -vsf ${PWD}/.noderc ${HOME}/.noderc
 	ln -vsf ${PWD}/config/* ${HOME}/.config/
 
-i3wm: ## config i3
-	ln -vsf ${PWD}/i3wm/* ${HOME}/.config/
-	yay -S --needed --noconfirm corrupter-bin \
-		flameshot insomnia-git i3wsr i3status-rust
-
 wayland:
 	sudo ln -vsf ${PWD}/waylan/* /usr/local/bin/
+
+newm: ## config i3
+	yay -S --needed --noconfirm newm-git waybar
 
 swaywm: ## config sway
 	ln -vsf ${PWD}/swaywm/* ${HOME}/.config/

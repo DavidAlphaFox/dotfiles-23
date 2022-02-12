@@ -28,7 +28,8 @@
 ##
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare']
+# server_names = ['cloudflare']
+server_names = ['google']
 # server_names = ['dns.ryan-palmer']
 # server_names = ['uncensoreddns-ipv4']
 # server_names = ['dns.digitale-gesellschaft.ch']

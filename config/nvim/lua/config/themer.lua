@@ -6,8 +6,8 @@ local M = {}
 function M.setup()
 	require("themer").setup({
 		colorscheme = "amora",
-		transparent = true,
-		dim_inactive = true,
+		-- transparent = true,
+		-- dim_inactive = true,
 		styles = {
 			comment = { style = 'italic' },
 			["function"] = { style = 'italic' },

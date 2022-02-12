@@ -91,10 +91,10 @@ def rules(view):
     )
     if view.app_id in float_apps:
         return common_rules
-    if view.app_id == "catapult":
-        return {'float': True, 'float_pos': (0.5, 0.1)}
     if view.app_id in blur_apps:
         return {'blur': {'radius': 5, 'passes': 3}}
+    if view.app_id == "catapult":
+        return {'float': True, 'float_pos': (0.5, 0.1)}
     return None
 
 

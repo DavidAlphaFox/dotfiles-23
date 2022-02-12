@@ -1,6 +1,6 @@
 local M = {}
 function M.setup()
-	require('neogen').setup {
+	require('neogen').setup{
 		enabled = true,
 		languages = {
 			lua = {
@@ -8,7 +8,7 @@ function M.setup()
 					annotation_convention = "emmylua" -- for a full list of annotation_conventions, see supported-languages below,
 				}
 			},
-			csharp = {
+			cs = {
 				template = {
 					annotation_convention = "xmldoc"
 				}
