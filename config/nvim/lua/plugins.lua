@@ -22,7 +22,7 @@ function M.setup()
 	-- Run PackerCompile if there are changes in this file
 	local function packer_init()
 		local fn = vim.fn
-		local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+		local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 		if fn.empty(fn.glob(install_path)) > 0 then
 			packer_bootstrap = fn.system {
 				"git",
@@ -45,87 +45,58 @@ function M.setup()
 		use 'lewis6991/impatient.nvim'
 		use 'nathom/filetype.nvim'
 
-		use 'folke/lua-dev.nvim'
-
-		-- LSP
-		use 'neovim/nvim-lspconfig'
+		-- Themes
+		-- use 'i3d/vim-jimbothemes'
+		-- use 'owozsh/amora'
+		-- use 'franbach/miramare'
+		-- use 'sainnhe/sonokai'
 		use {
-			'folke/lsp-colors.nvim',
+			"themercorp/themer.lua",
 			config = function()
-				require("lsp-colors").setup({
-					Error = "#f34f4d",
-					Warning = "#ffda45",
-					Information = "#8accfe",
-					Hint = "#7ad88e"
-				})
-			end
-		}
-		use 'glepnir/lspsaga.nvim'
-		use {
-			"ms-jpq/coq_nvim",
-			branch = "coq",
-			event = 'InsertEnter *',
-			opt = true,
-			run = ":COQdeps",
-			config = function()
-				require("config.coq").setup()
+				require("config.themer").setup()
 			end,
-			requires = {
-				{ "ms-jpq/coq.artifacts", branch = "artifacts" },
-				{ "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-			},
-			disable = false,
+			disable = false
 		}
-		use "folke/trouble.nvim"
-
-		-- Debug
-		use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
-		use {'nvim-telescope/telescope-dap.nvim'}
-		use {'mfussenegger/nvim-dap-python'}
 
 		-- Treesitter
 		use {
-			'nvim-treesitter/nvim-treesitter',
-			run = ':TSUpdate',
+			"nvim-treesitter/nvim-treesitter",
+			opt = true,
+			event = "BufRead",
+			run = ":TSUpdate",
 			config = function()
 				require("config.treesitter").setup()
-				require('treesitter-context').setup()
 			end,
 			requires = {
-				{ "nvim-treesitter/nvim-treesitter-textobjects" },
-				{'romgrk/nvim-treesitter-context'},
-			}
+				"nvim-treesitter/nvim-treesitter-textobjects",
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				"yioneko/nvim-yati",
+				'p00f/nvim-ts-rainbow',
+			},
 		}
+		--
+		-- Auto tag
 		use {
-			'JoosepAlviste/nvim-ts-context-commentstring',
-			wants = "nvim-treesitter",
-			disable = false,
-		}
-		use {
-			"yioneko/nvim-yati",
-			wants = "nvim-treesitter",
-			disable = false,
-		}
-		use {
-			'p00f/nvim-ts-rainbow',
-			wants = "nvim-treesitter",
-			disable = false,
-		}
-		use {
-			'windwp/nvim-ts-autotag',
+			"windwp/nvim-ts-autotag",
 			wants = "nvim-treesitter",
 			event = "InsertEnter",
 			config = function()
 				require("nvim-ts-autotag").setup { enable = true }
 			end,
 		}
-		use {
-			"windwp/nvim-autopairs",
-			wants = "nvim-treesitter",
-			config = function()
-				require("config.autopairs").setup()
-			end,
-		}
+
+		-- Auto pairs
+		-- use {
+		-- 	"windwp/nvim-autopairs",
+		-- 	wants = "coq_nvim",
+		-- 	config = function()
+		-- 		require("config.autopairs").setup()
+		-- 	end,
+		-- 	disable = true
+		-- }
+
+		use 'max-0406/autoclose.nvim'
+
 		use {
 			"danymat/neogen",
 			config = function()
@@ -154,30 +125,51 @@ function M.setup()
 
 		-- Git
 		use {
-			'lewis6991/gitsigns.nvim',
-			requires = { 'nvim-lua/plenary.nvim' },
+			"lewis6991/gitsigns.nvim",
+			event = "BufReadPre",
+			wants = "plenary.nvim",
+			requires = { "nvim-lua/plenary.nvim" },
 			config = function()
-				require("config.gitstatussigns").setup()
-			end
+				require("config.gitsigns").setup()
+			end,
 		}
 
 		-- Telescope
 		use {
-			'nvim-telescope/telescope.nvim',
-			requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+			"nvim-telescope/telescope.nvim",
+			-- opt = true,
+			config = function()
+				require("config.telescope").setup()
+			end,
+			-- cmd = { "Telescope" },
+			-- module = { "telescope", "telescope.builtin" },
+			wants = {
+				"plenary.nvim",
+				"popup.nvim",
+				"telescope-frecency.nvim",
+				"telescope-file-browser.nvim",
+				"trouble.nvim",
+				"telescope-dap.nvim",
+			},
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				{
+					"nvim-telescope/telescope-frecency.nvim",
+					requires = {"tami5/sqlite.lua"}
+				},
+				"nvim-telescope/telescope-file-browser.nvim",
+				'nvim-telescope/telescope-media-files.nvim',
+				"nvim-telescope/telescope-dap.nvim",
+			},
 		}
-		use {
-			"nvim-telescope/telescope-frecency.nvim",
-			requires = {"tami5/sqlite.lua"}
-		}
-		use 'nvim-telescope/telescope-media-files.nvim'
-		use "nvim-telescope/telescope-file-browser.nvim"
 
 		-- Flutter
 		-- use 'akinsho/flutter-tools.nvim'
 
 		-- Tim Pope docet
-		use { "tpope/vim-surround", event = "InsertEnter" }
+		use { "tpope/vim-surround" }
+		use 'Matt-A-Bennett/vim-surround-funk'
 		use 'tpope/vim-repeat'
 
 		-- Motions
@@ -249,19 +241,73 @@ function M.setup()
 		-- General Plugins
 		use 'jeffkreeftmeijer/vim-numbertoggle'
 
-		-- Themes
-		-- use 'i3d/vim-jimbothemes'
-		-- use 'owozsh/amora'
-		-- use 'franbach/miramare'
-		-- use 'sainnhe/sonokai'
+		-- LSP
 		use {
-			"themercorp/themer.lua",
+			"neovim/nvim-lspconfig",
+			-- opt = true,
+			event = "BufReadPre",
+			wants = {
+				"coq_nvim",
+				"lua-dev.nvim"
+			}, -- for coq.nvim
 			config = function()
-				local utils = require('utils')
-				require("config.themer").setup()
+				require("lsp_config.supports").setup()
 			end,
+			requires = {
+				"folke/lua-dev.nvim",
+			},
 			-- disable = true
 		}
+
+		use {
+			"ms-jpq/coq_nvim",
+			branch = "coq",
+			-- event = "VimEnter",
+			-- opt = true,
+			run = ":COQdeps",
+			config = function()
+				require("config.coq").setup()
+			end,
+			requires = {
+				{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+				{ "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+			},
+			-- disable = true,
+		}
+
+		use {
+			'folke/lsp-colors.nvim',
+			wants= { "nvim-lspconfig" },
+			config = function()
+				require("lsp-colors").setup({
+					Error = "#f34f4d",
+					Warning = "#ffda45",
+					Information = "#8accfe",
+					Hint = "#7ad88e"
+				})
+			end
+		}
+
+		use {
+			'glepnir/lspsaga.nvim',
+			wants= { "nvim-lspconfig" },
+			config = function()
+				require("lsp_config.saga").setup()
+			end,
+		}
+
+		use {
+			"folke/trouble.nvim",
+			wants= { "nvim-lspconfig" },
+			config = function()
+				require("lsp_config.diagnostics").setup()
+			end,
+		}
+
+		-- Debug
+		use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+		use {'mfussenegger/nvim-dap-python'}
+
 		-- Bootstrap Neovim
 		if packer_bootstrap then
 			print "Restart Neovim required after installation!"

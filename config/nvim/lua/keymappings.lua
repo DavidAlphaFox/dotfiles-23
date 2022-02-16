@@ -97,9 +97,9 @@ utils.map('n', 'ñ<Tab>', ':lua require("harpoon.ui").nav_next()<CR>')
 utils.map('n', 'ñ <Tab>', ':lua require("harpoon.ui").nav_prev()<CR>')
 for i = 9,1,-1
 do
-   local kmap = string.format("ñ%d", i)
-   local command = string.format(':lua require("harpoon.ui").nav_file(%d)<CR>', i)
-   utils.map('n', kmap, command)
+	local kmap = string.format("ñ%d", i)
+	local command = string.format(':lua require("harpoon.ui").nav_file(%d)<CR>', i)
+	utils.map('n', kmap, command)
 end
 utils.map('n', 'ñ.', [[:lua require("harpoon.term").sendCommand(10, require"code_runner".get_filetype_command() .. "\n")<CR>]])
 utils.map('n', 'ñt', ':lua require("harpoon.term").gotoTerminal(10)<CR>')

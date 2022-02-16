@@ -34,19 +34,6 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 --
--- Init settings
-
-local package = {
-  'settings',
-  -- 'netrw',
-  -- 'colorscheme',
-  'config',
-  'keymappings',
-  'debug',
-  'lsp_config',
-}
-
---
 --- Goto last position
 --
 function Goto_last_pos()
@@ -62,13 +49,13 @@ end
 -- au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 -- au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 -- au FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
--- au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
 -- au BufEnter *.py set ai sw=4 ts=4 sta et fo=croq
 vim.cmd[[
   augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
   augroup END
+  au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
   autocmd BufReadPost * lua Goto_last_pos()
   autocmd FileType make setlocal noexpandtab
   autocmd BufEnter * :let @/=""
@@ -79,8 +66,17 @@ vim.cmd[[
 --
 -- Init Packer Plugins
 --
-require("plugins").setup()
 
+local package = {
+  'settings',
+  -- 'netrw',
+  -- 'colorscheme',
+  'config',
+  'keymappings',
+  'debug',
+}
+
+require("plugins").setup()
 for _, pkg in ipairs(package) do
   local status, _  = pcall(require, pkg)
   if not status then

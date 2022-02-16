@@ -139,6 +139,10 @@ gitignore() {
     fi
 }
 
+vimg(){
+	nvim -p $(rg $1 -l | xargs)
+}
+
 
 # -> Config <-
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -203,9 +207,6 @@ alias music="termusic"
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
-export LC_ALL=es_MX.UTF-8
-export LANG=es_MX.UTF-8
-export LANGUAGE=es_MX.UTF-8
 export TERM="xterm-kitty"
 export VISUAL=nvim
 export EDITOR=$VISUAL

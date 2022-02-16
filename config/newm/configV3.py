@@ -72,7 +72,7 @@ pywm = {
     'enable_xwayland': True,
     'natural_scroll': True,
     'texture_shaders': 'basic',
-    'renderer_mode': 'indirect',
+    # 'renderer_mode': 'indirect',
     # 'contstrain_popups_to_toplevel': True
 }
 
@@ -221,7 +221,10 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     ]
 
 
-bar = {'enabled': False}
+bar = {
+    # 'cmd': 'waybar',
+    'enabled': False
+}
 
 gestures = {
     'lp_freq': 120.,

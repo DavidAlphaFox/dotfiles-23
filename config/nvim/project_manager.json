@@ -7,11 +7,11 @@
     "~/Git/ecosur/frontcei/frontComite/ClientApp": {
         "name": "Projecto Frontend ecosur",
         "description": "Projecto echo en react, redux y mui para evaluacion de projectos",
-        "command": "npm test"
+        "command": "npm start"
     },
-    "~/prueba": {
-        "name": "App1",
-        "description": "Tmx frontend api",
-        "file_name": "run.py"
+	    "~/Git/ecosur/apicei/webApi": {
+        "name": "Api-ecosur",
+        "description": "Projecto echo en netcore",
+        "command": "dotnet watch"
     }
 }
