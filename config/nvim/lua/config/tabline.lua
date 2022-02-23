@@ -1,7 +1,6 @@
 -- MIT License Copyright (c) 2021 Evgeni Chasnovski
 
 -- Documentation ==============================================================
----@brief [[
 --- Custom minimal and fast tabline module. General idea: show all listed
 --- buffers in readable way with minimal total width in case of one vim tab,
 --- fall back for deafult otherwise. Inspired by
@@ -20,32 +19,23 @@
 --- What it doesn't do:
 --- - Custom buffer order is not supported.
 ---
---- # Dependencies
+--- # Dependencies~
 ---
 --- Suggested dependencies (provide extra functionality, tabline will work
 --- without them):
 --- - Plugin 'kyazdani42/nvim-web-devicons' for filetype icons near the buffer
 ---   name. If missing, no icons will be shown.
 ---
---- # Setup
+--- # Setup~
 ---
 --- This module needs a setup with `require('mini.tabline').setup({})`
 --- (replace `{}` with your `config` table). It will create global Lua table
 --- `MiniTabline` which you can use for scripting or manually (with
 --- `:lua MiniTabline.*`).
 ---
---- Default `config`:
---- <code>
----   {
----     -- Whether to show file icons (requires 'kyazdani42/nvim-web-devicons')
----     show_icons = true,
+--- See |MiniTabline.config| for `config` structure and default values.
 ---
----     -- Whether to set Vim's settings for tabline (make it always shown and
----     -- allow hidden buffers)
----     set_vim_settings = true
----   }
---- </code>
---- # Highlight groups
+--- # Highlight groups~
 ---
 --- 1. `MiniTablineCurrent` - buffer is current (has cursor in it).
 --- 2. `MiniTablineVisible` - buffer is visible (displayed in some window).
@@ -57,14 +47,18 @@
 ---
 --- To change any highlight group, modify it directly with |:highlight|.
 ---
---- # Disabling
+--- # Disabling~
 ---
 --- To disable (show empty tabline), set `g:minitabline_disable` (globally) or
---- `b:minitabline_disable` (for a buffer) to `v:true`. Note: after
---- disabling tabline is not updated right away, but rather after dedicated
---- event (see |events| and `MiniTabline` |augroup|).
----@brief ]]
----@tag MiniTabline mini.tabline
+--- `b:minitabline_disable` (for a buffer) to `v:true`. Considering high number
+--- of different scenarios and customization intentions, writing exact rules
+--- for disabling module's functionality is left to user. See
+--- |mini.nvim-disabling-recipes| for common recipes. Note: after disabling,
+--- tabline is not updated right away, but rather after dedicated event (see
+--- |events| and `MiniTabline` |augroup|).
+---@tag mini.tabline
+---@tag MiniTabline
+---@toc_entry Tabline
 
 -- Module definition ==========================================================
 local MiniTabline = {}
@@ -72,7 +66,8 @@ local H = {}
 
 --- Module setup
 ---
----@param config table: Module config table.
+---@param config table Module config table. See |MiniTabline.config|.
+---
 ---@usage `require('mini.tabline').setup({})` (replace `{}` with your `config` table)
 function MiniTabline.setup(config)
   -- Export module
@@ -87,12 +82,12 @@ function MiniTabline.setup(config)
   -- Module behavior
   vim.api.nvim_exec(
     [[augroup MiniTabline
-        autocmd!
-        autocmd VimEnter   * lua MiniTabline.update_tabline()
-        autocmd TabEnter   * lua MiniTabline.update_tabline()
-        autocmd BufAdd     * lua MiniTabline.update_tabline()
-        autocmd FileType  qf lua MiniTabline.update_tabline()
-        autocmd BufDelete  * lua MiniTabline.update_tabline()
+        au!
+        au VimEnter   * lua MiniTabline.update_tabline()
+        au TabEnter   * lua MiniTabline.update_tabline()
+        au BufAdd     * lua MiniTabline.update_tabline()
+        au FileType  qf lua MiniTabline.update_tabline()
+        au BufDelete  * lua MiniTabline.update_tabline()
       augroup END]],
     false
   )
@@ -120,6 +115,10 @@ function MiniTabline.setup(config)
   )
 end
 
+--- Module config
+---
+--- Default values:
+---@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
 MiniTabline.config = {
   -- Whether to show file icons (requires 'kyazdani42/nvim-web-devicons')
   show_icons = true,
@@ -128,6 +127,7 @@ MiniTabline.config = {
   -- allow hidden buffers)
   set_vim_settings = true,
 }
+--minidoc_afterlines_end
 
 -- Module functionality =======================================================
 --- Update |tabline|
@@ -194,7 +194,7 @@ function H.apply_config(config)
 
   -- Set settings to ensure tabline is displayed properly
   if config.set_vim_settings then
-    vim.o.showtabline = 0 -- Always show tabline
+    vim.o.showtabline = 2 -- Always show tabline
     vim.o.hidden = true -- Allow switching buffers without saving them
   end
 end
@@ -360,7 +360,7 @@ function H.finalize_labels()
   end
 end
 
----@return integer[] Array of `H.tabs` ids which have non-unique labels
+---@return table Array of `H.tabs` ids which have non-unique labels.
 ---@private
 function H.get_nonunique_tab_ids()
   -- Collect tab-array-id per label

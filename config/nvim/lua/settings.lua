@@ -2,41 +2,44 @@ local set = vim.opt
 
 -- Global
 set.scrolloff = 10
-set.mouse = 'a'
-set.clipboard = 'unnamedplus'
+set.mouse = "a"
+set.clipboard = "unnamedplus"
 set.splitright = true
 set.splitbelow = true
+set.wrap = true
 set.wrapscan = true
 set.ttyfast = true
 set.lazyredraw = true
-set.icm='nosplit'
+set.icm = "nosplit"
 
 -- Format options
-set.encoding = 'utf-8'
-set.fileformat = 'unix'
-set.formatoptions = 'tcqrn1'
-set.spelllang = 'es'
-set.completeopt = 'menuone,noselect'
-set.errorformat:append('%f|%l col %c|%m')
-set.wildignore = {'*.pyc', '*.pyo', '*/__pycache__/*', '*.beam', '*.swp,~*', '*.zip', '*.tar' }
+set.encoding = "utf-8"
+set.fileformat = "unix"
+set.formatoptions = "tcqrn1"
+set.spelllang = "es"
+set.completeopt = "menuone,noselect"
+set.errorformat:append "%f|%l col %c|%m"
+set.wildignore:append { "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar" }
+
 set.undofile = false
 set.undolevels = 1000
 
 -- Spaces & Tabsset
+set.expandtab = true
+set.shiftround = true
+set.shiftwidth = 2
+set.softtabstop = 2
 set.tabstop = 2
-set.shiftwidth=2
-set.expandtab = false
 -- set.ts=2
--- set.softtabstop = 4
 -- set.autoindent = true
 -- set.smartindent = true
 -- set.smarttab = true
 -- set.copyindent = true
--- set.shiftround = true
 -- set.joinspaces = false
 set.textwidth = 79
 
 -- UI Config
+set.virtualedit = "onemore"
 set.pumheight = 10
 set.showmode = false
 set.title = true
@@ -50,12 +53,20 @@ set.wildmenu = true
 set.showmatch = true
 set.errorbells = false
 set.list = false
-set.signcolumn = 'yes'
-set.listchars = {eol = '↲', tab = '▸ ', trail = '·', precedes = '←', extends = '→', nbsp = '␣', space = '␣'}
-set.laststatus=2
+set.signcolumn = "yes"
+set.listchars = {
+  eol = "↲",
+  space = "␣",
+  tab = "▸ ",
+  trail = "·",
+  precedes = "←",
+  extends = "→",
+  nbsp = "␣",
+}
+set.laststatus = 2
 
 -- TermGui
-if vim.fn.has("termguicolors") == 1 then
+if vim.fn.has "termguicolors" == 1 then
   -- vim.go.t_8f = "[[38;2;%lu;%lu;%lum"
   -- vim.go.t_8b = "[[48;2;%lu;%lu;%lum"
   -- vim.go.t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
@@ -67,8 +78,8 @@ end
 set.hlsearch = true
 set.ignorecase = true
 set.smartcase = true
-set.grepformat = '%f:%l:%c:%m'
-set.grepprg = 'rg --vimgrep --no-heading --smart-case'
+set.grepformat = "%f:%l:%c:%m"
+set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
 set.foldenable = false
@@ -82,4 +93,4 @@ set.foldenable = false
 set.swapfile = false
 set.backup = false
 set.writebackup = false
-set.backupcopy = 'yes'
+set.backupcopy = "yes"

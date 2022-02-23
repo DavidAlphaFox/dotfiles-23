@@ -1,6 +1,22 @@
 local M = {}
 
 function M.setup()
+  vim.g.coq_settings = {
+    keymap = {
+      -- recommended = false,
+      jump_to_mark = ",<TAB>",
+    },
+    clients = {
+      tabnine = {
+        enabled = true,
+      },
+    },
+    display = {
+      icons = {
+        mode = "short",
+      },
+    },
+  }
   local coq = require "coq"
   coq.Now() -- Start coq
 
