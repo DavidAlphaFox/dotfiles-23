@@ -7,5 +7,6 @@
 	autocorrect = 1
 [color]
 	ui = true
+	editor = nvim -f
 [init]
 	defaultBranch = main

@@ -1,17 +1,22 @@
 {
-    "~/Git/app1": {
-        "name": "App1",
-        "description": "Tmx frontend api",
-        "file_name": "run.py"
-    },
-    "~/Git/ecosur/frontcei/frontComite/ClientApp": {
-        "name": "Projecto Frontend ecosur",
-        "description": "Projecto echo en react, redux y mui para evaluacion de projectos",
-        "command": "npm start"
-    },
-	    "~/Git/ecosur/apicei/webApi": {
-        "name": "Api-ecosur",
-        "description": "Projecto echo en netcore",
-        "command": "dotnet watch"
-    }
+	"~/Git/app1": {
+		"name": "App1",
+		"description": "Tmx frontend api",
+		"file_name": "run.py"
+	},
+	"~/Git/ecosur/frontcei/frontComite/ClientApp": {
+		"name": "Projecto Frontend ecosur",
+		"description": "Projecto echo en react, redux y mui para evaluacion de projectos",
+		"command": "npm start"
+	},
+	"~/Git/ecosur/frontcei/frontAlumnos/ClientApp": {
+		"name": "Projecto Frontend ecosur alumnos",
+		"description": "Projecto echo en react, redux y mui para evaluacion de projectos",
+		"command": "npm start"
+	},
+	"~/Git/ecosur/apicei/webApi": {
+		"name": "Api-ecosur",
+		"description": "Projecto echo en netcore",
+		"command": "dotnet watch"
+	}
 }

@@ -139,7 +139,7 @@ gitignore() {
     fi
 }
 
-vimg(){
+vims(){
 	nvim -p $(rg $1 -l | xargs)
 }
 
@@ -166,14 +166,12 @@ alias dnsc="vim /etc/resolv.conf"
 alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
 # HACK: Config Nvim Aliases
-alias vimc='vim ~/.config/nvim/init.lua'
+alias vimi='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugins.lua'
-alias vimm='vim ~/.config/nvim/lua/keymappings.lua'
-alias vims='vim ~/.config/nvim/lua/settings.lua'
+alias vimk='vim ~/.config/nvim/lua/keymappings.lua'
+alias vimc='vim ~/.config/nvim/lua/settings.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
-alias vimf='vim ~/.config/nvim/lua/config/snippets'
-alias viml='vim ~/.config/nvim/lua/status_line/init.lua'
-alias vimls='vim ~/.config/nvim/lua/lsp_config/supports.lua'
+alias vimls='vim ~/.config/nvim/lua/config/lsp/supports.lua'
 alias vimcp='vim ~/.config/nvim/lua/config'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
