@@ -18,7 +18,8 @@ set.encoding = "utf-8"
 set.fileformat = "unix"
 set.formatoptions = "tcqrn1"
 set.spelllang = "es"
-set.completeopt = "menuone,noselect"
+-- set.completeopt = "menuone,noselect"
+set.completeopt = "menuone,noselect,menu"
 set.errorformat:append "%f|%l col %c|%m"
 set.wildignore:append { "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar" }
 
@@ -77,6 +78,7 @@ end
 
 -- Searchset incsearch
 set.hlsearch = true
+set.incsearch = true
 set.ignorecase = true
 set.smartcase = true
 set.grepformat = "%f:%l:%c:%m"

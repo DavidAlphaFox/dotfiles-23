@@ -1,4 +1,4 @@
---
+local exec = vim.api.nvim_exec
 --- Goto last position
 --
 
@@ -19,7 +19,7 @@ end
 vim.cmd [[
   augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
   augroup END
   au FileType cs setlocal shiftwidth=4 softtabstop=4 expandtab
   autocmd BufReadPost * lua Goto_last_pos()
@@ -28,3 +28,6 @@ vim.cmd [[
   autocmd BufWritePre * :%s/\s\+$//e
   autocmd BufEnter * silent! lcd %:p:h
 ]]
+
+-- Disable autocommenting in new lines (kinda annoying)
+exec([[au BufEnter * set fo-=c fo-=r fo-=o]], false)

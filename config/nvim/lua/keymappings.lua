@@ -10,6 +10,8 @@ utils.map("n", "<leader>s", "?", opts)
 utils.map({ "n", "v" }, "ñr", ":%s/", opts)
 utils.map("n", "<leader>r", ":s/", opts)
 
+utils.map("n", "x", '"_x')
+
 -- Search and replace
 utils.map("n", "ñrw", [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
 utils.map("n", "<Leader>rw", [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
@@ -102,7 +104,7 @@ utils.map("n", "ñ.", function()
   require("harpoon.term").sendCommand(10, require("code_runner").get_filetype_command() .. "\n")
 end)
 
-vim.keymap.set("n", "ñt", function()
+utils.map("n", "ñt", function()
   require("harpoon.term").gotoTerminal(10)
 end)
 utils.map("n", "<leader>e", ":RunCode<CR>", opts)
