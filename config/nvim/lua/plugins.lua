@@ -170,7 +170,7 @@ function M.setup()
 
     -- Better surround
     -- Tim Pope docet
-    use { "tpope/vim-surround", event = "InsertEnter" }
+    use "tpope/vim-surround"
     use "Matt-A-Bennett/vim-surround-funk"
     use "tpope/vim-repeat"
 

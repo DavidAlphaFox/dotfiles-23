@@ -1,12 +1,13 @@
 local set = vim.opt
 
--- Global
+--  Edition
 set.scrolloff = 10
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true
 set.splitbelow = true
 set.wrap = true
+set.linebreak = true
 set.wrapscan = true
 set.ttyfast = true
 set.lazyredraw = true
