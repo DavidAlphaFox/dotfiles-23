@@ -34,7 +34,7 @@ plugins=(
   zsh-vi-mode
   zoxide
   copybuffer
-  copydir
+  copypath
   copyfile
   ripgrep
   genpass
@@ -151,6 +151,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
 
 # -< Aliases >-
+# HACK: docker Nftables
+alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
+alias doff='sudo systemctl stop docker containerd docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
 # HACK: Config alias
 alias starshipc="vim ~/.config/starship.toml"
 alias alacric="vim ~/.config/alacritty/alacritty.yml"

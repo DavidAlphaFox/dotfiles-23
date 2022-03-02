@@ -59,12 +59,12 @@ utils.map("n", ",j", ":resize +5<CR>")
 utils.map("n", ",k", ":resize -5<CR>")
 
 --Move line to up or down
-utils.map("n", "<A-j>", ":m .+1<CR>==", opts)
-utils.map("n", "<A-k>", ":m .-2<CR>==", opts)
-utils.map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-utils.map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-utils.map("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-utils.map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+utils.map("n", "<A-u>", ":m .+1<CR>==", opts)
+utils.map("n", "<A-i>", ":m .-2<CR>==", opts)
+utils.map("i", "<A-u>", "<Esc>:m .+1<CR>==gi", opts)
+utils.map("i", "<A-i>", "<Esc>:m .-2<CR>==gi", opts)
+utils.map("v", "<A-u>", ":m '>+1<CR>gv=gv", opts)
+utils.map("v", "<A-i>", ":m '<-2<CR>gv=gv", opts)
 
 --Esc in terminal mode
 utils.map("t", "<Esc>", "<C-\\><C-n>")

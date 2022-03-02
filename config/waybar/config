@@ -23,6 +23,7 @@
         "format": "{temperatureC}°C "
     },
     "backlight": {
+        "device": "intel_backlight",
         "format": "{percent}% {icon}",
         "states": [0,50],
         "format-icons": ["", ""]
@@ -37,12 +38,15 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid}({signalStrength}%)",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠",
-        "interval" : 7,
-        "on-click": "kitty nmtui"
-
+      "format": "{ifname}",
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "format-disconnected": "", //An empty format will hide the module.
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "tooltip-format-wifi": "{essid}({signalStrength}%) ",
+      "tooltip-format-ethernet": "{ifname} ",
+      "tooltip-format-disconnected": "Disconnected",
+      "max-length": 50
     },
     "pulseaudio": {
         "format": "{volume}% 墳",
