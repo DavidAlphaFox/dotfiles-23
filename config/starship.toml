@@ -3,10 +3,9 @@ add_newline = false
 [character]
 # success_symbol = "[»](fg:#fee074)[»](fg:#f34f4d)[»](fg:#7ad88e)"
 # vicmd_symbol = "[«](fg:#7ad88e)[«](fg:#f34f4d)[«](fg:#fee074)"
-success_symbol = "[»](fg:#f6e08b)[»](fg:#fb5c8e)[»](fg:#84c49b)"
-vicmd_symbol = "[«](fg:#84c49b)[«](fg:#fb5c8e)[«](fg:#f6e08b)"
-# success_symbol = "[](fg:#bb98eb)[](fg:#8accfe)[](fg:#7ad88e)"
-error_symbol = "[✗](bold red)"
+success_symbol = "[ﰉ](fg:#fb5c8e)[ ﰉ](fg:#f79f79)[ ﰉ](fg:#9fd3b3)"
+vicmd_symbol = "[ﰊ](fg:#9fd3b3)[ ﰊ](fg:#f79f79)[ ﰊ](fg:#fb5c8e)"
+error_symbol = "[ﰉ](fg:#fb5c8e)"
 
 [git_metrics]
 disabled = false

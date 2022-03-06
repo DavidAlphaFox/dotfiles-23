@@ -153,14 +153,14 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=
 # -< Aliases >-
 # HACK: docker Nftables
 alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
-alias doff='sudo systemctl stop docker containerd docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
+alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
+alias dor='doff && don'
 # HACK: Config alias
-alias starshipc="vim ~/.config/starship.toml"
-alias alacric="vim ~/.config/alacritty/alacritty.yml"
-alias swayc="vim ~/.config/sway/config"
-alias newmc="vim ~/.config/newm/config.py"
+# alias alacric="vim ~/.config/alacritty/alacritty.yml"
+# alias swayc="vim ~/.config/sway/config"
 # alias i3c="vim ~/.config/i3/config"
 # alias i3barc="~/.config/i3status/config"
+alias newmc="vim ~/.config/newm/config.py"
 alias zshc="vim ~/.zshrc"
 alias tmuxc="vim ~/.tmux.conf"
 alias firefoxc="vim ~/.mozilla/firefox/profiles.ini"
@@ -168,6 +168,7 @@ alias kittyc="vim ~/.config/kitty/kitty.conf"
 alias dnsc="vim /etc/resolv.conf"
 alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
+alias starshipc="vim ~/.config/starship.toml"
 # HACK: Config Nvim Aliases
 alias vimi='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugins.lua'
@@ -195,16 +196,21 @@ alias cp="rsync -P"
 alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
-alias help=cht.sh
 # HACK: HACK: fzf alias
 alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: short alias
 # alias aid="swaymsg -t get_tree | grep "app_id""
+alias help=cht.sh
 alias zt="zathura"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias music="termusic"
+
+# Tem alias
+alias wpstart="docker start wordpressdb wordpress"
+alias wpstop="docker stop wordpress wordpressdb"
+
 # -< Environ variable >-
 export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
@@ -213,7 +219,7 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_OPTS="--height 40% --reverse --bind='?:toggle-preview' --pointer='»'"
+export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' --height 40% --reverse --bind='?:toggle-preview'"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
 export PATH="$HOME/.poetry/bin:$PATH"

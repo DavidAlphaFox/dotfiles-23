@@ -36,9 +36,10 @@ def on_startup():
 def on_reconfigure():
     gnome_schema = "org.gnome.desktop.interface"
     gnome_peripheral = "org.gnome.desktop.peripherals"
+    theme = "Dracula-slim"
     wm_service_extra_config = (
-        f"gsettings set {gnome_schema} gtk-theme 'Sweet-Dark-v40'",
-        "gsettings set org.gnome.desktop.wm.preferences theme Sweet-Dark-v40",
+        f"gsettings set {gnome_schema} gtk-theme {theme}",
+        f"gsettings set org.gnome.desktop.wm.preferences theme {theme}",
         "gsettings set org.gnome.desktop.wm.preferences button-layout :",
         f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
         f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
@@ -86,7 +87,7 @@ def rules(view):
     if view.app_id in float_apps:
         return common_rules
     if view.app_id in blur_apps:
-        return {"blur": {"radius": 6, "passes": 4}}
+        return {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         return {"float": True, "float_pos": (0.5, 0.1)}
     return None
@@ -110,6 +111,7 @@ swipe_zoom = {
 mod = PYWM_MOD_LOGO
 background = {
     "path": os.environ["HOME"] + f"/.cache/space/space{randrange(1, 5)}.jpg",
+    # "path": os.environ["HOME"] + "/Imágenes/wallpaper-color.png",
     "time_scale": 0.125,
     "anim": True,
 }
