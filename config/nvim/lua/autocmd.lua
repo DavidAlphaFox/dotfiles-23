@@ -1,4 +1,5 @@
 local exec = vim.api.nvim_exec
+local cmd = vim.cmd
 --- Goto last position
 --
 
@@ -29,5 +30,5 @@ vim.cmd [[
   autocmd BufEnter * silent! lcd %:p:h
 ]]
 
--- Disable autocommenting in new lines (kinda annoying)
-exec([[au BufEnter * set fo-=c fo-=r fo-=o]], false)
+-- don't auto comment new line
+cmd [[autocmd BufEnter * set formatoptions-=cro]]

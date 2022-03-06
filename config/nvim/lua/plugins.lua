@@ -41,21 +41,26 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
-    -- SpeedUp
+    -- Performance
     use "lewis6991/impatient.nvim"
     use "nathom/filetype.nvim"
 
     -- Themes
     -- use 'i3d/vim-jimbothemes'
     -- use 'owozsh/amora'
-    -- use 'franbach/miramare'
+    -- use {
+    --   "franbach/miramare",
+    --   config = function()
+    --     vim.cmd "colorscheme miramare"
+    --   end,
+    -- }
     -- use 'sainnhe/sonokai'
     use {
       "themercorp/themer.lua",
+      -- after = "coq_nvim",
       config = function()
         require("config.themer").setup()
       end,
-      disable = false,
     }
 
     -- Treesitter
@@ -119,8 +124,10 @@ function M.setup()
     -- Color
     use {
       "norcalli/nvim-colorizer.lua",
+      after = "VimEnter",
       config = function()
-        require("config.colorizer").setup()
+        -- require("config.colorizer").setup()
+        require("colorizer").setup()
       end,
     }
 
@@ -177,7 +184,7 @@ function M.setup()
     -- Motions
     use { "andymass/vim-matchup", event = "CursorMoved" }
     use { "wellle/targets.vim", event = "CursorMoved" }
-    use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
+    use { "chaoren/vim-wordmotion" }
 
     use {
       "ggandor/lightspeed.nvim",
@@ -250,13 +257,13 @@ function M.setup()
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      event = { "BufReadPre" },
+      -- event = { "BufReadPre" },
+      after = "coq_nvim",
       wants = {
         "coq_nvim",
         "lua-dev.nvim",
         "null-ls.nvim",
-        -- "nvim-lsp-ts-utils",
-      },
+      }, -- for coq.nvim
       config = function()
         require("config.lsp").setup()
       end,
@@ -266,18 +273,17 @@ function M.setup()
         {
           "j-hui/fidget.nvim",
           config = function()
-            require("fidget").setup {}
+            require("fidget").setup()
           end,
         },
-        -- "jose-elias-alvarez/nvim-lsp-ts-utils",
       },
     }
 
     use {
       "ms-jpq/coq_nvim",
       branch = "coq",
-      -- event = "VimEnter",
-      -- opt = true,
+      event = "VimEnter",
+      opt = true,
       run = ":COQdeps",
       config = function()
         require("config.coq").setup()
@@ -286,20 +292,6 @@ function M.setup()
         { "ms-jpq/coq.artifacts", branch = "artifacts" },
         { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
-      -- disable = not PLUGINS.coq.enabled,
-    }
-
-    use {
-      "folke/lsp-colors.nvim",
-      wants = { "nvim-lspconfig" },
-      config = function()
-        require("lsp-colors").setup {
-          Error = "#f34f4d",
-          Warning = "#ffda45",
-          Information = "#8accfe",
-          Hint = "#7ad88e",
-        }
-      end,
     }
 
     use {
@@ -332,6 +324,11 @@ function M.setup()
   -- Init and start packer
   packer_init()
   local packer = require "packer"
+
+  -- Performance
+  pcall(require, "impatient")
+  -- pcall(require, "packer_compiled")
+
   packer.init(conf)
   packer.startup(plugins)
 end

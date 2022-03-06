@@ -22,6 +22,9 @@ set.spelllang = "es"
 set.completeopt = "menuone,noselect,menu"
 set.errorformat:append "%f|%l col %c|%m"
 set.wildignore:append { "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar" }
+-- Better search
+set.path:remove "/usr/include"
+set.path:append "**"
 
 set.undofile = false
 set.undolevels = 1000
@@ -97,3 +100,5 @@ set.swapfile = false
 set.backup = false
 set.writebackup = false
 set.backupcopy = "yes"
+
+-- Autocms

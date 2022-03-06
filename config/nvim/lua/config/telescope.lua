@@ -1,7 +1,6 @@
 local utils = require "utils"
 
 local M = {}
-
 function M.setup()
   local actions = require "telescope.actions"
   require("telescope").setup {
@@ -81,7 +80,7 @@ function M.setup()
     },
   }
 
-  require("telescope").load_extension "themes"
+  -- require("telescope").load_extension "themes"
   require("telescope").load_extension "frecency"
   require("telescope").load_extension "media_files"
   require("telescope").load_extension "file_browser"
