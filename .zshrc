@@ -156,7 +156,7 @@ alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
 alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
 alias dor='doff && don'
 # HACK: Config alias
-# alias alacric="vim ~/.config/alacritty/alacritty.yml"
+alias alacric="vim ~/.config/alacritty/alacritty.yml"
 # alias swayc="vim ~/.config/sway/config"
 # alias i3c="vim ~/.config/i3/config"
 # alias i3barc="~/.config/i3status/config"
@@ -173,10 +173,10 @@ alias starshipc="vim ~/.config/starship.toml"
 alias vimi='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugins.lua'
 alias vimk='vim ~/.config/nvim/lua/keymappings.lua'
-alias vimc='vim ~/.config/nvim/lua/settings.lua'
+alias vimd='vim ~/.config/nvim/after/plugin/defaults.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
-alias vimls='vim ~/.config/nvim/lua/config/lsp/supports.lua'
-alias vimcp='vim ~/.config/nvim/lua/config'
+alias viml='vim ~/.config/nvim/lua/config/lsp/init.lua'
+alias vimc='vim ~/.config/nvim/lua/config/init.lua'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
 alias Desktop="cd /$HOME/Escritorio"

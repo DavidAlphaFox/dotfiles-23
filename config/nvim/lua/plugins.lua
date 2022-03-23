@@ -45,6 +45,14 @@ function M.setup()
     use "lewis6991/impatient.nvim"
     use "nathom/filetype.nvim"
 
+    use {
+      "karb94/neoscroll.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("config.neoscroll").setup()
+      end,
+    }
+
     -- Themes
     -- use 'i3d/vim-jimbothemes'
     -- use 'owozsh/amora'
@@ -57,7 +65,6 @@ function M.setup()
     -- use 'sainnhe/sonokai'
     use {
       "themercorp/themer.lua",
-      -- after = "coq_nvim",
       config = function()
         require("config.themer").setup()
       end,
@@ -91,6 +98,12 @@ function M.setup()
       end,
     }
 
+    use {
+      "RRethy/nvim-treesitter-endwise",
+      wants = "nvim-treesitter",
+      event = "InsertEnter",
+      disable = false,
+    }
     -- Auto pairs
     -- use {
     -- 	"windwp/nvim-autopairs",
@@ -124,9 +137,8 @@ function M.setup()
     -- Color
     use {
       "norcalli/nvim-colorizer.lua",
-      after = "VimEnter",
+      event = { "BufReadPre" },
       config = function()
-        -- require("config.colorizer").setup()
         require("colorizer").setup()
       end,
     }
@@ -209,6 +221,16 @@ function M.setup()
 
     --UI
     use {
+      "SmiteshP/nvim-gps",
+      requires = "nvim-treesitter/nvim-treesitter",
+      module = "nvim-gps",
+      wants = "nvim-treesitter",
+      config = function()
+        require("nvim-gps").setup()
+      end,
+    }
+
+    use {
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
       config = function()
@@ -234,7 +256,7 @@ function M.setup()
     use {
       "CRAG666/code_runner.nvim",
       requires = "nvim-lua/plenary.nvim",
-      -- branch = 'enhancement',
+      branch = "new_features",
       config = function()
         require("config.code_runner").setup()
       end,
@@ -257,8 +279,8 @@ function M.setup()
     use {
       "neovim/nvim-lspconfig",
       opt = true,
+      event = "VimEnter",
       -- event = { "BufReadPre" },
-      after = "coq_nvim",
       wants = {
         "coq_nvim",
         "lua-dev.nvim",

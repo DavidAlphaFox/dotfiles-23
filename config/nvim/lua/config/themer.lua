@@ -5,10 +5,7 @@ local M = {}
 function M.setup()
   require("themer").setup {
     colorscheme = "amora",
-    -- transparent = true,
-    -- dim_inactive = true,
     styles = {
-      comment = { style = "italic" },
       ["function"] = { style = "italic" },
       functionbuiltin = { style = "italic" },
       variable = { style = "italic" },

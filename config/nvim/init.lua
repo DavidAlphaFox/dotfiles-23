@@ -37,10 +37,8 @@ end
 -- Init Packer Plugins
 --
 
-require "settings"
-require "autocmd"
-require("plugins").setup()
-require "debug"
-require "keymappings"
 require "config"
+require("plugins").setup()
+require "keymappings"
+require "debug"
 vim.opt.showtabline = 0

@@ -81,9 +81,9 @@
 ---   visible one (at process or finished drawing), drawing is done immediately
 ---   without animation. With most common example being typing new text, this
 ---   feels more natural.
---- - Scope for the whole is not drawn as it is isually redundant. Technically,
----   it can be thought as drawn at column 0 (because border indent is -1)
----   which is not visible.
+--- - Scope for the whole buffer is not drawn as it is isually redundant.
+---   Technically, it can be thought as drawn at column 0 (because border
+---   indent is -1) which is not visible.
 ---@tag MiniIndentscope-drawing
 
 -- Notes about implementation:
@@ -145,11 +145,11 @@ function MiniIndentscope.setup(config)
     false
   )
 
-  if vim.fn.has('nvim-0.7.0') == 1 then
+  if vim.fn.exists('##ModeChanged') == 1 then
     vim.api.nvim_exec(
       -- Call `auto_draw` on mode change to respect `miniindentscope_disable`
       [[augroup MiniIndentscope
-          au ModeChanged * lua MiniIndentscope.auto_draw({ lazy = true })
+          au ModeChanged *:* lua MiniIndentscope.auto_draw({ lazy = true })
         augroup END]],
       false
     )
@@ -719,22 +719,26 @@ function H.setup_config(config)
   vim.validate({ config = { config, 'table', true } })
   config = vim.tbl_deep_extend('force', H.default_config, config or {})
 
+  -- Validate per nesting level to produce correct error message
   vim.validate({
     draw = { config.draw, 'table' },
+    mappings = { config.mappings, 'table' },
+    options = { config.options, 'table' },
+    symbol = { config.symbol, 'string' },
+  })
+
+  vim.validate({
     ['draw.delay'] = { config.draw.delay, 'number' },
     ['draw.animation'] = { config.draw.animation, 'function' },
 
-    mappings = { config.options, 'table' },
     ['mappings.object_scope'] = { config.mappings.object_scope, 'string' },
     ['mappings.object_scope_with_border'] = { config.mappings.object_scope_with_border, 'string' },
     ['mappings.goto_top'] = { config.mappings.goto_top, 'string' },
     ['mappings.goto_bottom'] = { config.mappings.goto_bottom, 'string' },
 
-    options = { config.options, 'table' },
     ['options.border'] = { config.options.border, 'string' },
+    ['options.indent_at_cursor'] = { config.options.indent_at_cursor, 'boolean' },
     ['options.try_as_border'] = { config.options.try_as_border, 'boolean' },
-
-    symbol = { config.symbol, 'string' },
   })
   return config
 end
@@ -1046,7 +1050,7 @@ end
 function H.animation_arithmetic_powers(power, type, opts)
   -- Sum of first `n_steps` natural numbers raised to `power`
   --stylua: ignore start
-  local base_total_duration = ({
+  local arith_power_sum = ({
     [0] = function(n_steps) return n_steps end,
     [1] = function(n_steps) return n_steps * (n_steps + 1) / 2 end,
     [2] = function(n_steps) return n_steps * (n_steps + 1) * (2 * n_steps + 1) / 6 end,
@@ -1057,9 +1061,18 @@ function H.animation_arithmetic_powers(power, type, opts)
   -- Function which computes common delta so that overall duration will have
   -- desired value (based on supplied `opts`)
   local duration_unit, duration_value = opts.unit, opts.duration
-  local make_delta = function(n_steps)
-    local d = duration_unit == 'total' and duration_value or (duration_value * n_steps)
-    return d / base_total_duration(n_steps)
+  local make_delta = function(n_steps, is_in_out)
+    local total_time = duration_unit == 'total' and duration_value or (duration_value * n_steps)
+    local total_parts
+    if is_in_out then
+      -- Examples:
+      -- - n_steps=5: 3^d, 2^d, 1^d, 2^d, 3^d
+      -- - n_steps=6: 3^d, 2^d, 1^d, 1^d, 2^d, 3^d
+      total_parts = 2 * arith_power_sum(math.ceil(0.5 * n_steps)) - (n_steps % 2 == 1 and 1 or 0)
+    else
+      total_parts = arith_power_sum(n_steps)
+    end
+    return total_time / total_parts
   end
 
   return ({
@@ -1070,15 +1083,14 @@ function H.animation_arithmetic_powers(power, type, opts)
       return make_delta(n) * s ^ power
     end,
     ['in-out'] = function(s, n)
-      local n_half = math.floor(0.5 * n + 0.5)
-      -- Possibly use `0.5` if `make_delta` ensures total duration time within
-      -- its input number steps
-      local coef = (duration_unit == 'total' and n_half > 1) and 0.5 or 1
-
-      if s <= n_half then
-        return coef * make_delta(n_half) * (n_half - s + 1) ^ power
+      local n_half = math.ceil(0.5 * n)
+      local s_halved
+      if n % 2 == 0 then
+        s_halved = s <= n_half and (n_half - s + 1) or (s - n_half)
+      else
+        s_halved = s < n_half and (n_half - s + 1) or (s - n_half + 1)
       end
-      return coef * make_delta(n - n_half) * (s - n_half) ^ power
+      return make_delta(n, true) * s_halved ^ power
     end,
   })[type]
 end
@@ -1098,9 +1110,36 @@ function H.animation_geometrical_powers(type, opts)
   -- Function which computes common delta so that overall duration will have
   -- desired value (based on supplied `opts`)
   local duration_unit, duration_value = opts.unit, opts.duration
-  local make_delta = function(n_steps)
-    local d = duration_unit == 'step' and (duration_value * n_steps) or duration_value
-    return math.pow(d + 1, 1 / n_steps)
+  local make_delta = function(n_steps, is_in_out)
+    local total_time = duration_unit == 'step' and (duration_value * n_steps) or duration_value
+    -- Exact solution to avoid possible (bad) approximation
+    if n_steps == 1 then
+      return total_time + 1
+    end
+    if is_in_out then
+      local n_half = math.ceil(0.5 * n_steps)
+      -- Example for n_steps=6:
+      -- Steps: (d-1)*d^2, (d-1)*d^1, (d-1)*d^0, (d-1)*d^0, (d-1)*d^1, (d-1)*d^2
+      -- Sum: 2 * (d - 1) * (d^0 + d^1 + d^2) = 2 * (d^3 - 1)
+      -- Solution: 2 * (d^3 - 1) = total_time =>
+      --   d = math.pow(0.5 * total_time + 1, 1 / 3)
+      --
+      -- Example for n_steps=5:
+      -- Steps: (d-1)*d^2, (d-1)*d^1, (d-1)*d^0, (d-1)*d^1, (d-1)*d^2
+      -- Sum: 2 * (d - 1) * (d^0 + d^1 + d^2) - (d - 1) = 2 * (d^3 - 1) - (d - 1)
+      -- Solution: 2 * (d^3 - 1) - (d - 1) = total_time =>
+      --   As there is no general explicit solution, use approximation =>
+      --   (Exact solution without `- (d-1)`):
+      --     d_0 = math.pow(0.5 * total_time + 1, 1 / 3);
+      --   (Correction by solving exactly withtou `- (d-1)` for
+      --   `total_time_corr = total_time + (d_0 - 1)`):
+      --     d_1 = math.pow(0.5 * total_time_corr + 1, 1 / 3)
+      if n_steps % 2 == 1 then
+        total_time = total_time + math.pow(0.5 * total_time + 1, 1 / n_half) - 1
+      end
+      return math.pow(0.5 * total_time + 1, 1 / n_half)
+    end
+    return math.pow(total_time + 1, 1 / n_steps)
   end
 
   return ({
@@ -1113,17 +1152,14 @@ function H.animation_geometrical_powers(type, opts)
       return (delta - 1) * delta ^ (s - 1)
     end,
     ['in-out'] = function(s, n)
-      local n_half = math.floor(0.5 * n + 0.5)
-      -- Possibly use `0.5` if `make_delta` ensures total duration time within
-      -- its input number steps
-      local coef = (duration_unit == 'total' and n_half > 1) and 0.5 or 1
-
-      if s <= n_half then
-        local delta = make_delta(n_half)
-        return coef * (delta - 1) * delta ^ (n_half - s)
+      local n_half, delta = math.ceil(0.5 * n), make_delta(n, true)
+      local s_halved
+      if n % 2 == 0 then
+        s_halved = s <= n_half and (n_half - s) or (s - n_half - 1)
+      else
+        s_halved = s < n_half and (n_half - s) or (s - n_half)
       end
-      local delta = make_delta(n - n_half)
-      return coef * (delta - 1) * delta ^ (s - n_half - 1)
+      return (delta - 1) * delta ^ s_halved
     end,
   })[type]
 end

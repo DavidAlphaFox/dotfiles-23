@@ -6,14 +6,22 @@ from typing import Callable, Any
 from newm.layout import Layout
 from newm.helper import BacklightManager, WobRunner, PaCtl
 
-from pywm import PYWM_MOD_LOGO
-
-
 logger = logging.getLogger(__name__)
 
 
+def execute(procs: tuple[str], start="", end=" &"):
+    for proc in procs:
+        proc = f"{start}{proc}{end}"
+        os.system(proc)
+
+
+def set_value(keyval, file):
+    var, val = keyval.split("=")
+    return f"sed -i 's/^{var}\=.*/{var}={val}/' {file}"
+
+
 def on_startup():
-    init_service = (
+    INIT_SERVICE = (
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "systemctl --user import-environment \
         DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
@@ -22,46 +30,61 @@ def on_startup():
         DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "wl-paste -t text --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
-        "thunar --daemon",
-        "waybar",
         "nm-applet --indicator",
+        "easyeffects --gapplication-service",
         "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
     )
-
-    for service in init_service:
-        service = f"{service} &"
-        os.system(service)
+    execute(INIT_SERVICE)
 
 
 def on_reconfigure():
     gnome_schema = "org.gnome.desktop.interface"
     gnome_peripheral = "org.gnome.desktop.peripherals"
+    gnome_preferences = "org.gnome.desktop.wm.preferences"
+    easyeffects = "com.github.wwmm.easyeffects"
     theme = "Dracula-slim"
-    wm_service_extra_config = (
+    icons = "candy-icons"
+    cursor = "Sweet-cursors"
+    font = "Lucida MAC 12"
+    gtk2 = "~/.gtkrc-2.0"
+    gtk3 = "~/.config/gtk-3.0/settings.ini"
+
+    GSETTINGS = (
+        f"gsettings set {gnome_preferences} button-layout :",
+        f"gsettings set {gnome_preferences} theme {theme}",
         f"gsettings set {gnome_schema} gtk-theme {theme}",
-        f"gsettings set org.gnome.desktop.wm.preferences theme {theme}",
-        "gsettings set org.gnome.desktop.wm.preferences button-layout :",
-        f"gsettings set {gnome_schema} icon-theme 'candy-icons'",
-        f"gsettings set {gnome_schema} cursor-theme 'Sweet-cursors'",
-        f"gsettings set {gnome_schema} cursor-size 40",
-        f"gsettings set {gnome_schema} font-name 'Lucida MAC 15'",
+        f"gsettings set {gnome_schema} icon-theme {icons}",
+        f"gsettings set {gnome_schema} cursor-theme {cursor}",
+        f"gsettings set {gnome_schema} cursor-size 30",
+        f"gsettings set {gnome_schema} font-name '{font}'",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
         f"gsettings set {gnome_peripheral}.keyboard delay 500",
         f"gsettings set {gnome_peripheral}.mouse natural-scroll true",
         f"gsettings set {gnome_peripheral}.mouse speed 0.0",
         f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
+        f"gsettings {easyeffects} process-all-inputs true",
+        f"gsettings {easyeffects} process-all-outputs true",
     )
 
-    for config in wm_service_extra_config:
-        config = f"{config} &"
-        os.system(config)
+    def options_gtk(file, c=""):
+        CONFIG_GTK = (
+            set_value(f"gtk-theme-name={c}{theme}{c}", file),
+            set_value(f"gtk-icon-theme-name={c}{icons}{c}", file),
+            set_value(f"gtk-font-name={c}{font}{c}", file),
+            set_value(f"gtk-cursor-theme-name={c}{cursor}{c}", file),
+        )
+        execute(CONFIG_GTK)
+
+    options_gtk(gtk3)
+    options_gtk(gtk2, '"')
+    execute(GSETTINGS)
 
 
 corner_radius = 0
 
 outputs = [
-    {"name": "eDP-1", "scale": 0.6},
-    {"name": "DP-2", "scale": 0.6, "pos_x": 0, "pos_y": 0},
+    {"name": "eDP-1", "scale": 0.7},
+    {"name": "DP-2", "scale": 0.7, "pos_x": 0, "pos_y": 0},
 ]
 
 pywm = {
@@ -82,14 +105,24 @@ pywm = {
 
 def rules(view):
     common_rules = {"float": True, "float_size": (750, 750), "float_pos": (0.5, 0.35)}
-    float_apps = ("pavucontrol", "blueman-manager")
-    blur_apps = ("kitty", "rofi", "waybar")
-    if view.app_id in float_apps:
+    float_app_ids = (
+        "pavucontrol",
+        "blueman-manager",
+        "com.github.gi_lom.dialect",
+    )
+    float_titles = ("Exportar la imagen",)
+    blur_apps = ("kitty", "rofi", "waybar", "Alacritty")
+    if view.title in float_titles:
+        return common_rules
+    if view.app_id in float_app_ids:
         return common_rules
     if view.app_id in blur_apps:
         return {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         return {"float": True, "float_pos": (0.5, 0.1)}
+    os.system(f"echo 'appid:{view.app_id}' >> ~/.config/newm/open_apps")
+    os.system(f"echo 'role:{view.role}' >> ~/.config/newm/open_apps")
+    os.system(f"echo 'title:{view.title}' >> ~/.config/newm/open_apps")
     return None
 
 
@@ -108,7 +141,11 @@ swipe_zoom = {
     "grid_ovr": 0.02,
 }
 
-mod = PYWM_MOD_LOGO
+mod = "L"  # o "A", "C", "1", "2", "3"
+super = mod + "-"
+altgr = "3-"
+ctrl = "C-"
+alt = "A-"
 background = {
     "path": os.environ["HOME"] + f"/.cache/space/space{randrange(1, 5)}.jpg",
     # "path": os.environ["HOME"] + "/Imágenes/wallpaper-color.png",
@@ -118,7 +155,6 @@ background = {
 
 anim_time = 0.25
 blend_time = 0.5
-term = "kitty"
 power_times = [1000, 1000, 2000]
 
 wob_runner = WobRunner("wob -a top -M 100")
@@ -136,6 +172,7 @@ def synchronous_update() -> None:
 
 
 pactl = PaCtl(0, wob_runner)
+term = "kitty"
 
 
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
@@ -144,43 +181,44 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     favorites = "~/.config/rofi/bin/apps"
     powermenu = "~/.config/rofi/bin/menu_powermenu"
     bookmarks = "~/.config/rofi/bin/bookmarks"
-    passman = "~/.config/rofi/bin/passman"
+    # passman = "~/.config/rofi/bin/passman"
 
     return [
-        ("M-h", lambda: layout.move(-1, 0)),
-        ("M-j", lambda: layout.move(0, 1)),
-        ("M-k", lambda: layout.move(0, -1)),
-        ("M-l", lambda: layout.move(1, 0)),
-        ("M-t", lambda: layout.move_in_stack(1)),
-        ("M-H", lambda: layout.move_focused_view(-1, 0)),
-        ("M-J", lambda: layout.move_focused_view(0, 1)),
-        ("M-K", lambda: layout.move_focused_view(0, -1)),
-        ("M-L", lambda: layout.move_focused_view(1, 0)),
-        ("M-C-h", lambda: layout.resize_focused_view(-1, 0)),
-        ("M-C-j", lambda: layout.resize_focused_view(0, 1)),
-        ("M-C-k", lambda: layout.resize_focused_view(0, -1)),
-        ("M-C-l", lambda: layout.resize_focused_view(1, 0)),
-        ("M-W", lambda: layout.change_focused_view_workspace()),
-        ("M-v", lambda: layout.toggle_focused_view_floating()),
-        ("M-w", lambda: layout.move_workspace()),
-        ("A-Tab", lambda: layout.move_next_view(active_workspace=False)),
-        ("M-u", lambda: layout.basic_scale(1)),
-        ("M-n", lambda: layout.basic_scale(-1)),
-        ("M-f", lambda: layout.toggle_fullscreen()),
-        ("M-p", lambda: layout.ensure_locked(dim=True)),
-        ("M-P", lambda: layout.terminate()),
-        ("M-e", lambda: layout.close_view()),
-        ("M-R", lambda: layout.update_config()),
-        # ("ModPress", lambda: layout.toggle_overview()),
-        ("ModPress", lambda: layout.toggle_overview(only_active_workspace=True)),
-        ("M-z", lambda: layout.swallow_focused_view()),
-        ("M-Return", lambda: os.system(f"{term} &")),
-        ("C-q", lambda: os.system(f"{powermenu} &")),
-        ("M-m", lambda: os.system("playerctl previous")),
-        ("M-i", lambda: os.system("playerctl next")),
-        ("M-ñ", lambda: os.system("playerctl play-pause &")),
-        ("M-c", lambda: os.system(f"{clipboard} &")),
-        ("M-b", lambda: os.system(f"{bookmarks} &")),
+        (super + "h", lambda: layout.move(-1, 0)),
+        (super + "j", lambda: layout.move(0, 1)),
+        (super + "k", lambda: layout.move(0, -1)),
+        (super + "l", lambda: layout.move(1, 0)),
+        (super + "t", lambda: layout.move_in_stack(1)),
+        (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
+        (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
+        (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
+        (super + ctrl + "l", lambda: layout.move_focused_view(1, 0)),
+        (super + alt + "h", lambda: layout.resize_focused_view(-1, 0)),
+        (super + alt + "j", lambda: layout.resize_focused_view(0, 1)),
+        (super + alt + "k", lambda: layout.resize_focused_view(0, -1)),
+        (super + alt + "l", lambda: layout.resize_focused_view(1, 0)),
+        # (super + "w", layout.change_focused_view_workspace),
+        (altgr + "space", layout.change_focused_view_workspace),
+        (altgr + "v", layout.toggle_focused_view_floating),
+        (altgr + "w", layout.move_workspace),
+        (altgr + "Tab", layout.move_next_view),
+        (super + "u", lambda: layout.basic_scale(1)),
+        (super + "n", lambda: layout.basic_scale(-1)),
+        (super + "f", layout.toggle_fullscreen),
+        (super + "p", lambda: layout.ensure_locked(dim=True)),
+        (super + "P", layout.terminate),
+        (altgr + "q", layout.close_view),
+        (altgr + "r", layout.update_config),
+        (super, lambda: layout.toggle_overview(only_active_workspace=True)),
+        (altgr + "z", layout.swallow_focused_view),
+        (super + "m", lambda: os.system("playerctl previous")),
+        (super + "i", lambda: os.system("playerctl next")),
+        (super + "ñ", lambda: os.system("playerctl play-pause &")),
+        (super + "Return", lambda: os.system(f"{term} &")),
+        (altgr + "e", lambda: os.system(f"{powermenu} &")),
+        (altgr + "c", lambda: os.system(f"{clipboard} &")),
+        (altgr + "b", lambda: os.system(f"{bookmarks} &")),
+        (altgr + "m", lambda: os.system(f"{favorites} &")),
         # ("A-l", lambda: os.system(f"{passman} &")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         (
@@ -191,18 +229,19 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
             "XF86MonBrightnessDown",
             lambda: backlight_manager.set(backlight_manager.get() - 0.05),
         ),
-        # ("XF86KbdBrightnessUp", lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
-        # ("XF86KbdBrightnessDown", lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
+        # (
+        # "XF86KbdBrightnessUp",
+        # lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
+        # (
+        # "XF86KbdBrightnessDown",
+        # lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
         ("XF86AudioRaiseVolume", lambda: pactl.volume_adj(5)),
         ("XF86AudioLowerVolume", lambda: pactl.volume_adj(-5)),
-        ("XF86AudioMute", lambda: pactl.mute()),
+        ("XF86AudioMute", pactl.mute),
         ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
         (
             "XF86Tools",
-            lambda: os.system(
-                "kitty nvim \
-                                        ~/.config/newm/config.py &"
-            ),
+            lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
         ),
         ("XF86Search", lambda: os.system("catapult --show &")),
         ("Menu", lambda: os.system("catapult --show &")),
@@ -211,19 +250,13 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
         (
-            "M-Print",
-            lambda: os.system(
-                'grim -g "$(slurp)" ~/screen-"$(date\
-            +%s)".png &'
-            ),
+            super + "Print",
+            lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date +%s)".png &'),
         ),
     ]
 
 
-bar = {
-    # 'cmd': 'waybar',
-    "enabled": False
-}
+bar = {"enabled": False}
 
 gestures = {
     "lp_freq": 120.0,
@@ -240,6 +273,7 @@ panels = {
         "h": 0.7,
         "corner_radius": 50,
     },
+    "bar": {"cmd": "waybar"},
 }
 
 grid = {"throw_ps": [2, 10]}
@@ -247,10 +281,10 @@ grid = {"throw_ps": [2, 10]}
 energy = {"idle_times": [60, 180], "idle_callback": backlight_manager.callback}
 
 focus = {
-    # 'color': '#A29DFF11',  # change color
-    # 'distance': 0,
-    # 'width': 0,
-    # 'animate_on_change': false,
-    # 'anim_time': 0
+    # "color": "#fb5c8e",  # change color
+    # # 'distance': 0,
+    # "width": 2,
+    # "animate_on_change": True,
+    # "anim_time": 0.25
     "enabled": False
 }

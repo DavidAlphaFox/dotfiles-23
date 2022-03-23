@@ -18,6 +18,7 @@ local sources = {
   b.formatting.black.with { extra_args = { "--fast" } },
   -- b.formatting.isort,
   b.formatting.stylua,
+  -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
   b.diagnostics.write_good,
@@ -26,6 +27,7 @@ local sources = {
   b.diagnostics.flake8,
   b.diagnostics.tsc,
   b.diagnostics.selene,
+  -- with_root_file(b.diagnostics.selene, "selene.toml"),
   with_diagnostics_code(b.diagnostics.shellcheck),
 
   -- code actions

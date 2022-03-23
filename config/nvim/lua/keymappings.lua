@@ -1,3 +1,9 @@
+-- | | _____ _   _ _ __ ___   __ _ _ __
+-- | |/ / _ \ | | | '_ ` _ \ / _` | '_ \
+-- |   <  __/ |_| | | | | | | (_| | |_) |
+-- |_|\_\___|\__, |_| |_| |_|\__,_| .__/
+--           |___/                |_|
+
 local utils = require "utils"
 local opts = { noremap = true, silent = false }
 
@@ -5,14 +11,18 @@ utils.map("n", "Y", "yg$")
 utils.map("n", "k", "gk")
 utils.map("n", "j", "gj")
 utils.map({ "n", "v" }, "ñ", ":", opts)
+-- Search in the current buffer
 utils.map("n", "ñs", "/", opts)
 utils.map("n", "<leader>s", "?", opts)
+-- Search and  replace in the current buffer
 utils.map({ "n", "v" }, "ñr", ":%s/", opts)
 utils.map("n", "<leader>r", ":s/", opts)
+-- Set ; to end line
+utils.map("n", ";", "<esc>mzA;<esc>`z")
 
 utils.map("n", "x", '"_x')
 
--- Search and replace
+-- Search and replace word
 utils.map("n", "ñrw", [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
 utils.map("n", "<Leader>rw", [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
 utils.map("n", "<Leader>rp", [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
@@ -27,18 +37,17 @@ utils.map("n", "th", "gT")
 utils.map("n", "tn", ":tabnew<CR>")
 utils.map("n", "to", ":tabonly<CR>")
 utils.map("n", "td", ":tabclose<CR>")
-utils.map("n", "tm", ":tabmove<CR>")
+utils.map("n", "ti", ":tabmove +1<CR>")
+utils.map("n", "tm", ":tabmove -1<CR>")
 for i = 9, 1, -1 do
   local kmap = string.format("<leader>%d", i)
   local command = string.format("%dgt", i)
   utils.map("n", kmap, command)
+  utils.map("n", string.format("t%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i))
 end
 utils.map("n", "ñd", ":bd<CR>")
 utils.map("n", "tk", ":bnext<CR>")
 utils.map("n", "tj", ":bprev<CR>")
-
--- Terminal open
--- utils.map('n', '<leader>ñ', ':split<CR>:ter<CR>:resize 8<CR>')
 
 -- Move between splits
 -- Better window navigation
@@ -48,21 +57,16 @@ utils.map("n", "<Leader>j", ":wincmd j<CR>")
 utils.map("n", "<Leader>h", ":wincmd h<CR>")
 
 -- Resize pane
-utils.map("n", "<leader>+", ":vertical resize +5<CR>")
-utils.map("n", "<leader>-", ":vertical resize -5<CR>")
-utils.map("n", "<leader><leader>+", ":resize +5<CR>")
-utils.map("n", "<leader><leader>-", ":resize -5<CR>")
-
-utils.map("n", ",h", ":vertical resize +5<CR>")
-utils.map("n", ",l", ":vertical resize -5<CR>")
-utils.map("n", ",j", ":resize +5<CR>")
-utils.map("n", ",k", ":resize -5<CR>")
+utils.map("n", "ñh", ":vertical resize +5<CR>")
+utils.map("n", "nl", ":vertical resize -5<CR>")
+utils.map("n", "ñk", ":resize +5<CR>")
+utils.map("n", "nj", ":resize -5<CR>")
 
 --Move line to up or down
 utils.map("n", "J", ":m .+1<CR>==", opts)
 utils.map("n", "K", ":m .-2<CR>==", opts)
-utils.map("i", "J", "<Esc>:m .+1<CR>==gi", opts)
-utils.map("i", "K", "<Esc>:m .-2<CR>==gi", opts)
+-- utils.map("i", "J", "<Esc>:m .+1<CR>==gi", opts)
+-- utils.map("i", "K", "<Esc>:m .-2<CR>==gi", opts)
 utils.map("v", "J", ":m '>+1<CR>gv=gv", opts)
 utils.map("v", "K", ":m '<-2<CR>gv=gv", opts)
 
@@ -73,8 +77,6 @@ utils.map("t", "<C-v><Esc>", "<Esc>")
 
 --Delete search result
 utils.map("n", "<leader>c", ':let @/=""<cr>')
-utils.map("n", "n", "nzzzv", opts)
-utils.map("n", "N", "Nzzzv", opts)
 -- utils.map('n', '<bs>', '<c-^>`”zz')
 utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
 
@@ -107,6 +109,7 @@ end)
 utils.map("n", "ñt", function()
   require("harpoon.term").gotoTerminal(10)
 end)
+
 utils.map("n", "<leader>e", ":RunCode<CR>", opts)
 utils.map("n", "<Leader>fo", ":TodoTelescope<CR>")
 
