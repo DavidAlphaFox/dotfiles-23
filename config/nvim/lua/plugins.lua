@@ -81,7 +81,6 @@ function M.setup()
       end,
       requires = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "windwp/nvim-ts-autotag",
         "JoosepAlviste/nvim-ts-context-commentstring",
         "yioneko/nvim-yati",
         "p00f/nvim-ts-rainbow",
@@ -102,7 +101,6 @@ function M.setup()
       "RRethy/nvim-treesitter-endwise",
       wants = "nvim-treesitter",
       event = "InsertEnter",
-      disable = false,
     }
     -- Auto pairs
     -- use {
@@ -199,12 +197,9 @@ function M.setup()
     use { "chaoren/vim-wordmotion" }
 
     use {
-      "ggandor/lightspeed.nvim",
-      keys = { "s", "S", "f", "F", "t", "T" },
+      "ggandor/leap.nvim",
       config = function()
-        require("lightspeed").setup {
-          limit_ft_matches = 30,
-        }
+        require("leap").set_default_keymaps()
       end,
     }
 
@@ -265,22 +260,44 @@ function M.setup()
     use "ThePrimeagen/harpoon"
     use {
       "vuki656/package-info.nvim",
-      requires = "MunifTanjim/nui.nvim",
+      opt = true,
+      requires = {
+        "MunifTanjim/nui.nvim",
+      },
+      wants = { "nui.nvim" },
+      module = { "package-info" },
+      ft = { "json" },
       config = function()
         require("package-info").setup { package_manager = "npm" }
       end,
     }
+
     use { "kshenoy/vim-signature", config = [[require('config.signature')]] }
 
     -- General Plugins
     use "jeffkreeftmeijer/vim-numbertoggle"
 
     -- LSP
+
+    use {
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+      event = "VimEnter",
+      opt = true,
+      run = ":COQdeps",
+      config = function()
+        require("config.coq").setup()
+      end,
+      requires = {
+        { "ms-jpq/coq.artifacts", branch = "artifacts" },
+        { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+      },
+    }
+
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      event = "VimEnter",
-      -- event = { "BufReadPre" },
+      event = { "VimEnter" },
       wants = {
         "coq_nvim",
         "lua-dev.nvim",
@@ -298,21 +315,6 @@ function M.setup()
             require("fidget").setup()
           end,
         },
-      },
-    }
-
-    use {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      event = "VimEnter",
-      opt = true,
-      run = ":COQdeps",
-      config = function()
-        require("config.coq").setup()
-      end,
-      requires = {
-        { "ms-jpq/coq.artifacts", branch = "artifacts" },
-        { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
     }
 

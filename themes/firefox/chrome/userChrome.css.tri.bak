@@ -45,11 +45,3 @@
   z-index: 2;
   display: inline;
 }
-
-statuspanel[type="overLink"],
-#statuspanel[type="overLink"] {
-  top: 2em;
-  z-index: 2;
-  right: 0;
-  display: inline;
-}

@@ -1,0 +1,8 @@
+@import "mac/userChrome.css";
+#titlebar {
+  visibility: collapse !important;
+}
+
+#sidebar-header {
+  visibility: collapse !important;
+}

@@ -5,6 +5,8 @@ from random import randrange
 from typing import Callable, Any
 from newm.layout import Layout
 from newm.helper import BacklightManager, WobRunner, PaCtl
+import pwd
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -58,7 +60,7 @@ def on_reconfigure():
         f"gsettings set {gnome_schema} cursor-size 30",
         f"gsettings set {gnome_schema} font-name '{font}'",
         f"gsettings set {gnome_peripheral}.keyboard repeat-interval 30",
-        f"gsettings set {gnome_peripheral}.keyboard delay 500",
+        f"gsettings set {gnome_peripheral}.keyboard delay 250",
         f"gsettings set {gnome_peripheral}.mouse natural-scroll true",
         f"gsettings set {gnome_peripheral}.mouse speed 0.0",
         f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
@@ -181,7 +183,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     favorites = "~/.config/rofi/bin/apps"
     powermenu = "~/.config/rofi/bin/menu_powermenu"
     bookmarks = "~/.config/rofi/bin/bookmarks"
-    # passman = "~/.config/rofi/bin/passman"
+    passman = "~/.config/rofi/bin/passman"
 
     return [
         (super + "h", lambda: layout.move(-1, 0)),
@@ -189,37 +191,44 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "k", lambda: layout.move(0, -1)),
         (super + "l", lambda: layout.move(1, 0)),
         (super + "t", lambda: layout.move_in_stack(1)),
-        (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
-        (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
-        (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
-        (super + ctrl + "l", lambda: layout.move_focused_view(1, 0)),
-        (super + alt + "h", lambda: layout.resize_focused_view(-1, 0)),
-        (super + alt + "j", lambda: layout.resize_focused_view(0, 1)),
-        (super + alt + "k", lambda: layout.resize_focused_view(0, -1)),
-        (super + alt + "l", lambda: layout.resize_focused_view(1, 0)),
+        (super + alt + "h", lambda: layout.move_focused_view(-1, 0)),
+        (super + alt + "j", lambda: layout.move_focused_view(0, 1)),
+        (super + alt + "k", lambda: layout.move_focused_view(0, -1)),
+        (super + alt + "l", lambda: layout.move_focused_view(1, 0)),
+        (super + ctrl + "h", lambda: layout.resize_focused_view(-1, 0)),
+        (super + ctrl + "j", lambda: layout.resize_focused_view(0, 1)),
+        (super + ctrl + "k", lambda: layout.resize_focused_view(0, -1)),
+        (super + ctrl + "l", lambda: layout.resize_focused_view(1, 0)),
         # (super + "w", layout.change_focused_view_workspace),
-        (altgr + "space", layout.change_focused_view_workspace),
+        (altgr + "space w", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
         (altgr + "w", layout.move_workspace),
         (altgr + "Tab", layout.move_next_view),
+        (alt + "Tab", lambda: layout.move_next_view(active_workspace=False)),
         (super + "u", lambda: layout.basic_scale(1)),
         (super + "n", lambda: layout.basic_scale(-1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
         (super + "P", layout.terminate),
-        (altgr + "q", layout.close_view),
+        (altgr + "k", layout.close_view),
         (altgr + "r", layout.update_config),
         (super, lambda: layout.toggle_overview(only_active_workspace=True)),
         (altgr + "z", layout.swallow_focused_view),
         (super + "m", lambda: os.system("playerctl previous")),
         (super + "i", lambda: os.system("playerctl next")),
-        (super + "ñ", lambda: os.system("playerctl play-pause &")),
+        (super + "ntilde", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
         (altgr + "e", lambda: os.system(f"{powermenu} &")),
         (altgr + "c", lambda: os.system(f"{clipboard} &")),
         (altgr + "b", lambda: os.system(f"{bookmarks} &")),
         (altgr + "m", lambda: os.system(f"{favorites} &")),
         # ("A-l", lambda: os.system(f"{passman} &")),
+        (alt + "P", lambda: os.system("pavucontrol &")),
+        (altgr + "space t", lambda: os.system("dialect &")),
+        (altgr + alt + "f", lambda: os.system("catapult --show &")),
+        (alt + "space l", lambda: os.system(f"{menu} &")),
+        (alt + "space p", lambda: os.system(f"{passman} &")),
+        (altgr + "space f", lambda: os.system(f"{favorites} &")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         (
             "XF86MonBrightnessUp",
@@ -244,9 +253,9 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
             lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
         ),
         ("XF86Search", lambda: os.system("catapult --show &")),
-        ("Menu", lambda: os.system("catapult --show &")),
         ("XF86Explorer", lambda: os.system(f"{menu} &")),
-        ("Pause", lambda: os.system(f"{menu} &")),
+        ("Pause", lambda: os.system(f"{powermenu} &")),
+        ("Scroll_Lock", lambda: os.system(f"{menu} &")),
         ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
         (
@@ -255,8 +264,6 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ),
     ]
 
-
-bar = {"enabled": False}
 
 gestures = {
     "lp_freq": 120.0,
@@ -273,7 +280,11 @@ panels = {
         "h": 0.7,
         "corner_radius": 50,
     },
-    "bar": {"cmd": "waybar"},
+    "top_bar": {
+        "cmd": "waybar",
+        "visible_normal": False,
+        "visible_fullscreen": True,
+    },
 }
 
 grid = {"throw_ps": [2, 10]}

@@ -1,10 +1,10 @@
 {
     "layer": "bottom",
-    "position": "bottom",
-    "height": 20,
+    "position": "top",
+    "height": 30,
     "modules-right": ["cpu", "memory", "temperature", "network", "tray", "pulseaudio", "backlight", "battery", "clock"],
     "tray": {
-        "icon-size": 16,
+        "icon-size": 18,
         "spacing": 10
     },
     "clock": {
@@ -39,7 +39,7 @@
     },
     "network": {
       "format": "{ifname}",
-      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-wifi": "{essid} ({signalStrength}%)",
       "format-ethernet": "{ipaddr}/{cidr} ",
       "format-disconnected": "", //An empty format will hide the module.
       "tooltip-format": "{ifname} via {gwaddr} ",
@@ -52,6 +52,7 @@
         "format": "{volume}% 墳",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "婢",
+        "format-source-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",

@@ -24,22 +24,22 @@ def get_nw():
 
 
 bar = {
-    'font': 'JetBrainsMono Nerd Font',
-    'font_size': 15,
-    'height': 20,
-    'top_texts': lambda: [
+    "font": "JetBrainsMono Nerd Font",
+    "font_size": 15,
+    "height": 20,
+    "top_texts": lambda: [
         pwd.getpwuid(os.getuid())[0],
         f" {psutil.cpu_percent(interval=1)}",
         f" {psutil.virtual_memory().percent}%",
         f"/ {psutil.disk_usage('/').percent}%\
-            /home {psutil.disk_usage('/home').percent}%"
+            /home {psutil.disk_usage('/home').percent}%",
     ],
-    'bottom_texts': lambda: [
+    "bottom_texts": lambda: [
         # f'{psutil.sensors_battery().percent} \
         # {"↑" if psutil.sensors_battery().power_plugged else "↓"}',
         f' {check_output(brightness, shell=True).decode("utf-8")[:-2]}',
         f'墳 {check_output(volume, shell=True).decode("utf-8")[:-1]}',
         get_nw(),
-        f' {time.strftime("%c")}'
-    ]
+        f' {time.strftime("%c")}',
+    ],
 }

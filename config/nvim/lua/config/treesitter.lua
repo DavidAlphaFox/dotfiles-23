@@ -77,11 +77,9 @@ function M.setup()
       },
     },
 
-    -- autotag
-    autotag = {
+    endwise = {
       enable = true,
     },
-
     -- context_commentstring
     context_commentstring = {
       enable = true,
