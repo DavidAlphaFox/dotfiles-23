@@ -1,1 +1,1 @@
-./configV3.py
+configV3.py

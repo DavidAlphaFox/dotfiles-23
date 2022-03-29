@@ -1,7 +1,5 @@
 vim.g.mapleader = " "
 
--- require "impatient"
-
 --
 -- Disable builtin plugins
 --

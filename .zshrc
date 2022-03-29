@@ -157,9 +157,7 @@ alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc
 alias dor='doff && don'
 # HACK: Config alias
 alias alacric="vim ~/.config/alacritty/alacritty.yml"
-# alias swayc="vim ~/.config/sway/config"
-# alias i3c="vim ~/.config/i3/config"
-# alias i3barc="~/.config/i3status/config"
+alias swayc="vim ~/.config/sway/config"
 alias newmc="vim ~/.config/newm/config.py"
 alias zshc="vim ~/.zshrc"
 alias tmuxc="vim ~/.tmux.conf"

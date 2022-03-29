@@ -1,54 +1,56 @@
 # vim:fileencoding=utf-8:ft=conf
-set selection-clipboard clipboard
-set smooth-scroll "true"
 set guioptions none
-set font "JetBrainsMono Nerd Font Mono Bold 14"
-
-#  #colorscheme
-set notification-error-bg       "#181b28" # bg
-set notification-error-fg       "#fb5c8e" # bright:red
-set notification-warning-bg     "#181b28" # bg
-set notification-warning-fg     "#f47d49" # bright:yellow
-set notification-bg             "#181b28" # bg
-set notification-fg             "#84c49b" # bright:green
-
-set completion-bg               "#161925" # bg2
-set completion-fg               "#c3c7d1" # fg
-set completion-group-bg         "#161925" # bg1
-set completion-group-fg         "#edabd2" # gray
-set completion-highlight-bg     "#161925" # bright:blue
-set completion-highlight-fg     "#93c5e6" # bg2
-
-# Define the color in index mode
-set index-bg                    "#161925" # bg2
-set index-fg                    "#c3c7d1" # fg
-set index-active-bg             "#a29dff" # bright:blue
-set index-active-fg             "#161925" # bg2
-
-set inputbar-bg                 "#1a1d2b" # bg
-set inputbar-fg                 "#c3c7d1" # fg
-
-set statusbar-bg                "#161925" # bg2
-set statusbar-fg                "#c3c7d1" # fg
-
-set highlight-color             "#f6e08b" # bright:yellow
-set highlight-active-color      "#565393" # bright:orange
-
-set default-bg                  "#181b28" # bg
-set default-fg                  "#c3c7d1" # fg
-set render-loading              true
-set render-loading-bg           "#181b28" # bg
-set render-loading-fg           "#c3c7d1" # fg
-
-# Recolor book content's color
-set recolor-lightcolor          "#181b28" # bg
-set recolor-darkcolor           "#c3c7d1" # fg
-set recolor                     "true"
-# set recolor-keephue             true      # keep original color
-set adjust-open "width"
-
+set selection-clipboard "clipboard"
 set window-title-home-tilde "true"
+set window-title-basename "true"
 set statusbar-basename "true"
 
-set window-height 760
-set window-width 794
+set font "JetBrainsMono Nerd Font Mono Bold 14"
+
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "#f8f8f2" # Foreground
+set notification-warning-bg     "#ffb86c" # Orange
+set notification-warning-fg     "#bd93f9" # Selection
+set notification-bg             "#1e1f29" # Background
+set notification-fg             "#f8f8f2" # Foreground
+
+set completion-bg               "#1e1f29" # Background
+set completion-fg               "#6272a4" # Comment
+set completion-group-bg         "#1e1f29" # Background
+set completion-group-fg         "#6272a4" # Comment
+set completion-highlight-bg     "#bd93f9" # Selection
+set completion-highlight-fg     "#f8f8f2" # Foreground
+
+set index-bg                    "#1e1f29" # Background
+set index-fg                    "#f8f8f2" # Foreground
+set index-active-bg             "#bd93f9" # Current Line
+set index-active-fg             "#f8f8f2" # Foreground
+
+set inputbar-bg                 "#1e1f29" # Background
+set inputbar-fg                 "#f8f8f2" # Foreground
+set statusbar-bg                "#1e1f29" # Background
+set statusbar-fg                "#f8f8f2" # Foreground
+
+set highlight-color             "#ffb86c" # Orange
+set highlight-active-color      "#ff79c6" # Pink
+
+set default-bg                  "#1e1f29" # Background
+set default-fg                  "#f8f8f2" # Foreground
+
+set render-loading              true
+set render-loading-fg           "#1e1f29" # Background
+set render-loading-bg           "#f8f8f2" # Foreground
+
+#
+# Recolor mode settings
+#
+
+set recolor-lightcolor          "#1e1f29" # Background
+set recolor-darkcolor           "#f8f8f2" # Foreground
+
+#
+# Startup options
+#
+
+set adjust-open width
+set recolor true

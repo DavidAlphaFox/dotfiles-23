@@ -33,18 +33,14 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec ydotoold
-exec sworkstyle &> /tmp/sworkstyle.log
 exec wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 4500
 exec wl-paste -t text --watch clipman store
 exec nm-applet --indicator
 exec thunar --daemon
-exec systemctl --user start libinput-gestures.service
 
 ### Output configuration
 #
 # Wallpaper
-output * bg ~/.cache/wallpaper.jpg fill
 #
 
 # Monitors configuration:

@@ -1,6 +1,6 @@
 {
     "layer": "bottom",
-    "position": "top",
+    "position": "bottom",
     "height": 30,
     "modules-right": ["cpu", "memory", "temperature", "network", "tray", "pulseaudio", "backlight", "battery", "clock"],
     "tray": {

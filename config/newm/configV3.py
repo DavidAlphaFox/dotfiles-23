@@ -5,8 +5,6 @@ from random import randrange
 from typing import Callable, Any
 from newm.layout import Layout
 from newm.helper import BacklightManager, WobRunner, PaCtl
-import pwd
-import time
 
 logger = logging.getLogger(__name__)
 
@@ -122,9 +120,6 @@ def rules(view):
         return {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         return {"float": True, "float_pos": (0.5, 0.1)}
-    os.system(f"echo 'appid:{view.app_id}' >> ~/.config/newm/open_apps")
-    os.system(f"echo 'role:{view.role}' >> ~/.config/newm/open_apps")
-    os.system(f"echo 'title:{view.title}' >> ~/.config/newm/open_apps")
     return None
 
 
@@ -280,10 +275,10 @@ panels = {
         "h": 0.7,
         "corner_radius": 50,
     },
-    "top_bar": {
+    "bar": {
         "cmd": "waybar",
         "visible_normal": False,
-        "visible_fullscreen": True,
+        "visible_fullscreen": False,
     },
 }
 
