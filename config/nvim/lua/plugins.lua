@@ -82,6 +82,7 @@ function M.setup()
       requires = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "JoosepAlviste/nvim-ts-context-commentstring",
+        "RRethy/nvim-treesitter-endwise",
         "yioneko/nvim-yati",
         "p00f/nvim-ts-rainbow",
       },
@@ -97,11 +98,6 @@ function M.setup()
       end,
     }
 
-    use {
-      "RRethy/nvim-treesitter-endwise",
-      wants = "nvim-treesitter",
-      event = "InsertEnter",
-    }
     -- Auto pairs
     -- use {
     -- 	"windwp/nvim-autopairs",
@@ -130,7 +126,6 @@ function M.setup()
       "yamatsum/nvim-nonicons",
       requires = { "kyazdani42/nvim-web-devicons" },
     }
-    use "ryanoasis/vim-devicons"
 
     -- Color
     use {

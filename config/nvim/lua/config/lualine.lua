@@ -3,6 +3,7 @@
 -- Credit: glepnir
 
 local lualine = require "lualine"
+local gps = require "nvim-gps"
 
 -- Color table for highlights
 -- stylua: ignore
@@ -178,6 +179,13 @@ ins_left {
   end,
   icon = " LSP:",
   color = { fg = "#ffffff", gui = "bold" },
+}
+
+-- Gps
+ins_right {
+  gps.get_location,
+  cond = gps.is_available,
+  color = { fg = colors.orange, gui = "bold" },
 }
 
 -- Add components to right sections

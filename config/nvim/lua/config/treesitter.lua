@@ -80,6 +80,10 @@ function M.setup()
     endwise = {
       enable = true,
     },
+    -- autotag
+    autotag = {
+      enable = true,
+    },
     -- context_commentstring
     context_commentstring = {
       enable = true,
