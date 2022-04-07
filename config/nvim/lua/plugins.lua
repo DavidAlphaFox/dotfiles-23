@@ -46,10 +46,14 @@ function M.setup()
     use "nathom/filetype.nvim"
 
     use {
-      "karb94/neoscroll.nvim",
-      event = "BufReadPre",
+      "declancm/cinnamon.nvim",
       config = function()
-        require("config.neoscroll").setup()
+        require("cinnamon").setup {
+          default_keymaps = true, -- Enable default keymaps.
+          extra_keymaps = true, -- Enable extra keymaps.
+          extended_keymaps = true, -- Enable extended keymaps.
+          centered = true, -- Keep cursor centered in window when using window scrolling (arg2):
+        }
       end,
     }
 
@@ -119,7 +123,10 @@ function M.setup()
     }
 
     -- Syntax
-    use "elixir-editors/vim-elixir"
+    use {
+      "elixir-editors/vim-elixir",
+      ft = { "elixir" },
+    }
 
     -- Icons
     use {

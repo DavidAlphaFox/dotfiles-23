@@ -8,46 +8,50 @@ local utils = require "utils"
 local opts = { noremap = true, silent = false }
 
 utils.map("n", "Y", "yg$")
-utils.map("n", "k", "gk")
-utils.map("n", "j", "gj")
-utils.map({ "n", "v" }, "ñ", ":", opts)
+-- utils.map("n", "k", "gk")
+-- utils.map("n", "j", "gj")
+utils.map({ "n", "v" }, "ññ", ":", opts)
 -- Search in the current buffer
 utils.map("n", "ñs", "/", opts)
 utils.map("n", "<leader>s", "?", opts)
 -- Search and  replace in the current buffer
-utils.map({ "n", "v" }, "ñr", ":%s/", opts)
-utils.map("n", "<leader>r", ":s/", opts)
+utils.map("n", "ñr", ":%s/", opts)
+utils.map({ "n", "v" }, "<leader>r", ":s/", opts)
 -- Set ; to end line
 utils.map("n", ";", "<esc>mzA;<esc>`z")
 
 utils.map("n", "x", '"_x')
+utils.map({ "n", "x" }, "c", '"_c')
+utils.map("n", "C", '"_C')
+
+-- Spell checker toggle
+utils.map("n", "<F2>", ":setlocal spell! spelllang=es<CR>")
+utils.map("n", "<F3>", ":setlocal spell! spelllang=en_us<CR>")
 
 -- Search and replace word
-utils.map("n", "ñrw", [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
-utils.map("n", "<Leader>rw", [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
-utils.map("n", "<Leader>rp", [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
+utils.map("n", "ñcw", [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
+utils.map("n", "cn", [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
+utils.map("n", "cN", [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
 
 -- sudo
 vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
 
 -- Tab mappings
 utils.map("n", "<leader>t", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
-utils.map("n", "tl", "gt")
-utils.map("n", "th", "gT")
-utils.map("n", "tn", ":tabnew<CR>")
-utils.map("n", "to", ":tabonly<CR>")
-utils.map("n", "td", ":tabclose<CR>")
-utils.map("n", "ti", ":tabmove +1<CR>")
-utils.map("n", "tm", ":tabmove -1<CR>")
+utils.map("n", "ñtn", ":tabnew<CR>")
+utils.map("n", "ñto", ":tabonly<CR>")
+utils.map("n", "ñtd", ":tabclose<CR>")
+utils.map("n", "ñti", ":tabmove +1<CR>")
+utils.map("n", "ñtm", ":tabmove -1<CR>")
 for i = 9, 1, -1 do
   local kmap = string.format("<leader>%d", i)
   local command = string.format("%dgt", i)
   utils.map("n", kmap, command)
-  utils.map("n", string.format("t%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i))
+  utils.map("n", string.format("ñt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i))
 end
 utils.map("n", "ñd", ":bd<CR>")
-utils.map("n", "tk", ":bnext<CR>")
-utils.map("n", "tj", ":bprev<CR>")
+utils.map("n", "ñk", ":bnext<CR>")
+utils.map("n", "ñj", ":bprev<CR>")
 
 -- Move between splits
 -- Better window navigation
@@ -82,10 +86,8 @@ utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) 
 
 utils.map("n", "<leader>a", "=ip", opts)
 utils.map("n", "<leader>i", "=G", opts)
-utils.map("n", "<Tab>", ">>", opts)
-utils.map("n", "<S-Tab>", "<<", opts)
-utils.map("v", "<Tab>", ">", opts)
-utils.map("v", "<S-Tab>", "<", opts)
+utils.map("x", ">", ">gv", opts)
+utils.map("x", "<", "<gv", opts)
 
 -- Motions
 utils.map("n", "ç", "%")
@@ -93,20 +95,15 @@ utils.map("n", "ç", "%")
 -- PLUGINS
 -- harpoon
 utils.map("n", "ñm", require("harpoon.mark").add_file)
-utils.map("n", "ñ ", require("harpoon.ui").toggle_quick_menu)
+utils.map("n", "ñg", require("harpoon.ui").toggle_quick_menu)
 utils.map("n", "ñ<Tab>", require("harpoon.ui").nav_next)
-utils.map("n", " ñ<Tab>", require("harpoon.ui").nav_prev)
-for i = 9, 1, -1 do
-  utils.map("n", string.format("ñ%d", i), function()
-    require("harpoon.ui").nav_file(i)
-  end)
-end
+utils.map("n", "ñ <Tab>", require("harpoon.ui").nav_prev)
 
 utils.map("n", "ñ.", function()
   require("harpoon.term").sendCommand(10, require("code_runner").get_filetype_command() .. "\n")
 end)
 
-utils.map("n", "ñt", function()
+utils.map("n", "ñ ", function()
   require("harpoon.term").gotoTerminal(10)
 end)
 

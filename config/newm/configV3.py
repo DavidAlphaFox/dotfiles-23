@@ -21,18 +21,20 @@ def set_value(keyval, file):
 
 
 def on_startup():
+    # "hash dbus-update-activation-environment 2>/dev/null && \
+    # dbus-update-activation-environment --systemd --all",
+
     INIT_SERVICE = (
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "systemctl --user import-environment \
         DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-        "hash dbus-update-activation-environment 2>/dev/null && \
-        dbus-update-activation-environment --systemd \
-        DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+        "dbus-update-activation-environment --all",
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wl-paste -t text --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "easyeffects --gapplication-service",
         "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
+        "fnott",
     )
     execute(INIT_SERVICE)
 
@@ -90,7 +92,7 @@ outputs = [
 pywm = {
     "xkb_model": "PLACEHOLDER_xkb_model",
     "xkb_layout": "es",
-    "xkb_options": "caps:swapescape",
+    # "xkb_options": "caps:swapescape",
     "focus_follows_mouse": True,
     "xcursor_theme": "Sweet-cursors",
     "xcursor_size": 40,
@@ -251,7 +253,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86Explorer", lambda: os.system(f"{menu} &")),
         ("Pause", lambda: os.system(f"{powermenu} &")),
         ("Scroll_Lock", lambda: os.system(f"{menu} &")),
-        ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
+        # ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
         (
             super + "Print",

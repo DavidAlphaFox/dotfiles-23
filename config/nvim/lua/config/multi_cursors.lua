@@ -5,6 +5,6 @@ vim.g.VM_maps = {
   ["Select Cursor Up"] = "<c-k>",
   ["Select Cursor Down"] = "<c-j>",
   ["Find Under"] = "ñn",
-  ["Find Subword Under"] = "ñn",
+  ["Find Subword Under"] = "ñu",
   ["Visual Find"] = "çf",
 }

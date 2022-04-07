@@ -1,37 +1,39 @@
 local set = vim.opt
 
---  Edition
-set.scrolloff = 10
+--  Basic config
+set.scrolloff = 999
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true
 set.splitbelow = true
-set.wrap = true
-set.linebreak = true
-set.wrapscan = true
-set.ttyfast = true
-set.lazyredraw = true
 set.icm = "nosplit"
+set.virtualedit = "onemore"
+set.undofile = false
+set.undolevels = 1000
+set.backspace = { "indent", "eol", "start", "nostop" } -- Better backspace.
+set.inccommand = "split"
+
+-- speed up
+set.lazyredraw = false
+
+-- Tricks
+set.hidden = false
 
 -- Format options
 set.encoding = "utf-8"
 set.fileformat = "unix"
 set.formatoptions = "tcqrn1"
-set.spelllang = "es"
--- set.completeopt = "menuone,noselect"
-set.completeopt = "menuone,noselect,menu"
 set.errorformat:append "%f|%l col %c|%m"
 set.wildignore:append { "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar" }
 -- Better search
 set.path:remove "/usr/include"
 set.path:append "**"
 
-set.undofile = false
-set.undolevels = 1000
-
 -- Spaces & Tabsset
 set.expandtab = true
-set.shiftround = true
+set.autoindent = true
+set.cindent = true
+-- set.shiftround = true
 set.shiftwidth = 2
 set.softtabstop = 2
 set.tabstop = 2
@@ -41,22 +43,28 @@ set.tabstop = 2
 -- set.smarttab = true
 -- set.copyindent = true
 -- set.joinspaces = false
-set.textwidth = 79
+
+-- Text line
+set.wrap = true
+set.linebreak = true
+set.textwidth = 80
 
 -- UI Config
-set.virtualedit = "onemore"
-set.pumheight = 10
-set.showmode = false
+set.shortmess = set.shortmess - "S"
+-- set.completeopt = "menuone,noselect"
+set.completeopt = "menuone,noselect,menu"
+set.pumheight = 12
+set.showmode = true
 set.title = true
-set.hidden = false
 set.number = true
 set.relativenumber = true
 set.showcmd = true
--- set.cursorline = false
-set.cursorcolumn = false
+set.cursorline = true
+set.cursorcolumn = true
 set.wildmenu = true
-set.showmatch = true
-set.errorbells = false
+set.wildmode = "longest:full,full"
+set.showmatch = false
+set.errorbells = true
 set.list = false
 set.signcolumn = "yes"
 set.listchars = {
@@ -69,6 +77,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 2
+set.cmdheight = 2
 
 -- TermGui
 if vim.fn.has "termguicolors" == 1 then
@@ -79,7 +88,7 @@ if vim.fn.has "termguicolors" == 1 then
   set.termguicolors = true
 end
 
--- Searchset incsearch
+-- Search
 set.hlsearch = true
 set.incsearch = true
 set.ignorecase = true
@@ -95,10 +104,8 @@ set.foldenable = false
 -- set.foldnestmax=10
 -- set.foldmethod = 'indent'
 
---Backup
+-- Backup
 set.swapfile = false
 set.backup = false
 set.writebackup = false
 set.backupcopy = "yes"
-
--- Autocms

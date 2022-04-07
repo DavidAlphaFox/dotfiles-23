@@ -37,6 +37,5 @@ end
 
 require "config"
 require("plugins").setup()
-require "keymappings"
 require "debug"
 vim.opt.showtabline = 0

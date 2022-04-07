@@ -1,0 +1,17 @@
+
+# Place this file at: /etc/systemd/system/kbct.service
+#
+# To run:
+#   systemctl enable kbct
+#   systemctl start kbct
+#
+[Unit]
+Description=Keyboard keycode mapping daemon supporting layered configuration
+
+[Service]
+Type=simple
+ExecStart=kbct remap --config /etc/kbct/config.yml
+Restart=always
+
+[Install]
+WantedBy=default.target

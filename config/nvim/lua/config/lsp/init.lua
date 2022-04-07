@@ -52,14 +52,6 @@ local function make_config()
   }
 end
 
-local opts = make_config()
-
--- Setup LSP handlers
-require("config.lsp.handlers").setup()
-
--- Setup all lenguage server and null-ls
-require("config.lsp.null-ls").setup(opts)
-
 -- Especific config for lsp servers
 local function sumneko_lua()
   local runtime_path = vim.split(package.path, ";")
@@ -92,35 +84,41 @@ local function sumneko_lua()
   }
 end
 
+local function omnisharp()
+  local pid = vim.fn.getpid()
+  return {
+    cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+    root_dir = lsp.util.root_pattern("*.csproj", "*.sln"),
+  }
+end
+
+local server_config = {
+  omnisharp = omnisharp(),
+  sumneko_lua = sumneko_lua(),
+  cssls = {
+    cmd = { "vscode-css-languageserver", "--stdio" },
+  },
+}
+
+local servers = {
+  "sumneko_lua",
+  "pylsp",
+  "ccls",
+  "tsserver",
+  "dockerls",
+  "bashls",
+  "sqls",
+  "omnisharp",
+  "cssls",
+  "intelephense",
+}
+
+local opts = make_config()
+
+-- Setup LSP handlers
+require("config.lsp.handlers").setup()
+
 function M.setup()
-  local function omnisharp()
-    local pid = vim.fn.getpid()
-    return {
-      cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
-      root_dir = lsp.util.root_pattern("*.csproj", "*.sln"),
-    }
-  end
-
-  local server_config = {
-    omnisharp = omnisharp(),
-    sumneko_lua = sumneko_lua(),
-    cssls = {
-      cmd = { "vscode-css-languageserver", "--stdio" },
-    },
-  }
-
-  local servers = {
-    "sumneko_lua",
-    "pylsp",
-    "ccls",
-    "tsserver",
-    "dockerls",
-    "bashls",
-    "sqls",
-    "omnisharp",
-    "cssls",
-    "intelephense",
-  }
   for _, server in ipairs(servers) do
     local config = vim.tbl_deep_extend("force", opts, server_config[server] or {})
 
@@ -133,8 +131,12 @@ function M.setup()
     local cfg = lsp[server]
 
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
-      print(server .. ": cmd not found: " .. vim.inspect(cfg.cmd))
+      require("utils").warn(server .. " cmd not found: " .. vim.inspect(cfg.cmd), "Lsp client error")
     end
   end
 end
+
+-- Setup all lenguage server and null-ls
+require("config.lsp.null-ls").setup(opts)
+
 return M

@@ -170,11 +170,11 @@ alias starshipc="vim ~/.config/starship.toml"
 # HACK: Config Nvim Aliases
 alias vimi='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugins.lua'
-alias vimk='vim ~/.config/nvim/lua/keymappings.lua'
+alias vimk='vim ~/.config/nvim/after/plugin/keymappings.lua'
 alias vimd='vim ~/.config/nvim/after/plugin/defaults.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
 alias viml='vim ~/.config/nvim/lua/config/lsp/init.lua'
-alias vimc='vim ~/.config/nvim/lua/config/init.lua'
+alias vimc='vim ~/.config/nvim/after/plugin/defaults.lua'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
 alias Desktop="cd /$HOME/Escritorio"
@@ -187,7 +187,7 @@ alias Git="cd /$HOME/Git"
 alias Usb="cd /run/media/crag"
 # HACK: Command alternatives
 alias ping="prettyping"
-alias icat="kitty +kitten icat"
+# alias icat="kitty +kitten icat"
 alias js="/usr/bin/node ~/.noderc"
 alias ls="logo-ls"
 alias cp="rsync -P"
