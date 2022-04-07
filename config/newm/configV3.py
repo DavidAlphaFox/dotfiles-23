@@ -114,15 +114,14 @@ def rules(view):
     )
     float_titles = ("Exportar la imagen",)
     blur_apps = ("kitty", "rofi", "waybar", "Alacritty")
-    if view.title in float_titles:
-        return common_rules
-    if view.app_id in float_app_ids:
-        return common_rules
+    app_rule = None
+    if view.app_id in float_app_ids or view.title in float_titles:
+        app_rule = common_rules
     if view.app_id in blur_apps:
-        return {"blur": {"radius": 5, "passes": 6}}
+        app_rule = {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
-        return {"float": True, "float_pos": (0.5, 0.1)}
-    return None
+        app_rule = {"float": True, "float_pos": (0.5, 0.1)}
+    return app_rule
 
 
 view = {
@@ -196,8 +195,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + ctrl + "j", lambda: layout.resize_focused_view(0, 1)),
         (super + ctrl + "k", lambda: layout.resize_focused_view(0, -1)),
         (super + ctrl + "l", lambda: layout.resize_focused_view(1, 0)),
-        # (super + "w", layout.change_focused_view_workspace),
-        (altgr + "space w", layout.change_focused_view_workspace),
+        (super + "w", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
         (altgr + "w", layout.move_workspace),
         (altgr + "Tab", layout.move_next_view),
@@ -222,7 +220,6 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         # ("A-l", lambda: os.system(f"{passman} &")),
         (alt + "P", lambda: os.system("pavucontrol &")),
         (altgr + "space t", lambda: os.system("dialect &")),
-        (altgr + alt + "f", lambda: os.system("catapult --show &")),
         (alt + "space l", lambda: os.system(f"{menu} &")),
         (alt + "space p", lambda: os.system(f"{passman} &")),
         (altgr + "space f", lambda: os.system(f"{favorites} &")),
