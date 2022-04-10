@@ -3,7 +3,7 @@ local M = {}
 vim.g.coq_settings = {
   keymap = {
     -- recommended = false,
-    jump_to_mark = "<S-TAB>",
+    jump_to_mark = "<C-TAB>",
   },
   clients = {
     tabnine = {
