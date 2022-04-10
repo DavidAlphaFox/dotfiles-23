@@ -5,8 +5,15 @@ from random import randrange
 from typing import Callable, Any
 from newm.layout import Layout
 from newm.helper import BacklightManager, WobRunner, PaCtl
+from gi.repository import Notify
 
 logger = logging.getLogger(__name__)
+
+
+def notify(msg: str, app_name: str, image="system-config-services"):
+    Notify.init(app_name)
+    n = Notify.Notification.new(app_name, msg, image)
+    n.show()
 
 
 def execute(procs: tuple[str], start="", end=" &"):
@@ -80,6 +87,7 @@ def on_reconfigure():
     options_gtk(gtk3)
     options_gtk(gtk2, '"')
     execute(GSETTINGS)
+    notify("newm reload", "Reload")
 
 
 corner_radius = 0
@@ -111,6 +119,7 @@ def rules(view):
         "pavucontrol",
         "blueman-manager",
         "com.github.gi_lom.dialect",
+        "Pinentry-gtk-2",
     )
     float_titles = ("Exportar la imagen",)
     blur_apps = ("kitty", "rofi", "waybar", "Alacritty")
@@ -121,6 +130,9 @@ def rules(view):
         app_rule = {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
+    # os.system(
+    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
+    # )
     return app_rule
 
 
@@ -195,17 +207,16 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + ctrl + "j", lambda: layout.resize_focused_view(0, 1)),
         (super + ctrl + "k", lambda: layout.resize_focused_view(0, -1)),
         (super + ctrl + "l", lambda: layout.resize_focused_view(1, 0)),
-        (super + "w", layout.change_focused_view_workspace),
+        ("XF86TaskPane", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
         (altgr + "w", layout.move_workspace),
-        (altgr + "Tab", layout.move_next_view),
-        (alt + "Tab", lambda: layout.move_next_view(active_workspace=False)),
+        (alt + "Tab", layout.move_next_view),
         (super + "u", lambda: layout.basic_scale(1)),
         (super + "n", lambda: layout.basic_scale(-1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
         (super + "P", layout.terminate),
-        (altgr + "k", layout.close_view),
+        ("XF86Close", layout.close_view),
         (altgr + "r", layout.update_config),
         (super, lambda: layout.toggle_overview(only_active_workspace=True)),
         (altgr + "z", layout.swallow_focused_view),
@@ -214,15 +225,9 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "ntilde", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
         (altgr + "e", lambda: os.system(f"{powermenu} &")),
-        (altgr + "c", lambda: os.system(f"{clipboard} &")),
-        (altgr + "b", lambda: os.system(f"{bookmarks} &")),
-        (altgr + "m", lambda: os.system(f"{favorites} &")),
-        # ("A-l", lambda: os.system(f"{passman} &")),
-        (alt + "P", lambda: os.system("pavucontrol &")),
-        (altgr + "space t", lambda: os.system("dialect &")),
-        (alt + "space l", lambda: os.system(f"{menu} &")),
-        (alt + "space p", lambda: os.system(f"{passman} &")),
-        (altgr + "space f", lambda: os.system(f"{favorites} &")),
+        ("XF86Copy", lambda: os.system(f"{clipboard} &")),
+        ("XF86Favorites", lambda: os.system(f"{bookmarks} &")),
+        ("XF86Open", lambda: os.system(f"{passman} &")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         (
             "XF86MonBrightnessUp",
@@ -248,9 +253,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ),
         ("XF86Search", lambda: os.system("catapult --show &")),
         ("XF86Explorer", lambda: os.system(f"{menu} &")),
-        ("Pause", lambda: os.system(f"{powermenu} &")),
-        ("Scroll_Lock", lambda: os.system(f"{menu} &")),
-        # ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
+        ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
         (
             super + "Print",

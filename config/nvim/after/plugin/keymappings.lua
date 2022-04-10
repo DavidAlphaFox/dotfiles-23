@@ -10,7 +10,7 @@ local opts = { noremap = true, silent = false }
 utils.map("n", "Y", "yg$")
 -- utils.map("n", "k", "gk")
 -- utils.map("n", "j", "gj")
-utils.map({ "n", "v" }, "ññ", ":", opts)
+
 -- Search in the current buffer
 utils.map("n", "ñs", "/", opts)
 utils.map("n", "<leader>s", "?", opts)

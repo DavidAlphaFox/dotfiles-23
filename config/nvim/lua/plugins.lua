@@ -52,7 +52,6 @@ function M.setup()
           default_keymaps = true, -- Enable default keymaps.
           extra_keymaps = true, -- Enable extra keymaps.
           extended_keymaps = true, -- Enable extended keymaps.
-          centered = true, -- Keep cursor centered in window when using window scrolling (arg2):
         }
       end,
     }
@@ -248,6 +247,7 @@ function M.setup()
         require("config.comment").setup()
       end,
     }
+    use "gpanders/editorconfig.nvim"
 
     --Utils
     use {

@@ -1,3 +1,4 @@
+" vim: filetype=vim
 "
 "   _____ _           __            __     ___
 "  |  ___(_)_ __ ___ / _| _____  __ \ \   / (_)_ __ ___
@@ -6,38 +7,50 @@
 "  |_|   |_|_|  \___|_|  \___/_/\_\    \_/  |_|_| |_| |_|
 "
 "                                    _
-"                _ __ ___   ___   __| | ___
+"               _ __ ___   ___   __| | ___
 "              | '_ ` _ \ / _ \ / _` |/ _ \
 "              | | | | | | (_) | (_| |  __/
 "              |_| |_| |_|\___/ \__,_|\___|
 "
 
-" " Inject Google Translate
-" " This (clearly) is remotely hosted code. Google will be sent the whole
-" " contents of the page you are on if you run `:translate`
-" " From https://github.com/jeremiahlee/page-translator
-command translate js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);
+" This wipes all existing settings. This means that if a setting in this file
+" is removed, then it will return to default. In other words, this file serves
+" as an enforced single point of truth for Tridactyl's configuration.
+sanitize tridactyllocal tridactylsync
 
 colorscheme dark
 
+set newtab about:blank
+
 set smoothscroll true
+
+" Sane hinting mode
+set hintfiltermode vimperator-reflow
 
 "
 " Binds
 "
+bind j scrollline 5
+bind k scrollline -5
 bind <A-h> tabprev
 bind <A-l> tabnext
 bind = tabduplicate
 bind q back
 bind w forward
+bind $ tablast
+bind 0 tabfirst
+" Ctrl-F should use the browser's native 'find' functionality.
+unbind <C-f>
 unbind J
 unbind K
 unbind F1
 bind ñ fillcmdline_notrail
+" But also support Tridactyl search too.
 bind / fillcmdline find
 bind ? fillcmdline find -?
 bind n findnext 1
 bind N findnext -1
+
 " Make gu take you back to subreddit from comments
 bindurl reddit.com gu urlparent 4
 
@@ -49,11 +62,6 @@ unbind --mode=ex <C-c>
 
 " Open right click menu on links
 bind ;C composite hint focus; !s wtype -P Menu -p Menu
-
-
-" Sane hinting mode
-set hintfiltermode vimperator-reflow
-" set hintnames numeric
 
 "
 " Quickmarks
@@ -81,8 +89,5 @@ bind -8 tab 8
 bind -9 tab 9
 
 alias tabsort jsb browser.tabs.query({}).then(tabs => tabs.sort((t1, t2) => t1.url.localeCompare(t2.url)).forEach((tab, index) => browser.tabs.move(tab.id, {index})))
-alias tabuniq jsb browser.tabs.query({}).then(tabs => browser.tabs.remove(tabs.filter((tab, index) => tabs.slice(index + 1).find(t => t.url == tab.url)).map(tab => tab.id)))
 
-"
-" " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
-" " vim: set filetype=tridactyl
+alias tabuniq jsb browser.tabs.query({}).then(tabs => browser.tabs.remove(tabs.filter((tab, index) => tabs.slice(index + 1).find(t => t.url == tab.url)).map(tab => tab.id)))

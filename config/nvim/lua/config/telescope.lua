@@ -86,7 +86,7 @@ function M.setup()
       builtin.find_files(opts)
     end
   end
-  utils.map("n", " ñ", project_files)
+  utils.map("n", "ññ", project_files)
   utils.map("n", "<leader>fg", builtin.grep_string)
   utils.map("n", "<leader>fl", builtin.live_grep)
 
