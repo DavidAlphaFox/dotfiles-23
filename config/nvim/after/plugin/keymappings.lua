@@ -20,11 +20,16 @@ utils.map({ "n", "v" }, "<leader>r", ":s/", opts)
 -- Set ; to end line
 utils.map("n", ";", "<esc>mzA;<esc>`z")
 
+-- No yank
 utils.map("n", "x", '"_x')
 utils.map({ "n", "x" }, "c", '"_c')
 utils.map("n", "C", '"_C')
+utils.map("v", "p", '"_dP', opts)
+-- Better indent
+utils.map("v", "<", "<gv", opts)
+utils.map("v", ">", ">gv", opts)
 
--- Spell checker toggle
+-- Toggle spell checker
 utils.map("n", "<F2>", ":setlocal spell! spelllang=es<CR>")
 utils.map("n", "<F3>", ":setlocal spell! spelllang=en_us<CR>")
 
@@ -84,10 +89,9 @@ utils.map("n", "<leader>c", ':let @/=""<cr>')
 -- utils.map('n', '<bs>', '<c-^>`”zz')
 utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
 
+-- Format current buffer
 utils.map("n", "<leader>a", "=ip", opts)
 utils.map("n", "<leader>i", "=G", opts)
-utils.map("x", ">", ">gv", opts)
-utils.map("x", "<", "<gv", opts)
 
 -- Motions
 utils.map("n", "ç", "%")

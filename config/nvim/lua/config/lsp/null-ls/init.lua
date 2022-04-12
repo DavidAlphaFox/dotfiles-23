@@ -24,18 +24,17 @@ local sources = {
   b.formatting.shfmt,
   b.formatting.fixjson,
   b.formatting.black.with { extra_args = { "--fast" } },
-  -- b.formatting.isort,
-  b.formatting.stylua,
-  -- with_root_file(b.formatting.stylua, "stylua.toml"),
+  b.formatting.isort,
+  -- b.formatting.stylua,
+  with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
-  b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
-  b.diagnostics.flake8,
+  b.diagnostics.flake8.with { extra_args = { "--ignore=E501" } },
   b.diagnostics.tsc,
-  b.diagnostics.selene,
-  -- with_root_file(b.diagnostics.selene, "selene.toml"),
+  -- b.diagnostics.selene,
+  with_root_file(b.diagnostics.selene, "selene.toml"),
   -- with_diagnostics_code(b.diagnostics.shellcheck),
 
   -- code actions

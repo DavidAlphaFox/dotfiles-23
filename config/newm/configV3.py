@@ -1,11 +1,13 @@
 from __future__ import annotations
+
 import logging
 import os
 from random import randrange
-from typing import Callable, Any
-from newm.layout import Layout
-from newm.helper import BacklightManager, WobRunner, PaCtl
+from typing import Any, Callable
+
 from gi.repository import Notify
+from newm.helper import BacklightManager, PaCtl, WobRunner
+from newm.layout import Layout
 
 logger = logging.getLogger(__name__)
 

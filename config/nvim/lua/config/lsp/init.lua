@@ -102,7 +102,7 @@ local server_config = {
 
 local servers = {
   "sumneko_lua",
-  "pylsp",
+  "jedi_language_server",
   "ccls",
   "tsserver",
   "dockerls",
