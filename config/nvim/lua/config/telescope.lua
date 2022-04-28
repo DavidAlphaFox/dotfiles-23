@@ -33,7 +33,7 @@ function M.setup()
       winblend = 0,
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-      results_title = "~ Results ~",
+      results_title = "Results",
       color_devicons = true,
       use_less = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -120,4 +120,5 @@ function M.setup()
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)
 end
+
 return M

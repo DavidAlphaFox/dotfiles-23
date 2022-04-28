@@ -52,13 +52,19 @@ function M.setup()
           default_keymaps = true, -- Enable default keymaps.
           extra_keymaps = true, -- Enable extra keymaps.
           extended_keymaps = true, -- Enable extended keymaps.
+          default_delay = 3
         }
       end,
     }
 
     -- Themes
     -- use 'i3d/vim-jimbothemes'
-    -- use 'owozsh/amora'
+    -- use { 'owozsh/amora',
+    --   config = function()
+    --     vim.g.mode = 'jack-o-lantern'
+    --     vim.cmd "colorscheme amora"
+    --   end
+    -- }
     -- use {
     --   "franbach/miramare",
     --   config = function()
@@ -88,17 +94,8 @@ function M.setup()
         "RRethy/nvim-treesitter-endwise",
         "yioneko/nvim-yati",
         "p00f/nvim-ts-rainbow",
+        "windwp/nvim-ts-autotag",
       },
-    }
-
-    -- Auto tag
-    use {
-      "windwp/nvim-ts-autotag",
-      wants = "nvim-treesitter",
-      event = "InsertEnter",
-      config = function()
-        require("nvim-ts-autotag").setup { enable = true }
-      end,
     }
 
     -- Auto pairs
@@ -153,6 +150,8 @@ function M.setup()
       end,
     }
 
+    -- use { 'liuchengxu/vim-clap', run = ':Clap install-binary' }
+
     -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
@@ -193,7 +192,15 @@ function M.setup()
     use "tpope/vim-repeat"
 
     -- Motions
-    use { "andymass/vim-matchup", event = "CursorMoved" }
+    -- use { 'monkoose/matchparen.nvim',
+    --   config = function()
+    --     require('matchparen').setup({
+    --       on_startup = true, -- Should it be enabled by default
+    --       hl_group = 'MatchParen', -- highlight group for matched characters
+    --       augroup_name = 'matchparen', -- almost no reason to touch this unless there is already augroup with such name
+    --     })
+    --   end
+    -- }
     use { "wellle/targets.vim", event = "CursorMoved" }
     use { "chaoren/vim-wordmotion" }
 

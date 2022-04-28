@@ -8,7 +8,8 @@ set.clipboard = "unnamedplus"
 set.splitright = true
 set.splitbelow = true
 set.icm = "nosplit"
-set.virtualedit = "onemore"
+set.virtualedit = "block"
+-- set.virtualedit = "onemore"
 set.undofile = false
 set.undolevels = 1000
 set.backspace = { "indent", "eol", "start", "nostop" } -- Better backspace.
@@ -25,7 +26,7 @@ set.encoding = "utf-8"
 set.fileformat = "unix"
 set.formatoptions = "tcqrn1"
 set.errorformat:append "%f|%l col %c|%m"
-set.wildignore:append { "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar" }
+set.wildignore:append { ".git/**", "*.pyc", "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar", "*.DS_Store,**/", "node_modules/**", "**/bower_modules/**", "**/node_modules/**" }
 
 -- Better search
 set.path:remove "/usr/include"
@@ -33,18 +34,10 @@ set.path:append "**"
 
 -- Spaces & Tabsset
 set.expandtab = true
-set.autoindent = true
-set.cindent = true
--- set.shiftround = true
-set.shiftwidth = 2
-set.softtabstop = 2
 set.tabstop = 2
-set.joinspaces = false
--- set.ts=2
--- set.autoindent = true
--- set.smartindent = true
--- set.smarttab = true
--- set.copyindent = true
+set.shiftwidth = 2
+set.softtabstop = -1
+set.smarttab = true
 
 -- Text line
 set.wrap = true

@@ -1,13 +1,13 @@
 -- MIT License Copyright (c) 2021 Evgeni Chasnovski
 
 -- Documentation ==============================================================
---- Custom minimal and fast tabline module. General idea: show all listed
---- buffers in readable way with minimal total width in case of one vim tab,
---- fall back for deafult otherwise. Inspired by
+--- Minimal and fast tabline module. General idea: show all listed buffers in
+--- readable way with minimal total width. Also allow showing extra information
+--- section in case of multiple vim tabpages. Inspired by
 --- [ap/vim-buftabline](https://github.com/ap/vim-buftabline).
 ---
 --- Features:
---- - Buffers are listed by their identifier (see |bufnr()|).
+--- - Buffers are listed in the order of their identifier (see |bufnr()|).
 --- - Different highlight groups for "states" of buffer affecting 'buffer tabs':
 --- - Buffer names are made unique by extending paths to files or appending
 ---   unique identifier to buffers without name.
@@ -44,6 +44,7 @@
 --- 5. `MiniTablineModifiedVisible` - buffer is modified and visible.
 --- 6. `MiniTablineModifiedHidden` - buffer is modified and hidden.
 --- 7. `MiniTablineFill` - unused right space of tabline.
+--- 8. `MiniTablineTabpagesection` - section with tabpage information.
 ---
 --- To change any highlight group, modify it directly with |:highlight|.
 ---
@@ -79,19 +80,6 @@ function MiniTabline.setup(config)
   -- Apply config
   H.apply_config(config)
 
-  -- Module behavior
-  vim.api.nvim_exec(
-    [[augroup MiniTabline
-        au!
-        au VimEnter   * lua MiniTabline.update_tabline()
-        au TabEnter   * lua MiniTabline.update_tabline()
-        au BufAdd     * lua MiniTabline.update_tabline()
-        au FileType  qf lua MiniTabline.update_tabline()
-        au BufDelete  * lua MiniTabline.update_tabline()
-      augroup END]],
-    false
-  )
-
   -- Function to make tabs clickable
   vim.api.nvim_exec(
     [[function! MiniTablineSwitchBuffer(buf_id, clicks, button, mod)
@@ -110,6 +98,8 @@ function MiniTabline.setup(config)
       hi default link MiniTablineModifiedVisible StatusLine
       hi default link MiniTablineModifiedHidden  StatusLineNC
 
+      hi default link MiniTablineTabpagesection Search
+
       hi default MiniTablineFill NONE]],
     false
   )
@@ -126,27 +116,28 @@ MiniTabline.config = {
   -- Whether to set Vim's settings for tabline (make it always shown and
   -- allow hidden buffers)
   set_vim_settings = true,
+
+  -- Where to show tabpage section in case of multiple vim tabpages.
+  -- One of 'left', 'right', 'none'.
+  tabpage_section = 'left',
 }
 --minidoc_afterlines_end
 
 -- Module functionality =======================================================
---- Update |tabline|
----
---- Designed to be used with |autocmd|. No need to use it directly,
+-- TODO: remove after 0.4.0 release.
 function MiniTabline.update_tabline()
-  if vim.fn.tabpagenr('$') > 1 then
-    vim.o.tabline = [[]]
-  else
-    vim.o.tabline = [[%!v:lua.MiniTabline.make_tabline_string()]]
-  end
+  H.notify('`MiniTabline.update_tabline()` is deprecated because it is obsolete.')
+
+  vim.o.tabline = '%!v:lua.MiniTabline.make_tabline_string()'
 end
 
---- Make string for |tabline| in case of single tab
+--- Make string for |tabline|
 function MiniTabline.make_tabline_string()
   if H.is_disabled() then
     return ''
   end
 
+  H.make_tabpage_section()
   H.list_tabs()
   H.finalize_labels()
   H.fit_width()
@@ -170,8 +161,11 @@ H.unnamed_buffers_seq_ids = {}
 -- Separator of file path
 H.path_sep = package.config:sub(1, 1)
 
+-- String with tabpage prefix
+H.tabpage_section = ''
+
 -- Buffer number of center buffer
-H.center_buf_id = vim.fn.winbufnr(0)
+H.center_buf_id = nil
 
 -- Helper functionality =======================================================
 -- Settings -------------------------------------------------------------------
@@ -184,6 +178,7 @@ function H.setup_config(config)
   vim.validate({
     show_icons = { config.show_icons, 'boolean' },
     set_vim_settings = { config.set_vim_settings, 'boolean' },
+    tabpage_section = { config.tabpage_section, 'string' },
   })
 
   return config
@@ -197,22 +192,37 @@ function H.apply_config(config)
     vim.o.showtabline = 2 -- Always show tabline
     vim.o.hidden = true -- Allow switching buffers without saving them
   end
+
+  -- Set tabline string
+  vim.o.tabline = '%!v:lua.MiniTabline.make_tabline_string()'
 end
 
 function H.is_disabled()
   return vim.g.minitabline_disable == true or vim.b.minitabline_disable == true
 end
 
+-- Work with tabpages ---------------------------------------------------------
+function H.make_tabpage_section()
+  local n_tabpages = vim.fn.tabpagenr('$')
+  if n_tabpages == 1 or MiniTabline.config.tabpage_section == 'none' then
+    H.tabpage_section = ''
+    return
+  end
+
+  local cur_tabpagenr = vim.fn.tabpagenr()
+  H.tabpage_section = (' Tab %s/%s '):format(cur_tabpagenr, n_tabpages)
+end
+
 -- Work with tabs -------------------------------------------------------------
 -- List tabs
 function H.list_tabs()
   local tabs = {}
-  for i = 1, vim.fn.bufnr('$') do
-    if H.is_buffer_in_minitabline(i) then
-      local tab = { buf_id = i }
-      tab['hl'] = H.construct_highlight(i)
-      tab['tabfunc'] = H.construct_tabfunc(i)
-      tab['label'], tab['label_extender'] = H.construct_label_data(i)
+  for _, buf_id in ipairs(vim.api.nvim_list_bufs()) do
+    if H.is_buffer_in_minitabline(buf_id) then
+      local tab = { buf_id = buf_id }
+      tab['hl'] = H.construct_highlight(buf_id)
+      tab['tabfunc'] = H.construct_tabfunc(buf_id)
+      tab['label'], tab['label_extender'] = H.construct_label_data(buf_id)
 
       table.insert(tabs, tab)
     end
@@ -222,20 +232,20 @@ function H.list_tabs()
 end
 
 function H.is_buffer_in_minitabline(buf_id)
-  return (vim.fn.buflisted(buf_id) > 0) and (vim.fn.getbufvar(buf_id, '&buftype') ~= 'quickfix')
+  return vim.api.nvim_buf_get_option(buf_id, 'buflisted')
 end
 
 -- Tab's highlight group
 function H.construct_highlight(buf_id)
   local hl_type
-  if buf_id == vim.fn.winbufnr(0) then
+  if buf_id == vim.api.nvim_get_current_buf() then
     hl_type = 'Current'
   elseif vim.fn.bufwinnr(buf_id) > 0 then
     hl_type = 'Visible'
   else
     hl_type = 'Hidden'
   end
-  if vim.fn.getbufvar(buf_id, '&modified') > 0 then
+  if vim.api.nvim_buf_get_option(buf_id, 'modified') then
     hl_type = 'Modified' .. hl_type
   end
 
@@ -255,7 +265,7 @@ end
 function H.construct_label_data(buf_id)
   local label, label_extender
 
-  local bufpath = vim.fn.bufname(buf_id)
+  local bufpath = vim.api.nvim_buf_get_name(buf_id)
   if bufpath ~= '' then
     -- Process path buffer
     label = vim.fn.fnamemodify(bufpath, ':t')
@@ -263,20 +273,19 @@ function H.construct_label_data(buf_id)
   else
     -- Process unnamed buffer
     label = H.make_unnamed_label(buf_id)
-    label_extender = function(x)
-      return x
-    end
+    --stylua: ignore
+    label_extender = function(x) return x end
   end
 
   return label, label_extender
 end
 
 function H.make_path_extender(buf_id)
+  -- Add parent to current label (if possible)
   return function(label)
-    -- Add parent to current label
-    local full_path = vim.fn.fnamemodify(vim.fn.bufname(buf_id), ':p')
+    local full_path = vim.api.nvim_buf_get_name(buf_id)
     -- Using `vim.pesc` prevents effect of problematic characters (like '.')
-    local pattern = string.format('[^%s]+%s%s$', H.path_sep, H.path_sep, vim.pesc(label))
+    local pattern = string.format('[^%s]+%s%s$', vim.pesc(H.path_sep), vim.pesc(H.path_sep), vim.pesc(label))
     return string.match(full_path, pattern) or label
   end
 end
@@ -289,7 +298,17 @@ end
 -- - Delete second one.
 -- - Tab label for third one remains the same.
 function H.make_unnamed_label(buf_id)
-  local label = H.is_buffer_scratch(buf_id) and '!' or '*'
+  local label
+  if vim.api.nvim_buf_get_option(buf_id, 'buftype') == 'quickfix' then
+    -- It would be great to differentiate for buffer `buf_id` between quickfix
+    -- and location lists but it seems there is no reliable way to do so.
+    -- The only one is to use `getwininfo(bufwinid(buf_id))` and look for
+    -- `quickfix` and `loclist` fields, but that fails if buffer `buf_id` is
+    -- not visible.
+    label = '*quickfix*'
+  else
+    label = H.is_buffer_scratch(buf_id) and '!' or '*'
+  end
 
   -- Possibly add tracking id
   local unnamed_id = H.get_unnamed_id(buf_id)
@@ -301,7 +320,7 @@ function H.make_unnamed_label(buf_id)
 end
 
 function H.is_buffer_scratch(buf_id)
-  local buftype = vim.fn.getbufvar(buf_id, '&buftype')
+  local buftype = vim.api.nvim_buf_get_option(buf_id, 'buftype')
   return (buftype == 'acwrite') or (buftype == 'nofile')
 end
 
@@ -343,14 +362,15 @@ function H.finalize_labels()
 
   -- Postprocess: add file icons and padding
   local has_devicons, devicons
+  local show_icons = MiniTabline.config.show_icons
 
   -- Have this `require()` here to not depend on plugin initialization order
-  if MiniTabline.config.show_icons then
+  if show_icons then
     has_devicons, devicons = pcall(require, 'nvim-web-devicons')
   end
 
   for _, tab in pairs(H.tabs) do
-    if MiniTabline.config.show_icons and has_devicons then
+    if show_icons and has_devicons then
       local extension = vim.fn.fnamemodify(tab.label, ':e')
       local icon = devicons.get_icon(tab.label, extension, { default = true })
       tab.label = string.format(' %s %s ', icon, tab.label)
@@ -385,7 +405,7 @@ function H.fit_width()
   H.update_center_buf_id()
 
   -- Compute label width data
-  local center = 1
+  local center_offset = 1
   local tot_width = 0
   for _, tab in pairs(H.tabs) do
     -- Use `nvim_strwidth()` and not `:len()` to respect multibyte characters
@@ -395,36 +415,41 @@ function H.fit_width()
     tot_width = tot_width + tab.label_width
 
     if tab.buf_id == H.center_buf_id then
-      -- Make end of 'center tab' to be always displayed in center in case of
-      -- truncation
-      center = tot_width
+      -- Make right end of 'center tab' to be always displayed in center in
+      -- case of truncation
+      center_offset = tot_width
     end
   end
 
-  local display_interval = H.compute_display_interval(center, tot_width)
+  local display_interval = H.compute_display_interval(center_offset, tot_width)
 
   H.truncate_tabs_display(display_interval)
 end
 
 function H.update_center_buf_id()
-  local buf_displayed = vim.fn.winbufnr(0)
-  if H.is_buffer_in_minitabline(buf_displayed) then
-    H.center_buf_id = buf_displayed
+  local cur_buf = vim.api.nvim_get_current_buf()
+  if H.is_buffer_in_minitabline(cur_buf) then
+    H.center_buf_id = cur_buf
   end
 end
 
-function H.compute_display_interval(center, tabline_width)
+function H.compute_display_interval(center_offset, tabline_width)
   -- left - first character to be displayed (starts with 1)
   -- right - last character to be displayed
   -- Conditions to be satisfied:
   -- 1) right - left + 1 = math.min(tot_width, tabline_width)
   -- 2) 1 <= left <= tabline_width; 1 <= right <= tabline_width
 
-  local tot_width = vim.o.columns
+  local tot_width = vim.o.columns - vim.api.nvim_strwidth(H.tabpage_section)
 
-  -- Usage of `math.ceil` is crucial to avoid non-integer values which might
-  -- affect total width of output tabline string
-  local right = math.min(tabline_width, math.ceil(center + 0.5 * tot_width))
+  -- Usage of `math.floor` is crucial to avoid non-integer values which might
+  -- affect total width of output tabline string.
+  -- Using `floor` instead of `ceil` has effect when `tot_width` is odd:
+  -- - `floor` makes "true center" to be between second to last and last label
+  --   character (usually non-space and space).
+  -- - `ceil` - between last character of center label and first character of
+  --   next label (both whitespaces).
+  local right = math.min(tabline_width, math.floor(center_offset + 0.5 * tot_width))
   local left = math.max(1, right - tot_width + 1)
   right = left + math.min(tot_width, tabline_width) - 1
 
@@ -459,10 +484,33 @@ function H.concat_tabs()
   local t = {}
   for _, tab in ipairs(H.tabs) do
     -- Escape '%' in labels
-    table.insert(t, tab.hl .. tab.tabfunc .. tab.label:gsub('%%', '%%%%'))
+    table.insert(t, ('%s%s%s'):format(tab.hl, tab.tabfunc, tab.label:gsub('%%', '%%%%')))
   end
 
-  return table.concat(t, '') .. '%#MiniTablineFill#'
+  -- Usage of `%X` makes filled space to the right 'non-clickable'
+  local res = ('%s%%X%%#MiniTablineFill#'):format(table.concat(t, ''))
+
+  -- Add tabpage section
+  local position = MiniTabline.config.tabpage_section
+  if H.tabpage_section ~= '' then
+    if not vim.tbl_contains({ 'none', 'left', 'right' }, position) then
+      H.notify([[`config.tabpage_section` should be one of 'left', 'right', 'none'.]])
+    end
+    if position == 'left' then
+      res = ('%%#MiniTablineTabpagesection#%s%s'):format(H.tabpage_section, res)
+    end
+    if position == 'right' then
+      -- Use `%=` to make it stick to right hand side
+      res = ('%s%%=%%#MiniTablineTabpagesection#%s'):format(res, H.tabpage_section)
+    end
+  end
+
+  return res
+end
+
+-- Utilities ------------------------------------------------------------------
+function H.notify(msg)
+  vim.notify(('(mini.tabline) %s'):format(msg))
 end
 
 return MiniTabline

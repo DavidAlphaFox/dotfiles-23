@@ -146,6 +146,7 @@ view = {
     "floating_min_size": False,
     "debug_scaling": True,
     "border_ws_switch": 100,
+    "ssd": {"enabled": False},
 }
 
 swipe_zoom = {

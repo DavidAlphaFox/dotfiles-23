@@ -43,8 +43,11 @@ local M = {}
 -- uwu.lua
 
 function M.setup()
+  -- vim.pretty_print(require("themer.modules.core.api").get_cp("everforest"))
   require("themer").setup {
+    -- colorscheme = "everforest",
     colorscheme = "amora",
+    -- transparent = true,
     styles = {
       ["function"] = { style = "italic" },
       functionbuiltin = { style = "italic" },

@@ -168,13 +168,12 @@ alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
 alias starshipc="vim ~/.config/starship.toml"
 # HACK: Config Nvim Aliases
-alias vimi='vim ~/.config/nvim/init.lua'
+alias vimc='vim ~/.config/nvim/init.lua'
 alias vimp='vim ~/.config/nvim/lua/plugins.lua'
 alias vimk='vim ~/.config/nvim/after/plugin/keymappings.lua'
 alias vimd='vim ~/.config/nvim/after/plugin/defaults.lua'
 alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
 alias viml='vim ~/.config/nvim/lua/config/lsp/init.lua'
-alias vimc='vim ~/.config/nvim/after/plugin/defaults.lua'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
 alias Desktop="cd /$HOME/Escritorio"
