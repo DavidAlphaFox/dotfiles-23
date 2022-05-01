@@ -73,7 +73,7 @@ set.listchars = {
   extends = "→",
   nbsp = "␣",
 }
-set.laststatus = 2
+set.laststatus = 3
 set.cmdheight = 2
 
 -- Search

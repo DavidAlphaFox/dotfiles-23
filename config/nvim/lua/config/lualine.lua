@@ -8,21 +8,22 @@ local gps = require "nvim-gps"
 -- Color table for highlights
 -- stylua: ignore
 
-  local colors = {
-    bg       = '#1a1a2e',
-    -- bg       = '#161925',
-    fg       = '#e2d5bc',
-    yellow   = '#f6e08b',
-    cyan     = '#e68ac1',
-    darkblue = '#565393',
-    green    = '#9fd3b3',
-    orange   = '#f79f79',
-    violet   = '#a29dff',
-    purple   = '#c3b4ff',
-    magenta  = '#edabd2',
-    blue     = '#aed9f6',
-    red      = '#fb5c8e',
-  }
+local theme = require("themer.modules.core.api").get_cp(vim.g.colorscheme)
+local colors = {
+  bg       = theme.bg.base,
+  -- bg       = '#161925',
+  fg       = theme.fg,
+  yellow   = theme.yellow,
+  cyan     = theme.syntax.operator,
+  darkblue = theme.syntax.tag,
+  green    = theme.green,
+  orange   = theme.orange,
+  violet   = theme.syntax.statement,
+  purple   = theme.syntax.property,
+  magenta  = theme.magenta,
+  blue     = theme.blue,
+  red      = theme.red,
+}
 
 local conditions = {
   buffer_not_empty = function()
@@ -235,4 +236,5 @@ function M.setup()
   -- Now don't forget to initialize lualine
   lualine.setup(config)
 end
+
 return M

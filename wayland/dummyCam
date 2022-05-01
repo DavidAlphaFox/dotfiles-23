@@ -1,2 +1,0 @@
-sudo modprobe v4l2loopback exclusive_caps=1 card_label=WfRecorder
-wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video4 -x yuv420p -o eDP-1

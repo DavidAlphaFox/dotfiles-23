@@ -12,14 +12,29 @@ function M.map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  -- v6
-  -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-  -- v7
+  -- > v7
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- Highlights functions
 
+function M.get_highlight(hlname)
+    local hl = vim.api.nvim_get_hl_by_name(hlname, true)
+    setmetatable(hl, {
+        __index = function(t, k)
+            if k == "fg" then
+                return t.foreground
+            elseif k == "bg" then
+                return t.background
+            elseif k == "sp" then
+                return t.special
+            else
+                return rawget(t, k)
+            end
+        end,
+    })
+    return hl
+end
 -- Define bg color
 -- @param group Group
 -- @param color Color

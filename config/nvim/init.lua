@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
 
 --
 -- Disable builtin plugins
@@ -35,6 +37,8 @@ end
 -- Init Packer Plugins
 --
 
+vim.g.colorscheme = "everforest"
+-- vim.g.colorscheme = "amora"
 require "config"
 require("plugins").setup()
 require "debug"

@@ -49,7 +49,6 @@ function M.setup()
       "declancm/cinnamon.nvim",
       config = function()
         require("cinnamon").setup {
-          default_keymaps = true, -- Enable default keymaps.
           extra_keymaps = true, -- Enable extra keymaps.
           extended_keymaps = true, -- Enable extended keymaps.
           default_delay = 3
@@ -260,7 +259,6 @@ function M.setup()
     use {
       "CRAG666/code_runner.nvim",
       requires = "nvim-lua/plenary.nvim",
-      branch = "new_features",
       config = function()
         require("config.code_runner").setup()
       end,

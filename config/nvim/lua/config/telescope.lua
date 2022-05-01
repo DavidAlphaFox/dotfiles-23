@@ -17,7 +17,7 @@ function M.setup()
       },
       prompt_prefix = "  ",
       selection_caret = " ",
-      initial_mode = "normal",
+      -- initial_mode = "normal",
       selection_strategy = "reset",
       sorting_strategy = "ascending",
       layout_strategy = "bottom_pane",
@@ -65,16 +65,16 @@ function M.setup()
     },
   }
 
-  -- require("telescope").load_extension "themes"
-  require("telescope").load_extension "media_files"
-  require("telescope").load_extension "file_browser"
-  require("telescope").load_extension "frecency"
+  local extensions = { "media_files", "file_browser", "frecency", "themes" }
+  for _, extension in ipairs(extensions) do
+    require("telescope").load_extension(extension)
+  end
 
   -- Extensions
-  local extensions = require("telescope").extensions
-  utils.map("n", "<leader>fm", extensions.media_files.media_files)
-  utils.map("n", "ñe", extensions.file_browser.file_browser)
-  utils.map("n", "ñf", extensions.frecency.frecency)
+  local ext = require("telescope").extensions
+  utils.map("n", "<leader>fm", ext.media_files.media_files)
+  utils.map("n", "ñe", ext.file_browser.file_browser)
+  utils.map("n", "ñf", ext.frecency.frecency)
 
   local builtin = require "telescope.builtin"
 
@@ -116,7 +116,7 @@ function M.setup()
   -- Git Pickers
   utils.map("n", "<leader>gc", builtin.git_commits)
   utils.map("n", "<leader>gbc", builtin.git_bcommits)
-  utils.map("n", "<leader>gb", builtin.git_branches)
+  utils.map("n", "<leader>gb", ":Telescope git_branches<CR>")
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)
 end

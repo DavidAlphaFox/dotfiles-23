@@ -1,6 +1,7 @@
 music_dir = "~/Música"
 loop_mode = "Playlist"
 volume = 100
+speed = 1.0
 add_playlist_front = true
 disable_exit_confirmation = true
 playlist_display_symbol = true
@@ -193,6 +194,20 @@ args = "B"
 [keys.global_lyric_adjust_backward.modifiers]
 type = "KeyModifiers"
 bits = 1
+[keys.global_player_speed_up.code]
+type = "Char"
+args = "f"
+
+[keys.global_player_speed_up.modifiers]
+type = "KeyModifiers"
+bits = 2
+[keys.global_player_speed_down.code]
+type = "Char"
+args = "b"
+
+[keys.global_player_speed_down.modifiers]
+type = "KeyModifiers"
+bits = 2
 [keys.global_lyric_cycle.code]
 type = "Char"
 args = "T"

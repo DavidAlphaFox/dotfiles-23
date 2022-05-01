@@ -43,10 +43,8 @@ local M = {}
 -- uwu.lua
 
 function M.setup()
-  -- vim.pretty_print(require("themer.modules.core.api").get_cp("everforest"))
   require("themer").setup {
-    -- colorscheme = "everforest",
-    colorscheme = "amora",
+    colorscheme = vim.g.colorscheme,
     -- transparent = true,
     styles = {
       ["function"] = { style = "italic" },
@@ -57,20 +55,22 @@ function M.setup()
     },
   }
 
+  local theme = require("themer.modules.core.api").get_cp(vim.g.colorscheme)
   -- Telescope
-  utils.fg_bg("TelescopeBorder", "#1a1a2e", "NONE")
+  utils.fg_bg("TelescopeBorder", theme.bg.base, "NONE")
   -- utils.fg_bg("TelescopeBorder", "#161925", "NONE")
   utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
   utils.fg_bg("TelescopePromptNormal", "white", "NONE")
-  utils.fg_bg("TelescopePromptPrefix", "#84c49b", "NONE")
+  utils.fg_bg("TelescopePromptPrefix", theme.syntax.identifier, "NONE")
+  utils.fg("TelescopePromptCounter", "white")
 
-  utils.fg_bg("TelescopePromptTitle", "black", "#fb5c8e")
-  utils.fg_bg("TelescopePreviewTitle", "black", "#a29dff")
-  utils.fg_bg("TelescopeResultsTitle", "black", "#f79f79")
+  utils.fg_bg("TelescopePromptTitle", "black", theme.syntax.include)
+  utils.fg_bg("TelescopePreviewTitle", "black", theme.syntax['function'])
+  utils.fg_bg("TelescopeResultsTitle", "black", theme.syntax.field)
 
   utils.bg("TelescopeResults", "NONE")
   utils.bg("TelescopeNormal", "NONE")
-  utils.bg("TelescopeSelection", "#2c223c")
+  utils.bg("TelescopeSelection", theme.bg.selected)
 end
 
 return M
