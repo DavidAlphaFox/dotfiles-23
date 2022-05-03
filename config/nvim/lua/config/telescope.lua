@@ -103,20 +103,20 @@ function M.setup()
   utils.map("n", "<leader>fk", builtin.keymaps)
   utils.map("n", "<leader>ft", builtin.filetypes)
   utils.map("n", "<leader>ff", builtin.current_buffer_fuzzy_find)
-  -- utils.map('n', '<leader>bt', require('telescope.builtin').current_buffer_tags)
+  utils.map('n', '<leader>bt', require('telescope.builtin').current_buffer_tags)
 
-  -- LSP Pickers
+  -- -- LSP Pickers
   utils.map("n", "<leader>lr", builtin.lsp_references)
   utils.map("n", "<leader>ls", builtin.lsp_document_symbols)
-  utils.map("n", "<leader>la", builtin.lsp_code_actions)
-  -- utils.map('n', '<leader>fd', require('telescope.builtin').lsp_definitions)
+  -- utils.map("n", "<leader>la", builtin.lsp_code_actions)
+  utils.map('n', '<leader>lf', builtin.lsp_definitions)
   utils.map("n", "<leader>ld", builtin.diagnostics)
   utils.map("n", "<leader>li", builtin.lsp_implementations)
-
+  --
   -- Git Pickers
   utils.map("n", "<leader>gc", builtin.git_commits)
   utils.map("n", "<leader>gbc", builtin.git_bcommits)
-  utils.map("n", "<leader>gb", ":Telescope git_branches<CR>")
+  utils.map("n", "<leader>gb", builtin.git_branches)
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)
 end

@@ -6,12 +6,12 @@ local M = {}
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+  -- Enable completion triggered by <C-X><C-O>
+  -- See `:help omnifunc` and `:help ins-completion` for more information.
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- Use LSP as the handler for formatexpr.
+  -- See `:help formatexpr` for more information.
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
   -- Mappings.
@@ -45,6 +45,9 @@ local function make_config()
   return {
     on_attach = on_attach,
     capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    },
   }
 end
 
@@ -115,6 +118,8 @@ local opts = make_config()
 require("config.lsp.handlers").setup()
 
 function M.setup()
+  -- Setup all lenguage server and null-ls
+  require("config.lsp.null-ls").setup(opts)
   for _, server in ipairs(servers) do
     local config = vim.tbl_deep_extend("force", opts, server_config[server] or {})
 
@@ -125,14 +130,10 @@ function M.setup()
     lsp[server].setup(coq.lsp_ensure_capabilities(config))
 
     local cfg = lsp[server]
-
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then
       require("utils").warn(server .. " cmd not found: " .. vim.inspect(cfg.cmd), "Lsp client error")
     end
   end
 end
-
--- Setup all lenguage server and null-ls
-require("config.lsp.null-ls").setup(opts)
 
 return M

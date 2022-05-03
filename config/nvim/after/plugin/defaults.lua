@@ -1,8 +1,8 @@
 local set = vim.opt
 
 --  Basic config
-set.scrolloff = 999 -- Lines of context
-set.sidescrolloff = 999
+-- set.scrolloff = 999 -- Lines of context
+-- set.sidescrolloff = 999
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true

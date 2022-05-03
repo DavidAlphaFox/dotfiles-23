@@ -104,14 +104,14 @@ utils.map("n", "ñ<Tab>", require("harpoon.ui").nav_next)
 utils.map("n", "ñ <Tab>", require("harpoon.ui").nav_prev)
 
 utils.map("n", "ñ.", function()
-  require("harpoon.term").sendCommand(10, require("code_runner").get_filetype_command() .. "\n")
+  require("harpoon.term").sendCommand(10, require("code_runner.commands").get_filetype_command() .. "\n")
 end)
 
 utils.map("n", "ñ ", function()
   require("harpoon.term").gotoTerminal(10)
 end)
 
-utils.map("n", "<leader>e", ":RunCode<CR>", opts)
+utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
 utils.map("n", "<Leader>fo", ":TodoTelescope<CR>")
 
 local neogen = {

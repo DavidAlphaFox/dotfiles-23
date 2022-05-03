@@ -49,8 +49,9 @@ function M.setup()
       "declancm/cinnamon.nvim",
       config = function()
         require("cinnamon").setup {
-          extra_keymaps = true, -- Enable extra keymaps.
-          extended_keymaps = true, -- Enable extended keymaps.
+          default_keymaps = true, -- Create default keymaps.
+          extra_keymaps = true, -- Create extra keymaps.
+          extended_keymaps = true, -- Create extended keymaps.
           default_delay = 3
         }
       end,
@@ -75,6 +76,15 @@ function M.setup()
       "themercorp/themer.lua",
       config = function()
         require("config.themer").setup()
+      end,
+    }
+
+    -- Notification
+    use {
+      "rcarriga/nvim-notify",
+      event = "VimEnter",
+      config = function()
+        vim.notify = require "notify"
       end,
     }
 
@@ -304,7 +314,8 @@ function M.setup()
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      event = { "VimEnter" },
+      -- event = { "VimEnter" },
+      event = { "BufReadPre" },
       wants = {
         "coq_nvim",
         "lua-dev.nvim",

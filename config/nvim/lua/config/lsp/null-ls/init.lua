@@ -31,7 +31,7 @@ local sources = {
   -- diagnostics
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
-  b.diagnostics.flake8.with { extra_args = { "--ignore=E501" } },
+  b.diagnostics.flake8,
   b.diagnostics.tsc,
   -- b.diagnostics.selene,
   with_root_file(b.diagnostics.selene, "selene.toml"),
@@ -41,6 +41,7 @@ local sources = {
   b.code_actions.gitsigns,
   b.code_actions.eslint_d,
   b.code_actions.gitrebase,
+  b.code_actions.refactoring,
 
   -- hover
   b.hover.dictionary,
@@ -58,3 +59,4 @@ function M.setup(opts)
 end
 
 return M
+
