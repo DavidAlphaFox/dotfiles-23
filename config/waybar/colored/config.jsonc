@@ -1,0 +1,98 @@
+// vim:set ft=jsonc:
+{
+  "position": "top",
+  "modules-left": ["custom/arch-pill", "cpu", "memory", "temperature"],
+  "modules-center": [
+    "custom/playerctlprev",
+    "custom/playerctl",
+    "custom/playerctlnext"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock"
+  ],
+  // Modules configuration
+  "custom/arch-pill": {
+    "format": "",
+    // "on-click": "wofi",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "<span foreground='#edabd2'> </span><span> {:%I:%M %p}</span>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "<span foreground='#96CDFB'> </span><span> {:%I:%M %p  %a %d}</span>"
+  },
+  "cpu": {
+    "format": "<span foreground='#9fd3b3'></span> {usage}%"
+  },
+  "memory": {
+    "format": "<span foreground='#FAE3B0'></span> {}%",
+    "on-click": "kitty htop"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "<span foreground='#f79f79'></span> {temperatureC}°C"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span foreground='#fff0b8'>{icon}</span> {percent}%",
+    "states": [0, 50],
+    "format-icons": ["", ""]
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span foreground='#ABE9B3'>{icon} </span> {capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "interface": "wlan0",
+    "format": "Loading",
+    "format-wifi": "{essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format-wifi": "{essid}({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected"
+  },
+  "pulseaudio": {
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "format": "<span size='13000' foreground='#e68ac1'></span><span> {volume}%</span>",
+    "format-muted": "<span size='14000'>ﱝ</span>",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["奔", "墳"]
+    },
+    "on-click-right": "pavucontrol"
+  },
+  "custom/playerctl": {
+    "format": "{icon}  <span>{}</span>",
+    "return-type": "json",
+    "max-length": 70,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click-middle": "playerctl previous",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "format-icons": {
+      "Playing": "<span foreground='#ABE9B3'></span>",
+      "Paused": "<span foreground='#E8A2AF'></span>"
+    }
+  },
+  "tray": {
+    "icon-size": 20,
+    "reverse-direction": true
+  }
+}

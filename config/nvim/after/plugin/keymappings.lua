@@ -66,10 +66,10 @@ utils.map("n", "<Leader>j", ":wincmd j<CR>")
 utils.map("n", "<Leader>h", ":wincmd h<CR>")
 
 -- Resize pane
-utils.map("n", "<leader><leader>h", ":vertical resize +5<CR>")
-utils.map("n", "<leader><leader>l", ":vertical resize -5<CR>")
-utils.map("n", "<leader><leader>k", ":resize +5<CR>")
-utils.map("n", "<leader><leader>j", ":resize -5<CR>")
+utils.map("n", "<A-Left>", ":vertical resize +5<CR>")
+utils.map("n", "<A-Right>", ":vertical resize -5<CR>")
+utils.map("n", "<A-Up>", ":resize +5<CR>")
+utils.map("n", "<A-Down>", ":resize -5<CR>")
 
 --Move line to up or down
 utils.map("n", "J", ":m .+1<CR>==", opts)

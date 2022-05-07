@@ -9,11 +9,9 @@
 
 configuration {
     show-icons:                     false;
-	font:                      		"Comfortaa 14";
+	font:                      		"Comfortaa 12";
     disable-history:                false;
 	sidebar-mode: 					false;
-  kb-row-up: "h";
-  kb-row-down: "l";
 }
 
 @import "../../../styles/colors.rasi"
@@ -25,35 +23,34 @@ configuration {
 
 window {
     transparency:                   "real";
-    border-radius:                  20px;
-    location:                       center;
-    width:                       	800px;
-    x-offset:                       0px;
-    y-offset:                       0px;
+    border-radius:                  0px;
+    location:                       southeast;
+	width:							250px;
+    x-offset:                       -15px;
+    y-offset:                       -45px;
 }
 
 prompt {
     enabled: 						true;
     padding:                        10px;
-	background-color: 				@background;
+	background-color: 				@background-light;
 	text-color: 					@accent;
-    border:                  		0px 2px 0px 2px;
-    border-radius:                  100%;
+    border:                  		2px 2px 2px 2px;
+    border-radius:                  0px;
     border-color:                  	@accent;
 }
 
 textbox-prompt-colon {
 	expand: 						false;
-	str: 							" System ";
+	str: 							" Volume ";
 	background-color: 				@accent;
 	text-color: 					@background;
-    padding:                        10px 10px 0px 10px;
-    border-radius:                  100%;
+    padding:                        12px 10px 0px 10px;
 }
 
 inputbar {
 	children: 						[ textbox-prompt-colon, prompt ];
-    spacing:                        15px;
+    spacing:                        0px;
     background-color:               @background;
     text-color:                     @foreground;
     expand:                         false;
@@ -66,9 +63,9 @@ inputbar {
 }
 
 listview {
-    columns:						5;
+    columns:						3;
     lines:							1;
-    spacing:                        15px;
+    spacing:                        12px;
     cycle:                          true;
     dynamic:                        true;
     layout:                         vertical;
@@ -77,32 +74,32 @@ listview {
 mainbox {
     background-color:               @background;
     children:                       [ inputbar, listview ];
-    spacing:                        15px;
-    margin:                         40px;
+    spacing:                        12px;
+    margin:                         12px;
 }
 
 element {
     background-color:               @background-light;
     text-color:                     @foreground;
     orientation:                    vertical;
-    border-radius:                  100%;
+    border-radius:                  0px;
 }
 
 element-text {
     background-color: 				inherit;
     text-color:       				inherit;
-	font:							"feather 32";
+	font:							"feather 20";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    margin:                         40px 0px 40px 0px;
+    margin:                         19px 10px 19px 10px;
 }
 
 element normal.urgent,
 element alternate.urgent {
     background-color:               @off;
     text-color:                     @background;
-    border-radius:                  100%;
+    border-radius:                  0px;
 }
 
 element normal.active,
@@ -115,7 +112,7 @@ element selected {
     background-color:               @accent;
     text-color:                     @background;
     border:                  		0px;
-    border-radius:                  100%;
+    border-radius:                  0px;
     border-color:                  	@border;
 }
 
