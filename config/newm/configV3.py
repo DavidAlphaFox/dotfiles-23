@@ -195,13 +195,14 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     powermenu = "~/.config/rofi/bin/menu_powermenu"
     bookmarks = "~/.config/rofi/bin/bookmarks"
     passman = "~/.config/rofi/bin/passman"
+    wifi = "~/.config/rofi/bin/wifi"
 
     return [
         (super + "h", lambda: layout.move(-1, 0)),
         (super + "j", lambda: layout.move(0, 1)),
         (super + "k", lambda: layout.move(0, -1)),
         (super + "l", lambda: layout.move(1, 0)),
-        (super + "t", lambda: layout.move_in_stack(1)),
+        (super + "t", lambda: layout.move_in_stack(3)),
         (super + alt + "h", lambda: layout.move_focused_view(-1, 0)),
         (super + alt + "j", lambda: layout.move_focused_view(0, 1)),
         (super + alt + "k", lambda: layout.move_focused_view(0, -1)),
@@ -212,7 +213,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + ctrl + "l", lambda: layout.resize_focused_view(1, 0)),
         (altgr + "w", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
-        ("XF86TaskPane", layout.move_workspace),
+        ("Henkan_Mode", layout.move_workspace),
         (alt + "Tab", layout.move_next_view),
         (super + "u", lambda: layout.basic_scale(1)),
         (super + "n", lambda: layout.basic_scale(-1)),
@@ -220,12 +221,12 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "p", lambda: layout.ensure_locked(dim=True)),
         (super + "P", layout.terminate),
         ("XF86Close", layout.close_view),
-        (altgr + "r", layout.update_config),
+        ("XF86Reload", layout.update_config),
         (super, lambda: layout.toggle_overview(only_active_workspace=True)),
         (altgr + "z", layout.swallow_focused_view),
-        (super + "m", lambda: os.system("playerctl previous")),
-        (super + "i", lambda: os.system("playerctl next")),
-        (super + "ntilde", lambda: os.system("playerctl play-pause &")),
+        ("XF86AudioPrev", lambda: os.system("playerctl previous")),
+        ("XF86AudioNext", lambda: os.system("playerctl next")),
+        ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
         (altgr + "e", lambda: os.system(f"{powermenu} &")),
         ("XF86Copy", lambda: os.system(f"{clipboard} &")),
@@ -262,6 +263,17 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
             super + "Print",
             lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date +%s)".png &'),
         ),
+        ("XF86Go", lambda: os.system(f"{wifi} &")),
+        (
+            "XF86Mail",
+            lambda: os.system(
+                "electron-mail --enable-features=UseOzonePlatform --ozone-platform=wayland &"
+            ),
+        ),
+        ("XF86Bluetooth", lambda: os.system("blueman-manager &")),
+        ("XF86AudioPreset", lambda: os.system("pavucontrol &")),
+        ("XF86WWW", lambda: os.system("firefox &")),
+        ("XF86Documents", lambda: os.system("thunar &")),
     ]
 
 

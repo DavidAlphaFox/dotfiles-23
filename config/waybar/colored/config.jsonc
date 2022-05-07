@@ -1,20 +1,15 @@
 // vim:set ft=jsonc:
 {
   "position": "top",
-  "modules-left": ["custom/arch-pill", "cpu", "memory", "temperature"],
-  "modules-center": [
-    "custom/playerctlprev",
-    "custom/playerctl",
-    "custom/playerctlnext"
+  "modules-left": [
+    "custom/arch-pill",
+    "cpu",
+    "memory",
+    "temperature",
+    "battery"
   ],
-  "modules-right": [
-    "tray",
-    "network",
-    "pulseaudio",
-    "backlight",
-    "battery",
-    "clock"
-  ],
+  "modules-center": ["custom/playerctl"],
+  "modules-right": ["tray", "network", "pulseaudio", "backlight", "clock"],
   // Modules configuration
   "custom/arch-pill": {
     "format": "",
@@ -61,7 +56,8 @@
     "tooltip-format": "{ifname} via {gwaddr} ",
     "tooltip-format-wifi": "{essid}({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected"
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "~/.config/rofi/bin/wifi"
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
@@ -93,6 +89,7 @@
   },
   "tray": {
     "icon-size": 20,
-    "reverse-direction": true
+    "reverse-direction": true,
+    "spacing": 6
   }
 }
