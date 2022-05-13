@@ -5,5 +5,5 @@ date_generate="$(awk 'NR==3' $output_blocklist | awk '{print $4}')"
 current_date=$(date +%Oe)
 
 if [[ $current_date != ${date_generate:8:2} ]]; then
-	wget https://dblw.oisd.nl/ $output_blocklist
+  curl -o $output_blocklist https://dblw.oisd.nl/
 fi

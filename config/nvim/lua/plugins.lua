@@ -355,6 +355,7 @@ function M.setup()
     -- Debug
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use { "mfussenegger/nvim-dap-python" }
+    use { 'shuntaka9576/preview-swagger.nvim' }
 
     -- Bootstrap Neovim
     if packer_bootstrap then

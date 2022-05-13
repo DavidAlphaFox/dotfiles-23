@@ -8,9 +8,9 @@ playlist_display_symbol = true
 theme_selected = "default"
 
 [album_photo_xywh]
-x_between_1_100 = 2
-y_between_1_100 = 98
-width_between_1_100 = 30
+x_between_1_100 = 0
+y_between_1_100 = 97
+width_between_1_100 = 32
 align = "BottomLeft"
 
 [style_color_symbol]
@@ -327,3 +327,17 @@ args = "/"
 [keys.playlist_search.modifiers]
 type = "KeyModifiers"
 bits = 0
+[keys.playlist_swap_down.code]
+type = "Char"
+args = "j"
+
+[keys.playlist_swap_down.modifiers]
+type = "KeyModifiers"
+bits = 2
+[keys.playlist_swap_up.code]
+type = "Char"
+args = "k"
+
+[keys.playlist_swap_up.modifiers]
+type = "KeyModifiers"
+bits = 2

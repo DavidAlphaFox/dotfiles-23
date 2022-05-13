@@ -32,9 +32,9 @@ local on_attach = function(client, bufnr)
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.keymap.set("n", "<leader>fj", vim.lsp.buf.formatting, opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     vim.keymap.set("n", "<leader>fk", vim.lsp.buf.range_formatting, opts)
   end
 end

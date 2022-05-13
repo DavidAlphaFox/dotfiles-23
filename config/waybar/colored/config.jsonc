@@ -13,16 +13,16 @@
   // Modules configuration
   "custom/arch-pill": {
     "format": "",
-    // "on-click": "wofi",
+    "on-click": "~/.config/rofi/bin/launcher_misc",
     "tooltip": false
   },
   "clock": {
-    "format": "<span foreground='#edabd2'> </span><span> {:%I:%M %p}</span>",
+    "format": "<span foreground='#edabd2'> </span><span>{:%I:%M %p}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "<span foreground='#96CDFB'> </span><span> {:%I:%M %p  %a %d}</span>"
+    "format-alt": "<span foreground='#96CDFB'> </span><span>{:%I:%M %p %a %d}</span>"
   },
   "cpu": {
-    "format": "<span foreground='#9fd3b3'></span> {usage}%"
+    "format": "<span foreground='#aed9f6'></span> {usage}%"
   },
   "memory": {
     "format": "<span foreground='#FAE3B0'></span> {}%",

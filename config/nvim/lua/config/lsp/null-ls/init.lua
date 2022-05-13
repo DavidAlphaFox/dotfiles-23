@@ -29,6 +29,7 @@ local sources = {
   with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
+  -- b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
   b.diagnostics.flake8,
@@ -39,7 +40,7 @@ local sources = {
 
   -- code actions
   b.code_actions.gitsigns,
-  b.code_actions.eslint_d,
+  -- b.code_actions.eslint_d,
   b.code_actions.gitrebase,
   b.code_actions.refactoring,
 
@@ -59,4 +60,3 @@ function M.setup(opts)
 end
 
 return M
-

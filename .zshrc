@@ -1,79 +1,138 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-# Path to your oh-my-zsh installation.
-export ZSH="/home/crag/.oh-my-zsh"
-autoload -U compinit
-compinit
+# Start configuration added by Zim install {{{
+#
+# User configuration sourced by interactive shells
+#
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#  ZSH_THEME="robbyrussell"
+# -----------------
+# Zsh configuration
+# -----------------
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+#
+# History
+#
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+#
+# Input/output
+#
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Prompt for spelling correction of commands.
+#setopt CORRECT
 
-plugins=(
-  zsh-vi-mode
-  zoxide
-  copybuffer
-  copypath
-  copyfile
-  ripgrep
-  genpass
-  python
-  # poetry
-  history
-  colored-man-pages
-  extract
-  sudo
-  command-not-found
-  node
-  dircycle
-  docker
-  docker-compose
-  dotnet
-  systemd
-  ripgrep
-  ag
-  fd
-  fzf
-  fzf-tab
-)
+# Customize spelling correction prompt.
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 
-# -< Source files or scripts >-
-source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
 
-zvm_after_init_commands+=('enable-fzf-tab')
+# -----------------
+# Zim configuration
+# -----------------
 
-ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
+# Use degit instead of git as the default tool to install and update modules.
+#zstyle ':zim:zmodule' use 'degit'
+
+# --------------------
+# Module configuration
+# --------------------
+
+#
+# git
+#
+
+# Set a custom prefix for the generated aliases. The default prefix is 'G'.
+#zstyle ':zim:git' aliases-prefix 'g'
+
+#
+# input
+#
+
+# Append `../` to your input for each `.` you type after an initial `..`
+#zstyle ':zim:input' double-dot-expand yes
+
+#
+# termtitle
+#
+
+# Set a custom terminal title format using prompt expansion escape sequences.
+# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
+# If none is provided, the default '%n@%m: %~' is used.
+#zstyle ':zim:termtitle' format '%1~'
+
+#
+# zsh-autosuggestions
+#
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Customize the style that the suggestions are shown with.
+# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+#
+# zsh-syntax-highlighting
+#
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+
+# ------------------
+# Initialize modules
+# ------------------
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
+# ------------------------------
+# Post-init module configuration
+# ------------------------------
+
+#
+# zsh-history-substring-search
+#
+
+zmodload -F zsh/terminfo +p:terminfo
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+
+#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
+zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
+
+# Function
 sr(){
-rg "$1" -l | xargs sed -i "s/$1/$2/g"
+  rg "$1" -l | xargs sed -i "s/$1/$2/g"
 }
 
 # Util funtions
@@ -143,37 +202,65 @@ vims(){
 	nvim -p $(rg $1 -l | xargs)
 }
 
+lazy_load() {
+    echo "Lazy loading $1 ..."
+    local -a names
+    if [[ -n "$ZSH_VERSION" ]]; then
+        names=("${(@s: :)${1}}")
+    else
+        names=($1)
+    fi
+    unalias "${names[@]}"
+    . $2
+    shift 2
+    $*
+}
 
-# -> Config <-
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
-zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
+group_lazy_load() {
+    local script
+    script=$1
+    shift 1
+    for cmd in "$@"; do
+        alias $cmd="lazy_load \"$*\" $script $cmd"
+    done
+}
+group_lazy_load node npm yarn
+unset -f group_lazy_load
 
 # -< Aliases >-
+# HACK: Command alternatives
+alias ping="prettyping"
+alias icat="kitty +kitten icat"
+alias js="/usr/bin/node ~/.noderc"
+alias ls="logo-ls"
+alias cp="rsync -P"
+alias tree="ls -R"
+alias vi="nvim"
+alias vim="nvim"
 # HACK: docker Nftables
 alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
 alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
 alias dor='doff && don'
 # HACK: Config alias
-alias alacric="vim ~/.config/alacritty/alacritty.yml"
-alias swayc="vim ~/.config/sway/config"
-alias newmc="vim ~/.config/newm/config.py"
-alias zshc="vim ~/.zshrc"
-alias tmuxc="vim ~/.tmux.conf"
-alias firefoxc="vim ~/.mozilla/firefox/profiles.ini"
-alias kittyc="vim ~/.config/kitty/kitty.conf"
-alias dnsc="vim /etc/resolv.conf"
-alias nftc="vim /etc/nftables.conf"
 alias grubc="sudoedit /etc/default/grub"
-alias starshipc="vim ~/.config/starship.toml"
+alias alacric="nvim ~/.config/alacritty/alacritty.yml"
+alias swayc="nvim ~/.config/sway/config"
+alias newmc="nvim ~/.config/newm/config.py"
+alias zshc="nvim ~/.zshrc"
+alias zimc="nvim ~/.zimrc"
+alias tmuxc="nvim ~/.tmux.conf"
+alias firefoxc="nvim ~/.mozilla/firefox/profiles.ini"
+alias kittyc="nvim ~/.config/kitty/kitty.conf"
+alias dnsc="nvim /etc/resolv.conf"
+alias nftc="nvim /etc/nftables.conf"
+alias starshipc="nvim ~/.config/starship.toml"
 # HACK: Config Nvim Aliases
-alias vimc='vim ~/.config/nvim/init.lua'
-alias vimp='vim ~/.config/nvim/lua/plugins.lua'
-alias vimk='vim ~/.config/nvim/after/plugin/keymappings.lua'
-alias vimd='vim ~/.config/nvim/after/plugin/defaults.lua'
-alias vimt='vim ~/.config/nvim/lua/colorscheme.lua'
-alias viml='vim ~/.config/nvim/lua/config/lsp/init.lua'
+alias vimc='nvim ~/.config/nvim/init.lua'
+alias vimp='nvim ~/.config/nvim/lua/plugins.lua'
+alias vimk='nvim ~/.config/nvim/after/plugin/keymappings.lua'
+alias vimd='nvim ~/.config/nvim/after/plugin/defaults.lua'
+alias vimt='nvim ~/.config/nvim/lua/colorscheme.lua'
+alias viml='nvim ~/.config/nvim/lua/config/lsp/init.lua'
 # HACK: Jump alias
 alias Applications="cd /usr/share/applications"
 alias Desktop="cd /$HOME/Escritorio"
@@ -184,32 +271,21 @@ alias Music="cd /$HOME/Música"
 alias Videos="cd /$HOME/Vídeos"
 alias Git="cd /$HOME/Git"
 alias Usb="cd /run/media/crag"
-# HACK: Command alternatives
-alias ping="prettyping"
-# alias icat="kitty +kitten icat"
-alias js="/usr/bin/node ~/.noderc"
-alias ls="logo-ls"
-alias cp="rsync -P"
-alias tree="ls -R"
-alias vi="nvim"
-alias vim="nvim"
-# HACK: HACK: fzf alias
+# HACK: fzf alias
 alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: short alias
-# alias aid="swaymsg -t get_tree | grep "app_id""
-alias help=cht.sh
+alias aid="swaymsg -t get_tree | grep "app_id""
+alias help="cht.sh"
 alias zt="zathura"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias music="termusic"
-
-# Tem alias
+# HACK: Tem alias
 alias wpstart="docker start wordpressdb wordpress"
 alias wpstop="docker stop wordpress wordpressdb"
 
 # -< Environ variable >-
-export ANDROID_HOME=/opt/android-sdk
 export MYSQL_PS1="\n \d  ﯐ "
 export TERM="xterm-kitty"
 export VISUAL=nvim
@@ -218,14 +294,10 @@ export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
 export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' --height 40% --reverse --bind='?:toggle-preview'"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wxgtk-dev/lib/
-export PATH="$HOME/.poetry/bin:$PATH"
-export MESA_LOADER_DRIVER_OVERRIDE=iris
-source ~/.passmaria.zsh
-
+# source ~/.passmaria.zsh
 # -< Evals >-
 eval "$(starship init zsh)"
-
+eval "$(zoxide init zsh)"
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then

@@ -160,8 +160,10 @@ altgr = "3-"
 ctrl = "C-"
 alt = "A-"
 background = {
-    "path": os.environ["HOME"] + f"/.cache/space/space{randrange(1, 5)}.jpg",
-    # "path": os.environ["HOME"] + "/Imágenes/wallpaper-color.png",
+    # "path": os.environ["HOME"] + f"/.cache/space/space{randrange(1, 5)}.jpg",
+    # "path": os.environ["HOME"]
+    # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
+    "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
     "time_scale": 0.125,
     "anim": True,
 }
