@@ -9,13 +9,13 @@
 # Modules
 #
 
-zmodule archive
 zmodule environment
 zmodule input
 zmodule utility
+zmodule archive
+zmodule https://github.com/le0me55i/zsh-systemd.git --source systemd.plugin.zsh
 zmodule https://github.com/Aloxaf/fzf-tab.git
 zmodule https://github.com/jeffreytse/zsh-vi-mode.git
-zmodule https://github.com/le0me55i/zsh-systemd.git --source systemd.plugin.zsh
 
 #
 # Prompt
