@@ -1,3 +1,4 @@
+# vim: filetype=zsh
 # Start configuration added by Zim install {{{
 #
 # This is not sourced during shell startup, and it's only used to configure the
@@ -8,20 +9,13 @@
 # Modules
 #
 
-# Sets sane Zsh built-in environment options.
+zmodule archive
 zmodule environment
-# Provides handy git aliases and functions.
-zmodule git
-# Applies correct bindkeys for input events.
 zmodule input
-# Sets a custom terminal title.
-# zmodule termtitle
-# Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
 zmodule https://github.com/Aloxaf/fzf-tab.git
 zmodule https://github.com/jeffreytse/zsh-vi-mode.git
 zmodule https://github.com/le0me55i/zsh-systemd.git --source systemd.plugin.zsh
-zmodule archive
 
 #
 # Prompt
@@ -33,6 +27,7 @@ zmodule archive
 # zmodule git-info
 # A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
 # zmodule asciiship
+zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 
 #
 # Completion
@@ -49,9 +44,7 @@ zmodule completion
 #
 
 # Fish-like syntax highlighting for Zsh.
-# zsh-users/zsh-syntax-highlighting must be sourced after completion
-# zmodule zsh-users/zsh-syntax-highlighting
-zmodule https://github.com/z-shell/F-Sy-H.git --source F-Sy-H.plugin.zsh
+zmodule https://github.com/z-shell/F-Sy-H --source F-Sy-H.plugin.zsh
 # Fish-like history search (up arrow) for Zsh.
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search

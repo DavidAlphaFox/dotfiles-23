@@ -38,9 +38,6 @@ end
 --
 
 -- vim.g.colorscheme = "everforest"
-vim.g.pswag_node_path = '/usr/bin/node'
-vim.g.pswag_lunch_port = '6060'
-vim.g.pswag_lunch_ip = '127.0.0.1'
 vim.g.colorscheme = "amora"
 require "config"
 require("plugins").setup()

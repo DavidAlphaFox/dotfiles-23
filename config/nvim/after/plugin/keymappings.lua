@@ -55,8 +55,8 @@ for i = 9, 1, -1 do
   utils.map("n", string.format("ñt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i))
 end
 utils.map("n", "ñd", ":bd<CR>")
-utils.map("n", "ñk", ":bnext<CR>")
-utils.map("n", "ñj", ":bprev<CR>")
+utils.map("n", "ñw", ":bnext<CR>")
+utils.map("n", "ñq", ":bprev<CR>")
 
 -- Move between splits
 -- Better window navigation
@@ -68,8 +68,8 @@ utils.map("n", "<Leader>h", ":wincmd h<CR>")
 -- Resize pane
 utils.map("n", "<A-Left>", ":vertical resize +5<CR>")
 utils.map("n", "<A-Right>", ":vertical resize -5<CR>")
-utils.map("n", "<A-Up>", ":resize +5<CR>")
-utils.map("n", "<A-Down>", ":resize -5<CR>")
+utils.map("n", "<A-Down>", ":resize +5<CR>")
+utils.map("n", "<A-Up>", ":resize -5<CR>")
 
 --Move line to up or down
 utils.map("n", "J", ":m .+1<CR>==", opts)
@@ -88,10 +88,6 @@ utils.map("t", "<C-v><Esc>", "<Esc>")
 utils.map("n", "<leader>c", ':let @/=""<cr>')
 -- utils.map('n', '<bs>', '<c-^>`”zz')
 utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
-
--- Format current buffer
-utils.map("n", "<leader>a", "=ip", opts)
-utils.map("n", "<leader>i", "=G", opts)
 
 -- Motions
 utils.map("n", "ç", "%")

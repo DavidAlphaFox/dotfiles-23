@@ -3,6 +3,8 @@ local set = vim.opt
 --  Basic config
 -- set.scrolloff = 999 -- Lines of context
 -- set.sidescrolloff = 999
+set.syntax = 'enable'
+set.scrolloff = 8
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true
@@ -14,6 +16,9 @@ set.undofile = false
 set.undolevels = 1000
 set.backspace = { "indent", "eol", "start", "nostop" } -- Better backspace.
 set.inccommand = "split"
+set.matchtime = 2
+set.updatetime = 250
+set.timeoutlen = 500
 
 -- speed up
 set.lazyredraw = false
@@ -60,7 +65,7 @@ set.cursorline = true
 set.cursorcolumn = true
 set.wildmenu = true
 set.wildmode = "longest:full,full"
-set.showmatch = false
+set.showmatch = true
 set.errorbells = true
 set.list = false
 set.signcolumn = "yes"

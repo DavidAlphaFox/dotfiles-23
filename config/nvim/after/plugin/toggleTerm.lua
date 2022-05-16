@@ -5,7 +5,7 @@ local jobid = -1
 local bufid = -1
 local terminal_opened_win_id = -1
 
-utils.map({ "n", "t" }, "<leader><leader>",
+utils.map({ "n", "t" }, "ñt",
   function()
   local buf_exist = vim.api.nvim_buf_is_valid(bufid)
   local current_wind_id = vim.api.nvim_get_current_win()
@@ -14,6 +14,7 @@ utils.map({ "n", "t" }, "<leader><leader>",
     if bufinfo.hidden == 1 then
       terminal_opened_win_id = current_wind_id
       vim.cmd(splitconfig .. "| buffer " .. bufname)
+      vim.cmd("startinsert")
     else
       vim.fn.win_gotoid(bufinfo.windows[1])
       vim.cmd(":hide")
@@ -21,6 +22,7 @@ utils.map({ "n", "t" }, "<leader><leader>",
         vim.fn.win_gotoid(current_wind_id)
         terminal_opened_win_id = current_wind_id
         vim.cmd(splitconfig .. "| buffer " .. bufname)
+        vim.cmd("startinsert")
       end
     end
   else
@@ -32,6 +34,7 @@ utils.map({ "n", "t" }, "<leader><leader>",
     vim.bo.buflisted = false
     bufid = vim.api.nvim_buf_get_number(0)
     jobid = vim.b.terminal_job_id
+    vim.cmd("startinsert")
   end
 end)
 

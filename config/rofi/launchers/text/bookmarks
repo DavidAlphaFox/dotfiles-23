@@ -17,7 +17,6 @@ Awesome: cli apps|https://github.com/agarrharr/awesome-cli-apps
 Awesome: neovim|https://github.com/rockerBOO/awesome-neovim
 Awesome: python3|https://github.com/vinta/awesome-python
 Blog: Gtk|https://blog.gtk.org/2019/
-Blog: Hacker News|https://news.ycombinator.com/
 Blog: Lastdragon|https://www.lastdragon.net/
 Blog: Losst|https://losst.ru
 Blog: Spy|https://spy-soft.net/
@@ -42,9 +41,7 @@ Git: Diseño de sistemas|https://github.com/donnemartin/system-design-primer
 Git: Ejeccios de sistema|https://github.com/germaaan/SSBW
 Git: Guide|http://rogerdudler.github.io/git-guide/index.es.html
 Git: Mutt wizard|https://github.com/LukeSmithxyz/mutt-wizard
-Git: Otra bar|https://github.com/PolyMeilex/YetAnotherBar
 Git: Realworld|https://github.com/gothinkster/realworld
-Git: https://github.com/samvel1024/kbct
 Hot: Packs stars|https://celebrityrevealer.com/
 Piracy: Download Music|https://free-mp3-download.net/
 Python: 25 snippets|https://levelup.gitconnected.com/25-useful-python-snippets-for-everyday-problems-4e1a74d1abae
@@ -85,13 +82,10 @@ Resources: linux Server security tips|https://betterprogramming.pub/23-linux-ser
 Resources: nftables firewall|https://cryptsus.com/blog/setting-up-nftables-firewall.html
 Resources: servidor de archivos como miembro de un dominio|https://blog.desdelinux.net/samba-como-servidor-de-archivos-como-miembro-de-un-dominio/
 Rooms: Play station|https://roms-download.com/roms/playstation-portable
-TaT: 19 cosas chulas terminal|https://poesiabinaria.net/2015/02/19-cosas-chulas-que-se-pueden-hacer-en-una-terminal-de-linux/
-TaT: Activar esni y doh firefox|https://geekland.eu/activar-esni-y-doh-en-firefox/
-TaT: Best practices|https://towardsdatascience.com/30-python-best-practices-tips-and-tricks-caefb9f8c5f5
 Tools: Adobe Color|https://color.adobe.com/create/color-wheel
 Tools: Brand colors|https://brandcolors.net/
 Tools: Cargar imagen|https://es.imgbb.com/
-Tools: Me an hackeado|https://haveibeenpwned.com/
+Tools: Me han hackeado|https://haveibeenpwned.com/
 Tools: Online File Converter|http://www.online-convert.com/
 Tools: Pastebin|https://pastebin.com/
 Tools: Random browser engine|https://randsearch.daniel.priv.no/
@@ -99,12 +93,15 @@ Tools: Search Files|https://filepursuit.com/
 Tools: Unblocked sites|https://unblocked-pw.github.io/
 Tools: remove.bg|https://www.remove.bg/
 Url: Moodle inaoe|http://adria.inaoep.mx:5124/moodle/login/index.php
+Utils: 19 cosas chulas terminal|https://poesiabinaria.net/2015/02/19-cosas-chulas-que-se-pueden-hacer-en-una-terminal-de-linux/
 Utils: 400 comandos Linux|https://blog.desdelinux.net/mas-de-400-comandos-para-gnulinux-que-deberias-conocer/
+Utils: Activar esni y doh firefox|https://geekland.eu/activar-esni-y-doh-en-firefox/
+Utils: Best practices|https://towardsdatascience.com/30-python-best-practices-tips-and-tricks-caefb9f8c5f5
 Utils: List github repositories|https://betterprogramming.pub/a-curated-list-of-57-amazing-github-repositories-for-every-python-developer-67dc2cd8d0bc
 Utils: Refactorin|https://refactoring.guru/
 Utils: WindowMatching|http://wiki.compiz.org/WindowMatching
 Utils: exe NetCore|https://rojiblancosite.wordpress.com/2019/07/09/generar-exe-en-net-core/
 Videos: FIREWALL MODERNO|https://www.youtube.com/watch?v=A8aRH3oYyR8
 Videos: Reusar pantalla tablet|https://www.youtube.com/watch?v=qkk-JEKBNWQ
-Vim: anymore|https://medium.com/free-code-camp/how-not-to-be-afraid-of-vim-anymore-ec0b7264b0ae
 Vim: tips|https://pmoracho.github.io/blog/2016/12/23/My-Vim-Tips/
+Tips: Mejor rendimiento linq|https://medium.com/@hussein.nm/best-linq-performance-2dfe7fc7eff2

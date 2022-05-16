@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -25,7 +26,7 @@ bindkey -e
 #setopt CORRECT
 
 # Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+# SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
@@ -46,23 +47,14 @@ WORDCHARS=${WORDCHARS//[\/]}
 #
 
 # Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
+# zstyle ':zim:git' aliases-prefix 'g'
 
 #
 # input
 #
 
 # Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
+zstyle ':zim:input' double-dot-expand yes
 
 #
 # zsh-autosuggestions
@@ -82,7 +74,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
@@ -129,6 +121,23 @@ unset key
 
 #zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
+
+# zstyle :prompt:pure:execution_time      color
+# zstyle :prompt:pure:git:arrow           color
+zstyle :prompt:pure:git:branch          color '#84c49b'
+zstyle :prompt:pure:git:dirty           color '#f79f79'
+zstyle :prompt:pure:git:action          color '#e68ac1'
+zstyle :prompt:pure:git:stash           color '#f6e08b'
+zstyle :prompt:pure:path                color '#aed9f6'
+zstyle :prompt:pure:prompt:success      color '#b2aeff'
+# zstyle :prompt:pure:user                color
+# zstyle :prompt:pure:user:root           color
+zstyle :prompt:pure:virtualenv          color '#edabd2'
+
+PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
+
+# -< Evals >-
+eval "$(zoxide init zsh)"
 
 # Function
 sr(){
@@ -229,6 +238,7 @@ unset -f group_lazy_load
 
 # -< Aliases >-
 # HACK: Command alternatives
+# alias ...="cd ../.."
 alias ping="prettyping"
 alias icat="kitty +kitten icat"
 alias js="/usr/bin/node ~/.noderc"
@@ -237,6 +247,11 @@ alias cp="rsync -P"
 alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
+alias zt="zathura"
+alias music="termusic"
+alias aid="swaymsg -t get_tree | grep "app_id""
+alias help="cht.sh"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 # HACK: docker Nftables
 alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
 alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
@@ -275,12 +290,6 @@ alias Usb="cd /run/media/crag"
 alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-# HACK: short alias
-alias aid="swaymsg -t get_tree | grep "app_id""
-alias help="cht.sh"
-alias zt="zathura"
-alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias music="termusic"
 # HACK: Tem alias
 alias wpstart="docker start wordpressdb wordpress"
 alias wpstop="docker stop wordpress wordpressdb"
@@ -295,12 +304,11 @@ export BAT_THEME="gruvbox-dark"
 export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' --height 40% --reverse --bind='?:toggle-preview'"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 # source ~/.passmaria.zsh
-# -< Evals >-
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
   source "/usr/lib/kitty/shell-integration/zsh/kitty.zsh";
 fi
 # END_KITTY_SHELL_INTEGRATION
+# eval "$(starship init zsh)"
+# zprof
