@@ -92,7 +92,7 @@ function M.setup()
     use {
       "nvim-treesitter/nvim-treesitter",
       opt = true,
-      event = "BufRead",
+      event = "BufReadPre",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -229,6 +229,7 @@ function M.setup()
         require("config.lualine").setup()
       end,
       wants = "nvim-web-devicons",
+      -- disable = true
     }
 
     --UI
@@ -293,6 +294,14 @@ function M.setup()
 
     -- General Plugins
     use "jeffkreeftmeijer/vim-numbertoggle"
+    use {
+      "voldikss/vim-translator",
+      cmd = { "Translate", "TranslateV", "TranslateW", "TranslateWV", "TranslateR", "TranslateRV", "TranslateX" },
+      config = function()
+        vim.g.translator_target_lang = "es"
+        vim.g.translator_history_enable = true
+      end,
+    }
 
     -- LSP
 
@@ -327,12 +336,6 @@ function M.setup()
       requires = {
         "folke/lua-dev.nvim",
         "jose-elias-alvarez/null-ls.nvim",
-        {
-          "j-hui/fidget.nvim",
-          config = function()
-            require("fidget").setup()
-          end,
-        },
       },
     }
 

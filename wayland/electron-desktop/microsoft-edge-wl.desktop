@@ -105,7 +105,8 @@ Comment[vi]=Truy cập Internet
 Comment[zh_CN]=访问互联网
 Comment[zh_HK]=連線到網際網路
 Comment[zh_TW]=連線到網際網路
-Exec=open-wl /usr/bin/microsoft-edge-stable %U
+Exec=/usr/bin/microsoft-edge-stable --ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WebUIDarkMode %U
+
 StartupNotify=true
 Terminal=false
 Icon=microsoft-edge
@@ -166,7 +167,7 @@ Name[uk]=Нове вікно
 Name[vi]=Cửa sổ Mới
 Name[zh_CN]=新建窗口
 Name[zh_TW]=開新視窗
-Exec=open-wl /usr/bin/microsoft-edge-stable
+Exec=/usr/bin/microsoft-edge-stable --ozone-platform-hint=auto --enable-features=WebRTCPipeWireCapturer,WebUIDarkMode
 
 [Desktop Action new-private-window]
 Name=New InPrivate Window
@@ -218,4 +219,5 @@ Name[uk]=Нове вікно InPrivate
 Name[vi]=Cửa Sổ InPrivate Mới
 Name[zh_CN]=新建 InPrivate 窗口
 Name[zh_TW]=新 InPrivate 視窗
-Exec=open-wl /usr/bin/microsoft-edge-stable --inprivate
+Exec=/usr/bin/microsoft-edge-stable --ozone-platform-hint=auto
+--enable-features=WebRTCPipeWireCapturer,WebUIDarkMode --inprivate

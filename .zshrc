@@ -102,6 +102,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
+source ~/.zshfunc
 
 # ------------------------------
 # Post-init module configuration
@@ -134,107 +135,13 @@ zstyle :prompt:pure:prompt:success      color '#b2aeff'
 # zstyle :prompt:pure:user:root           color
 zstyle :prompt:pure:virtualenv          color '#edabd2'
 
-PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
+# PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
+PS1='
+%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}
+%B%(1j.%F{blue}*%f .)%(?.%F{#fb5c8e}%F{#f47d49}%F{#a29dff}.%F{#a29dff}%F{#f47d49}%F{#fb5c8e})%f%b '
 
 # -< Evals >-
 eval "$(zoxide init zsh)"
-
-# Function
-sr(){
-  rg "$1" -l | xargs sed -i "s/$1/$2/g"
-}
-
-# Util funtions
-encrypt(){
-  openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
-}
-
-decrypt(){
-  openssl enc -d -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
-}
-
-acp() {
-  git add .
-  git commit -m "$1"
-  git push
-}
-
-dhg() {
-  git checkout --orphan latest_branch
-  git add -A
-  git commit -am "$1"
-  git branch -D master
-  git branch -m master
-  git push -f origin master
-}
-
-fapp() {
-	selected="$(/bin/ls /usr/share/applications | fzf -e)"
-	nohup `grep '^Exec' "/usr/share/applications/$selected" | tail -1 | sed 's/^Exec=//' | sed 's/%.//'` >/dev/null 2>&1&
-}
-
-fkill() {
-  local pid
-
-  pid="$(
-    pgrep . -l \
-      | fzf -m \
-      | awk '{print $1}'
-  )" || return
-  if [ $pid ];then
-    kill -"${1:-9}" "$pid"
-  fi
-}
-
-fktmux() {
-    local sessions
-    sessions="$(tmux ls|fzf --exit-0 --multi)"  || return $?
-    local i
-    for i in "${(f@)sessions}"
-    do
-        [[ $i =~ '([^:]*):.*' ]] && {
-            echo "Killing $match[1]"
-            tmux kill-session -t "$match[1]"
-        }
-    done
-}
-
-gitignore() {
-    if [ $# = 1 ]; then
-      curl -L -s https://www.gitignore.io/api/$@ > .gitignore
-    else
-      echo 'usage: gitignore django'
-    fi
-}
-
-vims(){
-	nvim -p $(rg $1 -l | xargs)
-}
-
-lazy_load() {
-    echo "Lazy loading $1 ..."
-    local -a names
-    if [[ -n "$ZSH_VERSION" ]]; then
-        names=("${(@s: :)${1}}")
-    else
-        names=($1)
-    fi
-    unalias "${names[@]}"
-    . $2
-    shift 2
-    $*
-}
-
-group_lazy_load() {
-    local script
-    script=$1
-    shift 1
-    for cmd in "$@"; do
-        alias $cmd="lazy_load \"$*\" $script $cmd"
-    done
-}
-group_lazy_load node npm yarn
-unset -f group_lazy_load
 
 # -< Aliases >-
 # HACK: Command alternatives
@@ -262,6 +169,7 @@ alias alacric="nvim ~/.config/alacritty/alacritty.yml"
 alias swayc="nvim ~/.config/sway/config"
 alias newmc="nvim ~/.config/newm/config.py"
 alias zshc="nvim ~/.zshrc"
+alias zshf="nvim ~/.zshfunc"
 alias zimc="nvim ~/.zimrc"
 alias tmuxc="nvim ~/.tmux.conf"
 alias firefoxc="nvim ~/.mozilla/firefox/profiles.ini"

@@ -20,6 +20,7 @@ end
 
 local sources = {
   -- formatting
+  -- b.formatting.astyl,
   b.formatting.prettierd,
   b.formatting.shfmt,
   b.formatting.fixjson,
@@ -40,7 +41,7 @@ local sources = {
 
   -- code actions
   b.code_actions.gitsigns,
-  -- b.code_actions.eslint_d,
+  b.code_actions.eslint_d,
   b.code_actions.gitrebase,
   b.code_actions.refactoring,
 

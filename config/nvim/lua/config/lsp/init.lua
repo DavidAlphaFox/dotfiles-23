@@ -1,7 +1,17 @@
 local lsp = require "lspconfig"
 local coq = require "coq"
 
-local M = {}
+
+local diagnostics_active = true
+
+local function toggle_diagnostics()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -24,11 +34,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, opts)
 
   -- Configure highlighting
   require("config.lsp.highlighter").setup(client)
 
-  -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
@@ -83,16 +93,21 @@ local function sumneko_lua()
   }
 end
 
-local function omnisharp()
-  local pid = vim.fn.getpid()
-  return {
-    cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
-    root_dir = lsp.util.root_pattern("*.csproj", "*.sln"),
-  }
-end
+-- local function omnisharp()
+--   local pid = vim.fn.getpid()
+--   return {
+--     cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+-- root_dir = function(file, _)
+--   if file:sub(- #".csx") == ".csx" then
+--     return nvim_lsp.util.path.dirname(file)
+--   end
+--   return nvim_lsp.util.root_pattern("*.sln")(file) or util.root_pattern("*.csproj")(file)
+-- end,
+--   }
+-- end
 
 local server_config = {
-  omnisharp = omnisharp(),
+  -- omnisharp = omnisharp(),
   sumneko_lua = sumneko_lua(),
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
@@ -107,7 +122,7 @@ local servers = {
   "dockerls",
   "bashls",
   "sqls",
-  "omnisharp",
+  "csharp_ls",
   "cssls",
   "intelephense",
 }
@@ -116,6 +131,8 @@ local opts = make_config()
 
 -- Setup LSP handlers
 require("config.lsp.handlers").setup()
+
+local M = {}
 
 function M.setup()
   -- Setup all lenguage server and null-ls
