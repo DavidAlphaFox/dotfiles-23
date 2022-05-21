@@ -44,9 +44,9 @@
     "vim.statusBarColors.easymotioninputmode": "#007ACC",
     "vim.statusBarColors.surroundinputmode": "#007ACC",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#E68AC1",
-        "statusBar.noFolderBackground": "#E68AC1",
-        "statusBar.debuggingBackground": "#E68AC1",
+        "statusBar.background": "#A29DFF",
+        "statusBar.noFolderBackground": "#A29DFF",
+        "statusBar.debuggingBackground": "#A29DFF",
         "statusBar.foreground": "#1A1A2E",
         "statusBar.debuggingForeground": "#1A1A2E",
         "statusBar.border": "#1A1A2E"
@@ -64,6 +64,8 @@
     "editor.scrollbar.verticalScrollbarSize": 0,
     "editor.minimap.enabled": false,
     "editor.lineNumbers": "relative",
+    "editor.formatOnSave": true,
+    "breadcrumbs.enabled": false,
     "workbench.startupEditor": "none",
     "security.workspace.trust.startupPrompt": "never",
 }
