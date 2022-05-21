@@ -103,7 +103,7 @@ function M.setup()
   utils.map("n", "<leader>fk", builtin.keymaps)
   utils.map("n", "<leader>ft", builtin.filetypes)
   utils.map("n", "<leader>ff", builtin.current_buffer_fuzzy_find)
-  utils.map('n', '<leader>bt', require('telescope.builtin').current_buffer_tags)
+  utils.map('n', '<leader>bt', builtin.current_buffer_tags)
 
   -- -- LSP Pickers
   utils.map("n", "<leader>lr", builtin.lsp_references)
@@ -114,8 +114,8 @@ function M.setup()
   utils.map("n", "<leader>li", builtin.lsp_implementations)
   --
   -- Git Pickers
-  utils.map("n", "<leader>gc", builtin.git_commits)
-  utils.map("n", "<leader>gbc", builtin.git_bcommits)
+  -- utils.map("n", "<leader>gc", builtin.git_commits)
+  utils.map("n", "<leader>gc", builtin.git_bcommits)
   utils.map("n", "<leader>gb", builtin.git_branches)
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)

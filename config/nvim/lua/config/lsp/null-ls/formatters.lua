@@ -25,7 +25,7 @@ function M.format()
       filter = function(clients)
         return vim.tbl_filter(function(client)
           return client.name ~= "tsserver"
-          and client.name ~= "csharp_ls"
+          -- and client.name ~= "csharp_ls"
         end, clients)
       end,
     }
