@@ -51,6 +51,7 @@ set.linebreak = true
 set.textwidth = 80
 
 -- UI Config
+set.winbar = "%{%v:lua.require'config.winbar'.gps()%}"
 set.termguicolors = true -- Enable colors in terminal
 set.shortmess = set.shortmess - "S"
 -- set.completeopt = "menuone,noselect"

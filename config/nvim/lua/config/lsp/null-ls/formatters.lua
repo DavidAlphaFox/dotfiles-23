@@ -19,16 +19,16 @@ end
 
 function M.format()
   if M.autoformat then
-    -- vim.lsp.buf.formatting_sync(nil, 2000) -- deprecated
+    local view = vim.fn.winsaveview()
     vim.lsp.buf.format {
       async = true,
       filter = function(clients)
         return vim.tbl_filter(function(client)
           return client.name ~= "tsserver"
-          -- and client.name ~= "csharp_ls"
         end, clients)
       end,
     }
+    vim.fn.winrestview(view)
   end
 end
 
@@ -71,3 +71,4 @@ function M.list_supported(filetype)
 end
 
 return M
+

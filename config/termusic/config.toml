@@ -229,6 +229,20 @@ args = "K"
 [keys.global_key_editor_open.modifiers]
 type = "KeyModifiers"
 bits = 1
+[keys.global_layout_treeview.code]
+type = "Char"
+args = "1"
+
+[keys.global_layout_treeview.modifiers]
+type = "KeyModifiers"
+bits = 0
+[keys.global_layout_database.code]
+type = "Char"
+args = "2"
+
+[keys.global_layout_database.modifiers]
+type = "KeyModifiers"
+bits = 0
 [keys.library_load_dir.code]
 type = "Char"
 args = "L"
@@ -341,3 +355,10 @@ args = "k"
 [keys.playlist_swap_up.modifiers]
 type = "KeyModifiers"
 bits = 2
+[keys.database_add_all.code]
+type = "Char"
+args = "L"
+
+[keys.database_add_all.modifiers]
+type = "KeyModifiers"
+bits = 1
