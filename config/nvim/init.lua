@@ -37,8 +37,8 @@ end
 --
 
 vim.g.mapleader = " "
--- vim.g.colorscheme = "everforest"
-vim.g.colorscheme = "amora"
+vim.g.colorscheme = "everforest"
+-- vim.g.colorscheme = "amora"
 require "config"
 require("plugins").setup()
 require "debug"

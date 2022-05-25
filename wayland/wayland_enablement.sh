@@ -3,7 +3,7 @@
 #
 # GTK environment
 #
-export GDK_BACKEND=wayland
+# export GDK_BACKEND=wayland
 export TDESKTOP_DISABLE_GTK_INTEGRATION=1
 export CLUTTER_BACKEND=wayland
 export BEMENU_BACKEND=wayland

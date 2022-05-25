@@ -52,12 +52,10 @@ end
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
+  -- capabilities.textDocument.definition = true
   return {
     on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
+    capabilities = capabilities
   }
 end
 
@@ -93,25 +91,11 @@ local function sumneko_lua()
   }
 end
 
--- local function omnisharp()
---   local pid = vim.fn.getpid()
---   return {
---     cmd = { "/usr/bin/omnisharp", "--languageserver", "--hostPID", tostring(pid) },
--- root_dir = function(file, _)
---   if file:sub(- #".csx") == ".csx" then
---     return nvim_lsp.util.path.dirname(file)
---   end
---   return nvim_lsp.util.root_pattern("*.sln")(file) or util.root_pattern("*.csproj")(file)
--- end,
---   }
--- end
-
 local server_config = {
-  -- omnisharp = omnisharp(),
   sumneko_lua = sumneko_lua(),
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
-  },
+  }
 }
 
 local servers = {

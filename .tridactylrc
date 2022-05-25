@@ -17,6 +17,7 @@
 " is removed, then it will return to default. In other words, this file serves
 " as an enforced single point of truth for Tridactyl's configuration.
 sanitize tridactyllocal tridactylsync
+" sanitise tridactyllocal
 
 colorscheme dark
 
@@ -44,7 +45,7 @@ unbind <C-f>
 unbind J
 unbind K
 unbind F1
-bind ñ fillcmdline_notrail
+" bind ñ fillcmdline_notrail
 " But also support Tridactyl search too.
 bind / fillcmdline find
 bind ? fillcmdline find -?
@@ -78,15 +79,15 @@ quickmark l http://localhost/
 " move in tabs
 "
 
-bind -1 tab 1
-bind -2 tab 2
-bind -3 tab 3
-bind -4 tab 4
-bind -5 tab 5
-bind -6 tab 6
-bind -7 tab 7
-bind -8 tab 8
-bind -9 tab 9
+bind ñ1 tab 1
+bind ñ2 tab 2
+bind ñ3 tab 3
+bind ñ4 tab 4
+bind ñ5 tab 5
+bind ñ6 tab 6
+bind ñ7 tab 7
+bind ñ8 tab 8
+bind ñ9 tab 9
 
 alias tabsort jsb browser.tabs.query({}).then(tabs => tabs.sort((t1, t2) => t1.url.localeCompare(t2.url)).forEach((tab, index) => browser.tabs.move(tab.id, {index})))
 

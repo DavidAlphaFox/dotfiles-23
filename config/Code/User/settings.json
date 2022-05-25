@@ -44,9 +44,9 @@
     "vim.statusBarColors.easymotioninputmode": "#007ACC",
     "vim.statusBarColors.surroundinputmode": "#007ACC",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#A29DFF",
-        "statusBar.noFolderBackground": "#A29DFF",
-        "statusBar.debuggingBackground": "#A29DFF",
+        "statusBar.background": "#E68AC1",
+        "statusBar.noFolderBackground": "#E68AC1",
+        "statusBar.debuggingBackground": "#E68AC1",
         "statusBar.foreground": "#1A1A2E",
         "statusBar.debuggingForeground": "#1A1A2E",
         "statusBar.border": "#1A1A2E"
@@ -56,7 +56,6 @@
     "markdown.preview.fontSize": 20,
     "keyboard.dispatch": "keyCode",
     "screencastMode.keyboardShortcutsFormat": "keys",
-    "window.zoomLevel": 1,
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.vertical": "hidden",
     "editor.scrollbar.horizontalScrollbarSize": 0,
@@ -74,4 +73,5 @@
     "workbench.editor.showTabs": false,
     "material-icon-theme.showWelcomeMessage": false,
     "workbench.iconTheme": "helium-icon-theme",
+    "window.zoomLevel": 1,
 }
