@@ -58,10 +58,10 @@ function M.setup()
   local theme = require("themer.modules.core.api").get_cp(vim.g.colorscheme)
   -- Telescope
   utils.fg_bg("TelescopeBorder", theme.bg.base, "NONE")
-  -- utils.fg_bg("TelescopeBorder", "#161925", "NONE")
+  -- -- utils.fg_bg("TelescopeBorder", "#161925", "NONE")
   utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
   utils.fg_bg("TelescopePromptNormal", "white", "NONE")
-  utils.fg_bg("TelescopePromptPrefix", theme.syntax.identifier, "NONE")
+  utils.fg_bg("TelescopePromptPrefix", theme.syntax.string, "NONE")
   utils.fg("TelescopePromptCounter", "white")
 
   utils.fg_bg("TelescopePromptTitle", "black", theme.syntax.include)

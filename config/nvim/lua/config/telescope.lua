@@ -1,8 +1,18 @@
 local utils = require "utils"
-
 local M = {}
 function M.setup()
   local actions = require "telescope.actions"
+
+  local mappings = {
+    i = {
+      ["<CR>"] = actions.select_tab,
+      ["<C-l>"] = actions.select_default,
+    },
+    n = {
+      ["<CR>"] = actions.select_tab,
+      ["l"] = actions.select_default,
+    },
+  }
   require("telescope").setup {
     defaults = {
       vimgrep_arguments = {
@@ -21,51 +31,65 @@ function M.setup()
       selection_strategy = "reset",
       sorting_strategy = "ascending",
       layout_strategy = "bottom_pane",
-      -- layout_strategy = "horizontal",
       layout_config = {
         bottom_pane = {
           prompt_position = "top",
         },
+        horizontal = {
+          prompt_position = "top",
+        },
       },
-      file_sorter = require("telescope.sorters").get_fuzzy_file,
+      -- file_sorter = require("telescope.sorters").get_fuzzy_file,
+      -- file_sorter = require("telescope.sorters").get_fzy_file,
       file_ignore_patterns = { "__pycache__", "node_modules" },
-      path_display = { "smart" },
+      path_display = { "shorten" },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
       results_title = "Results",
       color_devicons = true,
       use_less = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      preview_title = "",
-      mappings = {
-        i = {
-          ["<CR>"] = actions.select_tab,
-          ["<C-l>"] = actions.select_default,
-        },
-        n = {
-          ["<CR>"] = actions.select_tab,
-          ["l"] = actions.select_default,
-        },
-      },
     },
     pickers = {
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+        mappings = mappings
+      },
+      git_files = {
+        mappings = mappings
+      },
+      oldfiles = {
+        mappings = mappings
+      },
+      live_grep = {
+        mappings = mappings
+      },
+      grep_string = {
+        mappings = mappings
       },
     },
     extensions = {
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      },
       media_files = {
         filetypes = { "png", "webp", "jpg", "jpeg" },
         find_cmd = "rg", -- find command (defaults to `fd`)
       },
       file_browser = {
-        theme = "ivy",
+        hijack_netrw = true,
+        mappings = mappings
+      },
+      frecency = {
+        mappings = mappings
       },
     },
   }
 
-  local extensions = { "media_files", "file_browser", "frecency", "themes" }
+  local extensions = {"fzy_native" , "media_files", "file_browser", "frecency", "themes", "tele_tabby"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end
@@ -75,6 +99,7 @@ function M.setup()
   utils.map("n", "<leader>fm", ext.media_files.media_files)
   utils.map("n", "ñe", ext.file_browser.file_browser)
   utils.map("n", "ñf", ext.frecency.frecency)
+  utils.map("n", "<leader>w", ext.tele_tabby.list)
 
   local builtin = require "telescope.builtin"
 
@@ -88,12 +113,12 @@ function M.setup()
   end
   utils.map("n", "ññ", project_files)
   utils.map("n", "<leader>fg", builtin.grep_string)
-  utils.map("n", "<leader>fl", builtin.live_grep)
+  utils.map("n", "<leader>gg", builtin.live_grep)
 
   -- Vim Pickers
   utils.map("n", "ñb", builtin.buffers)
   utils.map("n", "ño", builtin.oldfiles)
-  utils.map("n", "<leader>fc", builtin.commands)
+  utils.map("n", "<leader>cc", builtin.commands)
   utils.map("n", "<leader>ch", builtin.command_history)
   utils.map("n", "<leader>sh", builtin.search_history)
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
@@ -107,11 +132,10 @@ function M.setup()
 
   -- -- LSP Pickers
   utils.map("n", "<leader>lr", builtin.lsp_references)
-  utils.map("n", "<leader>ls", builtin.lsp_document_symbols)
-  -- utils.map("n", "<leader>la", builtin.lsp_code_actions)
+  utils.map("n", "ñu", builtin.lsp_document_symbols)
   utils.map('n', '<leader>lf', builtin.lsp_definitions)
   utils.map("n", "<leader>ld", builtin.diagnostics)
-  utils.map("n", "<leader>li", builtin.lsp_implementations)
+  utils.map("n", "ñi", builtin.lsp_implementations)
   --
   -- Git Pickers
   -- utils.map("n", "<leader>gc", builtin.git_commits)
@@ -119,6 +143,8 @@ function M.setup()
   utils.map("n", "<leader>gb", builtin.git_branches)
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)
+  utils.map("n", "ñt", builtin.treesitter)
+  utils.map("n", "ñp", builtin.builtin)
 end
 
 return M

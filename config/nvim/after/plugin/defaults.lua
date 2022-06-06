@@ -3,7 +3,6 @@ local set = vim.opt
 --  Basic config
 -- set.scrolloff = 999 -- Lines of context
 -- set.sidescrolloff = 999
-set.syntax = 'enable'
 set.scrolloff = 8
 set.mouse = "a"
 set.clipboard = "unnamedplus"
@@ -52,7 +51,8 @@ set.textwidth = 80
 
 -- UI Config
 set.winbar = "%{%v:lua.require'config.winbar'.gps()%}"
-set.termguicolors = true -- Enable colors in terminal
+-- set.termguicolors = true -- Enable colors in terminal
+vim.o.termguicolors = true
 set.shortmess = set.shortmess - "S"
 -- set.completeopt = "menuone,noselect"
 set.completeopt = "menuone,noselect,menu"

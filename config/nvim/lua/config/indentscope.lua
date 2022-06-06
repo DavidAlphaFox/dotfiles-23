@@ -43,9 +43,11 @@
 ---
 --- # Highlight groups~
 ---
---- - `MiniIndentscopeSymbol` - symbol showing on every line of scope.
---- - `MiniIndentscopePrefix` - space before symbol. By default made so as to
+--- * `MiniIndentscopeSymbol` - symbol showing on every line of scope.
+--- * `MiniIndentscopePrefix` - space before symbol. By default made so as to
 ---   appear as nothing is displayed.
+---
+--- To change any highlight group, modify it directly with |:highlight|.
 ---
 --- # Disabling~
 ---
@@ -939,7 +941,8 @@ function H.draw_indicator_animation(indicator, draw_fun, animation_fun)
     -- call next step function directly.
     if wait_time < 1 then
       H.timer:set_repeat(0)
-      draw_step()
+      -- Use `return` to make this proper "tail call"
+      return draw_step()
     else
       H.timer:set_repeat(wait_time)
 

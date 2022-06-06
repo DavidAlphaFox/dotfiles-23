@@ -22,24 +22,23 @@ function M.setup()
   }
 
   -- lspsaga
-  -- lsp provider to find the cursor word definition and reference
-  -- lsp provider to find the cursor word definition and reference
-  utils.map('n', 'ñlf', require 'lspsaga.provider'.lsp_finder)
+  utils.map('n', '<A-f>', require 'lspsaga.provider'.lsp_finder)
   utils.map('n', '<C-.>', require('lspsaga.codeaction').code_action)
+  -- vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
   -- show hover doc
-  utils.map('n', 'ñhd', require('lspsaga.hover').render_hover_doc)
-  -- scroll down hover doc or scroll in definition preview
+  utils.map('n', '<C-h>', require('lspsaga.hover').render_hover_doc)
   utils.map('n', 'C-f>', function() require('lspsaga.action').smart_scroll_with_saga(1) end)
-  -- scroll up hover doc
   utils.map('n', '<C-b>', function() require('lspsaga.action').smart_scroll_with_saga(-1) end)
-  utils.map('n', 'gs', require('lspsaga.signaturehelp').signature_help)
-  -- Rename
+  utils.map('n', '<C-s>', require('lspsaga.signaturehelp').signature_help)
+  -- -- Rename
   utils.map('n', 'gr', require('lspsaga.rename').rename)
-  -- preview definition
+  -- -- preview definition
   utils.map('n', 'gp', require 'lspsaga.provider'.preview_definition)
-  -- navegate between errors
-  utils.map('n', '<leader>dj', require 'lspsaga.diagnostic'.lsp_jump_diagnostic_next)
-  utils.map('n', '<leader>dk', require 'lspsaga.diagnostic'.lsp_jump_diagnostic_prev)
+  -- -- navegate between errors
+  utils.map('n', '<leader>dh', require 'lspsaga.diagnostic'.show_cursor_diagnostics)
+  utils.map('n', '<leader>dl', require 'lspsaga.diagnostic'.show_line_diagnostics)
+  utils.map('n', '<leader>dk', function() require 'lspsaga.diagnostic'.navigate("prev") end)
+  utils.map('n', '<leader>dj', function() require 'lspsaga.diagnostic'.navigate("next") end )
 end
 
 return M

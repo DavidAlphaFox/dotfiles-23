@@ -37,14 +37,14 @@
 ---
 --- # Highlight groups~
 ---
---- 1. `MiniTablineCurrent` - buffer is current (has cursor in it).
---- 2. `MiniTablineVisible` - buffer is visible (displayed in some window).
---- 3. `MiniTablineHidden` - buffer is hidden (not displayed).
---- 4. `MiniTablineModifiedCurrent` - buffer is modified and current.
---- 5. `MiniTablineModifiedVisible` - buffer is modified and visible.
---- 6. `MiniTablineModifiedHidden` - buffer is modified and hidden.
---- 7. `MiniTablineFill` - unused right space of tabline.
---- 8. `MiniTablineTabpagesection` - section with tabpage information.
+--- * `MiniTablineCurrent` - buffer is current (has cursor in it).
+--- * `MiniTablineVisible` - buffer is visible (displayed in some window).
+--- * `MiniTablineHidden` - buffer is hidden (not displayed).
+--- * `MiniTablineModifiedCurrent` - buffer is modified and current.
+--- * `MiniTablineModifiedVisible` - buffer is modified and visible.
+--- * `MiniTablineModifiedHidden` - buffer is modified and hidden.
+--- * `MiniTablineFill` - unused right space of tabline.
+--- * `MiniTablineTabpagesection` - section with tabpage information.
 ---
 --- To change any highlight group, modify it directly with |:highlight|.
 ---
@@ -124,13 +124,6 @@ MiniTabline.config = {
 --minidoc_afterlines_end
 
 -- Module functionality =======================================================
--- TODO: remove after 0.4.0 release.
-function MiniTabline.update_tabline()
-  H.message('`MiniTabline.update_tabline()` is deprecated because it is obsolete.')
-
-  vim.o.tabline = '%!v:lua.MiniTabline.make_tabline_string()'
-end
-
 --- Make string for |tabline|
 function MiniTabline.make_tabline_string()
   if H.is_disabled() then

@@ -1,8 +1,9 @@
-@import "mac/userChrome.css";
-#titlebar {
-  visibility: collapse !important;
+#TabsToolbar {
+  visibility: collapse;
 }
 
-#sidebar-header {
-  visibility: collapse !important;
+:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) {
+  max-height: 1px;
+  min-height: calc(0px);
+  overflow: hidden;
 }

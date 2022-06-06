@@ -81,6 +81,7 @@ local winbar_filetype_exclude = {
   "Outline",
   "spectre_panel",
   "toggleterm",
+  "term"
 }
 
 function M.statusline()

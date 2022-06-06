@@ -22,10 +22,11 @@ function M.format()
     local view = vim.fn.winsaveview()
     vim.lsp.buf.format {
       async = true,
-      filter = function(clients)
-        return vim.tbl_filter(function(client)
-          return client.name ~= "tsserver"
-        end, clients)
+      filter = function(client)
+        return client.name ~= "tsserver"
+          and client.name ~= "jsonls"
+          and client.name ~= "html"
+          and client.name ~= "sumneko_lua"
       end,
     }
     vim.fn.winrestview(view)
@@ -71,4 +72,3 @@ function M.list_supported(filetype)
 end
 
 return M
-

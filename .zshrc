@@ -201,6 +201,7 @@ alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 # HACK: Tem alias
 alias wpstart="docker start wordpressdb wordpress"
 alias wpstop="docker stop wordpress wordpressdb"
+alias ci="{ find . -xdev -printf '%h\n' | sort | uniq -c | sort -k 1 -n; } 2>/dev/null"
 
 # -< Environ variable >-
 export MYSQL_PS1="\n \d  ﯐ "

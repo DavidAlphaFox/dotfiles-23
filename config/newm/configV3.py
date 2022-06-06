@@ -132,6 +132,8 @@ def rules(view):
         app_rule = {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
+    if view.role == "jetbrains-rider":
+        app_rule = {"float": False}
     # os.system(
     #     f"echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
     # )
@@ -160,10 +162,10 @@ altgr = "3-"
 ctrl = "C-"
 alt = "A-"
 background = {
-    # "path": os.environ["HOME"] + f"/.cache/space/space{randrange(1, 5)}.jpg",
+    "path": os.environ["HOME"] + f"/Imágenes/space/space{randrange(1, 6)}.jpg",
     # "path": os.environ["HOME"]
     # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
-    "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
+    # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
     "time_scale": 0.125,
     "anim": True,
 }

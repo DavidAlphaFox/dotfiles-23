@@ -52,7 +52,7 @@ function M.setup()
           default_keymaps = true, -- Create default keymaps.
           extra_keymaps = true, -- Create extra keymaps.
           extended_keymaps = true, -- Create extended keymaps.
-          default_delay = 3
+          default_delay = 5
         }
       end,
     }
@@ -82,7 +82,7 @@ function M.setup()
     -- Notification
     use {
       "rcarriga/nvim-notify",
-      event = "VimEnter",
+      event = "BufReadPre",
       config = function()
         vim.notify = require "notify"
       end,
@@ -173,14 +173,17 @@ function M.setup()
       wants = {
         "plenary.nvim",
         "popup.nvim",
+        "telescope-fzy-native.nvim",
         "telescope-frecency.nvim",
         "telescope-file-browser.nvim",
+        "telescope-tele-tabby",
         "trouble.nvim",
         "telescope-dap.nvim",
       },
       requires = {
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-fzy-native.nvim",
         {
           "nvim-telescope/telescope-frecency.nvim",
           requires = { "tami5/sqlite.lua" },
@@ -188,6 +191,7 @@ function M.setup()
         "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-media-files.nvim",
         "nvim-telescope/telescope-dap.nvim",
+        "TC72/telescope-tele-tabby.nvim"
       },
     }
 
@@ -323,12 +327,13 @@ function M.setup()
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      -- event = { "VimEnter" },
       event = { "BufReadPre" },
       wants = {
         "coq_nvim",
         "lua-dev.nvim",
         "null-ls.nvim",
+        "omnisharp-extended-lsp.nvim",
+        "csharpls-extended-lsp.nvim"
       }, -- for coq.nvim
       config = function()
         require("config.lsp").setup()
@@ -336,11 +341,13 @@ function M.setup()
       requires = {
         "folke/lua-dev.nvim",
         "jose-elias-alvarez/null-ls.nvim",
+        "Hoffs/omnisharp-extended-lsp.nvim",
+        "Decodetalkers/csharpls-extended-lsp.nvim"
       },
     }
 
     use {
-      "glepnir/lspsaga.nvim",
+      "tami5/lspsaga.nvim",
       wants = { "nvim-lspconfig" },
       config = function()
         require("config.lsp.saga").setup()

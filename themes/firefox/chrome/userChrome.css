@@ -1,33 +1,5 @@
-@import "mac/userChrome.css";
-
-/* #titlebar { */
-
-/**/
-
-/*   visibility: collapse !important; */
-
-/**/
-
-/* } */
-
-/**/
-
-/* #sidebar-header { */
-
-/**/
-
-/*   visibility: collapse !important; */
-
-/**/
-
-/* } */
-
-:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #nav-bar {
-  max-height: 0;
-  min-height: 0!important;
-  --tridactyl-auto-show-zone: 10px;
-  margin-bottom: calc(-1 * var(--tridactyl-auto-show-zone));
-  opacity: 0;
+#TabsToolbar {
+  visibility: collapse;
 }
 
 :root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) {
@@ -36,20 +8,9 @@
   overflow: hidden;
 }
 
-#navigator-toolbox::after {
-  display: none !important;
-}
-
-#statuspanel {
-  top: 2em;
-  z-index: 2;
-  display: inline;
-}
-
 statuspanel[type="overLink"],
 #statuspanel[type="overLink"] {
   top: 2em;
   z-index: 2;
-  right: 0;
   display: inline;
 }
