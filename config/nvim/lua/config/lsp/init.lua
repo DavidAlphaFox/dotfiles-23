@@ -87,8 +87,8 @@ local function sumneko_lua()
 end
 
 local function root_csharp(path)
-    -- Make sure an sln doesn't already exist before trying to use the nearest csproj file
-    return lsp.util.root_pattern('*.sln')(path) or lsp.util.root_pattern('*.csproj')(path)
+  -- Make sure an sln doesn't already exist before trying to use the nearest csproj file
+  return lsp.util.root_pattern('*.sln')(path) or lsp.util.root_pattern('*.csproj')(path)
 end
 
 local server_config = {
@@ -134,7 +134,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits'
   }
 }
--- capabilities.textDocument.definition = true
+
 local opts = {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -157,8 +157,8 @@ function M.setup()
     if server == "sumneko_lua" then
       config = require("lua-dev").setup { lspconfig = config }
     end
-
-    lsp[server].setup(coq.lsp_ensure_capabilities(config))
+    config = coq.lsp_ensure_capabilities(config)
+    lsp[server].setup(config)
 
     local cfg = lsp[server]
     if not (cfg and cfg.cmd and vim.fn.executable(cfg.cmd[1]) == 1) then

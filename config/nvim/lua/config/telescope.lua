@@ -89,7 +89,7 @@ function M.setup()
     },
   }
 
-  local extensions = {"fzy_native" , "media_files", "file_browser", "frecency", "themes", "tele_tabby"}
+  local extensions = {"fzy_native" , "dap","media_files", "file_browser", "frecency", "themes", "tele_tabby"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end

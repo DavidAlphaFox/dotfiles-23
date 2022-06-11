@@ -7,6 +7,6 @@ export XDG_CURRENT_DESKTOP=wlroots
 export XDG_CURRENT_SESSION=wlroots
 source /usr/local/bin/wayland_enablement.sh
 
-sleep 0.5;
+sleep 0.5
 
-start-newm -d
+start-newm

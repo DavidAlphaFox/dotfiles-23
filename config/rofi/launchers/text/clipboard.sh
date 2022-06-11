@@ -14,7 +14,7 @@ color="${styles[$(($RANDOM % 10))]}"
 
 if [[ "$XDG_SESSION_DESKTOP" == "wlroots" ]]; then
 	clipman pick --tool=CUSTOM --tool-args="rofi -p \
-    pick -dmenu -theme \
+    pick -dmenu -i -theme \
     $dir/'$theme' -lines 10"
 else
 	rofi -modi "clipboard:greenclip print" \

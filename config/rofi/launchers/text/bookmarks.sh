@@ -6,7 +6,7 @@ BOOKMARKS="$HOME/.config/rofi/launchers/text/bookmarks"
 BROWSER="librewolf"
 
 function rofi_main_window() {
-	rofi -dmenu -l 10 -p $1 -theme $dir/"$theme"
+	rofi -dmenu -i -l 10 -p $1 -theme $dir/"$theme"
 }
 
 function rofi_sub_window() {

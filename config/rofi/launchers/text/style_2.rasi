@@ -27,21 +27,40 @@ configuration {
 @import "styles/colors.rasi"
 
 * {
-    background-color:             	@bg;
+  background-color: @bg;
+  bgAlt: @al;
+  background-color:	@bg;
+  text-color:		@fg;
 }
 
 window {
-    border: 						0px;
-    border-color: 					@ac;
-    border-radius: 					6px;
-    padding: 						30;
-    width: 							30%;
+  transparency:		"real";
+  width:		650px;
+  border-radius:	15px;
+  height:		750px;
+  border: 12px;
+  border-color: @bg;
+}
+
+inputbar {
+  children:		[ entry ];
+  expand:		false;
+  padding:		5px 10px 5px 10px;
 }
 
 prompt {
-    spacing: 						0;
-    border: 						0;
-    text-color: 					@fg;
+  enabled: true;
+  background-color:	@bgAlt;
+  padding:		15px;
+  border-radius:	15px;
+}
+
+entry {
+  background-color:	@bgAlt;
+  placeholder:		"Buscar";
+  expand:		true;
+  padding:		15px;
+  border-radius:	15px;
 }
 
 textbox-prompt-colon {
@@ -51,21 +70,9 @@ textbox-prompt-colon {
     text-color: 					inherit;
 }
 
-entry {
-    spacing:    					0;
-    text-color: 					@fg;
-}
-
 case-indicator {
     spacing:    					0;
     text-color: 					@fg;
-}
-
-inputbar {
-    spacing:    					0px;
-    text-color: 					@fg;
-    padding:    					1px;
-    children: 						[ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 
 mainbox {

@@ -45,13 +45,20 @@ local M = {}
 function M.setup()
   require("themer").setup {
     colorscheme = vim.g.colorscheme,
-    -- transparent = true,
+    transparent = true,
     styles = {
+      keyword = { style = 'italic' },
+      keywordBuiltIn = { style = 'italic' },
       ["function"] = { style = "italic" },
       functionbuiltin = { style = "italic" },
-      variable = { style = "italic" },
-      variableBuiltIn = { style = "italic" },
       parameter = { style = "italic" },
+      property = { style = "bold" },
+      comment = { style = "bold" },
+      number = { style = "bold" },
+      variable = { style = "italic" },
+      variableBuiltIn = { style = "bold" },
+      type = { style = "bold" },
+      typeBuiltin = { style = "bold" },
     },
   }
 

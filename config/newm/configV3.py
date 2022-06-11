@@ -38,7 +38,7 @@ def on_startup():
         DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "dbus-update-activation-environment --all",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-        "wl-paste -t text --watch clipman store",
+        "wl-paste -t text -n --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "easyeffects --gapplication-service",

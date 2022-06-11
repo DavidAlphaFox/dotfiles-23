@@ -43,5 +43,4 @@ vim.g.colorscheme = "catppuccin"
 -- vim.g.colorscheme = "amora"
 require "config"
 require("plugins").setup()
-require "debug"
 vim.opt.showtabline = 0

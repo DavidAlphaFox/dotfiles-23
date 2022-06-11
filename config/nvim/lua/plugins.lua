@@ -107,16 +107,6 @@ function M.setup()
       },
     }
 
-    -- Auto pairs
-    -- use {
-    -- 	"windwp/nvim-autopairs",
-    -- 	wants = "coq_nvim",
-    -- 	config = function()
-    -- 		require("config.autopairs").setup()
-    -- 	end,
-    -- 	disable = true
-    -- }
-
     use { "max-0406/autoclose.nvim", event = "InsertEnter" }
 
     use {
@@ -183,6 +173,7 @@ function M.setup()
       requires = {
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope-fzy-native.nvim",
         {
           "nvim-telescope/telescope-frecency.nvim",
@@ -190,7 +181,6 @@ function M.setup()
         },
         "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-media-files.nvim",
-        "nvim-telescope/telescope-dap.nvim",
         "TC72/telescope-tele-tabby.nvim"
       },
     }
@@ -362,9 +352,28 @@ function M.setup()
       end,
     }
 
-    -- Debug
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use { "mfussenegger/nvim-dap-python" }
+    -- Debugging
+    use {
+      "mfussenegger/nvim-dap",
+      opt = true,
+      -- event = "BufReadPre",
+      keys = { [[<leader>d]] },
+      module = { "dap" },
+      wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui", "nvim-dap-python" },
+      requires = {
+        "alpha2phi/DAPInstall.nvim",
+        -- { "Pocco81/dap-buddy.nvim", branch = "dev" },
+        "theHamsta/nvim-dap-virtual-text",
+        "rcarriga/nvim-dap-ui",
+        "mfussenegger/nvim-dap-python",
+        "nvim-telescope/telescope-dap.nvim",
+        { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+      },
+      config = function()
+        require("config.dap").setup()
+      end,
+    }
+
     use { 'shuntaka9576/preview-swagger.nvim' }
 
     -- Bootstrap Neovim
