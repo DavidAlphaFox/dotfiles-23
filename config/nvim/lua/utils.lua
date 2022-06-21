@@ -16,6 +16,19 @@ function M.map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+function M.is_empty(s)
+  return s == nil or s == ""
+end
+
+function M.get_buf_option(opt)
+  local status_ok, buf_option = pcall(vim.api.nvim_buf_get_option, 0, opt)
+  if not status_ok then
+    return nil
+  else
+    return buf_option
+  end
+end
+
 -- Highlights functions
 
 function M.get_highlight(hlname)

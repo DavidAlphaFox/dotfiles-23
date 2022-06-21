@@ -50,8 +50,7 @@ set.linebreak = true
 set.textwidth = 80
 
 -- UI Config
-set.winbar = "%{%v:lua.require'config.winbar'.gps()%}"
--- set.termguicolors = true -- Enable colors in terminal
+-- set.winbar = "%{%v:lua.require'config.winbar'.get_winbar()%}"
 vim.o.termguicolors = true
 set.shortmess = set.shortmess - "S"
 -- set.completeopt = "menuone,noselect"
@@ -91,8 +90,17 @@ set.grepformat = "%f:%l:%c:%m"
 set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
-set.foldenable = false
--- set.foldlevel = 1
+vim.wo.foldcolumn = '1'
+vim.wo.foldlevel = 99
+vim.wo.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.fillchars = {
+--   eob = "",
+--   fold = "",
+--   foldopen = "",
+--   foldsep = "",
+--   foldclose = ""
+-- }
 -- set.foldlevelstart=10
 -- set.foldnestmax = 10
 -- set.foldnestmax=10

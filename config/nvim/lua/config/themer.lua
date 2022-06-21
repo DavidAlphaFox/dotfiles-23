@@ -63,6 +63,7 @@ function M.setup()
   }
 
   local theme = require("themer.modules.core.api").get_cp(vim.g.colorscheme)
+  utils.fg_bg("FoldColumn", theme.syntax.string, "NONE")
   -- Telescope
   utils.fg_bg("TelescopeBorder", theme.bg.base, "NONE")
   -- -- utils.fg_bg("TelescopeBorder", "#161925", "NONE")

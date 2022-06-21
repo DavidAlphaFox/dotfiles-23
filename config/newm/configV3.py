@@ -96,7 +96,7 @@ corner_radius = 0
 
 outputs = [
     {"name": "eDP-1", "scale": 0.7},
-    {"name": "DP-2", "scale": 0.7, "pos_x": 0, "pos_y": 0},
+    {"name": "DP-2", "scale": 0.7},
 ]
 
 pywm = {
@@ -111,6 +111,7 @@ pywm = {
     "natural_scroll": True,
     "texture_shaders": "basic",
     # 'renderer_mode': 'indirect',
+    "renderer_mode": "pywm",
     # 'contstrain_popups_to_toplevel': True
 }
 
@@ -135,7 +136,7 @@ def rules(view):
     if view.role == "jetbrains-rider":
         app_rule = {"float": False}
     # os.system(
-    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
+    #   "echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
     # )
     return app_rule
 
@@ -305,7 +306,7 @@ panels = {
 
 grid = {"throw_ps": [2, 10]}
 
-energy = {"idle_times": [60, 180], "idle_callback": backlight_manager.callback}
+energy = {"idle_times": [600, 1800], "idle_callback": backlight_manager.callback}
 
 focus = {
     # "color": "#fb5c8e",  # change color

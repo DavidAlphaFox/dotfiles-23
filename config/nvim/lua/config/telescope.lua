@@ -2,6 +2,39 @@ local utils = require "utils"
 local M = {}
 function M.setup()
   local actions = require "telescope.actions"
+  -- custom previewer
+  local previewers = require "telescope.previewers"
+  local job = require "plenary.job"
+  local preview_maker = function(filepath, bufnr, opts)
+  filepath = vim.fn.expand(filepath)
+  job
+    :new({
+      command = "file",
+      args = { "--mime-type", "-b", filepath },
+      on_exit = function(j)
+        local mime_type = vim.split(j:result()[1], "/")[1]
+
+        if mime_type == "text" then
+          -- check file size
+          vim.loop.fs_stat(filepath, function(_, stat)
+            if not stat then
+              return
+            end
+            if stat.size > 500000 then
+              return
+            else
+              previewers.buffer_previewer_maker(filepath, bufnr, opts)
+            end
+          end)
+        else
+          vim.schedule(function()
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "binary file" })
+          end)
+        end
+      end,
+    })
+    :sync()
+  end
 
   local mappings = {
     i = {
@@ -27,13 +60,14 @@ function M.setup()
       },
       prompt_prefix = "  ",
       selection_caret = " ",
-      -- initial_mode = "normal",
+      initial_mode = "normal",
       selection_strategy = "reset",
       sorting_strategy = "ascending",
       layout_strategy = "bottom_pane",
       layout_config = {
         bottom_pane = {
           prompt_position = "top",
+          preview_cutoff = 0,
         },
         horizontal = {
           prompt_position = "top",
@@ -41,6 +75,7 @@ function M.setup()
       },
       -- file_sorter = require("telescope.sorters").get_fuzzy_file,
       -- file_sorter = require("telescope.sorters").get_fzy_file,
+      buffer_previewer_maker = preview_maker,
       file_ignore_patterns = { "__pycache__", "node_modules" },
       path_display = { "shorten" },
       winblend = 0,
@@ -89,7 +124,7 @@ function M.setup()
     },
   }
 
-  local extensions = {"fzy_native" , "dap","media_files", "file_browser", "frecency", "themes", "tele_tabby"}
+  local extensions = {"fzy_native", "dap", "media_files", "file_browser", "frecency", "themes", "tele_tabby"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end
@@ -113,7 +148,13 @@ function M.setup()
   end
   utils.map("n", "ññ", project_files)
   utils.map("n", "<leader>fg", builtin.grep_string)
-  utils.map("n", "<leader>gg", builtin.live_grep)
+  utils.map("n", "<leader>gg", function()
+    builtin.live_grep(
+      {
+        cwd = require'lspconfig'.util.root_pattern('.git')(vim.loop.cwd())
+      }
+    )
+  end)
 
   -- Vim Pickers
   utils.map("n", "ñb", builtin.buffers)

@@ -52,26 +52,13 @@ function M.setup()
           default_keymaps = true, -- Create default keymaps.
           extra_keymaps = true, -- Create extra keymaps.
           extended_keymaps = true, -- Create extended keymaps.
+          override_keymaps = true,
           default_delay = 5
         }
       end,
     }
 
-    -- Themes
-    -- use 'i3d/vim-jimbothemes'
-    -- use { 'owozsh/amora',
-    --   config = function()
-    --     vim.g.mode = 'jack-o-lantern'
-    --     vim.cmd "colorscheme amora"
-    --   end
-    -- }
-    -- use {
-    --   "franbach/miramare",
-    --   config = function()
-    --     vim.cmd "colorscheme miramare"
-    --   end,
-    -- }
-    -- use 'sainnhe/sonokai'
+    --- THEME
     use {
       "themercorp/themer.lua",
       config = function()
@@ -79,16 +66,19 @@ function M.setup()
       end,
     }
 
-    -- Notification
+    -- NOTIFICATION
     use {
       "rcarriga/nvim-notify",
       event = "BufReadPre",
       config = function()
+        require'notify'.setup({
+          background_colour = "#1a1a2e",
+        })
         vim.notify = require "notify"
       end,
     }
 
-    -- Treesitter
+    -- TREESITTER
     use {
       "nvim-treesitter/nvim-treesitter",
       opt = true,
@@ -149,8 +139,6 @@ function M.setup()
       end,
     }
 
-    -- use { 'liuchengxu/vim-clap', run = ':Clap install-binary' }
-
     -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
@@ -158,8 +146,6 @@ function M.setup()
       config = function()
         require("config.telescope").setup()
       end,
-      -- cmd = { "Telescope" },
-      -- module = { "telescope", "telescope.builtin" },
       wants = {
         "plenary.nvim",
         "popup.nvim",
@@ -185,25 +171,10 @@ function M.setup()
       },
     }
 
-    -- Flutter
-    -- use 'akinsho/flutter-tools.nvim'
-
-    -- Better surround
     -- Tim Pope docet
     use "tpope/vim-surround"
     use "Matt-A-Bennett/vim-surround-funk"
     use "tpope/vim-repeat"
-
-    -- Motions
-    -- use { 'monkoose/matchparen.nvim',
-    --   config = function()
-    --     require('matchparen').setup({
-    --       on_startup = true, -- Should it be enabled by default
-    --       hl_group = 'MatchParen', -- highlight group for matched characters
-    --       augroup_name = 'matchparen', -- almost no reason to touch this unless there is already augroup with such name
-    --     })
-    --   end
-    -- }
     use { "wellle/targets.vim", event = "CursorMoved" }
     use { "chaoren/vim-wordmotion" }
 
@@ -227,15 +198,6 @@ function M.setup()
     }
 
     --UI
-    use {
-      "SmiteshP/nvim-gps",
-      requires = "nvim-treesitter/nvim-treesitter",
-      module = "nvim-gps",
-      wants = "nvim-treesitter",
-      config = function()
-        require("nvim-gps").setup()
-      end,
-    }
 
     use {
       "folke/todo-comments.nvim",
@@ -268,7 +230,7 @@ function M.setup()
         require("config.code_runner").setup()
       end,
     }
-    -- use 'is0n/fm-nvim'
+
     use "ThePrimeagen/harpoon"
     use {
       "vuki656/package-info.nvim",
@@ -290,6 +252,7 @@ function M.setup()
     use "jeffkreeftmeijer/vim-numbertoggle"
     use {
       "voldikss/vim-translator",
+      ft = "markdown",
       cmd = { "Translate", "TranslateV", "TranslateW", "TranslateWV", "TranslateR", "TranslateRV", "TranslateX" },
       config = function()
         vim.g.translator_target_lang = "es"
@@ -323,7 +286,8 @@ function M.setup()
         "lua-dev.nvim",
         "null-ls.nvim",
         "omnisharp-extended-lsp.nvim",
-        "csharpls-extended-lsp.nvim"
+        "csharpls-extended-lsp.nvim",
+        "lsp_signature.nvim"
       }, -- for coq.nvim
       config = function()
         require("config.lsp").setup()
@@ -332,8 +296,24 @@ function M.setup()
         "folke/lua-dev.nvim",
         "jose-elias-alvarez/null-ls.nvim",
         "Hoffs/omnisharp-extended-lsp.nvim",
-        "Decodetalkers/csharpls-extended-lsp.nvim"
-      },
+        "Decodetalkers/csharpls-extended-lsp.nvim",
+        "ray-x/lsp_signature.nvim"
+      }
+    }
+
+    use({
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function()
+        require("lsp_lines").register_lsp_virtual_lines()
+      end,
+    })
+
+    use {
+      'kevinhwang91/nvim-ufo',
+      requires = 'kevinhwang91/promise-async',
+      config = function()
+        require('ufo').setup()
+      end
     }
 
     use {
@@ -373,8 +353,6 @@ function M.setup()
         require("config.dap").setup()
       end,
     }
-
-    use { 'shuntaka9576/preview-swagger.nvim' }
 
     -- Bootstrap Neovim
     if packer_bootstrap then

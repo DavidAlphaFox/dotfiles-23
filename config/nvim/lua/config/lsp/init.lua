@@ -134,6 +134,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits'
   }
 }
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 
 local opts = {
   on_attach = on_attach,
@@ -150,6 +154,7 @@ local M = {}
 
 function M.setup()
   -- Setup all lenguage server and null-ls
+  require "lsp_signature".setup()
   require("config.lsp.null-ls").setup(opts)
   for _, server in ipairs(servers) do
     local config = vim.tbl_deep_extend("force", opts, server_config[server] or {})
