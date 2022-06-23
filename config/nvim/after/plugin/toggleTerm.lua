@@ -29,9 +29,10 @@ utils.map({ "n", "t" }, "<C-ñ>",
       terminal_opened_win_id = current_wind_id
       vim.cmd(splitconfig .. "| term")
       vim.cmd("file " .. bufname)
-      vim.opt_local.relativenumber = false
-      vim.opt_local.number = false
+      vim.wo.relativenumber = false
+      vim.o.number = false
       vim.bo.buflisted = false
+      vim.wo.foldcolumn = '0'
       bufid = vim.api.nvim_buf_get_number(0)
       jobid = vim.b.terminal_job_id
       vim.cmd("startinsert")

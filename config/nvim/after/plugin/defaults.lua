@@ -68,7 +68,8 @@ set.wildmode = "longest:full,full"
 set.showmatch = true
 set.errorbells = true
 set.list = false
-set.signcolumn = "yes"
+-- set.signcolumn = "yes:1"
+set.signcolumn = "auto:1"
 set.listchars = {
   eol = "↲",
   space = "␣",
@@ -79,7 +80,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 3
-set.cmdheight = 2
+set.cmdheight = 1
 
 -- Search
 set.hlsearch = true
@@ -90,7 +91,7 @@ set.grepformat = "%f:%l:%c:%m"
 set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
-vim.wo.foldcolumn = '1'
+vim.wo.foldcolumn = 'auto:1'
 vim.wo.foldlevel = 99
 vim.wo.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

@@ -171,6 +171,19 @@ function M.setup()
       },
     }
 
+    use {
+      "stevearc/dressing.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("dressing").setup {
+          input = { relative = "editor" },
+          select = {
+            backend = { "telescope", "fzf", "builtin" },
+          },
+        }
+      end,
+    }
+
     -- Tim Pope docet
     use "tpope/vim-surround"
     use "Matt-A-Bennett/vim-surround-funk"
