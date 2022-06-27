@@ -12,11 +12,12 @@ api.nvim_create_autocmd("TextYankPost", {
 
 -- show cursor line only in active window
 local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
-api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
-  pattern = "*",
-  command = "set cursorline",
-  group = cursorGrp,
-})
+api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, { pattern = "*", command = "set cursorline", group = cursorGrp })
+api.nvim_create_autocmd(
+  { "InsertEnter", "WinLeave" },
+  { pattern = "*", command = "set nocursorline", group = cursorGrp }
+)
+
 api.nvim_create_autocmd(
   { "InsertEnter", "WinLeave" },
   { pattern = "*", command = "set nocursorline", group = cursorGrp }
@@ -44,8 +45,9 @@ api.nvim_create_autocmd("FileType", { pattern = "cs", command = [[setlocal shift
 api.nvim_create_autocmd("FileType", { pattern = "make", command = [[setlocal noexpandtab]] })
 -- don't auto comment new line
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 -- Fix highlight issue
-api.nvim_create_autocmd("VimEnter", { command = [[syntax enable]] })
+api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })
 
 -- au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 -- au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab

@@ -20,11 +20,10 @@ cli-tools: ## Add cli tools to local bin
 	ln -vsf ${PWD}/commands/* ${HOME}/.local/bin/
 
 init: ## Initial deploy dotfiles
-	for item in zshrc myclirc tmux.conf gitconfig pyrc noderc gtkrc-2.0 .scripts; do
+	for item in zshrc zshfunc zimrc myclirc tmux.conf gtkrc-2.0 noderc pyrc tridactylrc; do
 		ln -vsf {${PWD},${HOME}}/.$$item
 	done
-	# ln -vsf ${PWD}/.zsh_history ${HOME}/.zsh_history
-	ln -vsf ${PWD}/config/* ${HOME}/.config/
+	# ln -vsf ${PWD}/config/* ${HOME}/.config/
 
 wayland:
 	sudo ln -vsf ${PWD}/$@/* /usr/local/bin/

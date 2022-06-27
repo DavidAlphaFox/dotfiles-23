@@ -300,7 +300,6 @@ function M.setup()
         "null-ls.nvim",
         "omnisharp-extended-lsp.nvim",
         "csharpls-extended-lsp.nvim",
-        "lsp_signature.nvim"
       }, -- for coq.nvim
       config = function()
         require("config.lsp").setup()
@@ -310,8 +309,18 @@ function M.setup()
         "jose-elias-alvarez/null-ls.nvim",
         "Hoffs/omnisharp-extended-lsp.nvim",
         "Decodetalkers/csharpls-extended-lsp.nvim",
-        "ray-x/lsp_signature.nvim"
       }
+    }
+
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+          {"nvim-treesitter/nvim-treesitter"}
+      },
+      config = function()
+        require('refactoring').setup({})
+      end
     }
 
     use({
@@ -330,8 +339,9 @@ function M.setup()
     }
 
     use {
-      "tami5/lspsaga.nvim",
-      wants = { "nvim-lspconfig" },
+      "glepnir/lspsaga.nvim",
+      branch = 'main',
+      -- wants = { "nvim-lspconfig" },
       config = function()
         require("config.lsp.saga").setup()
       end,

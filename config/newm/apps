@@ -1,17 +1,34 @@
-waybar, Layer Shell, layer
 kitty, kitty, toplevel
 waybar, Layer Shell, layer
-kitty, RIDER_JDK=/usr/lib/jvm/java-11-openjdk rider, toplevel
-firefox, Exprimiendo IntelliJ IDEA — Mozilla Firefox, toplevel
-jetbrains-rider, ProcesosCoordinacionUnidadECOSUR – FilesService.cs, jetbrains-rider
-kitty, ~, toplevel
+waybar, Layer Shell, layer
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel
+firefox, Comparison to PaperWM and Cardboard · Issue #57 · jbuchermn/newm — Mozilla Firefox, toplevel
+kitty, …/templates/ecosur-apirest/Ecosur.WebAPI, toplevel
+kitty, music, toplevel
+app.drey.Dialect, Dialect, toplevel
 notifications, Layer Shell, layer
 notifications, Layer Shell, layer
-jetbrains-rider, Confirm Exit, jetbrains-rider
-jetbrains-rider, Confirm Exit, jetbrains-rider
-jetbrains-rider,  , jetbrains-rider
-jetbrains-rider,  , jetbrains-rider
-jetbrains-rider, Welcome to JetBrains Rider, jetbrains-rider
-jetbrains-rider, Welcome to JetBrains Rider, jetbrains-rider
-jetbrains-rider,  , jetbrains-rider
-jetbrains-rider,  , jetbrains-rider
+catapult, catapult, toplevel
+catapult, catapult, toplevel
+catapult, catapult, toplevel
+catapult, catapult, toplevel
+app.drey.Dialect, Dialect, toplevel
+app.drey.Dialect, Dialect, toplevel
+kitty, kitty, toplevel
+waybar, Layer Shell, layer
+waybar, Layer Shell, layer
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel
+firefox, Comparison to PaperWM and Cardboard · Issue #57 · jbuchermn/newm — Mozilla Firefox, toplevel
+kitty, …/templates/ecosur-apirest/Ecosur.WebAPI, toplevel
+kitty, music, toplevel
+app.drey.Dialect, Dialect, toplevel
+notifications, Layer Shell, layer
+notifications, Layer Shell, layer
+catapult, catapult, toplevel
+catapult, catapult, toplevel
+app.drey.Dialect, Dialect, toplevel
+app.drey.Dialect, Dialect, toplevel
+catapult, catapult, toplevel
+catapult, catapult, toplevel
+app.drey.Dialect, Dialect, toplevel
+app.drey.Dialect, Dialect, toplevel

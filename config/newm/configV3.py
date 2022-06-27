@@ -26,7 +26,7 @@ def execute(procs: tuple[str], start="", end=" &"):
 
 def set_value(keyval, file):
     var, val = keyval.split("=")
-    return f"sed -i 's/^{var}\=.*/{var}={val}/' {file}"
+    return f"sed -i 's/^{var}\\=.*/{var}={val}/' {file}"
 
 
 def on_startup():
@@ -41,7 +41,6 @@ def on_startup():
         "wl-paste -t text -n --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
-        "easyeffects --gapplication-service",
         "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
         "fnott",
     )
@@ -73,8 +72,8 @@ def on_reconfigure():
         f"gsettings set {gnome_peripheral}.mouse natural-scroll true",
         f"gsettings set {gnome_peripheral}.mouse speed 0.0",
         f"gsettings set {gnome_peripheral}.mouse accel-profile 'default'",
-        f"gsettings {easyeffects} process-all-inputs true",
-        f"gsettings {easyeffects} process-all-outputs true",
+        # f"gsettings {easyeffects} process-all-inputs true",
+        # f"gsettings {easyeffects} process-all-outputs true",
     )
 
     def options_gtk(file, c=""):
@@ -105,7 +104,7 @@ pywm = {
     # "xkb_options": "caps:swapescape",
     "focus_follows_mouse": True,
     "xcursor_theme": "Sweet-cursors",
-    "xcursor_size": 40,
+    "xcursor_size": 20,
     "encourage_csd": False,
     "enable_xwayland": True,
     "natural_scroll": True,
@@ -121,33 +120,31 @@ def rules(view):
     float_app_ids = (
         "pavucontrol",
         "blueman-manager",
-        "com.github.gi_lom.dialect",
         "Pinentry-gtk-2",
     )
-    float_titles = ("Exportar la imagen",)
+    float_titles = ("Exportar la imagen", "Dialect")
     blur_apps = ("kitty", "rofi", "waybar", "Alacritty")
     app_rule = None
+    # Set float common rules
     if view.app_id in float_app_ids or view.title in float_titles:
         app_rule = common_rules
     if view.app_id in blur_apps:
         app_rule = {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
-    if view.role == "jetbrains-rider":
-        app_rule = {"float": False}
     # os.system(
-    #   "echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
+    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
     # )
     return app_rule
 
 
 view = {
-    "padding": 6,
+    "padding": 10,
     "fullscreen_padding": 0,
     "send_fullscreen": False,
     "rules": rules,
-    "floating_min_size": False,
-    "debug_scaling": True,
+    "floating_min_size": True,
+    "debug_scaling": False,
     "border_ws_switch": 100,
     "ssd": {"enabled": False},
 }
@@ -162,6 +159,7 @@ super = mod + "-"
 altgr = "3-"
 ctrl = "C-"
 alt = "A-"
+
 background = {
     "path": os.environ["HOME"] + f"/Imágenes/space/space{randrange(1, 6)}.jpg",
     # "path": os.environ["HOME"]
@@ -208,14 +206,14 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "k", lambda: layout.move(0, -1)),
         (super + "l", lambda: layout.move(1, 0)),
         (super + "t", lambda: layout.move_in_stack(3)),
-        (super + alt + "h", lambda: layout.move_focused_view(-1, 0)),
-        (super + alt + "j", lambda: layout.move_focused_view(0, 1)),
-        (super + alt + "k", lambda: layout.move_focused_view(0, -1)),
-        (super + alt + "l", lambda: layout.move_focused_view(1, 0)),
-        (super + ctrl + "h", lambda: layout.resize_focused_view(-1, 0)),
-        (super + ctrl + "j", lambda: layout.resize_focused_view(0, 1)),
-        (super + ctrl + "k", lambda: layout.resize_focused_view(0, -1)),
-        (super + ctrl + "l", lambda: layout.resize_focused_view(1, 0)),
+        (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
+        (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
+        (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
+        (super + ctrl + "l", lambda: layout.move_focused_view(1, 0)),
+        (super + alt + "h", lambda: layout.resize_focused_view(-1, 0)),
+        (super + alt + "j", lambda: layout.resize_focused_view(0, 1)),
+        (super + alt + "k", lambda: layout.resize_focused_view(0, -1)),
+        (super + alt + "l", lambda: layout.resize_focused_view(1, 0)),
         (altgr + "w", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
         ("Henkan_Mode", layout.move_workspace),
@@ -306,13 +304,13 @@ panels = {
 
 grid = {"throw_ps": [2, 10]}
 
-energy = {"idle_times": [600, 1800], "idle_callback": backlight_manager.callback}
+energy = {"idle_times": [600, 900, 1800], "idle_callback": backlight_manager.callback}
 
 focus = {
-    # "color": "#fb5c8e",  # change color
-    # # 'distance': 0,
-    # "width": 2,
-    # "animate_on_change": True,
-    # "anim_time": 0.25
-    "enabled": False
+    "color": "#a29dff",  # change color
+    "distance": 4,
+    "width": 4,
+    "animate_on_change": True,
+    "anim_time": 0.4
+    # "enabled": False
 }
