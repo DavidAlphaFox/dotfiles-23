@@ -94,8 +94,8 @@ def on_reconfigure():
 corner_radius = 0
 
 outputs = [
-    {"name": "eDP-1", "scale": 0.7},
-    {"name": "DP-2", "scale": 0.7},
+    {"name": "eDP-1", "scale": 1},
+    # {"name": "DP-2", "scale": 0.7},
 ]
 
 pywm = {
