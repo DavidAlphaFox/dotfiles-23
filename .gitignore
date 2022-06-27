@@ -548,4 +548,5 @@ blocked-names.txt
 localhost.pem
 playlist.log
 library.db
+packer_compiled.lua
 # End of https://www.toptal.com/developers/gitignore/api/node,python,intellij+all,intellij+iml,intellij,pycharm,visualstudiocode
