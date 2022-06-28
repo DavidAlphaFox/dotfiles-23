@@ -93,19 +93,19 @@ end
 
 local server_config = {
   sumneko_lua = sumneko_lua(),
-  -- omnisharp = {
-  --   cmd = { '/usr/bin/omnisharp', '--languageserver', '--hostPID', tostring(pid) },
-  --   root_dir = root_csharp,
-  --   handlers = {
-  --     ['textDocument/definition'] = require('omnisharp_extended').handler
-  --   }
-  -- },
-  csharp_ls = {
+  omnisharp = {
+    cmd = { '/usr/bin/omnisharp', '--languageserver', '--hostPID', tostring(pid) },
     root_dir = root_csharp,
     handlers = {
-      ["textDocument/definition"] = require('csharpls_extended').handler,
+      ['textDocument/definition'] = require('omnisharp_extended').handler
     }
   },
+  -- csharp_ls = {
+  --   root_dir = root_csharp,
+  --   handlers = {
+  --     ["textDocument/definition"] = require('csharpls_extended').handler,
+  --   }
+  -- },
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
   }
@@ -118,11 +118,10 @@ local servers = {
   "tsserver",
   "dockerls",
   "bashls",
-  "sqls",
-  "csharp_ls",
-  -- "omnisharp",
+  -- "csharp_ls",
+  "omnisharp",
   "cssls",
-  "intelephense",
+  -- "intelephense",
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

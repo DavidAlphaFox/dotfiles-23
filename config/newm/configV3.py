@@ -51,11 +51,11 @@ def on_reconfigure():
     gnome_schema = "org.gnome.desktop.interface"
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
-    easyeffects = "com.github.wwmm.easyeffects"
+    # easyeffects = "com.github.wwmm.easyeffects"
     theme = "Dracula-slim"
     icons = "candy-icons"
     cursor = "Sweet-cursors"
-    font = "Lucida MAC 12"
+    font = "Lucida MAC 10"
     gtk2 = "~/.gtkrc-2.0"
     gtk3 = "~/.config/gtk-3.0/settings.ini"
 
@@ -100,7 +100,7 @@ outputs = [
 
 pywm = {
     "xkb_model": "PLACEHOLDER_xkb_model",
-    "xkb_layout": "es",
+    "xkb_layout": "latam",
     # "xkb_options": "caps:swapescape",
     "focus_follows_mouse": True,
     "xcursor_theme": "Sweet-cursors",
@@ -110,7 +110,7 @@ pywm = {
     "natural_scroll": True,
     "texture_shaders": "basic",
     # 'renderer_mode': 'indirect',
-    "renderer_mode": "pywm",
+    # "renderer_mode": "pywm",
     # 'contstrain_popups_to_toplevel': True
 }
 
@@ -143,7 +143,7 @@ view = {
     "fullscreen_padding": 0,
     "send_fullscreen": False,
     "rules": rules,
-    "floating_min_size": True,
+    "floating_min_size": False,
     "debug_scaling": False,
     "border_ws_switch": 100,
     "ssd": {"enabled": False},
@@ -191,6 +191,13 @@ pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
+def prueba(layout):
+    try:
+        layout.ensure_locked()
+    except Exception as e:
+        notify(e)
+
+
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     menu = "~/.config/rofi/bin/launcher_misc"
     clipboard = "~/.config/rofi/bin/clipboard"
@@ -222,6 +229,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "n", lambda: layout.basic_scale(-1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
+        (altgr + "r", lambda: prueba(layout)),
         (super + "P", layout.terminate),
         ("XF86Close", layout.close_view),
         ("XF86Reload", layout.update_config),
@@ -308,8 +316,8 @@ energy = {"idle_times": [600, 900, 1800], "idle_callback": backlight_manager.cal
 
 focus = {
     "color": "#a29dff",  # change color
-    "distance": 4,
-    "width": 4,
+    "distance": 3,
+    "width": 3,
     "animate_on_change": True,
     "anim_time": 0.4
     # "enabled": False

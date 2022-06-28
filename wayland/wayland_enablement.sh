@@ -49,3 +49,4 @@ export DBUS_SESSION_BUS_PID
 # LibreOffice
 #
 export SAL_USE_VCLPLUGIN=gtk3
+export XDG_CACHE_HOME="/tmp/${USER}/.cache"
