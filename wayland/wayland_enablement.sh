@@ -15,7 +15,7 @@ export MOZ_ENABLE_WAYLAND=1
 #
 # Qt environment
 #
-export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM=wayland-egl
 # export QT_QPA_PLATFORM=wayland
 export QT_WAYLAND_FORCE_DPI=physical
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
@@ -49,4 +49,4 @@ export DBUS_SESSION_BUS_PID
 # LibreOffice
 #
 export SAL_USE_VCLPLUGIN=gtk3
-export XDG_CACHE_HOME="/tmp/${USER}/.cache"
+export XDG_CACHE_HOME="/tmp/$USER/.cache"

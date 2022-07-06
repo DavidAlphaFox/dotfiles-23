@@ -22,7 +22,7 @@ local on_attach = function(client, bufnr)
 
   -- Use LSP as the handler for formatexpr.
   -- See `:help formatexpr` for more information.
-  vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
   -- Mappings.
   local opts = { buffer = bufnr }
@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>dt", toggle_diagnostics, opts)
 
   -- Configure highlighting
-  require("config.lsp.highlighter").setup(client)
+  require("config.lsp.highlighter").setup(client, bufnr)
 
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
@@ -93,19 +93,19 @@ end
 
 local server_config = {
   sumneko_lua = sumneko_lua(),
-  omnisharp = {
-    cmd = { '/usr/bin/omnisharp', '--languageserver', '--hostPID', tostring(pid) },
-    root_dir = root_csharp,
-    handlers = {
-      ['textDocument/definition'] = require('omnisharp_extended').handler
-    }
-  },
-  -- csharp_ls = {
+  -- omnisharp = {
+  --   cmd = { '/usr/bin/omnisharp', '--languageserver', '--hostPID', tostring(pid) },
   --   root_dir = root_csharp,
   --   handlers = {
-  --     ["textDocument/definition"] = require('csharpls_extended').handler,
+  --     ['textDocument/definition'] = require('omnisharp_extended').handler
   --   }
   -- },
+  csharp_ls = {
+    root_dir = root_csharp,
+    handlers = {
+      ["textDocument/definition"] = require('csharpls_extended').handler,
+    }
+  },
   cssls = {
     cmd = { "vscode-css-languageserver", "--stdio" },
   }
@@ -113,13 +113,13 @@ local server_config = {
 
 local servers = {
   "sumneko_lua",
-  "jedi_language_server",
+  "pyright",
   "ccls",
   "tsserver",
   "dockerls",
   "bashls",
-  -- "csharp_ls",
-  "omnisharp",
+  "csharp_ls",
+  -- "omnisharp",
   "cssls",
   -- "intelephense",
 }

@@ -3,6 +3,7 @@ local M = {}
 local utils = require "utils"
 local nls_utils = require "config.lsp.null-ls.utils"
 local nls_sources = require "null-ls.sources"
+local api = vim.api
 
 local method = require("null-ls").methods.FORMATTING
 
@@ -24,17 +25,19 @@ function M.format()
       async = true,
       filter = function(client)
         return client.name ~= "tsserver"
-            and client.name ~= "jsonls"
-            and client.name ~= "html"
-            and client.name ~= "sumneko_lua"
+          and client.name ~= "jsonls"
+          and client.name ~= "html"
+          and client.name ~= "sumneko_lua"
+          and client.name ~= "jdt.ls"
+        -- and client.name ~= "kotlin_language_server"
       end,
     }
     vim.fn.winrestview(view)
   end
 end
 
-function M.setup(client, buf)
-  local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+function M.setup(client, bufnr)
+  local filetype = api.nvim_buf_get_option(bufnr, "filetype")
 
   local enable = false
   if M.has_formatter(filetype) then
@@ -46,12 +49,14 @@ function M.setup(client, buf)
   client.server_capabilities.documentFormattingProvder = enable
   client.server_capabilities.documentRangeFormattingProvider = enable
   if client.server_capabilities.documentFormattingProvider then
-    vim.cmd [[
-      augroup LspFormat
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua require("config.lsp.null-ls.formatters").format()
-      augroup END
-    ]]
+    local lsp_format_grp = api.nvim_create_augroup("LspFormat", { clear = true })
+    api.nvim_create_autocmd("BufWritePre", {
+      callback = function()
+        vim.schedule(M.format)
+      end,
+      group = lsp_format_grp,
+      buffer = bufnr,
+    })
   end
 end
 

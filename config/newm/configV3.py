@@ -5,16 +5,19 @@ import os
 from random import randrange
 from typing import Any, Callable
 
-from gi.repository import Notify
+import gi
 from newm.helper import BacklightManager, PaCtl, WobRunner
 from newm.layout import Layout
+
+gi.require_version("Notify", "0.7")
+from gi.repository import Notify
 
 logger = logging.getLogger(__name__)
 
 
-def notify(msg: str, app_name: str, image="system-config-services"):
-    Notify.init(app_name)
-    n = Notify.Notification.new(app_name, msg, image)
+def notify(title: str, msg: str, icon="system-config-services"):
+    Notify.init(icon)
+    n = Notify.Notification.new(title, msg)
     n.show()
 
 
@@ -31,17 +34,18 @@ def set_value(keyval, file):
 
 def on_startup():
     # "hash dbus-update-activation-environment 2>/dev/null && \
-    # dbus-update-activation-environment --systemd --all",
+    # "dbus-update-activation-environment --systemd --all",
+    # "dbus-update-activation-environment --all",
 
     INIT_SERVICE = (
         "systemctl --user import-environment \
         DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-        "dbus-update-activation-environment --all",
+        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wl-paste -t text -n --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
-        "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
+        # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
         "fnott",
     )
     execute(INIT_SERVICE)
@@ -52,12 +56,11 @@ def on_reconfigure():
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
     # easyeffects = "com.github.wwmm.easyeffects"
-    theme = "Dracula-slim"
+    theme = "Catppuccin-purple"
     icons = "candy-icons"
-    cursor = "Sweet-cursors"
+    cursor = "Catppuccin-Mocha-Pink"
     font = "Lucida MAC 10"
     gtk2 = "~/.gtkrc-2.0"
-    gtk3 = "~/.config/gtk-3.0/settings.ini"
 
     GSETTINGS = (
         f"gsettings set {gnome_preferences} button-layout :",
@@ -85,10 +88,10 @@ def on_reconfigure():
         )
         execute(CONFIG_GTK)
 
-    options_gtk(gtk3)
+    # options_gtk(gtk3)
     options_gtk(gtk2, '"')
     execute(GSETTINGS)
-    notify("newm reload", "Reload")
+    notify("Reload", "update config success", "firefox")
 
 
 corner_radius = 0
@@ -99,8 +102,9 @@ outputs = [
 ]
 
 pywm = {
-    "xkb_model": "PLACEHOLDER_xkb_model",
-    "xkb_layout": "latam",
+    # "xkb_model": "PLACEHOLDER_xkb_model",
+    # "xkb_layout": "latam",
+    "xkb_layout": "es",
     # "xkb_options": "caps:swapescape",
     "focus_follows_mouse": True,
     "xcursor_theme": "Sweet-cursors",
@@ -109,9 +113,10 @@ pywm = {
     "enable_xwayland": True,
     "natural_scroll": True,
     "texture_shaders": "basic",
+    "renderer_mode": "passthrough",
     # 'renderer_mode': 'indirect',
     # "renderer_mode": "pywm",
-    # 'contstrain_popups_to_toplevel': True
+    "contstrain_popups_to_toplevel": True,
 }
 
 
@@ -149,6 +154,15 @@ view = {
     "ssd": {"enabled": False},
 }
 
+focus = {
+    "color": "#cba6f7",  # change color
+    "distance": 3,
+    "width": 3,
+    "animate_on_change": True,
+    # "anim_time": 0.3
+    # "enabled": False
+}
+
 swipe_zoom = {
     "grid_m": 1,
     "grid_ovr": 0.02,
@@ -171,31 +185,23 @@ background = {
 
 anim_time = 0.25
 blend_time = 0.5
-power_times = [1000, 1000, 2000]
+power_times = [1000, 2000, 3000]
 
 wob_runner = WobRunner("wob -a top -M 100")
 backlight_manager = BacklightManager(anim_time=1.0, bar_display=wob_runner)
 # Config for keyboard light
-# kbdlight_manager = BacklightManager(
-#     args="--device='*::kbd_backlight'",
-#     anim_time=1.,
-#     bar_display=wob_runner)
+kbdlight_manager = BacklightManager(
+    args="--device='*::kbd_backlight'", anim_time=1.0, bar_display=wob_runner
+)
 
 
 def synchronous_update() -> None:
-    #     kbdlight_manager.update()
+    kbdlight_manager.update()
     backlight_manager.update()
 
 
 pactl = PaCtl(0, wob_runner)
 term = "kitty"
-
-
-def prueba(layout):
-    try:
-        layout.ensure_locked()
-    except Exception as e:
-        notify(e)
 
 
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
@@ -229,7 +235,6 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "n", lambda: layout.basic_scale(-1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
-        (altgr + "r", lambda: prueba(layout)),
         (super + "P", layout.terminate),
         ("XF86Close", layout.close_view),
         ("XF86Reload", layout.update_config),
@@ -311,14 +316,4 @@ panels = {
 }
 
 grid = {"throw_ps": [2, 10]}
-
 energy = {"idle_times": [600, 900, 1800], "idle_callback": backlight_manager.callback}
-
-focus = {
-    "color": "#a29dff",  # change color
-    "distance": 3,
-    "width": 3,
-    "animate_on_change": True,
-    "anim_time": 0.4
-    # "enabled": False
-}

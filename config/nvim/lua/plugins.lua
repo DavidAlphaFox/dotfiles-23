@@ -61,10 +61,18 @@ function M.setup()
     --- THEME
     use {
       "themercorp/themer.lua",
-      config = function()
-        require("config.themer").setup()
-      end,
+      -- config = function()
+      --   require("config.themer").setup()
+      -- end,
     }
+    use({
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = function()
+        vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+        vim.cmd[[colorscheme catppuccin]]
+      end,
+    })
 
     -- NOTIFICATION
     use {
@@ -113,6 +121,7 @@ function M.setup()
       ft = { "elixir" },
     }
 
+    -- use "kyazdani42/nvim-web-devicons"
     -- Icons
     use {
       "yamatsum/nvim-nonicons",
@@ -184,8 +193,14 @@ function M.setup()
       end,
     }
 
+    use {
+      "kylechui/nvim-surround",
+      config = function()
+         require("nvim-surround").setup()
+      end
+    }
     -- Tim Pope docet
-    use "tpope/vim-surround"
+    -- use "tpope/vim-surround"
     use "Matt-A-Bennett/vim-surround-funk"
     use "tpope/vim-repeat"
     use { "wellle/targets.vim", event = "CursorMoved" }
@@ -208,6 +223,17 @@ function M.setup()
       end,
       wants = "nvim-web-devicons",
       -- disable = true
+    }
+
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+          "nvim-lua/plenary.nvim",
+          "nvim-treesitter/nvim-treesitter"
+      },
+      config = function()
+        require('refactoring').setup({})
+      end
     }
 
     --UI
@@ -297,6 +323,7 @@ function M.setup()
       wants = {
         "coq_nvim",
         "lua-dev.nvim",
+        "vim-illuminate",
         "null-ls.nvim",
         "omnisharp-extended-lsp.nvim",
         "csharpls-extended-lsp.nvim",
@@ -306,21 +333,11 @@ function M.setup()
       end,
       requires = {
         "folke/lua-dev.nvim",
+        "RRethy/vim-illuminate",
         "jose-elias-alvarez/null-ls.nvim",
         "Hoffs/omnisharp-extended-lsp.nvim",
         "Decodetalkers/csharpls-extended-lsp.nvim",
       }
-    }
-
-    use {
-      "ThePrimeagen/refactoring.nvim",
-      requires = {
-          {"nvim-lua/plenary.nvim"},
-          {"nvim-treesitter/nvim-treesitter"}
-      },
-      config = function()
-        require('refactoring').setup({})
-      end
     }
 
     use({

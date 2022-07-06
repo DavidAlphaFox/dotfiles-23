@@ -210,8 +210,14 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
 export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' --height 40% --reverse --bind='?:toggle-preview'"
+export FZF_DEFAULT_OPTS=""
+export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' \
+--height 40% --reverse --bind='?:toggle-preview' \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+
 # source ~/.passmaria.zsh
 
 # BEGIN_KITTY_SHELL_INTEGRATION

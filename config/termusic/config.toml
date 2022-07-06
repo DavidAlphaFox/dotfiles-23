@@ -1,11 +1,12 @@
 music_dir = "~/Música"
 loop_mode = "Playlist"
 volume = 100
-speed = 1.0
+speed = 10
 add_playlist_front = false
+gapless = true
 disable_exit_confirmation = true
 playlist_display_symbol = true
-theme_selected = "default"
+theme_selected = "crag"
 
 [album_photo_xywh]
 x_between_1_100 = 0
@@ -24,7 +25,7 @@ playlist_background = "Reset"
 playlist_border = "Magenta"
 playlist_highlight = "Red"
 playlist_highlight_symbol = "🚀"
-progress_foreground = "LightMagenta"
+progress_foreground = "Blue"
 progress_background = "Reset"
 progress_border = "Cyan"
 lyric_foreground = "Foreground"
@@ -33,28 +34,28 @@ lyric_border = "Green"
 
 [style_color_symbol.alacritty_theme]
 path = ""
-name = "default"
-author = "Crag"
-background = "#1a1a2e"
-foreground = "#e2d5bc"
-cursor = "#bbbbbb"
-text = "#e2d5bc"
-black = "#212121"
-red = "#fb5c8e"
-green = "#84c49b"
-yellow = "#f6e08b"
-blue = "#93c5e6"
-magenta = "#a29dff"
-cyan = "#e68ac1"
-white = "#e5e9f0"
-light_black = "#565393"
-light_red = "#dd5289"
-light_green = "#9fd3b3"
-light_yellow = "#fff0b8"
-light_blue = "#aed9f6"
-light_magenta = "#b2aeff"
-light_cyan = "#edabd2"
-light_white = "#f2f2f2"
+name = "crag"
+author = "Diego Aguilar"
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+cursor = "#f5e0dc"
+text = "#45475a"
+black = "#585b70"
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+magenta = "#f5c2e7"
+cyan = "#94e2d5"
+white = "#bac2de"
+light_black = "#a6adc8"
+light_red = "#f38ba8"
+light_green = "#a6e3a1"
+light_yellow = "#f9e2af"
+light_blue = "#89b4fa"
+light_magenta = "#f5c2e7"
+light_cyan = "#94e2d5"
+light_white = "#ffffff"
 [keys.global_esc.code]
 type = "Esc"
 
@@ -362,3 +363,10 @@ args = "L"
 [keys.database_add_all.modifiers]
 type = "KeyModifiers"
 bits = 1
+[keys.global_player_toggle_gapless.code]
+type = "Char"
+args = "g"
+
+[keys.global_player_toggle_gapless.modifiers]
+type = "KeyModifiers"
+bits = 2
