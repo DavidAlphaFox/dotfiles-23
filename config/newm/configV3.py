@@ -30,16 +30,17 @@ def on_startup():
     # DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
     # "systemctl --user import-environment \
     #     DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+    # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
 
     INIT_SERVICE = (
-        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY",
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wl-paste -t text -n --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
-        # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
-        "/home/crag/.scripts/battery-status.sh",
         "fnott",
+        "powerprofilesctl set power-saver",
+        "/home/crag/.scripts/battery-status.sh",
     )
     execute_iter(INIT_SERVICE)
 
@@ -87,29 +88,36 @@ def on_reconfigure():
     notify("Reload", "update config success")
 
 
-corner_radius = 0
-
 outputs = [
-    {"name": "eDP-2", "scale": 0.95},
+    {"name": "eDP-2", "pos_x": 0, "pos_y": 0, "scale": 1.0},  # 2560/1600 },
     # {"name": "DP-2", "scale": 0.7},
 ]
 
+
+mod = "L"  # o "A", "C", "1", "2", "3"
+
+background = {
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/10.jpg"),
+    # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
+    # "path": os.environ["HOME"]
+    # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
+    # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
+}
+
+corner_radius = 0
+
 pywm = {
+    "enable_xwayland": False,
     # "xkb_model": "PLACEHOLDER_xkb_model",
     # "xkb_layout": "latam",
     "xkb_layout": "es",
     # "xkb_options": "caps:swapescape",
-    "focus_follows_mouse": True,
     "xcursor_theme": "Catppuccin-Mocha-Pink",
     "xcursor_size": 30,
+    "contstrain_popups_to_toplevel": True,
     "encourage_csd": False,
-    "enable_xwayland": True,
-    "natural_scroll": True,
     "texture_shaders": "basic",
     "renderer_mode": "pywm",
-    # "renderer_mode": "passthrough",
-    # "renderer_mode": "indirect",
-    "contstrain_popups_to_toplevel": True,
 }
 
 
@@ -140,20 +148,19 @@ view = {
     "padding": 10,
     "fullscreen_padding": 0,
     "send_fullscreen": False,
-    "sticky_fullscreen": True,
+    "sticky_fullscreen": False,
     "rules": rules,
     "floating_min_size": False,
     "debug_scaling": False,
-    "border_ws_switch": 100,
     "ssd": {"enabled": False},
 }
 
 focus = {
     "color": "#cba6f7",  # change color
-    "distance": 3,
-    "width": 3,
+    "distance": 4.5,
+    "width": 4.5,
     "animate_on_change": True,
-    # "anim_time": 0.3
+    "anim_time": 0.3
     # "enabled": False
 }
 
@@ -162,19 +169,8 @@ swipe_zoom = {
     "grid_ovr": 0.02,
 }
 
-background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
-    # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
-    # "path": os.environ["HOME"]
-    # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
-    # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
-    "time_scale": 0.15,
-    "anim": True,
-}
-
+blend_time = 0.2
 anim_time = 0.25
-blend_time = 0.5
-power_times = [1000, 2000, 3000]
 
 wob_option = {
     "border": 2,
@@ -191,14 +187,14 @@ wob_args = " ".join((f"--{k} {v}" for (k, v) in wob_option.items()))
 wob_runner = WobRunner(f"wob {wob_args}")
 
 backlight_manager = BacklightManager(anim_time=1.0, bar_display=wob_runner)
-# Config for keyboard light
-kbdlight_manager = BacklightManager(
-    args="--device='*::kbd_backlight'", anim_time=1.0, bar_display=wob_runner
-)
+# # Config for keyboard light
+# kbdlight_manager = BacklightManager(
+#     args="--device='*::kbd_backlight'", anim_time=1.0, bar_display=wob_runner
+# )
 
 
 def synchronous_update() -> None:
-    kbdlight_manager.update()
+    # kbdlight_manager.update()
     backlight_manager.update()
 
 
@@ -206,21 +202,12 @@ pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
-mod = "L"  # o "A", "C", "1", "2", "3"
-super = mod + "-"
-altgr = "3-"
-ctrl = "C-"
-alt = "A-"
-
-
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
-    menu = "~/.config/rofi/bin/launcher_misc"
-    clipboard = "~/.config/rofi/bin/clipboard"
-    favorites = "~/.config/rofi/bin/apps"
-    powermenu = "~/.config/rofi/bin/menu_powermenu"
-    bookmarks = "~/.config/rofi/bin/bookmarks"
-    passman = "~/.config/rofi/bin/passman"
-    wifi = "~/.config/rofi/bin/wifi"
+    super = mod + "-"
+    altgr = "3-"
+    ctrl = "C-"
+    alt = "A-"
+    rofi = "~/.config/rofi/bin"
 
     return [
         (super + "h", lambda: layout.move(-1, 0)),
@@ -240,9 +227,9 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + alt + "j", lambda: layout.resize_focused_view(0, 1)),
         (super + alt + "k", lambda: layout.resize_focused_view(0, -1)),
         (super + alt + "l", lambda: layout.resize_focused_view(1, 0)),
-        (altgr + "w", layout.change_focused_view_workspace),
+        # (altgr + "w", layout.change_focused_view_workspace),
         (altgr + "v", layout.toggle_focused_view_floating),
-        ("Henkan_Mode", layout.move_workspace),
+        # ("Henkan_Mode", layout.move_workspace),
         (alt + "Tab", layout.move_next_view),
         (super + "comma", lambda: layout.basic_scale(-1)),
         (super + "period", lambda: layout.basic_scale(1)),
@@ -257,10 +244,10 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86AudioNext", lambda: os.system("playerctl next")),
         ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
-        (altgr + "e", lambda: os.system(f"{powermenu} &")),
-        ("XF86Copy", lambda: os.system(f"{clipboard} &")),
-        ("XF86Favorites", lambda: os.system(f"{bookmarks} &")),
-        ("XF86Open", lambda: os.system(f"{passman} &")),
+        (altgr + "e", lambda: os.system(f"{rofi}/menu_powermenu &")),
+        ("XF86Copy", lambda: os.system(f"{rofi}/clipboard &")),
+        ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
+        ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         (
             "XF86MonBrightnessUp",
@@ -284,15 +271,15 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
             "XF86Tools",
             lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
         ),
-        ("XF86Search", lambda: os.system("catapult --show &")),
-        ("XF86Explorer", lambda: os.system(f"{menu} &")),
-        ("XF86LaunchA", lambda: os.system(f"{favorites} &")),
+        ("XF86Search", lambda: os.system("catapult &")),
+        ("XF86Explorer", lambda: os.system(f"{rofi}/launcher_misc &")),
+        ("XF86LaunchA", lambda: os.system(f"{rofi}/apps &")),
         ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
         (
             super + "Print",
             lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date +%s)".png &'),
         ),
-        ("XF86Go", lambda: os.system(f"{wifi} &")),
+        ("XF86Go", lambda: os.system(f"{rofi}/wifi &")),
         (
             "XF86Mail",
             lambda: os.system(
@@ -329,4 +316,4 @@ panels = {
 }
 
 grid = {"throw_ps": [2, 10]}
-energy = {"idle_times": [600, 900, 1800], "idle_callback": backlight_manager.callback}
+energy = {"idle_times": [300, 600, 900], "idle_callback": backlight_manager.callback}
