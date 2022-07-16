@@ -30,6 +30,7 @@ Blog: tcpip|https://mytcpip.com/
 Blog: thevaluable|https://thevaluable.dev
 Doc: Marshmallow|https://marshmallow.readthedocs.io/en/latest/marshmallow.fields.html#marshmallow.fields.Integer
 Doc: Nftables reference|https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes
+Doc: httpie sintaxis|https://httpie.io/docs/cli/request-items
 Gist: Cifrar arch linux install|https://gist.github.com/tz4678/bd33f94ab96c96bc6719035fcac2b807#%D0%A2%D0%B8%D0%BF%D1%8B-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2-%D0%B2-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D0%B5-ls-%D0%B8-%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D1%8B%D1%85-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4
 Gist: Piracy|https://gist.github.com/teraflik/f718fd2611cb1eb589a3e5e6599290f6
 Gist: Secure Laptop Install|https://gist.github.com/Th3Whit3Wolf/2f24b29183be7f8e9c0b05115aefb693
@@ -82,10 +83,12 @@ Resources: linux Server security tips|https://betterprogramming.pub/23-linux-ser
 Resources: nftables firewall|https://cryptsus.com/blog/setting-up-nftables-firewall.html
 Resources: servidor de archivos como miembro de un dominio|https://blog.desdelinux.net/samba-como-servidor-de-archivos-como-miembro-de-un-dominio/
 Rooms: Play station|https://roms-download.com/roms/playstation-portable
+Tips: Mejor rendimiento linq|https://medium.com/@hussein.nm/best-linq-performance-2dfe7fc7eff2
 Tools: Adobe Color|https://color.adobe.com/create/color-wheel
 Tools: Brand colors|https://brandcolors.net/
 Tools: Cargar imagen|https://es.imgbb.com/
 Tools: Me han hackeado|https://haveibeenpwned.com/
+Tools: Modelado de base de datos|https://dbdiagram.io/home
 Tools: Online File Converter|http://www.online-convert.com/
 Tools: Pastebin|https://pastebin.com/
 Tools: Random browser engine|https://randsearch.daniel.priv.no/
@@ -104,5 +107,3 @@ Utils: exe NetCore|https://rojiblancosite.wordpress.com/2019/07/09/generar-exe-e
 Videos: FIREWALL MODERNO|https://www.youtube.com/watch?v=A8aRH3oYyR8
 Videos: Reusar pantalla tablet|https://www.youtube.com/watch?v=qkk-JEKBNWQ
 Vim: tips|https://pmoracho.github.io/blog/2016/12/23/My-Vim-Tips/
-Tips: Mejor rendimiento linq|https://medium.com/@hussein.nm/best-linq-performance-2dfe7fc7eff2
-Tools: Modelado de base de datos|https://dbdiagram.io/home

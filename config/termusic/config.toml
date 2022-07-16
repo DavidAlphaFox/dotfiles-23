@@ -4,8 +4,10 @@ volume = 100
 speed = 10
 add_playlist_front = false
 gapless = true
-disable_exit_confirmation = true
+enable_exit_confirmation = false
 playlist_display_symbol = true
+playlist_select_random_track_quantity = 20
+playlist_select_random_album_quantity = 1
 theme_selected = "crag"
 
 [album_photo_xywh]
@@ -59,314 +61,328 @@ light_white = "#ffffff"
 [keys.global_esc.code]
 type = "Esc"
 
-[keys.global_esc.modifiers]
+[keys.global_esc.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_quit.code]
 type = "Char"
 args = "q"
 
-[keys.global_quit.modifiers]
+[keys.global_quit.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_left.code]
 type = "Char"
 args = "h"
 
-[keys.global_left.modifiers]
+[keys.global_left.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_down.code]
 type = "Char"
 args = "j"
 
-[keys.global_down.modifiers]
+[keys.global_down.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_up.code]
 type = "Char"
 args = "k"
 
-[keys.global_up.modifiers]
+[keys.global_up.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_right.code]
 type = "Char"
 args = "l"
 
-[keys.global_right.modifiers]
+[keys.global_right.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_goto_top.code]
 type = "Char"
 args = "g"
 
-[keys.global_goto_top.modifiers]
+[keys.global_goto_top.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_goto_bottom.code]
 type = "Char"
 args = "G"
 
-[keys.global_goto_bottom.modifiers]
+[keys.global_goto_bottom.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_toggle_pause.code]
 type = "Char"
 args = " "
 
-[keys.global_player_toggle_pause.modifiers]
+[keys.global_player_toggle_pause.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_player_next.code]
 type = "Char"
 args = "n"
 
-[keys.global_player_next.modifiers]
+[keys.global_player_next.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_player_previous.code]
 type = "Char"
 args = "N"
 
-[keys.global_player_previous.modifiers]
+[keys.global_player_previous.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_volume_plus_1.code]
 type = "Char"
 args = "+"
 
-[keys.global_player_volume_plus_1.modifiers]
+[keys.global_player_volume_plus_1.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_volume_plus_2.code]
 type = "Char"
 args = "="
 
-[keys.global_player_volume_plus_2.modifiers]
+[keys.global_player_volume_plus_2.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_player_volume_minus_1.code]
 type = "Char"
 args = "_"
 
-[keys.global_player_volume_minus_1.modifiers]
+[keys.global_player_volume_minus_1.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_volume_minus_2.code]
 type = "Char"
 args = "-"
 
-[keys.global_player_volume_minus_2.modifiers]
+[keys.global_player_volume_minus_2.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_help.code]
 type = "Char"
 args = "h"
 
-[keys.global_help.modifiers]
+[keys.global_help.modifier]
 type = "KeyModifiers"
 bits = 2
 [keys.global_player_seek_forward.code]
 type = "Char"
 args = "f"
 
-[keys.global_player_seek_forward.modifiers]
+[keys.global_player_seek_forward.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_player_seek_backward.code]
 type = "Char"
 args = "b"
 
-[keys.global_player_seek_backward.modifiers]
+[keys.global_player_seek_backward.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_lyric_adjust_forward.code]
 type = "Char"
 args = "F"
 
-[keys.global_lyric_adjust_forward.modifiers]
+[keys.global_lyric_adjust_forward.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_lyric_adjust_backward.code]
 type = "Char"
 args = "B"
 
-[keys.global_lyric_adjust_backward.modifiers]
+[keys.global_lyric_adjust_backward.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_speed_up.code]
 type = "Char"
 args = "f"
 
-[keys.global_player_speed_up.modifiers]
+[keys.global_player_speed_up.modifier]
 type = "KeyModifiers"
 bits = 2
 [keys.global_player_speed_down.code]
 type = "Char"
 args = "b"
 
-[keys.global_player_speed_down.modifiers]
+[keys.global_player_speed_down.modifier]
 type = "KeyModifiers"
 bits = 2
 [keys.global_lyric_cycle.code]
 type = "Char"
 args = "T"
 
-[keys.global_lyric_cycle.modifiers]
-type = "KeyModifiers"
-bits = 1
-[keys.global_color_editor_open.code]
-type = "Char"
-args = "C"
-
-[keys.global_color_editor_open.modifiers]
-type = "KeyModifiers"
-bits = 1
-[keys.global_key_editor_open.code]
-type = "Char"
-args = "K"
-
-[keys.global_key_editor_open.modifiers]
+[keys.global_lyric_cycle.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_layout_treeview.code]
 type = "Char"
 args = "1"
 
-[keys.global_layout_treeview.modifiers]
+[keys.global_layout_treeview.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.global_layout_database.code]
 type = "Char"
 args = "2"
 
-[keys.global_layout_database.modifiers]
+[keys.global_layout_database.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_load_dir.code]
 type = "Char"
 args = "L"
 
-[keys.library_load_dir.modifiers]
+[keys.library_load_dir.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.library_delete.code]
 type = "Char"
 args = "d"
 
-[keys.library_delete.modifiers]
+[keys.library_delete.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_yank.code]
 type = "Char"
 args = "y"
 
-[keys.library_yank.modifiers]
+[keys.library_yank.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_paste.code]
 type = "Char"
 args = "p"
 
-[keys.library_paste.modifiers]
+[keys.library_paste.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_search.code]
 type = "Char"
 args = "/"
 
-[keys.library_search.modifiers]
+[keys.library_search.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_search_youtube.code]
 type = "Char"
 args = "s"
 
-[keys.library_search_youtube.modifiers]
+[keys.library_search_youtube.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.library_tag_editor_open.code]
 type = "Char"
 args = "t"
 
-[keys.library_tag_editor_open.modifiers]
+[keys.library_tag_editor_open.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_delete.code]
 type = "Char"
 args = "d"
 
-[keys.playlist_delete.modifiers]
+[keys.playlist_delete.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_delete_all.code]
 type = "Char"
 args = "D"
 
-[keys.playlist_delete_all.modifiers]
+[keys.playlist_delete_all.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.playlist_shuffle.code]
 type = "Char"
-args = "s"
+args = "r"
 
-[keys.playlist_shuffle.modifiers]
+[keys.playlist_shuffle.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_mode_cycle.code]
 type = "Char"
 args = "m"
 
-[keys.playlist_mode_cycle.modifiers]
+[keys.playlist_mode_cycle.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_play_selected.code]
 type = "Char"
 args = "l"
 
-[keys.playlist_play_selected.modifiers]
+[keys.playlist_play_selected.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_add_front.code]
 type = "Char"
 args = "a"
 
-[keys.playlist_add_front.modifiers]
+[keys.playlist_add_front.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_search.code]
 type = "Char"
 args = "/"
 
-[keys.playlist_search.modifiers]
+[keys.playlist_search.modifier]
 type = "KeyModifiers"
 bits = 0
 [keys.playlist_swap_down.code]
 type = "Char"
 args = "j"
 
-[keys.playlist_swap_down.modifiers]
+[keys.playlist_swap_down.modifier]
 type = "KeyModifiers"
 bits = 2
 [keys.playlist_swap_up.code]
 type = "Char"
 args = "k"
 
-[keys.playlist_swap_up.modifiers]
+[keys.playlist_swap_up.modifier]
 type = "KeyModifiers"
 bits = 2
+[keys.playlist_cmus_lqueue.code]
+type = "Char"
+args = "S"
+
+[keys.playlist_cmus_lqueue.modifier]
+type = "KeyModifiers"
+bits = 1
+[keys.playlist_cmus_tqueue.code]
+type = "Char"
+args = "s"
+
+[keys.playlist_cmus_tqueue.modifier]
+type = "KeyModifiers"
+bits = 0
 [keys.database_add_all.code]
 type = "Char"
 args = "L"
 
-[keys.database_add_all.modifiers]
+[keys.database_add_all.modifier]
 type = "KeyModifiers"
 bits = 1
 [keys.global_player_toggle_gapless.code]
 type = "Char"
 args = "g"
 
-[keys.global_player_toggle_gapless.modifiers]
+[keys.global_player_toggle_gapless.modifier]
+type = "KeyModifiers"
+bits = 2
+[keys.global_config_open.code]
+type = "Char"
+args = "c"
+
+[keys.global_config_open.modifier]
+type = "KeyModifiers"
+bits = 2
+[keys.global_config_save.code]
+type = "Char"
+args = "s"
+
+[keys.global_config_save.modifier]
 type = "KeyModifiers"
 bits = 2

@@ -53,7 +53,7 @@ function M.setup()
           extra_keymaps = true, -- Create extra keymaps.
           extended_keymaps = true, -- Create extended keymaps.
           override_keymaps = true,
-          default_delay = 5
+          default_delay = 4
         }
       end,
     }
@@ -68,6 +68,7 @@ function M.setup()
     use({
       "catppuccin/nvim",
       as = "catppuccin",
+      -- branch = "dev",
       config = function()
         vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
         vim.cmd[[colorscheme catppuccin]]
@@ -213,6 +214,16 @@ function M.setup()
       end,
     }
 
+    use {
+      'jinh0/eyeliner.nvim',
+    config = function()
+        require('eyeliner').setup {
+          bold = true, -- Default: false
+          underline = true -- Default: false
+        }
+      end
+    }
+
     -- Status line
     use {
       "nvim-lualine/lualine.nvim",
@@ -225,15 +236,15 @@ function M.setup()
       -- disable = true
     }
 
+    -- Refactoring
     use {
       "ThePrimeagen/refactoring.nvim",
-      requires = {
-          "nvim-lua/plenary.nvim",
-          "nvim-treesitter/nvim-treesitter"
-      },
+      module = { "refactoring", "telescope" },
+      keys = { [[<leader>r]] },
+      wants = { "telescope.nvim" },
       config = function()
-        require('refactoring').setup({})
-      end
+        require("config.refactoring").setup()
+      end,
     }
 
     --UI
@@ -270,7 +281,18 @@ function M.setup()
       end,
     }
 
-    use "ThePrimeagen/harpoon"
+    use {
+      "ThePrimeagen/harpoon",
+      config = function()
+        require("harpoon").setup {
+          global_settings = {
+            save_on_toggle = true,
+            enter_on_sendcmd = true,
+          },
+        }
+      end
+    }
+
     use {
       "vuki656/package-info.nvim",
       opt = true,
@@ -289,15 +311,7 @@ function M.setup()
 
     -- General Plugins
     use "jeffkreeftmeijer/vim-numbertoggle"
-    use {
-      "voldikss/vim-translator",
-      ft = "markdown",
-      cmd = { "Translate", "TranslateV", "TranslateW", "TranslateWV", "TranslateR", "TranslateRV", "TranslateX" },
-      config = function()
-        vim.g.translator_target_lang = "es"
-        vim.g.translator_history_enable = true
-      end,
-    }
+    use "potamides/pantran.nvim"
 
     -- LSP
 
@@ -348,10 +362,17 @@ function M.setup()
     })
 
     use {
-      'kevinhwang91/nvim-ufo',
-      requires = 'kevinhwang91/promise-async',
+      "kevinhwang91/nvim-ufo",
+      opt = true,
+      -- event = { "BufReadPre" },
+      wants = { "promise-async" },
+      requires = "kevinhwang91/promise-async",
       config = function()
-        require('ufo').setup()
+        require("ufo").setup {
+          provider_selector = function(bufnr, filetype)
+            return { "lsp", "treesitter", "indent" }
+          end,
+        }
       end
     }
 

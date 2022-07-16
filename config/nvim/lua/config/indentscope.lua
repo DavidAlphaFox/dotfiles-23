@@ -14,7 +14,7 @@
 ---   like moving cursor). You can customize debounce delay and animation rule.
 --- - Customization of scope computation options can be done on global level
 ---   (in |MiniIndentscope.config|), for a certain buffer (using
----   `vim.b.miniindentscope_options` buffer variable), or within a call (using
+---   `vim.b.miniindentscope_config` buffer variable), or within a call (using
 ---   `opts` variable in |MiniIndentscope.get_scope|).
 --- - Customizable notion of a border: which adjacent lines with strictly lower
 ---   indent are recognized as such. This is useful for a certain filetypes
@@ -29,8 +29,13 @@
 --- This module needs a setup with `require('mini.indentscope').setup({})`
 --- (replace `{}` with your `config` table). It will create global Lua table
 --- `MiniIndentscope` which you can use for scripting or manually (with `:lua
---- MiniIndentscope.*`). See |MiniIndentscope.config| for available config
---- settings.
+--- MiniIndentscope.*`).
+---
+--- See |MiniIndentscope.config| for available config settings.
+---
+--- You can override runtime config settings locally to buffer inside
+--- `vim.b.miniindentscope_config` which should have same structure as
+--- `MiniIndentscope.config`. See |mini.nvim-buffer-local-config| for more details.
 ---
 --- # Comparisons~
 ---
@@ -127,7 +132,7 @@ local H = {}
 ---@param config table Module config table. See |MiniIndentscope.config|.
 ---
 ---@usage `require('mini.indentscope').setup({})` (replace `{}` with your `config` table)
-function MiniIndentscope.setup(config)
+MiniIndentscope.setup = function(config)
   -- Export module
   _G.MiniIndentscope = MiniIndentscope
 
@@ -172,8 +177,8 @@ end
 ---@text # Options ~
 ---
 --- - Options can be supplied globally (from this `config`), locally to buffer
----   (via `vim.b.miniindentscope_options` buffer variable), or locally to call
----   (as argument to |MiniIndentscope.get_scope()|).
+---   (via `options` field of `vim.b.miniindentscope_config` buffer variable),
+---   or locally to call (as argument to |MiniIndentscope.get_scope()|).
 ---
 --- - Option `border` controls which line(s) with smaller indent to categorize
 ---   as border. This matters for textobjects and motions.
@@ -223,9 +228,7 @@ MiniIndentscope.config = {
     -- |MiniIndentscope.gen_animation()| for builtin options. To not use
     -- animation, supply `require('mini.indentscope').gen_animation('none')`.
     --minidoc_replace_start animation = --<function: implements constant 20ms between steps>,
-    animation = function(s, n)
-      return 20
-    end,
+    animation = function(s, n) return 20 end,
     --minidoc_replace_end
   },
 
@@ -240,8 +243,7 @@ MiniIndentscope.config = {
     goto_bottom = ']i',
   },
 
-  -- Options which control computation of scope. Buffer local values can be
-  -- supplied in buffer variable `vim.b.miniindentscope_options`.
+  -- Options which control scope computation
   options = {
     -- Type of scope's border: which line(s) with smaller indent to
     -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
@@ -275,8 +277,8 @@ MiniIndentscope.config = {
 ---
 --- Options controlling actual computation is taken from these places in order:
 --- - Argument `opts`. Use it to ensure independence from other sources.
---- - Buffer local variable `vim.b.miniindentscope_options`. Useful to define
----   behavior inside some autocommand (for example, for a certain filetype).
+--- - Buffer local variable `vim.b.miniindentscope_config` (`options` field).
+---   Useful to define local behavior (for example, for a certain filetype).
 --- - Global options from |MiniIndentscope.config|.
 ---
 --- Algorithm overview~
@@ -327,7 +329,7 @@ MiniIndentscope.config = {
 ---   - <buf_id> - identifier of current buffer.
 ---   - <reference> - table with <line> (reference line), <column> (reference
 ---     column), and <indent> ("indent at column") keys.
-function MiniIndentscope.get_scope(line, col, opts)
+MiniIndentscope.get_scope = function(line, col, opts)
   opts = H.get_opts(opts)
 
   -- Compute default `line` and\or `col`
@@ -371,7 +373,7 @@ end
 --- is setup in |MiniIndentscope.setup|.
 ---
 ---@param opts table Options.
-function MiniIndentscope.auto_draw(opts)
+MiniIndentscope.auto_draw = function(opts)
   if H.is_disabled() then
     H.undraw_scope()
     return
@@ -382,9 +384,7 @@ function MiniIndentscope.auto_draw(opts)
 
   -- Make early return if nothing has to be done. Doing this before updating
   -- event id allows to not interrupt ongoing animation.
-  if opts.lazy and H.current.draw_status ~= 'none' and H.scope_is_equal(scope, H.current.scope) then
-    return
-  end
+  if opts.lazy and H.current.draw_status ~= 'none' and H.scope_is_equal(scope, H.current.scope) then return end
 
   -- Account for current event
   local local_event_id = H.current.event_id + 1
@@ -394,16 +394,12 @@ function MiniIndentscope.auto_draw(opts)
   local draw_opts = H.make_autodraw_opts(scope)
 
   -- Allow delay
-  if draw_opts.delay > 0 then
-    H.undraw_scope(draw_opts)
-  end
+  if draw_opts.delay > 0 then H.undraw_scope(draw_opts) end
 
   -- Use `defer_fn()` even if `delay` is 0 to draw indicator only after all
   -- events are processed (stops flickering)
   vim.defer_fn(function()
-    if H.current.event_id ~= local_event_id then
-      return
-    end
+    if H.current.event_id ~= local_event_id then return end
 
     H.undraw_scope(draw_opts)
 
@@ -423,9 +419,9 @@ end
 ---@param opts table Options. Currently supported:
 ---    - <animation_fun> - animation function for drawing. See
 ---      |MiniIndentscope-drawing| and |MiniIndentscope.gen_animation()|.
-function MiniIndentscope.draw(scope, opts)
+MiniIndentscope.draw = function(scope, opts)
   scope = scope or MiniIndentscope.get_scope()
-  local draw_opts = vim.tbl_deep_extend('force', { animation_fun = MiniIndentscope.config.draw.animation }, opts or {})
+  local draw_opts = vim.tbl_deep_extend('force', { animation_fun = H.get_config().draw.animation }, opts or {})
 
   H.undraw_scope()
 
@@ -434,9 +430,7 @@ function MiniIndentscope.draw(scope, opts)
 end
 
 --- Undraw currently visible scope manually
-function MiniIndentscope.undraw()
-  H.undraw_scope()
-end
+MiniIndentscope.undraw = function() H.undraw_scope() end
 
 --- Generate builtin animation function
 ---
@@ -484,7 +478,7 @@ end
 ---   `gen_animation('quadraticOut', { duration = 1000, unit = 'total' })`
 ---
 ---@seealso |MiniIndentscope-drawing| for more information about how drawing is done.
-function MiniIndentscope.gen_animation(easing, opts)
+MiniIndentscope.gen_animation = function(easing, opts)
   --stylua: ignore start
   if easing == 'none' then
     return function() return 0 end
@@ -532,7 +526,7 @@ end
 ---@param use_border boolean Whether to move to border or withing scope's body.
 ---   If particular border is absent, body is used.
 ---@param scope table Scope to use. Default: output of |MiniIndentscope.get_scope()|.
-function MiniIndentscope.move_cursor(side, use_border, scope)
+MiniIndentscope.move_cursor = function(side, use_border, scope)
   scope = scope or MiniIndentscope.get_scope()
 
   -- This defaults to body's side if it is not present in border
@@ -553,20 +547,16 @@ end
 ---@param side string One of "top" or "bottom".
 ---@param add_to_jumplist boolean Whether to add movement to jump list. It is
 ---   `true` only for Normal mode mappings.
-function MiniIndentscope.operator(side, add_to_jumplist)
+MiniIndentscope.operator = function(side, add_to_jumplist)
   local scope = MiniIndentscope.get_scope()
 
   -- Don't support scope that can't be shown
-  if H.scope_get_draw_indent(scope) < 0 then
-    return
-  end
+  if H.scope_get_draw_indent(scope) < 0 then return end
 
   -- Add movement to jump list. Needs remembering `count1` before that because
   -- it seems to reset it to 1.
   local count = vim.v.count1
-  if add_to_jumplist then
-    vim.cmd('normal! m`')
-  end
+  if add_to_jumplist then vim.cmd('normal! m`') end
 
   -- Make sequence of jumps
   for _ = 1, count do
@@ -575,9 +565,7 @@ function MiniIndentscope.operator(side, add_to_jumplist)
     scope = MiniIndentscope.get_scope(nil, nil, { try_as_border = false })
 
     -- Don't support scope that can't be shown
-    if H.scope_get_draw_indent(scope) < 0 then
-      return
-    end
+    if H.scope_get_draw_indent(scope) < 0 then return end
   end
 end
 
@@ -589,13 +577,11 @@ end
 ---@param use_border boolean Whether to include border in textobject. When
 ---   `true` and `try_as_border` option is `false`, allows "chaining" calls for
 ---   incremental selection.
-function MiniIndentscope.textobject(use_border)
+MiniIndentscope.textobject = function(use_border)
   local scope = MiniIndentscope.get_scope()
 
   -- Don't support scope that can't be shown
-  if H.scope_get_draw_indent(scope) < 0 then
-    return
-  end
+  if H.scope_get_draw_indent(scope) < 0 then return end
 
   -- Allow chaining only if using border
   local count = use_border and vim.v.count1 or 1
@@ -617,9 +603,7 @@ function MiniIndentscope.textobject(use_border)
     scope = MiniIndentscope.get_scope(nil, nil, { try_as_border = false })
 
     -- Don't support scope that can't be shown
-    if H.scope_get_draw_indent(scope) < 0 then
-      return
-    end
+    if H.scope_get_draw_indent(scope) < 0 then return end
   end
 end
 
@@ -641,18 +625,10 @@ H.current = { event_id = 0, scope = {}, draw_status = 'none' }
 
 -- Functions to compute indent in ambiguous cases
 H.indent_funs = {
-  ['min'] = function(top_indent, bottom_indent)
-    return math.min(top_indent, bottom_indent)
-  end,
-  ['max'] = function(top_indent, bottom_indent)
-    return math.max(top_indent, bottom_indent)
-  end,
-  ['top'] = function(top_indent, bottom_indent)
-    return top_indent
-  end,
-  ['bottom'] = function(top_indent, bottom_indent)
-    return bottom_indent
-  end,
+  ['min'] = function(top_indent, bottom_indent) return math.min(top_indent, bottom_indent) end,
+  ['max'] = function(top_indent, bottom_indent) return math.max(top_indent, bottom_indent) end,
+  ['top'] = function(top_indent, bottom_indent) return top_indent end,
+  ['bottom'] = function(top_indent, bottom_indent) return bottom_indent end,
 }
 
 -- Functions to compute indent of blank line to satisfy `config.options.border`
@@ -665,15 +641,9 @@ H.blank_indent_funs = {
 
 -- Functions to compute border from body
 H.border_from_body = {
-  ['none'] = function(body, opts)
-    return {}
-  end,
-  ['top'] = function(body, opts)
-    return { top = body.top - 1, indent = H.get_line_indent(body.top - 1, opts) }
-  end,
-  ['bottom'] = function(body, opts)
-    return { bottom = body.bottom + 1, indent = H.get_line_indent(body.bottom + 1, opts) }
-  end,
+  ['none'] = function(body, opts) return {} end,
+  ['top'] = function(body, opts) return { top = body.top - 1, indent = H.get_line_indent(body.top - 1, opts) } end,
+  ['bottom'] = function(body, opts) return { bottom = body.bottom + 1, indent = H.get_line_indent(body.bottom + 1, opts) } end,
   ['both'] = function(body, opts)
     return {
       top = body.top - 1,
@@ -685,9 +655,7 @@ H.border_from_body = {
 
 -- Functions to correct line in case it is a border
 H.border_correctors = {
-  ['none'] = function(line, opts)
-    return line
-  end,
+  ['none'] = function(line, opts) return line end,
   ['top'] = function(line, opts)
     local cur_indent, next_indent = H.get_line_indent(line, opts), H.get_line_indent(line + 1, opts)
     return (cur_indent < next_indent) and (line + 1) or line
@@ -700,14 +668,10 @@ H.border_correctors = {
     local prev_indent, cur_indent, next_indent =
       H.get_line_indent(line - 1, opts), H.get_line_indent(line, opts), H.get_line_indent(line + 1, opts)
 
-    if prev_indent <= cur_indent and next_indent <= cur_indent then
-      return line
-    end
+    if prev_indent <= cur_indent and next_indent <= cur_indent then return line end
 
     -- If prev and next indents are equal and bigger than current, prefer next
-    if prev_indent <= next_indent then
-      return line + 1
-    end
+    if prev_indent <= next_indent then return line + 1 end
 
     return line - 1
   end,
@@ -715,7 +679,7 @@ H.border_correctors = {
 
 -- Helper functionality =======================================================
 -- Settings -------------------------------------------------------------------
-function H.setup_config(config)
+H.setup_config = function(config)
   -- General idea: if some table elements are not present in user-supplied
   -- `config`, take them from default config
   vim.validate({ config = { config, 'table', true } })
@@ -745,7 +709,7 @@ function H.setup_config(config)
   return config
 end
 
-function H.apply_config(config)
+H.apply_config = function(config)
   MiniIndentscope.config = config
   local maps = config.mappings
 
@@ -765,14 +729,26 @@ function H.apply_config(config)
   --stylua: ignore start
 end
 
-function H.is_disabled()
-  return vim.g.miniindentscope_disable == true or vim.b.miniindentscope_disable == true
+H.is_disabled = function() return vim.g.miniindentscope_disable == true or vim.b.miniindentscope_disable == true end
+
+H.get_config = function(config)
+  return vim.tbl_deep_extend('force', MiniIndentscope.config, vim.b.miniindentscope_config or {}, config or {})
 end
 
-function H.get_opts(opts)
-  local opts_local = vim.b.miniindentscope_options
-  local opts_global = MiniIndentscope.config.options
-  return vim.tbl_deep_extend('force', opts_global, opts_local or {}, opts or {})
+H.get_opts = function(opts)
+  -- TODO: remove after 0.5.0 release
+  if vim.b.miniindentscope_options ~= nil then
+    local msg = string.format(
+      '%s %s',
+      '(mini.indentscope) Usage of `vim.b.miniindentscope_options` is deprecated.',
+      'Use `options` field of `vim.b.miniindentscope_config`.'
+    )
+    vim.notify_once(msg)
+    vim.b.miniindentscope_config =
+      vim.tbl_deep_extend('force', { options = vim.b.miniindentscope_options }, vim.b.miniindentscope_config or {})
+  end
+
+  return H.get_config({ options = opts }).options
 end
 
 -- Scope ----------------------------------------------------------------------
@@ -780,7 +756,7 @@ end
 -- - Equals output of `vim.fn.indent()` in case of non-blank line.
 -- - Depends on `MiniIndentscope.config.options.border` in such way so as to
 --   ignore blank lines before line not recognized as border.
-function H.get_line_indent(line, opts)
+H.get_line_indent = function(line, opts)
   local prev_nonblank = vim.fn.prevnonblank(line)
   local res = vim.fn.indent(prev_nonblank)
 
@@ -794,7 +770,7 @@ function H.get_line_indent(line, opts)
   return res
 end
 
-function H.cast_ray(line, indent, direction, opts)
+H.cast_ray = function(line, indent, direction, opts)
   local final_line, increment = 1, -1
   if direction == 'down' then
     final_line, increment = vim.fn.line('$'), 1
@@ -803,25 +779,17 @@ function H.cast_ray(line, indent, direction, opts)
   local min_indent = math.huge
   for l = line, final_line, increment do
     local new_indent = H.get_line_indent(l + increment, opts)
-    if new_indent < indent then
-      return l, min_indent
-    end
-    if new_indent < min_indent then
-      min_indent = new_indent
-    end
+    if new_indent < indent then return l, min_indent end
+    if new_indent < min_indent then min_indent = new_indent end
   end
 
   return final_line, min_indent
 end
 
-function H.scope_get_draw_indent(scope)
-  return scope.border.indent or (scope.body.indent - 1)
-end
+H.scope_get_draw_indent = function(scope) return scope.border.indent or (scope.body.indent - 1) end
 
-function H.scope_is_equal(scope_1, scope_2)
-  if type(scope_1) ~= 'table' or type(scope_2) ~= 'table' then
-    return false
-  end
+H.scope_is_equal = function(scope_1, scope_2)
+  if type(scope_1) ~= 'table' or type(scope_2) ~= 'table' then return false end
 
   return scope_1.buf_id == scope_2.buf_id
     and H.scope_get_draw_indent(scope_1) == H.scope_get_draw_indent(scope_2)
@@ -829,10 +797,8 @@ function H.scope_is_equal(scope_1, scope_2)
     and scope_1.body.bottom == scope_2.body.bottom
 end
 
-function H.scope_has_intersect(scope_1, scope_2)
-  if type(scope_1) ~= 'table' or type(scope_2) ~= 'table' then
-    return false
-  end
+H.scope_has_intersect = function(scope_1, scope_2)
+  if type(scope_1) ~= 'table' or type(scope_2) ~= 'table' then return false end
   if (scope_1.buf_id ~= scope_2.buf_id) or (H.scope_get_draw_indent(scope_1) ~= H.scope_get_draw_indent(scope_2)) then
     return false
   end
@@ -853,15 +819,13 @@ end
 ---@return table|nil Table with indicator info or empty one in case indicator
 ---   shouldn't be drawn.
 ---@private
-function H.indicator_compute(scope)
+H.indicator_compute = function(scope)
   scope = scope or H.current.scope
   local indent = H.scope_get_draw_indent(scope)
 
   -- Don't draw indicator that should be outside of screen. This condition is
   -- (perpusfully) "responsible" for not drawing indicator spanning whole file.
-  if indent < 0 then
-    return {}
-  end
+  if indent < 0 then return {} end
 
   -- Extmarks will be located at column zero but show indented text:
   -- - This allows showing line even on empty lines.
@@ -870,18 +834,14 @@ function H.indicator_compute(scope)
   --     - Neovim issue: https://github.com/neovim/neovim/issues/14050
   --     - Used fix: https://github.com/lukas-reineke/indent-blankline.nvim/pull/155
   local leftcol = vim.fn.winsaveview().leftcol
-  if indent < leftcol then
-    return {}
-  end
+  if indent < leftcol then return {} end
 
   -- Usage separate highlight groups for prefix and symbol allows cursor to be
   -- "natural" when on the left of indicator line (like on empty lines)
-  local virt_text = { { MiniIndentscope.config.symbol, 'MiniIndentscopeSymbol' } }
+  local virt_text = { { H.get_config().symbol, 'MiniIndentscopeSymbol' } }
   local prefix = string.rep(' ', indent - leftcol)
   -- Currently Neovim doesn't work when text for extmark is empty string
-  if prefix:len() > 0 then
-    table.insert(virt_text, 1, { prefix, 'MiniIndentscopePrefix' })
-  end
+  if prefix:len() > 0 then table.insert(virt_text, 1, { prefix, 'MiniIndentscopePrefix' }) end
 
   local top = scope.body.top
   local bottom = scope.body.bottom
@@ -890,7 +850,7 @@ function H.indicator_compute(scope)
 end
 
 -- Drawing --------------------------------------------------------------------
-function H.draw_scope(scope, opts)
+H.draw_scope = function(scope, opts)
   scope = scope or {}
   opts = opts or {}
 
@@ -910,7 +870,7 @@ function H.draw_scope(scope, opts)
   H.draw_indicator_animation(indicator, draw_fun, opts.animation_fun)
 end
 
-function H.draw_indicator_animation(indicator, draw_fun, animation_fun)
+H.draw_indicator_animation = function(indicator, draw_fun, animation_fun)
   -- Draw from origin (cursor line but wihtin indicator range)
   local top, bottom = indicator.top, indicator.bottom
   local origin = math.min(math.max(vim.fn.line('.'), top), bottom)
@@ -923,9 +883,7 @@ function H.draw_indicator_animation(indicator, draw_fun, animation_fun)
   draw_step = vim.schedule_wrap(function()
     -- Check for not drawing outside of interval is done inside `draw_fun`
     local success = draw_fun(origin - step)
-    if step > 0 then
-      success = success and draw_fun(origin + step)
-    end
+    if step > 0 then success = success and draw_fun(origin + step) end
 
     if not success or step == n_steps then
       H.current.draw_status = step == n_steps and 'finished' or H.current.draw_status
@@ -967,13 +925,11 @@ function H.draw_indicator_animation(indicator, draw_fun, animation_fun)
   draw_step()
 end
 
-function H.undraw_scope(opts)
+H.undraw_scope = function(opts)
   opts = opts or {}
 
   -- Don't operate outside of current event if able to verify
-  if opts.event_id and opts.event_id ~= H.current.event_id then
-    return
-  end
+  if opts.event_id and opts.event_id ~= H.current.event_id then return end
 
   pcall(vim.api.nvim_buf_clear_namespace, H.current.scope.buf_id or 0, H.ns_id, 0, -1)
 
@@ -981,17 +937,16 @@ function H.undraw_scope(opts)
   H.current.scope = {}
 end
 
-function H.make_autodraw_opts(scope)
+H.make_autodraw_opts = function(scope)
+  local config = H.get_config()
   local res = {
     event_id = H.current.event_id,
     type = 'animation',
-    delay = MiniIndentscope.config.draw.delay,
-    animation_fun = MiniIndentscope.config.draw.animation,
+    delay = config.draw.delay,
+    animation_fun = config.draw.animation,
   }
 
-  if H.current.draw_status == 'none' then
-    return res
-  end
+  if H.current.draw_status == 'none' then return res end
 
   -- Draw immediately scope which intersects (same indent, overlapping ranges)
   -- currently drawn or finished. This is more natural when typing text.
@@ -1005,7 +960,7 @@ function H.make_autodraw_opts(scope)
   return res
 end
 
-function H.make_draw_function(indicator, opts)
+H.make_draw_function = function(indicator, opts)
   local extmark_opts = {
     hl_mode = 'combine',
     priority = 2,
@@ -1018,19 +973,13 @@ function H.make_draw_function(indicator, opts)
 
   return function(l)
     -- Don't draw if outdated
-    if H.current.event_id ~= current_event_id and current_event_id ~= nil then
-      return false
-    end
+    if H.current.event_id ~= current_event_id and current_event_id ~= nil then return false end
 
     -- Don't draw if disabled
-    if H.is_disabled() then
-      return false
-    end
+    if H.is_disabled() then return false end
 
     -- Don't put extmark outside of indicator range
-    if not (indicator.top <= l and l <= indicator.bottom) then
-      return true
-    end
+    if not (indicator.top <= l and l <= indicator.bottom) then return true end
 
     return pcall(vim.api.nvim_buf_set_extmark, indicator.buf_id, H.ns_id, l - 1, 0, extmark_opts)
   end
@@ -1052,7 +1001,7 @@ end
 ---@param type string One of "in", "out", "in-out".
 ---@param opts table Options from `MiniIndentscope.gen_animation()`.
 ---@private
-function H.animation_arithmetic_powers(power, type, opts)
+H.animation_arithmetic_powers = function(power, type, opts)
   -- Sum of first `n_steps` natural numbers raised to `power`
   --stylua: ignore start
   local arith_power_sum = ({
@@ -1081,12 +1030,8 @@ function H.animation_arithmetic_powers(power, type, opts)
   end
 
   return ({
-    ['in'] = function(s, n)
-      return make_delta(n) * (n - s + 1) ^ power
-    end,
-    ['out'] = function(s, n)
-      return make_delta(n) * s ^ power
-    end,
+    ['in'] = function(s, n) return make_delta(n) * (n - s + 1) ^ power end,
+    ['out'] = function(s, n) return make_delta(n) * s ^ power end,
     ['in-out'] = function(s, n)
       local n_half = math.ceil(0.5 * n)
       local s_halved
@@ -1111,16 +1056,14 @@ end
 ---@param type string One of "in", "out", "in-out".
 ---@param opts table Options from `MiniIndentscope.gen_animation()`.
 ---@private
-function H.animation_geometrical_powers(type, opts)
+H.animation_geometrical_powers = function(type, opts)
   -- Function which computes common delta so that overall duration will have
   -- desired value (based on supplied `opts`)
   local duration_unit, duration_value = opts.unit, opts.duration
   local make_delta = function(n_steps, is_in_out)
     local total_time = duration_unit == 'step' and (duration_value * n_steps) or duration_value
     -- Exact solution to avoid possible (bad) approximation
-    if n_steps == 1 then
-      return total_time + 1
-    end
+    if n_steps == 1 then return total_time + 1 end
     if is_in_out then
       local n_half = math.ceil(0.5 * n_steps)
       -- Example for n_steps=6:
@@ -1139,9 +1082,7 @@ function H.animation_geometrical_powers(type, opts)
       --   (Correction by solving exactly withtou `- (d-1)` for
       --   `total_time_corr = total_time + (d_0 - 1)`):
       --     d_1 = math.pow(0.5 * total_time_corr + 1, 1 / 3)
-      if n_steps % 2 == 1 then
-        total_time = total_time + math.pow(0.5 * total_time + 1, 1 / n_half) - 1
-      end
+      if n_steps % 2 == 1 then total_time = total_time + math.pow(0.5 * total_time + 1, 1 / n_half) - 1 end
       return math.pow(0.5 * total_time + 1, 1 / n_half)
     end
     return math.pow(total_time + 1, 1 / n_steps)
@@ -1170,30 +1111,23 @@ function H.animation_geometrical_powers(type, opts)
 end
 
 -- Utilities ------------------------------------------------------------------
-function H.message(msg)
-  vim.cmd('echomsg ' .. vim.inspect('(mini.indentscope) ' .. msg))
-end
+H.message = function(msg) vim.cmd('echomsg ' .. vim.inspect('(mini.indentscope) ' .. msg)) end
 
-function H.map(mode, key, rhs, opts)
-  --stylua: ignore
+H.map = function(mode, key, rhs, opts)
   if key == '' then return end
 
   opts = vim.tbl_deep_extend('force', { noremap = true, silent = true }, opts or {})
 
   -- Use mapping description only in Neovim>=0.7
-  if vim.fn.has('nvim-0.7') == 0 then
-    opts.desc = nil
-  end
+  if vim.fn.has('nvim-0.7') == 0 then opts.desc = nil end
 
   vim.api.nvim_set_keymap(mode, key, rhs, opts)
 end
 
-function H.exit_visual_mode()
+H.exit_visual_mode = function()
   local ctrl_v = vim.api.nvim_replace_termcodes('<C-v>', true, true, true)
   local cur_mode = vim.fn.mode()
-  if cur_mode == 'v' or cur_mode == 'V' or cur_mode == ctrl_v then
-    vim.cmd('normal! ' .. cur_mode)
-  end
+  if cur_mode == 'v' or cur_mode == 'V' or cur_mode == ctrl_v then vim.cmd('normal! ' .. cur_mode) end
 end
 
 return MiniIndentscope

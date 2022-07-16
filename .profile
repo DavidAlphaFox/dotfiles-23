@@ -6,4 +6,3 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export GTK_THEME="$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d \"\'\")"
 # export RIDER_JDK=/usr/share/rider/jbr
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-sh /home/crag/.scripts/battery-status.sh &

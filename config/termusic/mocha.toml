@@ -1,3 +1,21 @@
+[style_color_symbol]
+library_foreground = "Foreground"
+library_background = "Reset"
+library_border = "Blue"
+library_highlight = "LightYellow"
+library_highlight_symbol = "🦄"
+playlist_foreground = "Foreground"
+playlist_background = "Reset"
+playlist_border = "Magenta"
+playlist_highlight = "Red"
+playlist_highlight_symbol = "🚀"
+progress_foreground = "Blue"
+progress_background = "Reset"
+progress_border = "Cyan"
+lyric_foreground = "Foreground"
+lyric_background = "Reset"
+lyric_border = "Green"
+
 [style_color_symbol.alacritty_theme]
 path = ""
 name = "crag"

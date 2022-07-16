@@ -15,7 +15,6 @@ zmodule Aloxaf/fzf-tab
 zmodule utility
 zmodule archive
 # zmodule kutsan/zsh-system-clipboard
-# zmodule jeffreytse/zsh-vi-mode
 zmodule le0me55i/zsh-systemd --source systemd.plugin.zsh
 
 #
@@ -44,6 +43,7 @@ zmodule completion
 # Modules that must be initialized last
 #
 
+zmodule catppuccin/zsh-syntax-highlighting
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions

@@ -2,29 +2,21 @@ from __future__ import annotations
 
 import logging
 import os
-from random import randrange
 from typing import Any, Callable
 
-import gi
 from newm.helper import BacklightManager, PaCtl, WobRunner
 from newm.layout import Layout
-
-gi.require_version("Notify", "0.7")
-from gi.repository import Notify
 
 logger = logging.getLogger(__name__)
 
 
-def notify(title: str, msg: str, icon="system-config-services"):
-    Notify.init(icon)
-    n = Notify.Notification.new(title, msg)
-    n.show()
+def notify(title: str, msg: str, icon="system-settings"):
+    os.system(f"notify-send -i '{icon}' -a '{title}' '{msg}'")
 
 
-def execute(procs: tuple[str], start="", end=" &"):
-    for proc in procs:
-        proc = f"{start}{proc}{end}"
-        os.system(proc)
+def execute_iter(commands: tuple[str, ...]):
+    for command in commands:
+        os.system(f"{command} &")
 
 
 def set_value(keyval, file):
@@ -34,21 +26,22 @@ def set_value(keyval, file):
 
 def on_startup():
     # "hash dbus-update-activation-environment 2>/dev/null && \
-    # "dbus-update-activation-environment --systemd --all",
-    # "dbus-update-activation-environment --all",
+    # "dbus-update-activation-environment --systemd \
+    # DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+    # "systemctl --user import-environment \
+    #     DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
 
     INIT_SERVICE = (
-        "systemctl --user import-environment \
-        DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wl-paste -t text -n --watch clipman store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
+        "/home/crag/.scripts/battery-status.sh",
         "fnott",
     )
-    execute(INIT_SERVICE)
+    execute_iter(INIT_SERVICE)
 
 
 def on_reconfigure():
@@ -86,18 +79,18 @@ def on_reconfigure():
             set_value(f"gtk-font-name={c}{font}{c}", file),
             set_value(f"gtk-cursor-theme-name={c}{cursor}{c}", file),
         )
-        execute(CONFIG_GTK)
+        execute_iter(CONFIG_GTK)
 
     # options_gtk(gtk3)
     options_gtk(gtk2, '"')
-    execute(GSETTINGS)
-    notify("Reload", "update config success", "firefox")
+    execute_iter(GSETTINGS)
+    notify("Reload", "update config success")
 
 
 corner_radius = 0
 
 outputs = [
-    {"name": "eDP-1", "scale": 1},
+    {"name": "eDP-2", "scale": 0.95},
     # {"name": "DP-2", "scale": 0.7},
 ]
 
@@ -107,15 +100,15 @@ pywm = {
     "xkb_layout": "es",
     # "xkb_options": "caps:swapescape",
     "focus_follows_mouse": True,
-    "xcursor_theme": "Sweet-cursors",
-    "xcursor_size": 20,
+    "xcursor_theme": "Catppuccin-Mocha-Pink",
+    "xcursor_size": 30,
     "encourage_csd": False,
     "enable_xwayland": True,
     "natural_scroll": True,
     "texture_shaders": "basic",
-    "renderer_mode": "passthrough",
-    # 'renderer_mode': 'indirect',
-    # "renderer_mode": "pywm",
+    "renderer_mode": "pywm",
+    # "renderer_mode": "passthrough",
+    # "renderer_mode": "indirect",
     "contstrain_popups_to_toplevel": True,
 }
 
@@ -128,7 +121,7 @@ def rules(view):
         "Pinentry-gtk-2",
     )
     float_titles = ("Exportar la imagen", "Dialect")
-    blur_apps = ("kitty", "rofi", "waybar", "Alacritty")
+    blur_apps = ("kitty", "rofi", "Alacritty")
     app_rule = None
     # Set float common rules
     if view.app_id in float_app_ids or view.title in float_titles:
@@ -147,6 +140,7 @@ view = {
     "padding": 10,
     "fullscreen_padding": 0,
     "send_fullscreen": False,
+    "sticky_fullscreen": True,
     "rules": rules,
     "floating_min_size": False,
     "debug_scaling": False,
@@ -168,18 +162,13 @@ swipe_zoom = {
     "grid_ovr": 0.02,
 }
 
-mod = "L"  # o "A", "C", "1", "2", "3"
-super = mod + "-"
-altgr = "3-"
-ctrl = "C-"
-alt = "A-"
-
 background = {
-    "path": os.environ["HOME"] + f"/Imágenes/space/space{randrange(1, 6)}.jpg",
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
+    # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
     # "path": os.environ["HOME"]
     # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
     # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
-    "time_scale": 0.125,
+    "time_scale": 0.15,
     "anim": True,
 }
 
@@ -187,7 +176,20 @@ anim_time = 0.25
 blend_time = 0.5
 power_times = [1000, 2000, 3000]
 
-wob_runner = WobRunner("wob -a top -M 100")
+wob_option = {
+    "border": 2,
+    "anchor": "top",
+    "margin": 100,
+    "border-color": "#94E2D5FF",
+    "background-color": "#1E1E2EFF",
+    "bar-color": "#A6E3A1FF",
+    "overflow-border-color": "#F5C2E7FF",
+    "overflow-background-color": "#1E1E2EFF",
+    "overflow-bar-color": "#F38BA8FF",
+}
+wob_args = " ".join((f"--{k} {v}" for (k, v) in wob_option.items()))
+wob_runner = WobRunner(f"wob {wob_args}")
+
 backlight_manager = BacklightManager(anim_time=1.0, bar_display=wob_runner)
 # Config for keyboard light
 kbdlight_manager = BacklightManager(
@@ -204,6 +206,13 @@ pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
+mod = "L"  # o "A", "C", "1", "2", "3"
+super = mod + "-"
+altgr = "3-"
+ctrl = "C-"
+alt = "A-"
+
+
 def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
     menu = "~/.config/rofi/bin/launcher_misc"
     clipboard = "~/.config/rofi/bin/clipboard"
@@ -218,7 +227,11 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (super + "j", lambda: layout.move(0, 1)),
         (super + "k", lambda: layout.move(0, -1)),
         (super + "l", lambda: layout.move(1, 0)),
-        (super + "t", lambda: layout.move_in_stack(3)),
+        (super + "u", lambda: layout.move(-1, -1)),
+        (super + "m", lambda: layout.move(1, 1)),
+        (super + "i", lambda: layout.move(1, -1)),
+        (super + "n", lambda: layout.move(-1, 1)),
+        (super + "t", lambda: layout.move_in_stack(1)),
         (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
         (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
         (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
@@ -231,8 +244,8 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         (altgr + "v", layout.toggle_focused_view_floating),
         ("Henkan_Mode", layout.move_workspace),
         (alt + "Tab", layout.move_next_view),
-        (super + "u", lambda: layout.basic_scale(1)),
-        (super + "n", lambda: layout.basic_scale(-1)),
+        (super + "comma", lambda: layout.basic_scale(-1)),
+        (super + "period", lambda: layout.basic_scale(1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
         (super + "P", layout.terminate),
@@ -251,11 +264,11 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86AudioMicMute", lambda: os.system("amixer set Capture toggle")),
         (
             "XF86MonBrightnessUp",
-            lambda: backlight_manager.set(backlight_manager.get() + 0.05),
+            lambda: backlight_manager.set(backlight_manager.get() + 0.03),
         ),
         (
             "XF86MonBrightnessDown",
-            lambda: backlight_manager.set(backlight_manager.get() - 0.05),
+            lambda: backlight_manager.set(backlight_manager.get() - 0.03),
         ),
         # (
         # "XF86KbdBrightnessUp",
@@ -266,7 +279,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86AudioRaiseVolume", lambda: pactl.volume_adj(5)),
         ("XF86AudioLowerVolume", lambda: pactl.volume_adj(-5)),
         ("XF86AudioMute", pactl.mute),
-        ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
+        # ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
         (
             "XF86Tools",
             lambda: os.system("kitty nvim ~/.config/newm/config.py &"),

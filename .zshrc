@@ -125,12 +125,12 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=
 
 # zstyle :prompt:pure:execution_time      color
 # zstyle :prompt:pure:git:arrow           color
-zstyle :prompt:pure:git:branch          color '#84c49b'
-zstyle :prompt:pure:git:dirty           color '#f79f79'
-zstyle :prompt:pure:git:action          color '#e68ac1'
-zstyle :prompt:pure:git:stash           color '#f6e08b'
-zstyle :prompt:pure:path                color '#aed9f6'
-zstyle :prompt:pure:prompt:success      color '#b2aeff'
+zstyle :prompt:pure:git:branch          color '#a6e3a1'
+zstyle :prompt:pure:git:dirty           color '#f5c2e7'
+zstyle :prompt:pure:git:action          color '#f38ba8'
+zstyle :prompt:pure:git:stash           color '#f9e2af'
+zstyle :prompt:pure:path                color '#89b4fa'
+zstyle :prompt:pure:prompt:success      color '#94e2d5'
 # zstyle :prompt:pure:user                color
 # zstyle :prompt:pure:user:root           color
 zstyle :prompt:pure:virtualenv          color '#edabd2'
@@ -138,7 +138,7 @@ zstyle :prompt:pure:virtualenv          color '#edabd2'
 # PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
 PS1='
 %(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}
-%B%(1j.%F{blue}*%f .)%(?.%F{#fb5c8e}>%F{#f47d49}>%F{#a29dff}>.%F{#a29dff}>%F{#f47d49}>%F{#fb5c8e}>)%f%b '
+%B%(1j.%F{blue}*%f .)%(?.%F{#f38ba8}ﰉ %F{#f9e2af}ﰉ %F{#a6e3a1}ﰉ.%F{#a6e3a1}ﰉ %F{#f9e2af}ﰉ %F{#f38ba8}ﰉ)%f%b '
 
 # -< Evals >-
 eval "$(zoxide init zsh)"
@@ -155,7 +155,7 @@ alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
 alias zt="zathura"
-alias music="termusic"
+alias music="XDG_CACHE_HOME=/home/$USER/.cache termusic"
 # alias aid="swaymsg -t get_tree | grep "app_id""
 alias help="cht.sh"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"

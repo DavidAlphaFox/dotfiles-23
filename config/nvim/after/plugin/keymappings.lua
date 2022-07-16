@@ -122,3 +122,7 @@ for k, v in pairs(neogen) do
     require("neogen").generate { type = v }
   end)
 end
+local pantran = require("pantran")
+utils.map("n", "<leader>tr", pantran.motion_translate)
+utils.map("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end)
+utils.map("x", "<leader>tr", pantran.motion_translate)

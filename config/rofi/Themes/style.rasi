@@ -1,14 +1,14 @@
 
 * {
-bg: #1e1f29;
-bgAlt: #282a36;
-fg: #bd93f9;
-button: #22232e;
+bg: #161320;
+bgAlt: #1E1E2E;
+fg: #F28FAD;
+button: #1E1E2E;
 background-color: @bg;
 text-color: @fg;
 }
 
 configuration {
-  font: "mononoki Nerd Font 16";
+  font: "mononoki Nerd Font 13";
 }
 

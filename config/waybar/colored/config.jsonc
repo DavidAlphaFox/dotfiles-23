@@ -17,24 +17,24 @@
     "tooltip": false
   },
   "clock": {
-    "format": "<span foreground='#edabd2'> </span><span>{:%I:%M %p}</span>",
+    "format": "<span foreground='#cba6f7'> </span><span>{:%I:%M %p}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "<span foreground='#96CDFB'> </span><span>{:%I:%M %p %a %d}</span>"
+    "format-alt": "<span foreground='#b4befe'> </span><span>{:%I:%M %p %a %d}</span>"
   },
   "cpu": {
-    "format": "<span foreground='#aed9f6'></span> {usage}%"
+    "format": "<span foreground='#89b4fa'></span> {usage}%"
   },
   "memory": {
-    "format": "<span foreground='#FAE3B0'></span> {}%",
+    "format": "<span foreground='#f9e2af'></span> {}%",
     "on-click": "kitty htop"
   },
   "temperature": {
     "critical-threshold": 80,
-    "format": "<span foreground='#f79f79'></span> {temperatureC}°C"
+    "format": "<span foreground='#f5c2e7'></span> {temperatureC}°C"
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span foreground='#fff0b8'>{icon}</span> {percent}%",
+    "format": "<span foreground='#f9e2af'>{icon}</span> {percent}%",
     "states": [0, 50],
     "format-icons": ["", ""]
   },
@@ -44,7 +44,7 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span foreground='#ABE9B3'>{icon} </span> {capacity}%",
+    "format": "<span foreground='#a6e3a1'>{icon} </span> {capacity}%",
     "format-icons": ["", "", "", "", ""]
   },
   "network": {
@@ -61,7 +61,7 @@
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "format": "<span size='13000' foreground='#e68ac1'></span><span> {volume}%</span>",
+    "format": "<span size='13000' foreground='#f38ba8'> </span><span> {volume}%</span>",
     "format-muted": "<span size='14000'>ﱝ</span>",
     "format-icons": {
       "headphone": "",
@@ -83,8 +83,8 @@
     "on-click": "playerctl previous",
     "on-click-right": "playerctl next",
     "format-icons": {
-      "Playing": "<span foreground='#ABE9B3'></span>",
-      "Paused": "<span foreground='#E8A2AF'></span>"
+      "Playing": "<span foreground='#94e2d5'></span>",
+      "Paused": "<span foreground='#f5c2e7'></span>"
     }
   },
   "tray": {
