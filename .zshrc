@@ -121,19 +121,19 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 
 #zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
-zstyle ':fzf-tab:complete:*:*' fzf-preview '([[ -f $realpath ]] && (bat --style=numbers --color=always $realpath || cat $realpath)) || ([[ -d $realpath ]] && (tree -C $realpath | less)) || echo $realpath 2> /dev/null | head -200'
+zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 
 # zstyle :prompt:pure:execution_time      color
 # zstyle :prompt:pure:git:arrow           color
-zstyle :prompt:pure:git:branch          color '#a6e3a1'
-zstyle :prompt:pure:git:dirty           color '#f5c2e7'
-zstyle :prompt:pure:git:action          color '#f38ba8'
-zstyle :prompt:pure:git:stash           color '#f9e2af'
-zstyle :prompt:pure:path                color '#89b4fa'
-zstyle :prompt:pure:prompt:success      color '#94e2d5'
+# zstyle :prompt:pure:git:branch          color '#a6e3a1'
+# zstyle :prompt:pure:git:dirty           color '#f5c2e7'
+# zstyle :prompt:pure:git:action          color '#f38ba8'
+# zstyle :prompt:pure:git:stash           color '#f9e2af'
+# zstyle :prompt:pure:path                color '#89b4fa'
+# zstyle :prompt:pure:prompt:success      color '#94e2d5'
 # zstyle :prompt:pure:user                color
 # zstyle :prompt:pure:user:root           color
-zstyle :prompt:pure:virtualenv          color '#edabd2'
+# zstyle :prompt:pure:virtualenv          color '#edabd2'
 
 # PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
 PS1='
@@ -150,6 +150,7 @@ alias ping="prettyping"
 alias icat="kitty +kitten icat"
 alias js="/usr/bin/node ~/.noderc"
 alias ls="logo-ls"
+alias la="logo-ls -A"
 alias cp="rsync -P"
 alias tree="ls -R"
 alias vi="nvim"
@@ -195,12 +196,9 @@ alias Videos="cd /$HOME/Vídeos"
 alias Git="cd /$HOME/Git"
 alias Usb="cd /run/media/crag"
 # HACK: fzf alias
-alias fpaci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias fpacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias fyay="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-# HACK: Tem alias
-alias wpstart="docker start wordpressdb wordpress"
-alias wpstop="docker stop wordpress wordpressdb"
+alias paci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias ys="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 alias ci="{ find . -xdev -printf '%h\n' | sort | uniq -c | sort -k 1 -n; } 2>/dev/null"
 
 # -< Environ variable >-
@@ -209,14 +207,7 @@ export TERM="xterm-kitty"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
-export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_OPTS=""
-export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' \
---height 40% --reverse --bind='?:toggle-preview' \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+export BAT_THEME="base16"
 
 # source ~/.passmaria.zsh
 

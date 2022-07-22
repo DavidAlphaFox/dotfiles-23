@@ -47,5 +47,7 @@ zmodule catppuccin/zsh-syntax-highlighting
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions
+zmodule none9632/zsh-sudo
+zmodule wfxr/forgit
 
 # }}} End configuration added by Zim install

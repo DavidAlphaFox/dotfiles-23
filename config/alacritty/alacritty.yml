@@ -20,7 +20,7 @@ window:
     y: 70
   decorations: none
   dynamic_title: true
-  opacity: 0.6
+  opacity: 0.9
 
 class:
   gtk_theme_variant: dark
@@ -31,7 +31,7 @@ scrolling:
 
 font:
   normal:
-    family: CaskaydiaCove Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Normal
   bold:
     family: mononoki Nerd Font

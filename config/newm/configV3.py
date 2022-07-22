@@ -33,9 +33,9 @@ def on_startup():
     # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
 
     INIT_SERVICE = (
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
+        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-        "wl-paste -t text -n --watch clipman store",
+        "wl-paste --watch cliphist store",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "fnott",
@@ -97,7 +97,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/10.jpg"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
     # "path": os.environ["HOME"]
     # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",

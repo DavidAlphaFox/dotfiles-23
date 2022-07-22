@@ -1,4 +1,4 @@
-# Function
+# Completions
 _dotnet_zsh_complete()
 {
   local completions=("$(dotnet complete "$words")")
@@ -14,32 +14,11 @@ _dotnet_zsh_complete()
   _values = "${(ps:\n:)completions}"
 }
 
-compdef _dotnet_zsh_complete dotnet
-
-sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    if [[ $BUFFER == sudo\ * ]]; then
-        LBUFFER="${LBUFFER#sudo }"
-    elif [[ $BUFFER == $EDITOR\ * ]]; then
-        LBUFFER="${LBUFFER#$EDITOR }"
-        LBUFFER="sudoedit $LBUFFER"
-    elif [[ $BUFFER == sudoedit\ * ]]; then
-        LBUFFER="${LBUFFER#sudoedit }"
-        LBUFFER="$EDITOR $LBUFFER"
-    else
-        LBUFFER="sudo $LBUFFER"
-    fi
-}
-zle -N sudo-command-line
-# Defined shortcut keys: [Esc] [Esc]
-bindkey "\e\e" sudo-command-line
-bindkey -M vicmd '\e\e' sudo-command-line
-
+# User Functions
 sr(){
   rg "$1" -l | xargs sed -i "s/$1/$2/g"
 }
 
-# Util funtions
 encrypt(){
   openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in $1 -out $2
 }
@@ -105,6 +84,28 @@ gitignore() {
 vims(){
 	nvim -p $(rg $1 -l | xargs)
 }
+
+dirsum() {
+    if [ $# = 1 ]; then
+	find $1 -type f -print0 | xargs -0 shasum | awk '{print $1}' | sort | shasum
+    else
+	echo 'usage: dirsum [directory]'
+    fi
+}
+
+uuid() {
+  repeat ${1-1} python -c "import uuid; print(uuid.uuid4());"
+}
+
+gb() {
+  git for-each-ref --color=always --sort=-committerdate refs/heads/ --format=' %(color:green)%(committerdate:relative)%(color:reset)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) %(color:magenta)%(authorname)%(color:reset) • %(contents:subject)'
+}
+
+gsb() {
+  gb | fzf --ansi --header='switch branch <choose branch>' --reverse | awk '{print $4}' | xargs -ro git switch
+}
+
+# Lazy loading
 
 lazy_load() {
     echo "Lazy loading $1 ..."
