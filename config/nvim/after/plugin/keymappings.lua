@@ -126,3 +126,11 @@ local pantran = require("pantran")
 utils.map("n", "<leader>tr", pantran.motion_translate)
 utils.map("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end)
 utils.map("x", "<leader>tr", pantran.motion_translate)
+
+-- diffview.nvim
+
+utils.map("n", "<leader>do", ":DiffviewOpen<CR>")
+utils.map("n", "<leader>dc", ":DiffviewClose<CR>")
+for i = 9, 1, -1 do
+  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i))
+end

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Any, Callable
 
 from newm.helper import BacklightManager, PaCtl, WobRunner
 from newm.layout import Layout
@@ -40,7 +39,8 @@ def on_startup():
         "nm-applet --indicator",
         "fnott",
         "powerprofilesctl set power-saver",
-        "/home/crag/.scripts/battery-status.sh",
+        os.path.expanduser("~/.scripts/battery-status.sh"),
+        "catapult",
     )
     execute_iter(INIT_SERVICE)
 
@@ -151,7 +151,7 @@ view = {
     "sticky_fullscreen": False,
     "rules": rules,
     "floating_min_size": False,
-    "debug_scaling": False,
+    "debug_scaling": True,
     "ssd": {"enabled": False},
 }
 
@@ -202,14 +202,14 @@ pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
-def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
+def key_bindings(layout: Layout):
     super = mod + "-"
     altgr = "3-"
     ctrl = "C-"
     alt = "A-"
     rofi = "~/.config/rofi/bin"
 
-    return [
+    return (
         (super + "h", lambda: layout.move(-1, 0)),
         (super + "j", lambda: layout.move(0, 1)),
         (super + "k", lambda: layout.move(0, -1)),
@@ -290,7 +290,7 @@ def key_bindings(layout: Layout) -> list[tuple[str, Callable[[], Any]]]:
         ("XF86AudioPreset", lambda: os.system("pavucontrol &")),
         ("XF86WWW", lambda: os.system("firefox &")),
         ("XF86Documents", lambda: os.system("thunar &")),
-    ]
+    )
 
 
 gestures = {

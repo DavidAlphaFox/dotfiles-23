@@ -1,8 +1,8 @@
-music_dir = "~/Música"
-loop_mode = "Playlist"
+music_dir = ["~/Música"]
+loop_mode = "Queue"
 volume = 100
 speed = 10
-add_playlist_front = false
+add_playlist_front = true
 gapless = true
 enable_exit_confirmation = false
 playlist_display_symbol = true
@@ -332,18 +332,18 @@ type = "KeyModifiers"
 bits = 0
 [keys.playlist_swap_down.code]
 type = "Char"
-args = "j"
+args = "J"
 
 [keys.playlist_swap_down.modifier]
 type = "KeyModifiers"
-bits = 2
+bits = 1
 [keys.playlist_swap_up.code]
 type = "Char"
-args = "k"
+args = "K"
 
 [keys.playlist_swap_up.modifier]
 type = "KeyModifiers"
-bits = 2
+bits = 1
 [keys.playlist_cmus_lqueue.code]
 type = "Char"
 args = "S"
@@ -386,3 +386,24 @@ args = "s"
 [keys.global_config_save.modifier]
 type = "KeyModifiers"
 bits = 2
+[keys.library_switch_root.code]
+type = "Char"
+args = "o"
+
+[keys.library_switch_root.modifier]
+type = "KeyModifiers"
+bits = 0
+[keys.library_add_root.code]
+type = "Char"
+args = "a"
+
+[keys.library_add_root.modifier]
+type = "KeyModifiers"
+bits = 0
+[keys.library_remove_root.code]
+type = "Char"
+args = "A"
+
+[keys.library_remove_root.modifier]
+type = "KeyModifiers"
+bits = 1
