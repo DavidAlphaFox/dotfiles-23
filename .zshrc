@@ -201,6 +201,7 @@ alias paci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sud
 alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias ys="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 alias ci="{ find . -xdev -printf '%h\n' | sort | uniq -c | sort -k 1 -n; } 2>/dev/null"
+alias gbc="git switch -c"
 
 # -< Environ variable >-
 export MYSQL_PS1="\n \d  ﯐ "
@@ -208,7 +209,7 @@ export TERM="xterm-kitty"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export PYTHONSTARTUP=~/.pyrc
-export BAT_THEME="base16"
+export BAT_THEME="Catppuccin-mocha"
 
 # source ~/.passmaria.zsh
 
@@ -216,6 +217,7 @@ export BAT_THEME="base16"
 if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
   source "/usr/lib/kitty/shell-integration/zsh/kitty.zsh";
 fi
+[ ! -f /tmp/crag/.cache/bat/themes.bin ] && bat cache --build
 # END_KITTY_SHELL_INTEGRATION
 # eval "$(starship init zsh)"
 # zprof

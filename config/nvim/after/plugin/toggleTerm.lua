@@ -41,7 +41,7 @@ end
 function _G.CragTermSend(cmd)
   local buf_exist = vim.api.nvim_buf_is_valid(bufid)
   if buf_exist then
-    vim.fn.chansend(jobid, vim.api.nvim_replace_termcodes('<C-c> ', true, true, true))
+    vim.fn.chansend(jobid, vim.api.nvim_replace_termcodes('<C-c><C-l>', true, true, true))
     vim.loop.sleep(100)
     vim.fn.chansend(jobid, cmd .. "\n")
   else

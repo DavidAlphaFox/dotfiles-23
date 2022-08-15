@@ -100,7 +100,9 @@ utils.map("n", "ñ<Tab>", require("harpoon.ui").nav_next)
 utils.map("n", "ñ <Tab>", require("harpoon.ui").nav_prev)
 
 utils.map("n", "ñ.", function()
-  require("harpoon.term").sendCommand(10, vim.api.nvim_replace_termcodes('<C-c>' ..  require("code_runner.commands").get_filetype_command() .. "\n", true, true, true))
+  require("harpoon.term").sendCommand(10, vim.api.nvim_replace_termcodes('<C-c><C-l>', true, true, true))
+  vim.loop.sleep(100)
+  require("harpoon.term").sendCommand(10, require("code_runner.commands").get_filetype_command() .. "\n")
 end)
 
 utils.map("n", "ñ ", function()
