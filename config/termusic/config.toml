@@ -2,7 +2,7 @@ music_dir = ["~/Música"]
 loop_mode = "Queue"
 volume = 100
 speed = 10
-add_playlist_front = true
+add_playlist_front = false
 gapless = true
 enable_exit_confirmation = false
 playlist_display_symbol = true
@@ -11,10 +11,10 @@ playlist_select_random_album_quantity = 1
 theme_selected = "crag"
 
 [album_photo_xywh]
-x_between_1_100 = 0
-y_between_1_100 = 97
-width_between_1_100 = 32
-align = "BottomLeft"
+x_between_1_100 = 1
+y_between_1_100 = 1
+width_between_1_100 = 24
+align = "TopRight"
 
 [style_color_symbol]
 library_foreground = "Foreground"
@@ -379,11 +379,11 @@ args = "c"
 [keys.global_config_open.modifier]
 type = "KeyModifiers"
 bits = 2
-[keys.global_config_save.code]
+[keys.config_save.code]
 type = "Char"
 args = "s"
 
-[keys.global_config_save.modifier]
+[keys.config_save.modifier]
 type = "KeyModifiers"
 bits = 2
 [keys.library_switch_root.code]
