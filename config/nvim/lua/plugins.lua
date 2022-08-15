@@ -290,6 +290,9 @@ function M.setup()
     use "gpanders/editorconfig.nvim"
 
     --Utils
+
+    use "jidn/vim-dbml"
+
     use {
       "CRAG666/code_runner.nvim",
       requires = "nvim-lua/plenary.nvim",
@@ -374,7 +377,7 @@ function M.setup()
     use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function()
-        require("lsp_lines").register_lsp_virtual_lines()
+        require("lsp_lines").setup()
       end,
     })
 
