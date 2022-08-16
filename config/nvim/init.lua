@@ -35,7 +35,6 @@ end
 --
 -- Init Packer Plugins
 --
-
 vim.g.mapleader = " "
 vim.g.colorscheme = "catppuccin"
 -- vim.g.colorscheme = "radium"
