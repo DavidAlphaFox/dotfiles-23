@@ -2,40 +2,6 @@ local utils = require "utils"
 local M = {}
 function M.setup()
   local actions = require "telescope.actions"
-  -- custom previewer
-  local previewers = require "telescope.previewers"
-  local job = require "plenary.job"
-  local preview_maker = function(filepath, bufnr, opts)
-  filepath = vim.fn.expand(filepath)
-  job
-    :new({
-      command = "file",
-      args = { "--mime-type", "-b", filepath },
-      on_exit = function(j)
-        local mime_type = vim.split(j:result()[1], "/")[1]
-
-        if mime_type == "text" then
-          -- check file size
-          vim.loop.fs_stat(filepath, function(_, stat)
-            if not stat then
-              return
-            end
-            if stat.size > 500000 then
-              return
-            else
-              previewers.buffer_previewer_maker(filepath, bufnr, opts)
-            end
-          end)
-        else
-          vim.schedule(function()
-            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "binary file" })
-          end)
-        end
-      end,
-    })
-    :sync()
-  end
-
   local mappings = {
     i = {
       ["<CR>"] = actions.select_tab,
@@ -75,7 +41,6 @@ function M.setup()
       },
       -- file_sorter = require("telescope.sorters").get_fuzzy_file,
       -- file_sorter = require("telescope.sorters").get_fzy_file,
-      buffer_previewer_maker = preview_maker,
       file_ignore_patterns = { "__pycache__", "node_modules" },
       path_display = { "shorten" },
       winblend = 0,
@@ -119,12 +84,20 @@ function M.setup()
         mappings = mappings
       },
       frecency = {
-        mappings = mappings
+        mappings = mappings,
+        show_unindexed = false,
+        ignore_patterns = {"*.git/*", "*/tmp/*"},
+        workspaces = {
+          ["dotfiles"]    = "/home/crag/Git/dotfiles",
+        }
       },
+      tele_tabby = {
+        use_highlighter = true,
+      }
     },
   }
 
-  local extensions = {"fzy_native", "dap", "media_files", "file_browser", "frecency", "themes", "tele_tabby"}
+  local extensions = {"frecency", "fzy_native", "dap", "media_files", "file_browser", "tele_tabby", "themes"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end
@@ -164,7 +137,7 @@ function M.setup()
   utils.map("n", "<leader>sh", builtin.search_history)
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
   utils.map("n", "<leader>m", builtin.marks)
-  utils.map("n", "<leader>fs", builtin.colorscheme)
+  utils.map("n", "<leader>fc", builtin.colorscheme)
   utils.map("n", "<leader>ss", builtin.spell_suggest)
   utils.map("n", "<leader>fk", builtin.keymaps)
   utils.map("n", "<leader>ft", builtin.filetypes)
@@ -173,7 +146,7 @@ function M.setup()
 
   -- -- LSP Pickers
   utils.map("n", "<leader>lr", builtin.lsp_references)
-  utils.map("n", "ñu", builtin.lsp_document_symbols)
+  utils.map("n", ",,", builtin.lsp_document_symbols)
   utils.map('n', '<leader>lf', builtin.lsp_definitions)
   utils.map("n", "<leader>ld", builtin.diagnostics)
   utils.map("n", "ñi", builtin.lsp_implementations)

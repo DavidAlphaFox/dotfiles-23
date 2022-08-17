@@ -44,7 +44,10 @@ api.nvim_create_autocmd("BufEnter", { command = "silent! lcd %:p:h" })
 api.nvim_create_autocmd("FileType", { pattern = "cs", command = [[setlocal shiftwidth=4 softtabstop=4 expandtab]] })
 api.nvim_create_autocmd("FileType", { pattern = "make", command = [[setlocal noexpandtab]] })
 -- don't auto comment new line
-api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = "set fo-=c fo-=r fo-=o",
+})
 api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 -- Fix highlight issue
 api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })

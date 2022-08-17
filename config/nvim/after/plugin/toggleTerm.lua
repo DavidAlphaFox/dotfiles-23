@@ -1,7 +1,6 @@
 local utils = require("utils")
 local bufname = "SingleTerminal"
--- Define term position
-local splitconfig = "bot 20 new "
+local splitconfig = "20 new "
 local jobid = -1
 local bufid = -1
 local terminal_opened_win_id = -1

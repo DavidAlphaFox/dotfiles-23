@@ -38,7 +38,7 @@ def on_startup():
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "fnott",
-        "powerprofilesctl set power-saver",
+        "powerprofilesctl set performance",
         os.path.expanduser("~/.scripts/battery-status.sh"),
         "catapult",
     )

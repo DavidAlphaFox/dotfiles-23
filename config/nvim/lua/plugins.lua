@@ -358,6 +358,7 @@ function M.setup()
         "coq_nvim",
         "lua-dev.nvim",
         "vim-illuminate",
+        "refactoring.nvim",
         "null-ls.nvim",
         "omnisharp-extended-lsp.nvim",
         "csharpls-extended-lsp.nvim",
