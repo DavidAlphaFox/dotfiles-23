@@ -50,7 +50,7 @@ def on_reconfigure():
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
     # easyeffects = "com.github.wwmm.easyeffects"
-    theme = "Catppuccin-purple"
+    theme = "Catppuccin-Mocha-Mauve"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Pink"
     font = "Lucida MAC 10"
@@ -97,11 +97,12 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/12.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
     # "path": os.environ["HOME"]
     # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
     # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
+    "anim": True,
 }
 
 corner_radius = 0
