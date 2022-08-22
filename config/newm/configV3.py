@@ -290,7 +290,7 @@ def key_bindings(layout: Layout):
         ("XF86Bluetooth", lambda: os.system("blueman-manager &")),
         ("XF86AudioPreset", lambda: os.system("pavucontrol &")),
         ("XF86WWW", lambda: os.system("firefox &")),
-        ("XF86Documents", lambda: os.system("thunar &")),
+        ("XF86Documents", lambda: os.system("kitty ranger &")),
     )
 
 

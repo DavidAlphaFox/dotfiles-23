@@ -21,7 +21,7 @@ function M.setup()
       dart = "dart",
       cs = function()
         root_path = require'lspconfig'.util.root_pattern('*.csproj')(vim.loop.cwd())
-        return "cd " .. root_path .. " && dotnet watch"
+        return "cd " .. root_path .. " && dotnet run"
       end
     },
     project_path = vim.fn.expand "~/.config/nvim/project_manager.json",

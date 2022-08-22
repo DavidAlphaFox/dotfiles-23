@@ -162,9 +162,9 @@ alias recorder="wf-recorder -f recording-$(date +%s).mp4 -c libx264rgb -d /dev/d
 alias help="cht.sh"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 # HACK: docker Nftables
-alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
-alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
-alias dor='doff && don'
+# alias don='sudo nft -f /etc/nftables-docker.conf && sudo systemctl start docker'
+# alias doff='sudo systemctl stop docker.service docker.socket && sudo nft -f /etc/nftables.conf && sudo ip l d docker0'
+# alias dor='doff && don'
 # HACK: Config alias
 alias grubc="sudoedit /etc/default/grub"
 alias alacric="nvim ~/.config/alacritty/alacritty.yml"
