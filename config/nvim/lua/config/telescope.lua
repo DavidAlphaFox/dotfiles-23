@@ -145,10 +145,10 @@ function M.setup()
   utils.map('n', '<leader>bt', builtin.current_buffer_tags)
 
   -- -- LSP Pickers
-  utils.map("n", "<leader>lr", builtin.lsp_references)
-  utils.map("n", ",,", builtin.lsp_document_symbols)
-  utils.map('n', '<leader>lf', builtin.lsp_definitions)
-  utils.map("n", "<leader>ld", builtin.diagnostics)
+  utils.map("n", ",r", builtin.lsp_references)
+  utils.map("n", ",s", builtin.lsp_document_symbols)
+  utils.map('n', ',f', builtin.lsp_definitions)
+  utils.map("n", ",d", builtin.diagnostics)
   utils.map("n", "ñi", builtin.lsp_implementations)
   --
   -- Git Pickers

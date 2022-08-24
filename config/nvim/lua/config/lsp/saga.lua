@@ -11,22 +11,22 @@ function M.setup()
   })
 
   -- lspsaga
-  utils.map('n', '<A-f>', require("lspsaga.finder").lsp_finder)
-  utils.map('n', '<C-.>', require('lspsaga.codeaction').code_action)
+  utils.map('n', '<A-f>', ':Lspsaga lsp_finder<CR>')
+  utils.map('n', '<C-.>', ':Lspsaga code_action<CR>')
   -- vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
   -- show hover doc
-  utils.map('n', '<C-h>', require("lspsaga.hover").render_hover_doc)
+  utils.map('n', ',h', require("lspsaga.hover").render_hover_doc)
   local action = require("lspsaga.action")
   utils.map('n', 'C-f>', function() action.smart_scroll_with_saga(1) end)
   utils.map('n', '<C-b>', function() action.smart_scroll_with_saga(-1) end)
-  utils.map('n', '<C-s>', require("lspsaga.signaturehelp").signature_help)
   -- -- Rename
-  utils.map('n', 'gr', require("lspsaga.rename").lsp_rename)
+  utils.map('n', 'gr', ':Lspsaga rename<CR>')
   -- -- preview definition
-  utils.map('n', 'gp', require("lspsaga.definition").preview_definition)
+  utils.map('n', 'gp', ':Lspsaga preview_definition<CR>')
   -- -- navegate between errors
   utils.map('n', '<leader>dk', function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end)
   utils.map('n', '<leader>dj', function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end)
+  utils.map("n","<leader>o", "<cmd>LSoutlineToggle<CR>")
 end
 
 return M

@@ -1,38 +1,48 @@
 local M = {}
 
 function M.setup()
-  -- vim.g.coq_settings = {
-  --   keymap = {
-  --     -- recommended = false,
-  --     jump_to_mark = "<C-,>",
-  --   },
-  --   clients = {
-  --     lsp = {
-  --       enabled = true,
-  --       -- resolve_timeout = 0.04,
-  --       -- weight_adjust = 0.1
-  --     },
-  --     tabnine = {
-  --       enabled = true,
-  --     },
-  --     paths = {
-  --       path_seps = {
-  --         "/"
-  --       }
-  --     },
-  --     buffers = {
-  --       match_syms = true
-  --     }
-  --   },
-  --   display = {
-  --     icons = {
-  --       mode = "short",
-  --     },
-  --     ghost_text = {
-  --       enabled = true
-  --     }
-  --   },
-  -- }
+  vim.g.coq_settings = {
+    keymap = {
+      -- recommended = false,
+      jump_to_mark = "<C-l>",
+    },
+    clients = {
+      tabnine = {
+        enabled = true,
+        weight_adjust = 1.9
+      },
+      snippets = {
+        enabled = true,
+        weight_adjust = 1.8
+      },
+      lsp = {
+        enabled = true,
+        resolve_timeout = 0.04,
+        weight_adjust = 1.7
+      },
+      tree_sitter = {
+        enabled = true,
+        weight_adjust = 1.6
+      },
+      paths = {
+        path_seps = {
+          "/"
+        }
+      },
+      buffers = {
+        match_syms = true,
+        weight_adjust = - 1.9
+      }
+    },
+    display = {
+      icons = {
+        mode = "short",
+      },
+      ghost_text = {
+        enabled = true
+      }
+    },
+  }
 
   local coq = require "coq"
   coq.Now() -- Start coq

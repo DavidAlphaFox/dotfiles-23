@@ -131,13 +131,15 @@ function M.setup()
 
     -- Color
     use {
-      "norcalli/nvim-colorizer.lua",
-      event = { "BufReadPre" },
+      "brenoprata10/nvim-highlight-colors",
       config = function()
-        require("colorizer").setup()
+        require("nvim-highlight-colors").setup {
+          render = 'background', -- or 'foreground' or 'first_column'
+          enable_tailwind = false
+        }
       end,
-      -- disable = true
     }
+
 
     -- use {
     --   'brenoprata10/nvim-highlight-colors',

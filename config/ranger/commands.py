@@ -11,12 +11,25 @@ from __future__ import absolute_import, division, print_function
 
 import os
 from collections import deque
+# You can import any python module as needed.
+# import os
+from threading import Thread
 
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import Command
 
-# You can import any python module as needed.
-# import os
+
+class dragon(Command):
+    def execute(self):
+        th = Thread(target=self.dragondaemon, daemon=True)
+        th.start()
+        th.join()
+
+    def dragondaemon(self):
+        arguments = "kitty --class dragon-term -e dragon-daemon {}".format(
+            " ".join(self.args[1:])
+        )
+        self.fm.execute_command(arguments)
 
 
 class empty(Command):
