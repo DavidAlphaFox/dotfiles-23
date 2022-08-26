@@ -120,7 +120,9 @@ for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
+#
+# fzf-tab preview
+#
 zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 
 # zstyle :prompt:pure:execution_time      color
@@ -136,9 +138,9 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 # zstyle :prompt:pure:virtualenv          color '#edabd2'
 
 # PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
-PS1='
-%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}
-%B%(1j.%F{blue}*%f .)%(?.%F{#f38ba8}ﰉ %F{#f9e2af}ﰉ %F{#a6e3a1}ﰉ.%F{#a6e3a1}ﰉ %F{#f9e2af}ﰉ %F{#f38ba8}ﰉ)%f%b '
+# PS1='
+# %(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}
+# %B%(1j.%F{blue}*%f .)%(?.%F{#f38ba8}ﰉ %F{#f9e2af}ﰉ %F{#a6e3a1}ﰉ.%F{#a6e3a1}ﰉ %F{#f9e2af}ﰉ %F{#f38ba8}ﰉ)%f%b '
 
 # -< Evals >-
 eval "$(zoxide init zsh)"
@@ -219,5 +221,5 @@ if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
 fi
 [ ! -f /tmp/crag/.cache/bat/themes.bin ] && bat cache --build > /dev/null
 # END_KITTY_SHELL_INTEGRATION
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 # zprof

@@ -41,41 +41,49 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
+    --
     -- Performance
+    --
+
     use "lewis6991/impatient.nvim"
     use "nathom/filetype.nvim"
 
-    use {
-      "declancm/cinnamon.nvim",
-      config = function()
-        require("cinnamon").setup {
-          default_keymaps = true, -- Create default keymaps.
-          extra_keymaps = true, -- Create extra keymaps.
-          extended_keymaps = true, -- Create extended keymaps.
-          override_keymaps = true,
-          default_delay = 4
-        }
-      end,
-    }
+    --
+    -- End Performance
+    --
 
-    --- THEME
+    --
+    -- Appearance
+    --
+
     use {
-      "themercorp/themer.lua",
-      -- config = function()
-      --   require("config.themer").setup()
-      -- end,
-    }
-    use({
       "catppuccin/nvim",
       as = "catppuccin",
-      -- branch = "dev",
       config = function()
-        vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-        vim.cmd[[colorscheme catppuccin]]
+        require("config.catppuccin").setup()
       end,
-    })
+    }
 
-    -- NOTIFICATION
+    -- use "kyazdani42/nvim-web-devicons"
+    -- Icons
+    use {
+      "yamatsum/nvim-nonicons",
+      requires = { "kyazdani42/nvim-web-devicons" },
+    }
+
+    -- Status line
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
+      after = "nvim-treesitter",
+      config = function()
+        require("config.lualine").setup()
+      end,
+      wants = "nvim-web-devicons",
+      -- disable = true
+    }
+
+    -- Notification
     use {
       "rcarriga/nvim-notify",
       event = "BufReadPre",
@@ -87,7 +95,52 @@ function M.setup()
       end,
     }
 
+    use {
+      'jinh0/eyeliner.nvim',
+    config = function()
+        require('eyeliner').setup {
+          bold = true, -- Default: false
+          underline = true -- Default: false
+        }
+      end
+    }
+
+    -- Highlight Color
+    use {
+      "brenoprata10/nvim-highlight-colors",
+      config = function()
+        require("nvim-highlight-colors").setup {
+          render = 'background', -- or 'foreground' or 'first_column'
+          enable_tailwind = false
+        }
+      end,
+    }
+
+    use { "kshenoy/vim-signature", config = [[require('config.signature')]] }
+
+    use "jeffkreeftmeijer/vim-numbertoggle"
+
+    -- Todo
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup {
+          highlight = {
+            keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+          },
+        }
+      end,
+    }
+
+    --
+    -- End Appearance
+    --
+
+    --
     -- TREESITTER
+    --
+
     use {
       "nvim-treesitter/nvim-treesitter",
       opt = true,
@@ -106,49 +159,14 @@ function M.setup()
       },
     }
 
-    use { "max-0406/autoclose.nvim", event = "InsertEnter" }
+    --
+    -- End TREESITTER
+    --
 
-    use {
-      "danymat/neogen",
-      config = function()
-        require("config.neogen").setup()
-      end,
-      requires = "nvim-treesitter/nvim-treesitter",
-    }
-
-    -- Syntax
-    use {
-      "elixir-editors/vim-elixir",
-      ft = { "elixir" },
-    }
-
-    -- use "kyazdani42/nvim-web-devicons"
-    -- Icons
-    use {
-      "yamatsum/nvim-nonicons",
-      requires = { "kyazdani42/nvim-web-devicons" },
-    }
-
-    -- Color
-    use {
-      "brenoprata10/nvim-highlight-colors",
-      config = function()
-        require("nvim-highlight-colors").setup {
-          render = 'background', -- or 'foreground' or 'first_column'
-          enable_tailwind = false
-        }
-      end,
-    }
-
-
-    -- use {
-    --   'brenoprata10/nvim-highlight-colors',
-    --   config = function()
-    --     require('nvim-highlight-colors').setup()
-    --   end,
-    -- }
-
+    --
     -- Git
+    --
+
     use {
       "lewis6991/gitsigns.nvim",
       event = "BufReadPre",
@@ -168,7 +186,14 @@ function M.setup()
 
     }
 
+    --
+    -- End Git
+    --
+
+    --
     -- Telescope
+    --
+
     use {
       "nvim-telescope/telescope.nvim",
       -- opt = true,
@@ -178,7 +203,7 @@ function M.setup()
       wants = {
         "plenary.nvim",
         "popup.nvim",
-        "telescope-fzy-native.nvim",
+        "telescope-zf-native.nvim",
         "telescope-frecency.nvim",
         "telescope-file-browser.nvim",
         "telescope-tele-tabby",
@@ -189,7 +214,7 @@ function M.setup()
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-dap.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim",
+        "natecraddock/telescope-zf-native.nvim",
         {
           "nvim-telescope/telescope-frecency.nvim",
           requires = { "tami5/sqlite.lua" },
@@ -213,87 +238,44 @@ function M.setup()
       end,
     }
 
+    --
+    -- End Telescope
+    --
+
+    --
+    -- Text Edition
+    --
+
+    use { "wellle/targets.vim", event = "CursorMoved" }
+
+    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
+
+    use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
+
+    use "chaoren/vim-wordmotion"
+
     use {
       "kylechui/nvim-surround",
       config = function()
          require("nvim-surround").setup()
       end
     }
+
+    use "Matt-A-Bennett/vim-surround-funk"
+
     -- Tim Pope docet
     -- use "tpope/vim-surround"
-    use "Matt-A-Bennett/vim-surround-funk"
     use "tpope/vim-repeat"
-    use { "wellle/targets.vim", event = "CursorMoved" }
-    use { "chaoren/vim-wordmotion" }
 
-    use {
-      "ggandor/leap.nvim",
-      config = function()
-        require("leap").set_default_keymaps()
-      end,
-    }
+    --
+    -- End Text Edition
+    --
 
-    use {
-      'jinh0/eyeliner.nvim',
-    config = function()
-        require('eyeliner').setup {
-          bold = true, -- Default: false
-          underline = true -- Default: false
-        }
-      end
-    }
+    --
+    -- Utils
+    --
 
-    -- Status line
-    use {
-      "nvim-lualine/lualine.nvim",
-      event = "VimEnter",
-      after = "nvim-treesitter",
-      config = function()
-        require("config.lualine").setup()
-      end,
-      wants = "nvim-web-devicons",
-      -- disable = true
-    }
-
-    -- Refactoring
-    use {
-      "ThePrimeagen/refactoring.nvim",
-      module = { "refactoring", "telescope" },
-      keys = { [[<leader>r]] },
-      wants = { "telescope.nvim" },
-      config = function()
-        require("config.refactoring").setup()
-      end,
-    }
-
-    --UI
-
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("todo-comments").setup {
-          highlight = {
-            keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-          },
-        }
-      end,
-    }
-
-    -- Text edition
-    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
-    use "AndrewRadev/splitjoin.vim"
-    use {
-      "numToStr/Comment.nvim",
-      config = function()
-        require("config.comment").setup()
-      end,
-    }
     use "gpanders/editorconfig.nvim"
-
-    --Utils
-
-    use "jidn/vim-dbml"
 
     use {
       "CRAG666/code_runner.nvim",
@@ -316,6 +298,53 @@ function M.setup()
     }
 
     use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require("config.comment").setup()
+      end
+    }
+
+    use {
+      "danymat/neogen",
+      config = function()
+        require("config.neogen").setup()
+      end,
+      requires = "nvim-treesitter/nvim-treesitter",
+    }
+
+    use {
+      "ggandor/leap.nvim",
+      config = function()
+        require("leap").set_default_keymaps()
+      end,
+    }
+
+    use {
+      "declancm/cinnamon.nvim",
+      config = function()
+        require("cinnamon").setup {
+          default_keymaps = true, -- Create default keymaps.
+          extra_keymaps = true, -- Create extra keymaps.
+          extended_keymaps = true, -- Create extended keymaps.
+          override_keymaps = true,
+          default_delay = 4
+        }
+      end,
+    }
+
+    -- Refactoring
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      module = { "refactoring", "telescope" },
+      keys = { [[<leader>r]] },
+      wants = { "telescope.nvim" },
+      config = function()
+        require("config.refactoring").setup()
+      end,
+    }
+
+    -- package json
+    use {
       "vuki656/package-info.nvim",
       opt = true,
       requires = {
@@ -329,13 +358,13 @@ function M.setup()
       end,
     }
 
-    use { "kshenoy/vim-signature", config = [[require('config.signature')]] }
+    --
+    -- End Utils
+    --
 
-    -- General Plugins
-    use "jeffkreeftmeijer/vim-numbertoggle"
-    use "potamides/pantran.nvim"
-
+    --
     -- LSP
+    --
 
     use {
       "ms-jpq/coq_nvim",
@@ -416,7 +445,14 @@ function M.setup()
       end,
     }
 
+    --
+    -- End LSP
+    --
+
+    --
     -- Debugging
+    --
+
     use {
       "mfussenegger/nvim-dap",
       opt = true,
@@ -437,6 +473,24 @@ function M.setup()
         require("config.dap").setup()
       end,
     }
+
+    --
+    -- End Debugging
+    --
+
+    --
+    -- Syntax
+    --
+
+    use "jidn/vim-dbml"
+    use {
+      "elixir-editors/vim-elixir",
+      ft = { "elixir" },
+    }
+
+    --
+    -- End Syntax
+    --
 
     -- Bootstrap Neovim
     if packer_bootstrap then

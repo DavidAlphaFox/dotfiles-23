@@ -71,10 +71,6 @@ function M.setup()
       },
     },
     extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true,
-      },
       media_files = {
         filetypes = { "png", "webp", "jpg", "jpeg" },
         find_cmd = "rg", -- find command (defaults to `fd`)
@@ -97,7 +93,7 @@ function M.setup()
     },
   }
 
-  local extensions = {"frecency", "fzy_native", "dap", "media_files", "file_browser", "tele_tabby", "themes"}
+  local extensions = {"frecency", "zf-native", "dap", "media_files", "file_browser", "tele_tabby"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end

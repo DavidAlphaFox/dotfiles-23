@@ -42,7 +42,7 @@ utils.map("n", "cN", [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace
 vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
 
 -- Tab mappings
-utils.map("n", "<leader>t", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
+utils.map("n", "<leader>p", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
 utils.map("n", "ñtn", ":tabnew<CR>")
 utils.map("n", "ñto", ":tabonly<CR>")
 utils.map("n", "ñtd", ":tabclose<CR>")
@@ -127,13 +127,8 @@ for k, v in pairs(neogen) do
     require("neogen").generate { type = v }
   end)
 end
-local pantran = require("pantran")
-utils.map("n", "<leader>tr", pantran.motion_translate)
-utils.map("n", "<leader>trr", function() return pantran.motion_translate() .. "_" end)
-utils.map("x", "<leader>tr", pantran.motion_translate)
 
 -- diffview.nvim
-
 utils.map("n", "<leader>do", ":DiffviewOpen<CR>")
 utils.map("n", "<leader>dc", ":DiffviewClose<CR>")
 for i = 9, 1, -1 do

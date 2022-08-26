@@ -7,19 +7,19 @@ local lualine = require "lualine"
 -- Color table for highlights
 -- stylua: ignore
 
-local theme = require("themer.modules.core.api").get_cp(vim.g.colorscheme)
+local theme = require("catppuccin.palettes").get_palette()
 local colors = {
-  bg       = theme.bg.base,
+  bg       = theme.base,
   -- bg       = '#161925',
-  fg       = theme.fg,
+  fg       = theme.flamingo,
   yellow   = theme.yellow,
-  cyan     = theme.syntax.operator,
-  darkblue = theme.syntax.tag,
+  cyan     = theme.teal,
+  darkblue = theme.sapphire,
   green    = theme.green,
-  orange   = theme.orange,
-  violet   = theme.syntax.statement,
-  purple   = theme.syntax.property,
-  magenta  = theme.magenta,
+  orange   = theme.peach,
+  violet   = theme.lavender,
+  purple   = theme.mauve,
+  magenta  = theme.pink,
   blue     = theme.blue,
   red      = theme.red,
 }

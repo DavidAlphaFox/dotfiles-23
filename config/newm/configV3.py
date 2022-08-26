@@ -97,7 +97,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/12.jpg"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
     # "path": os.environ["HOME"]
     # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
@@ -180,7 +180,7 @@ wob_option = {
     "border-color": "#94E2D5FF",
     "background-color": "#1E1E2EFF",
     "bar-color": "#A6E3A1FF",
-    "overflow-border-color": "#F5C2E7FF",
+    "overflow-border-color": "#EBA0ACFF",
     "overflow-background-color": "#1E1E2EFF",
     "overflow-bar-color": "#F38BA8FF",
 }

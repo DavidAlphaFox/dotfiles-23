@@ -22,11 +22,11 @@ zmodule le0me55i/zsh-systemd --source systemd.plugin.zsh
 #
 
 # Exposes to prompts how long the last command took to execute, used by asciiship.
-zmodule duration-info
+# zmodule duration-info
 # Exposes git repository status information to prompts, used by asciiship.
-zmodule git-info
+# zmodule git-info
 # A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-zmodule asciiship
+# zmodule asciiship
 # zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 
 #
@@ -44,10 +44,12 @@ zmodule completion
 #
 
 zmodule catppuccin/zsh-syntax-highlighting
-zmodule zsh-users/zsh-syntax-highlighting
+# zmodule zsh-users/zsh-syntax-highlighting
+zmodule z-shell/F-Sy-H
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions
 zmodule none9632/zsh-sudo
 zmodule wfxr/forgit
+zmodule jeffreytse/zsh-vi-mode
 
 # }}} End configuration added by Zim install
