@@ -29,7 +29,8 @@ function M.setup()
       initial_mode = "normal",
       selection_strategy = "reset",
       sorting_strategy = "ascending",
-      layout_strategy = "bottom_pane",
+      -- layout_strategy = "bottom_pane",
+      layout_strategy = "horizontal",
       layout_config = {
         bottom_pane = {
           prompt_position = "top",
@@ -37,6 +38,7 @@ function M.setup()
         },
         horizontal = {
           prompt_position = "top",
+          preview_cutoff = 0,
         },
       },
       -- file_sorter = require("telescope.sorters").get_fuzzy_file,
@@ -98,14 +100,15 @@ function M.setup()
     require("telescope").load_extension(extension)
   end
 
-  -- Extensions
+  local builtin = require "telescope.builtin"
+  utils.map("n", "<leader>fb", builtin.builtin)
+  -- Most used
   local ext = require("telescope").extensions
-  utils.map("n", "<leader>fm", ext.media_files.media_files)
   utils.map("n", "ñe", ext.file_browser.file_browser)
   utils.map("n", "ñf", ext.frecency.frecency)
-  utils.map("n", "<leader>w", ext.tele_tabby.list)
-
-  local builtin = require "telescope.builtin"
+  utils.map("n", "ñb", builtin.buffers)
+  utils.map("n", "ño", builtin.oldfiles)
+  utils.map("n", "ñt", builtin.treesitter)
 
   -- File Pickers
   local project_files = function()
@@ -116,21 +119,19 @@ function M.setup()
     end
   end
   utils.map("n", "ññ", project_files)
-  utils.map("n", "<leader>fg", builtin.grep_string)
-  utils.map("n", "<leader>gg", function()
-    builtin.live_grep(
-      {
-        cwd = require'lspconfig'.util.root_pattern('.git')(vim.loop.cwd())
-      }
-    )
-  end)
+  utils.map("n", "<leader>fm", ext.media_files.media_files)
+  utils.map("n", "<leader>gg", ext.tele_tabby.list)
+
+  local cwd_conf = {
+    cwd = require'lspconfig'.util.root_pattern('.git')(vim.loop.cwd())
+  }
+  utils.map("n", "<leader>fg", function() builtin.grep_string(cwd_conf) end)
+  utils.map("n", "<leader>fl", function() builtin.live_grep(cwd_conf) end)
 
   -- Vim Pickers
-  utils.map("n", "ñb", builtin.buffers)
-  utils.map("n", "ño", builtin.oldfiles)
-  utils.map("n", "<leader>cc", builtin.commands)
-  utils.map("n", "<leader>ch", builtin.command_history)
-  utils.map("n", "<leader>sh", builtin.search_history)
+  utils.map("n", "<leader>fcc", builtin.commands)
+  utils.map("n", "<leader>fch", builtin.command_history)
+  utils.map("n", "<leader>fsh", builtin.search_history)
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
   utils.map("n", "<leader>m", builtin.marks)
   utils.map("n", "<leader>fc", builtin.colorscheme)
@@ -141,11 +142,11 @@ function M.setup()
   utils.map('n', '<leader>bt', builtin.current_buffer_tags)
 
   -- -- LSP Pickers
-  utils.map("n", ",r", builtin.lsp_references)
-  utils.map("n", ",s", builtin.lsp_document_symbols)
-  utils.map('n', ',f', builtin.lsp_definitions)
-  utils.map("n", ",d", builtin.diagnostics)
-  utils.map("n", "ñi", builtin.lsp_implementations)
+  utils.map("n", "<leader>fr", builtin.lsp_references)
+  utils.map("n", "<leader>fs", builtin.lsp_document_symbols)
+  -- utils.map('n', '<leader>fd', builtin.lsp_definitions)
+  utils.map("n", "<leader>fd", builtin.diagnostics)
+  utils.map("n", "<leader>fi", builtin.lsp_implementations)
   --
   -- Git Pickers
   -- utils.map("n", "<leader>gc", builtin.git_commits)
@@ -153,8 +154,6 @@ function M.setup()
   utils.map("n", "<leader>gb", builtin.git_branches)
   utils.map("n", "<leader>gs", builtin.git_status)
   utils.map("n", "<leader>gt", builtin.git_stash)
-  utils.map("n", "ñt", builtin.treesitter)
-  utils.map("n", "ñp", builtin.builtin)
 end
 
 return M

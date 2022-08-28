@@ -20,7 +20,7 @@ window:
     y: 70
   decorations: none
   dynamic_title: true
-  opacity: 0.9
+  opacity: 0.4
 
 class:
   gtk_theme_variant: dark

@@ -6,6 +6,7 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
+    auto_reload_compiled = true,
     profile = {
       enable = true,
       threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
@@ -34,7 +35,13 @@ function M.setup()
       }
       vim.cmd [[packadd packer.nvim]]
     end
-    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+    vim.api.nvim_create_autocmd("BufWritePost", {
+	    pattern = { "plugins.lua", "catppuccin.lua" },
+	    callback = function()
+		    vim.cmd "PackerCompile"
+	    end
+    })
   end
 
   -- Plugins
@@ -59,6 +66,7 @@ function M.setup()
     use {
       "catppuccin/nvim",
       as = "catppuccin",
+      run = ":CatppuccinCompile",
       config = function()
         require("config.catppuccin").setup()
       end,

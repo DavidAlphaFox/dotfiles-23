@@ -97,11 +97,10 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/4.png"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/tec/4.jpg"),
+    # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
+    # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
-    # "path": os.environ["HOME"]
-    # + f"/Imágenes/wallpaperCicle/waves/{randrange(1, 3)}.png",
-    # "path": os.environ["HOME"] + "/Imágenes/wallpaperCicle/cat-sound.png",
     "anim": True,
 }
 

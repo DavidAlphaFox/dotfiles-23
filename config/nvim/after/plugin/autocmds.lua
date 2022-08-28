@@ -52,6 +52,17 @@ api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buf
 -- Fix highlight issue
 api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })
 
+-- Create an autocmd User PackerCompileDone to update it every time packer is compiled
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PackerCompileDone",
+	callback = function()
+		vim.cmd "CatppuccinCompile"
+		vim.defer_fn(function()
+			vim.cmd "colorscheme catppuccin"
+		end, 0) -- Defered for live reloading
+	end
+})
+
 -- au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 -- au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 -- au FileType lua setlocal tabstop=2 shiftwidth=2 expandtab

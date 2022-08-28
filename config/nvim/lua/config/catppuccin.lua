@@ -22,6 +22,10 @@ end
 function M.setup()
   vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
   require("catppuccin").setup({
+    compile = {
+	    enabled = true,
+	    path = vim.fn.expand("~/.cache/catppuccin")
+    },
     styles = {
         comments = { "bold" },
         conditionals = { "italic" },
