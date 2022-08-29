@@ -167,6 +167,17 @@ function M.setup()
       },
     }
 
+    use {
+      'm-demare/hlargs.nvim',
+      wants = { "catppuccin" },
+      requires = { 'nvim-treesitter/nvim-treesitter' },
+      config = function()
+        require('hlargs').setup({
+          color = '#fab387',
+        })
+      end
+    }
+
     --
     -- End TREESITTER
     --

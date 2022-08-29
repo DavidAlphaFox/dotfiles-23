@@ -19,6 +19,17 @@ from threading import Thread
 from ranger.api.commands import Command
 
 
+class mmv(Command):
+    def execute(self):
+        th = Thread(target=self.mmvdaemon, daemon=True)
+        th.start()
+        th.join()
+
+    def mmvdaemon(self):
+        arguments = "kitty -e mmv {}".format(" ".join(self.args[1:]))
+        self.fm.execute_command(arguments)
+
+
 class dragon(Command):
     def execute(self):
         th = Thread(target=self.dragondaemon, daemon=True)
