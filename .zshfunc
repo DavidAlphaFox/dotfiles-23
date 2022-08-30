@@ -15,8 +15,17 @@ _dotnet_zsh_complete()
 }
 
 # User Functions
-sr(){
-  rg "$1" -l | xargs sed -i "s/$1/$2/g"
+atm(){
+  device="/run/media/$USER"
+  subcmd="unmount"
+  if [[ $1 != "-u" ]]; then
+    device=$(udisksctl status | rg -e "sd[^a]" | fzf --header='Select Divice' | awk '{print $(NF)}')"\d"
+    subcmd="mount"
+  fi
+  partition=$(lsblk | rg "$device" | sed 's/[├─└─]//g' | fzf --header='Select Partition' | awk '{print $1}')
+  if [ $partition ];then
+    udisksctl $subcmd -b /dev/$partition
+  fi
 }
 
 encrypt(){
