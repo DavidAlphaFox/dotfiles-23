@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
   vim.g.coq_settings = {
     keymap = {
-      -- recommended = false,
+      recommended = true,
       jump_to_mark = "<C-l>",
     },
     clients = {

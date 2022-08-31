@@ -11,12 +11,12 @@ error_symbol = "[ﰉ](fg:red)"
 disabled = false
 
 [directory.substitutions]
-"~/Escritorio" = "  "
-"~/Descargas" = "  "
+"~/Escritorio" = " "
+"~/Descargas" = " "
 "~/Documentos" = " "
 "~/Imágenes" = " "
 "~/Música" = " "
-"~/Vídeos" = "  "
+"~/Vídeos" = " "
 "~/Git" = " "
 "/run/media/crag" = "禍"
 

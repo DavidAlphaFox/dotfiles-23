@@ -36,10 +36,10 @@ end
 -- Init Packer Plugins
 --
 vim.g.mapleader = " "
-vim.g.colorscheme = "catppuccin"
--- vim.g.colorscheme = "radium"
--- vim.g.colorscheme = "everforest"
--- vim.g.colorscheme = "amora"
-require "config"
 require("plugins").setup()
+require("config.indentscope").setup {}
+require("config.tabline").setup {
+  set_vim_settings = true,
+  tabpage_section = 'right'
+}
 vim.opt.showtabline = 0

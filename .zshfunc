@@ -15,6 +15,10 @@ _dotnet_zsh_complete()
 }
 
 # User Functions
+sar(){
+  rg $1 -l | xargs sed -i -e "s/$1/$2/g"
+}
+
 atm(){
   device="/run/media/$USER"
   subcmd="unmount"

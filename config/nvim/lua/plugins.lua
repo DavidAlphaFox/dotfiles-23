@@ -269,7 +269,7 @@ function M.setup()
 
     use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
 
-    use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
+    -- use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
 
     use "chaoren/vim-wordmotion"
 

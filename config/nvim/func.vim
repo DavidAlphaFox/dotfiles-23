@@ -1,5 +1,5 @@
 " Search an Replace in all files
-fu! Sraf(v1, v2)
+fu! sar(v1, v2)
   let pattern=a:v1
   let replacement=a:v2
   execute "grep " .pattern
