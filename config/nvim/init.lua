@@ -1,5 +1,6 @@
 -- vim.g.do_filetype_lua = 1
 -- vim.g.did_load_filetypes = 0
+vim.g.mapleader = " "
 
 --
 -- Disable builtin plugins
@@ -35,11 +36,5 @@ end
 --
 -- Init Packer Plugins
 --
-vim.g.mapleader = " "
 require("plugins").setup()
 require("config.indentscope").setup {}
-require("config.tabline").setup {
-  set_vim_settings = true,
-  tabpage_section = 'right'
-}
-vim.opt.showtabline = 0

@@ -1,6 +1,7 @@
 local set = vim.opt
 
 --  Basic config
+vim.opt.showtabline = 0
 set.scrolloff = 999 -- Lines of context
 set.sidescrolloff = 999
 set.scrolloff = 8

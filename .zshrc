@@ -123,19 +123,8 @@ unset key
 #
 # fzf-tab preview
 #
-zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 
-# zstyle :prompt:pure:execution_time      color
-# zstyle :prompt:pure:git:arrow           color
-# zstyle :prompt:pure:git:branch          color '#a6e3a1'
-# zstyle :prompt:pure:git:dirty           color '#f5c2e7'
-# zstyle :prompt:pure:git:action          color '#f38ba8'
-# zstyle :prompt:pure:git:stash           color '#f9e2af'
-# zstyle :prompt:pure:path                color '#89b4fa'
-# zstyle :prompt:pure:prompt:success      color '#94e2d5'
-# zstyle :prompt:pure:user                color
-# zstyle :prompt:pure:user:root           color
-# zstyle :prompt:pure:virtualenv          color '#edabd2'
+zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 
 # PROMPT='%(?.%F{#fb5c8e}ﰉ %F{#f47d49}ﰉ %F{#a29dff}ﰉ.%F{#a29dff}ﰉ %F{#f47d49}ﰉ %F{#fb5c8e}ﰉ)%f '
 # PS1='

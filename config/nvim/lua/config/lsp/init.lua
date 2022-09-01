@@ -133,10 +133,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits'
   }
 }
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
 
 local opts = {
   on_attach = on_attach,

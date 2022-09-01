@@ -60,16 +60,58 @@ function M.setup()
     --
 
     --
+    -- TREESITTER
+    --
+
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      opt = true,
+      event = "BufReadPre",
+      run = ":TSUpdate",
+      config = function()
+        require("config.treesitter").setup()
+      end,
+      requires = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        "RRethy/nvim-treesitter-endwise",
+        "yioneko/nvim-yati",
+        "p00f/nvim-ts-rainbow",
+        "windwp/nvim-ts-autotag",
+      },
+    }
+
+    --
+    -- End TREESITTER
+    --
+
+    --
     -- Appearance
     --
+
+    -- Notification
+    use {
+      "rcarriga/nvim-notify",
+      event = "BufReadPre",
+      config = function()
+        require'notify'.setup({
+          background_colour = "#1a1a2e",
+        })
+        vim.notify = require "notify"
+      end,
+    }
 
     use {
       "catppuccin/nvim",
       as = "catppuccin",
       run = ":CatppuccinCompile",
+      after = { "nvim-treesitter" },
+      wants = { "hlargs.nvim" },
       config = function()
         require("config.catppuccin").setup()
+        require('hlargs').setup({ color = '#fab387' })
       end,
+      requires = { "m-demare/hlargs.nvim" }
     }
 
     -- use "kyazdani42/nvim-web-devicons"
@@ -82,25 +124,12 @@ function M.setup()
     -- Status line
     use {
       "nvim-lualine/lualine.nvim",
-      event = "VimEnter",
-      after = "nvim-treesitter",
+      after = { "catppuccin" },
+      wants = { "nvim-nonicons" },
       config = function()
         require("config.lualine").setup()
       end,
-      wants = "nvim-web-devicons",
       -- disable = true
-    }
-
-    -- Notification
-    use {
-      "rcarriga/nvim-notify",
-      event = "BufReadPre",
-      config = function()
-        require'notify'.setup({
-          background_colour = "#1a1a2e",
-        })
-        vim.notify = require "notify"
-      end,
     }
 
     use {
@@ -141,45 +170,20 @@ function M.setup()
       end,
     }
 
-    --
-    -- End Appearance
-    --
-
-    --
-    -- TREESITTER
-    --
-
     use {
-      "nvim-treesitter/nvim-treesitter",
-      opt = true,
-      event = "BufReadPre",
-      run = ":TSUpdate",
+      'kevinhwang91/nvim-ufo',
+      requires = 'kevinhwang91/promise-async',
       config = function()
-        require("config.treesitter").setup()
-      end,
-      requires = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        "RRethy/nvim-treesitter-endwise",
-        "yioneko/nvim-yati",
-        "p00f/nvim-ts-rainbow",
-        "windwp/nvim-ts-autotag",
-      },
-    }
-
-    use {
-      'm-demare/hlargs.nvim',
-      wants = { "catppuccin" },
-      requires = { 'nvim-treesitter/nvim-treesitter' },
-      config = function()
-        require('hlargs').setup({
-          color = '#fab387',
+        require('ufo').setup({
+          provider_selector = function(bufnr, filetype, buftype)
+              return {'treesitter', 'indent'}
+          end
         })
       end
     }
 
     --
-    -- End TREESITTER
+    -- End Appearance
     --
 
     --
@@ -255,6 +259,7 @@ function M.setup()
           },
         }
       end,
+      disable = true
     }
 
     --
@@ -267,24 +272,25 @@ function M.setup()
 
     use { "wellle/targets.vim", event = "CursorMoved" }
 
-    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
+    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]], event = "CursorMoved" }
 
     -- use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
 
-    use "chaoren/vim-wordmotion"
+    use { "chaoren/vim-wordmotion", event = "CursorMoved"}
 
     use {
       "kylechui/nvim-surround",
+      event = "CursorMoved",
       config = function()
          require("nvim-surround").setup()
       end
     }
 
-    use "Matt-A-Bennett/vim-surround-funk"
+    use { "Matt-A-Bennett/vim-surround-funk", event = "CursorMoved" }
 
     -- Tim Pope docet
     -- use "tpope/vim-surround"
-    use "tpope/vim-repeat"
+    use { "tpope/vim-repeat", event = "CursorMoved" }
 
     --
     -- End Text Edition
@@ -298,6 +304,7 @@ function M.setup()
 
     use {
       "CRAG666/code_runner.nvim",
+      event = "BufWritePost",
       requires = "nvim-lua/plenary.nvim",
       config = function()
         require("config.code_runner").setup()
@@ -318,6 +325,7 @@ function M.setup()
 
     use {
       'numToStr/Comment.nvim',
+      event = "CursorMoved",
       config = function()
           require("config.comment").setup()
       end
@@ -325,6 +333,7 @@ function M.setup()
 
     use {
       "danymat/neogen",
+      event = "CursorMoved",
       config = function()
         require("config.neogen").setup()
       end,
@@ -333,6 +342,7 @@ function M.setup()
 
     use {
       "ggandor/leap.nvim",
+      event = "CursorMoved",
       config = function()
         require("leap").set_default_keymaps()
       end,
@@ -340,6 +350,7 @@ function M.setup()
 
     use {
       "declancm/cinnamon.nvim",
+      event = "CursorMoved",
       config = function()
         require("cinnamon").setup {
           default_keymaps = true, -- Create default keymaps.
@@ -433,21 +444,6 @@ function M.setup()
     })
 
     use {
-      "kevinhwang91/nvim-ufo",
-      opt = true,
-      -- event = { "BufReadPre" },
-      wants = { "promise-async" },
-      requires = "kevinhwang91/promise-async",
-      config = function()
-        require("ufo").setup {
-          provider_selector = function(bufnr, filetype)
-            return { "lsp", "treesitter", "indent" }
-          end,
-        }
-      end
-    }
-
-    use {
       "glepnir/lspsaga.nvim",
       branch = 'main',
       -- wants = { "nvim-lspconfig" },
@@ -501,7 +497,7 @@ function M.setup()
     -- Syntax
     --
 
-    use "jidn/vim-dbml"
+    use { "jidn/vim-dbml", ft = { "dbml" } }
     use {
       "elixir-editors/vim-elixir",
       ft = { "elixir" },
