@@ -105,7 +105,6 @@ function M.setup()
       "catppuccin/nvim",
       as = "catppuccin",
       run = ":CatppuccinCompile",
-      after = { "nvim-treesitter" },
       wants = { "hlargs.nvim" },
       config = function()
         require("config.catppuccin").setup()
@@ -272,7 +271,7 @@ function M.setup()
 
     use { "wellle/targets.vim", event = "CursorMoved" }
 
-    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]], event = "CursorMoved" }
+    use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
 
     -- use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
 

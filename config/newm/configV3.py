@@ -107,7 +107,7 @@ background = {
 corner_radius = 0
 
 pywm = {
-    "enable_xwayland": False,
+    "enable_xwayland": True,
     # "xkb_model": "PLACEHOLDER_xkb_model",
     # "xkb_layout": "latam",
     "xkb_layout": "es",

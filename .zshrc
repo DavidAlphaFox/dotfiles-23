@@ -137,6 +137,7 @@ eval "$(zoxide init zsh)"
 # -< Aliases >-
 # HACK: Command alternatives
 # alias ...="cd ../.."
+alias vpn="~/.scripts/vpn"
 alias ping="prettyping"
 alias icat="kitty +kitten icat"
 alias js="/usr/bin/node ~/.noderc"

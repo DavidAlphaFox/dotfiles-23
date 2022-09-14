@@ -1,6 +1,6 @@
 local M = {}
 local utils = require "utils"
-local function SetTheme()
+local function SetThemeTelescope()
   local colors = require("catppuccin.palettes").get_palette()
   -- Telescope
   -- utils.fg_bg("TelescopeBorder", "NONE", "NONE")
@@ -56,10 +56,11 @@ function M.setup()
         enabled = true,
         enable_ui = true,
       },
+      fidget = true,
     }
   })
   vim.cmd[[colorscheme catppuccin]]
-  SetTheme()
+  SetThemeTelescope()
 end
 
 return M
