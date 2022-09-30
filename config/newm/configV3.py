@@ -32,12 +32,12 @@ def on_startup():
     # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
 
     INIT_SERVICE = (
-        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
+        # "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "fnott",
-        "powerprofilesctl set performance",
+        # "powerprofilesctl set performance",
         os.path.expanduser("~/.scripts/battery-status.sh"),
         "wl-paste --watch cliphist store",
         "catapult",
@@ -50,7 +50,7 @@ def on_reconfigure():
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
     # easyeffects = "com.github.wwmm.easyeffects"
-    theme = "Catppuccin-Mocha-Mauve"
+    theme = "Catppuccin-Mocha-Lavender"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Pink"
     font = "Lucida MAC 10"

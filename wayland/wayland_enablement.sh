@@ -42,9 +42,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 export NO_AT_BRIDGE=1
 export WINIT_UNIX_BACKEND=wayland
-export DBUS_SESSION_BUS_ADDRESS
-export DBUS_SESSION_BUS_PID
 # unset WAYLAND_DISPLAY
+
 #
 # LibreOffice
 #
