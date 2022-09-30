@@ -311,6 +311,15 @@ function M.setup()
     }
 
     use {
+      "rest-nvim/rest.nvim",
+      ft = { "http" },
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("config.rest").setup()
+      end
+    }
+
+    use {
       "ThePrimeagen/harpoon",
       config = function()
         require("harpoon").setup {
