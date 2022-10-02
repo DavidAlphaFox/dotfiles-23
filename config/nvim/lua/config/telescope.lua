@@ -86,7 +86,7 @@ function M.setup()
         show_unindexed = false,
         ignore_patterns = {"*.git/*", "*/tmp/*"},
         workspaces = {
-          ["dotfiles"]    = "/home/crag/Git/dotfiles",
+          ["dotfiles"]    = "~/Git/dotfiles",
         }
       },
       tele_tabby = {
@@ -123,7 +123,7 @@ function M.setup()
   utils.map("n", "<leader>gg", ext.tele_tabby.list)
 
   local cwd_conf = {
-    cwd = require'lspconfig'.util.root_pattern('.git')(vim.loop.cwd())
+    cwd = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1])
   }
   utils.map("n", "<leader>fg", function() builtin.grep_string(cwd_conf) end)
   utils.map("n", "<leader>fl", function() builtin.live_grep(cwd_conf) end)

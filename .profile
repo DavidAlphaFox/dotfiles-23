@@ -6,6 +6,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export GTK_THEME="$(gsettings get org.gnome.desktop.interface gtk-theme | tr -d \"\'\")"
 # export RIDER_JDK=/usr/share/rider/jbr
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export PATH="$PATH:/home/think-crag/.dotnet/tools"
 export FZF_DEFAULT_COMMAND='fd . --type f --hidden --follow --exclude .git --no-ignore'
 export FZF_DEFAULT_OPTS="--prompt='ﰉ ' --pointer='ﰊ' \
 --height 40% --reverse --bind='?:toggle-preview' \

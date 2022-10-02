@@ -298,6 +298,12 @@ function M.setup()
     --
     -- Utils
     --
+    use {
+      "max397574/better-escape.nvim",
+      config = function()
+        require("better_escape").setup()
+      end,
+    }
 
     use "gpanders/editorconfig.nvim"
 
@@ -419,30 +425,36 @@ function M.setup()
       },
     }
 
-    use {
-      "neovim/nvim-lspconfig",
-      opt = true,
-      event = { "BufReadPre" },
-      wants = {
-        "coq_nvim",
-        "lua-dev.nvim",
-        "vim-illuminate",
-        "refactoring.nvim",
-        "null-ls.nvim",
-        "omnisharp-extended-lsp.nvim",
-        "csharpls-extended-lsp.nvim",
-      }, -- for coq.nvim
-      config = function()
-        require("config.lsp").setup()
-      end,
-      requires = {
-        "folke/lua-dev.nvim",
-        "RRethy/vim-illuminate",
-        "jose-elias-alvarez/null-ls.nvim",
-        "Hoffs/omnisharp-extended-lsp.nvim",
-        "Decodetalkers/csharpls-extended-lsp.nvim",
-      }
-    }
+    -- use {
+    --   "neovim/nvim-lspconfig",
+    --   opt = true,
+    --   event = { "BufReadPre" },
+    --   wants = {
+    --     "coq_nvim",
+    --     "lua-dev.nvim",
+    --     "vim-illuminate",
+    --     "refactoring.nvim",
+    --     "null-ls.nvim",
+    --     "omnisharp-extended-lsp.nvim",
+    --     "csharpls-extended-lsp.nvim",
+    --   }, -- for coq.nvim
+    --   config = function()
+    --     require("config.lsp").setup()
+    --   end,
+    --   requires = {
+    --     "folke/lua-dev.nvim",
+    --     "RRethy/vim-illuminate",
+    --     "jose-elias-alvarez/null-ls.nvim",
+    --     "Hoffs/omnisharp-extended-lsp.nvim",
+    --     "Decodetalkers/csharpls-extended-lsp.nvim",
+    --   },
+    --   disable = true
+    -- }
+
+    use  "neovim/nvim-lspconfig"
+    use { "folke/lua-dev.nvim" }
+    use { "jose-elias-alvarez/null-ls.nvim" }
+    use { "Decodetalkers/csharpls-extended-lsp.nvim" }
 
     use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -462,7 +474,7 @@ function M.setup()
 
     use {
       "folke/trouble.nvim",
-      wants = { "nvim-lspconfig" },
+      -- wants = { "nvim-lspconfig" },
       config = function()
         require("config.lsp.diagnostics").setup()
       end,

@@ -20,7 +20,7 @@ function M.setup()
       rust = "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
       dart = "dart",
       cs = function()
-        root_path = require'lspconfig'.util.root_pattern('*.csproj')(vim.loop.cwd())
+        root_path = vim.fs.dirname(vim.fs.find({'*.csproj'}, { upward = true })[1])
         return "cd " .. root_path .. " && dotnet run"
       end
     },

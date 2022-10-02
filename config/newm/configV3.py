@@ -33,6 +33,7 @@ def on_startup():
 
     INIT_SERVICE = (
         # "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
@@ -109,8 +110,8 @@ corner_radius = 0
 pywm = {
     "enable_xwayland": True,
     # "xkb_model": "PLACEHOLDER_xkb_model",
-    # "xkb_layout": "latam",
-    "xkb_layout": "es",
+    "xkb_layout": "latam",
+    # "xkb_layout": "es",
     # "xkb_options": "caps:swapescape",
     "xcursor_theme": "Catppuccin-Mocha-Pink",
     "xcursor_size": 30,

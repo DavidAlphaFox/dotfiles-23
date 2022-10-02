@@ -148,7 +148,7 @@ alias tree="ls -R"
 alias vi="nvim"
 alias vim="nvim"
 alias zt="zathura"
-alias music="XDG_CACHE_HOME=/home/$USER/.cache termusic"
+alias music="termusic"
 alias recorder="wf-recorder -f recording-$(date +%s).mp4 -c libx264rgb -d /dev/dri/renderD129 -x yuv444p"
 # alias aid="swaymsg -t get_tree | grep "app_id""
 alias help="cht.sh"
@@ -209,7 +209,7 @@ export BAT_THEME="Catppuccin-mocha"
 if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
   source "/usr/lib/kitty/shell-integration/zsh/kitty.zsh";
 fi
-[ ! -f /tmp/crag/.cache/bat/themes.bin ] && bat cache --build > /dev/null
+# [ ! -f /tmp/crag/.cache/bat/themes.bin ] && bat cache --build > /dev/null
 # END_KITTY_SHELL_INTEGRATION
 eval "$(starship init zsh)"
 # zprof

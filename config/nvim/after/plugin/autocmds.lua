@@ -18,11 +18,6 @@ api.nvim_create_autocmd(
   { pattern = "*", command = "set nocursorline", group = cursorGrp }
 )
 
-api.nvim_create_autocmd(
-  { "InsertEnter", "WinLeave" },
-  { pattern = "*", command = "set nocursorline", group = cursorGrp }
-)
-
 function Goto_last_pos()
   local last_pos = vim.fn.line "'\""
   if last_pos > 0 and last_pos <= vim.fn.line "$" then
@@ -44,13 +39,8 @@ api.nvim_create_autocmd("BufEnter", { command = "silent! lcd %:p:h" })
 api.nvim_create_autocmd("FileType", { pattern = "cs", command = [[setlocal shiftwidth=4 softtabstop=4 expandtab]] })
 api.nvim_create_autocmd("FileType", { pattern = "make", command = [[setlocal noexpandtab]] })
 -- don't auto comment new line
-api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  command = "set fo-=c fo-=r fo-=o",
-})
+api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
--- Fix highlight issue
-api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })
 
 -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
 vim.api.nvim_create_autocmd("User", {
@@ -62,6 +52,8 @@ vim.api.nvim_create_autocmd("User", {
 		end, 0) -- Defered for live reloading
 	end
 })
+-- Fix highlight issue
+api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })
 
 -- au FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 -- au FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab

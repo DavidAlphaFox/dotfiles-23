@@ -17,7 +17,7 @@ function M.setup()
       },
       lsp = {
         enabled = true,
-        resolve_timeout = 0.04,
+        -- resolve_timeout = 0.04,
         weight_adjust = 1.7
       },
       tree_sitter = {
