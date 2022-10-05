@@ -133,6 +133,7 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '~/.scripts/preview $realpath'
 
 # -< Evals >-
 eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 # -< Aliases >-
 # HACK: Command alternatives
@@ -209,7 +210,6 @@ export BAT_THEME="Catppuccin-mocha"
 if test -e "/usr/lib/kitty/shell-integration/zsh/kitty.zsh"; then
   source "/usr/lib/kitty/shell-integration/zsh/kitty.zsh";
 fi
-# [ ! -f /tmp/crag/.cache/bat/themes.bin ] && bat cache --build > /dev/null
 # END_KITTY_SHELL_INTEGRATION
-eval "$(starship init zsh)"
+
 # zprof

@@ -23,8 +23,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "<leader>dt", toggle_diagnostics, opts)
-  require("config.lsp.highlighter").setup(client, bufnr)
 
+  require("config.lsp.highlighter").setup(client, bufnr)
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 end
 
@@ -59,18 +59,11 @@ function M.setup(server)
   -- null-ls
   require("config.lsp.null-ls").setup(defaults)
   local config = vim.tbl_deep_extend("force", defaults, server or {})
-  require("utils").info(config.name, "LSP")
   if server.name == "sumneko_lua" then
     require("lua-dev").setup({})
   end
   config = coq.lsp_ensure_capabilities(config)
-  -- vim.api.nvim_create_autocmd('FileType', {
-  --   pattern = filetype,
-  --   callback = function()
-  vim.lsp.start(config)
-  --   end,
-  -- })
--- end
+  vim.lsp.start(config)  -- vim.api.nvim_create_autocmd('FileType', {
 end
 
 function M.remove_unused_imports()

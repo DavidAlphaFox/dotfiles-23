@@ -8,8 +8,8 @@ local utils = require "utils"
 local opts = { noremap = true, silent = false }
 
 utils.map("n", "Y", "yg$")
--- utils.map("n", "k", "gk")
--- utils.map("n", "j", "gj")
+utils.map("n", "k", "gk")
+utils.map("n", "j", "gj")
 
 -- Search in the current buffer
 utils.map("n", "ñs", "/", opts)

@@ -98,7 +98,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/tec/4.jpg"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/3.png"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
@@ -275,10 +275,10 @@ def key_bindings(layout: Layout):
         ("XF86Search", lambda: os.system("catapult &")),
         ("XF86Explorer", lambda: os.system(f"{rofi}/launcher_misc &")),
         ("XF86LaunchA", lambda: os.system(f"{rofi}/apps &")),
-        ("Print", lambda: os.system('grim ~/screen-"$(date +%s)".png &')),
+        ("Print", lambda: os.system("shotman output &")),
         (
             super + "Print",
-            lambda: os.system('grim -g "$(slurp)" ~/screen-"$(date +%s)".png &'),
+            lambda: os.system("shotman region &"),
         ),
         ("XF86Go", lambda: os.system(f"{rofi}/wifi &")),
         (

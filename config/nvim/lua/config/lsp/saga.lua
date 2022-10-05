@@ -4,6 +4,7 @@ local M = {}
 function M.setup()
   local saga = require 'lspsaga'
   saga.init_lsp_saga({
+    code_action_lightbulb = { sign = false },
     finder_action_keys = {
       open = 'o', vsplit = 'v', split = 's', quit = 'q', scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
     },

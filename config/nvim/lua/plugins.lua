@@ -309,7 +309,7 @@ function M.setup()
 
     use {
       "CRAG666/code_runner.nvim",
-      event = "BufWritePost",
+      -- event = "BufWritePost",
       requires = "nvim-lua/plenary.nvim",
       config = function()
         require("config.code_runner").setup()
@@ -363,17 +363,10 @@ function M.setup()
     }
 
     use {
-      "declancm/cinnamon.nvim",
-      event = "CursorMoved",
+      'gen740/SmoothCursor.nvim',
       config = function()
-        require("cinnamon").setup {
-          default_keymaps = true, -- Create default keymaps.
-          extra_keymaps = true, -- Create extra keymaps.
-          extended_keymaps = true, -- Create extended keymaps.
-          override_keymaps = true,
-          default_delay = 4
-        }
-      end,
+        require('smoothcursor').setup({fancy = { enable = true }})
+      end
     }
 
     -- Refactoring

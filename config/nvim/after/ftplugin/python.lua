@@ -5,6 +5,7 @@ vim.bo.expandtab = true
 vim.bo.textwidth = 0
 vim.bo.autoindent = true
 vim.bo.smartindent = true
+--LSP
 pyright = {
   name = "pyright",
   cmd = { "pyright-langserver", "--stdio" },

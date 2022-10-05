@@ -43,15 +43,15 @@ api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
-vim.api.nvim_create_autocmd("User", {
-	pattern = "PackerCompileDone",
-	callback = function()
-		vim.cmd "CatppuccinCompile"
-		vim.defer_fn(function()
-			vim.cmd "colorscheme catppuccin"
-		end, 0) -- Defered for live reloading
-	end
-})
+-- vim.api.nvim_create_autocmd("User", {
+-- 	pattern = "PackerCompileDone",
+-- 	callback = function()
+-- 		vim.cmd "CatppuccinCompile"
+-- 		vim.defer_fn(function()
+-- 			vim.cmd "colorscheme catppuccin"
+-- 		end, 0) -- Defered for live reloading
+-- 	end
+-- })
 -- Fix highlight issue
 api.nvim_create_autocmd("BufEnter", { command = [[syntax enable]] })
 

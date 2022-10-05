@@ -19,9 +19,9 @@ function M.setup()
       typescript = "deno run",
       rust = "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
       dart = "dart",
-      cs = function()
-        root_path = vim.fs.dirname(vim.fs.find({'*.csproj'}, { upward = true })[1])
-        return "cd " .. root_path .. " && dotnet run"
+      cs = function (...)
+        local root_dir = require'lspconfig'.util.root_pattern('*.csproj')(vim.loop.cwd())
+        return "cd " .. root_dir .. " && dotnet run"
       end
     },
     project_path = vim.fn.expand "~/.config/nvim/project_manager.json",

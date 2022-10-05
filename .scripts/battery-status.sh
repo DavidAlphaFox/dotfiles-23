@@ -1,7 +1,7 @@
 #!/bin/bash
 while true; do
 	# export DISPLAY=:0.0
-	battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+	battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
 	on_ac_power=$(cat /sys/class/power_supply/AC/online)
 	if [ "$on_ac_power" -eq 1 ]; then
 		if [ "$battery_level" -ge 95 ]; then
