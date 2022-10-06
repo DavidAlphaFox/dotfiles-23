@@ -37,7 +37,7 @@ function M.setup()
     end
     -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
     vim.api.nvim_create_autocmd("BufWritePost", {
-	    pattern = { "plugins.lua", "catppuccin.lua" },
+	    pattern = { "plugins.lua" },
 	    callback = function()
 		    vim.cmd "PackerCompile"
 	    end
@@ -51,9 +51,7 @@ function M.setup()
     --
     -- Performance
     --
-
     use "lewis6991/impatient.nvim"
-    use "nathom/filetype.nvim"
 
     --
     -- End Performance
@@ -113,18 +111,17 @@ function M.setup()
       requires = { "m-demare/hlargs.nvim" }
     }
 
-    -- use "kyazdani42/nvim-web-devicons"
     -- Icons
+    -- use "kyazdani42/nvim-web-devicons"
     use {
-      "yamatsum/nvim-nonicons",
-      requires = { "kyazdani42/nvim-web-devicons" },
+      'yamatsum/nvim-nonicons',
+      requires = {'kyazdani42/nvim-web-devicons'}
     }
 
     -- Status line
     use {
       "nvim-lualine/lualine.nvim",
       after = { "catppuccin" },
-      wants = { "nvim-nonicons" },
       config = function()
         require("config.lualine").setup()
       end,
@@ -152,7 +149,12 @@ function M.setup()
       end,
     }
 
-    use { "kshenoy/vim-signature", config = [[require('config.signature')]] }
+    use {
+      'chentoast/marks.nvim',
+      config = function()
+         require'marks'.setup()
+      end
+    }
 
     use "jeffkreeftmeijer/vim-numbertoggle"
 
@@ -258,7 +260,6 @@ function M.setup()
           },
         }
       end,
-      disable = true
     }
 
     --
@@ -284,8 +285,6 @@ function M.setup()
          require("nvim-surround").setup()
       end
     }
-
-    use { "Matt-A-Bennett/vim-surround-funk", event = "CursorMoved" }
 
     -- Tim Pope docet
     -- use "tpope/vim-surround"

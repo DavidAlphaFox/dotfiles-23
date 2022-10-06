@@ -1,0 +1,10 @@
+kitty, newm-panel-basic, toplevel
+waybar, Layer Shell, layer
+firefox, diced/dlauncher: An application launcher for Linux that is based on Ulauncher — Mozilla Firefox, toplevel
+kitty, ~, toplevel
+kitty, dlauncher, toplevel
+kitty, ~, toplevel
+notifications, Layer Shell, layer
+notifications, Layer Shell, layer
+dlauncher, Dlauncher - Application Launcher, toplevel
+dlauncher, Dlauncher - Application Launcher, toplevel

@@ -53,7 +53,7 @@ def on_reconfigure():
     # easyeffects = "com.github.wwmm.easyeffects"
     theme = "Catppuccin-Mocha-Lavender"
     icons = "candy-icons"
-    cursor = "Catppuccin-Mocha-Pink"
+    cursor = "Catppuccin-Mocha-Lavender-Cursors"
     font = "Lucida MAC 10"
     gtk2 = "~/.gtkrc-2.0"
 
@@ -113,7 +113,7 @@ pywm = {
     "xkb_layout": "latam",
     # "xkb_layout": "es",
     # "xkb_options": "caps:swapescape",
-    "xcursor_theme": "Catppuccin-Mocha-Pink",
+    "xcursor_theme": "Catppuccin-Mocha-Lavender-Cursors",
     "xcursor_size": 30,
     "contstrain_popups_to_toplevel": True,
     "encourage_csd": False,
@@ -140,7 +140,7 @@ def rules(view):
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
     # os.system(
-    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> /home/crag/.config/newm/apps"
+    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> ~/.config/newm/apps"
     # )
     return app_rule
 
@@ -208,7 +208,7 @@ def key_bindings(layout: Layout):
     altgr = "3-"
     ctrl = "C-"
     alt = "A-"
-    rofi = "~/.config/rofi/bin"
+    rofi = "~/.config/rofi/scripts"
 
     return (
         (super + "h", lambda: layout.move(-1, 0)),
@@ -245,7 +245,7 @@ def key_bindings(layout: Layout):
         ("XF86AudioNext", lambda: os.system("playerctl next")),
         ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
-        (altgr + "e", lambda: os.system(f"{rofi}/menu_powermenu &")),
+        (altgr + "e", lambda: os.system(f"{rofi}/powermenu &")),
         ("XF86Copy", lambda: os.system(f"{rofi}/clipboard &")),
         ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
         ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
@@ -273,8 +273,8 @@ def key_bindings(layout: Layout):
             lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
         ),
         ("XF86Search", lambda: os.system("catapult &")),
-        ("XF86Explorer", lambda: os.system(f"{rofi}/launcher_misc &")),
-        ("XF86LaunchA", lambda: os.system(f"{rofi}/apps &")),
+        ("XF86Explorer", lambda: os.system(f"{rofi}/launcher &")),
+        # ("XF86LaunchA", lambda: os.system(f"{rofi}/apps &")),
         ("Print", lambda: os.system("shotman output &")),
         (
             super + "Print",

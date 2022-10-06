@@ -2,80 +2,63 @@ local M = {}
 
 function M.setup()
   require("nvim-treesitter.configs").setup {
-    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "all",
-
-    -- Install languages synchronously (only applied to `ensure_installed`)
+    ensure_installed = { "bash", "c", "cpp", "c_sharp", "cmake", "comment", "css", "dockerfile", "elixir", "fennel", "gitignore", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "kotlin", "latex", "lua", "make", "markdown", "python", "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "yaml" },
     sync_install = false,
-
     highlight = {
-      -- `false` will disable the whole extension
       enable = true,
       use_languagetree = true,
       additional_vim_regex_highlighting = true
     },
-
     incremental_selection = {
       enable = true,
       keymaps = {
         init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
+        node_incremental = "gni",
+        scope_incremental = "gns",
+        node_decremental = "gnd",
       },
     },
-
     indent = { enable = false },
-
     yati = { enable = true },
-
-    -- vim-matchup
     matchup = {
       enable = true,
     },
-
     rainbow = {
       enable = true,
       extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
       max_file_lines = nil,
     },
-
     -- nvim-treesitter-textobjects
     textobjects = {
       select = {
         enable = true,
-
-        -- Automatically jump forward to textobj, similar to targets.vim
         lookahead = true,
-
         keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
         },
       },
-    },
-
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
+        },
       },
     },
 
