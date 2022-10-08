@@ -120,7 +120,7 @@ function M.setup()
   end
   utils.map("n", "ññ", project_files)
   utils.map("n", "<leader>fm", ext.media_files.media_files)
-  utils.map("n", "<leader>gg", ext.tele_tabby.list)
+  utils.map("n", "<leader>fñ", ext.tele_tabby.list)
 
   local cwd_conf = {
     cwd = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1])
@@ -131,7 +131,7 @@ function M.setup()
   -- Vim Pickers
   utils.map("n", "<leader>fcc", builtin.commands)
   utils.map("n", "<leader>fch", builtin.command_history)
-  utils.map("n", "<leader>fsh", builtin.search_history)
+  utils.map("n", "<leader>fh", builtin.search_history)
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
   utils.map("n", "<leader>m", builtin.marks)
   utils.map("n", "<leader>fc", builtin.colorscheme)

@@ -117,31 +117,39 @@ pywm = {
     "xcursor_size": 30,
     "contstrain_popups_to_toplevel": True,
     "encourage_csd": False,
-    "texture_shaders": "basic",
     "renderer_mode": "pywm",
 }
 
 
 def rules(view):
-    common_rules = {"float": True, "float_size": (750, 750), "float_pos": (0.5, 0.35)}
+    common_rules = {
+        # "opacity": 0.8,
+        "float": True,
+        "float_size": (750, 750),
+        "float_pos": (0.5, 0.35),
+    }
     float_app_ids = (
         "pavucontrol",
         "blueman-manager",
-        "Pinentry-gtk-2",
     )
-    float_titles = ("Exportar la imagen", "Dialect")
+    float_titles = ("Dialect",)
     blur_apps = ("kitty", "rofi", "Alacritty")
+    firefox_indicator = "Compartir indicador"
     app_rule = None
+    # os.system(
+    #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
+    # )
     # Set float common rules
-    if view.app_id in float_app_ids or view.title in float_titles:
-        app_rule = common_rules
-    if view.app_id in blur_apps:
-        app_rule = {"blur": {"radius": 5, "passes": 6}}
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
-    # os.system(
-    #     f"echo '{view.app_id}, {view.title}, {view.role}' >> ~/.config/newm/apps"
-    # )
+    elif firefox_indicator in view.title:
+        app_rule = common_rules
+    elif view.up_state.is_floating:
+        app_rule = common_rules
+    elif view.app_id in float_app_ids or view.title in float_titles:
+        app_rule = common_rules
+    elif view.app_id in blur_apps:
+        app_rule = {"blur": {"radius": 5, "passes": 6}}
     return app_rule
 
 
@@ -150,9 +158,10 @@ view = {
     "fullscreen_padding": 0,
     "send_fullscreen": False,
     "sticky_fullscreen": False,
+    "accept_fullscreen": True,
     "rules": rules,
     "floating_min_size": False,
-    "debug_scaling": True,
+    "debug_scaling": False,
     "ssd": {"enabled": False},
 }
 
@@ -297,7 +306,7 @@ def key_bindings(layout: Layout):
 gestures = {
     "lp_freq": 120.0,
     "lp_inertia": 0.4,
-    # 'pyevdev': {"enabled": True},
+    # "pyevdev": {"enabled": True},
 }
 
 swipe = {"gesture_factor": 3}
@@ -317,4 +326,4 @@ panels = {
 }
 
 grid = {"throw_ps": [2, 10]}
-energy = {"idle_times": [300, 600, 900], "idle_callback": backlight_manager.callback}
+energy = {"idle_times": [300, 600, 1500], "idle_callback": backlight_manager.callback}

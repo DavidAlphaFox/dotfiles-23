@@ -113,7 +113,8 @@ end)
 utils.map("n", "<leader>e", function()
   SingleTermSend(require("code_runner.commands").get_filetype_command(), true)
 end)
-utils.map("n", "<Leader>fo", ":TodoTelescope<CR>")
+
+utils.map("n", "<leader>fo", ":TodoTelescope<CR>")
 
 local neogen = {
   c = "class",

@@ -51,7 +51,6 @@ set.linebreak = true
 set.textwidth = 80
 
 -- UI Config
--- set.winbar = "%{%v:lua.require'config.winbar'.get_winbar()%}"
 vim.o.termguicolors = true
 set.shortmess = set.shortmess - "S"
 -- set.completeopt = "menuone,noselect"
@@ -81,7 +80,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 3
-set.cmdheight = 1
+set.cmdheight = 2
 
 -- Search
 set.hlsearch = true

@@ -8,3 +8,395 @@ notifications, Layer Shell, layer
 notifications, Layer Shell, layer
 dlauncher, Dlauncher - Application Launcher, toplevel
 dlauncher, Dlauncher - Application Launcher, toplevel
+kitty, newm-panel-basic, toplevel
+waybar, Layer Shell, layer
+kitty, ~, toplevel
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel
+kitty, tail -f apps, toplevel
+firefox, ImgBB — Subir Imágenes — Alojamiento De Imágenes — Mozilla Firefox, toplevel
+notifications, Layer Shell, layer
+notifications, Layer Shell, layer
+firefox, Cargar archivos, toplevel
+firefox, Cargar archivos, toplevel
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+firefox, newm/view.py at bcea8953d722adec35cb1bcf611c985897ab08db · jbuchermn/newm — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, Cargar archivos, toplevel, False
+firefox, Cargar archivos, toplevel, True
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+firefox, newm/view.py at bcea8953d722adec35cb1bcf611c985897ab08db · jbuchermn/newm — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Minimal Shocks Get Purely | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+firefox, , toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Nearby Regulators Render Wearily | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, SingleTerminal - (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+firefox, , toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+notifications, Layer Shell, layer, True, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+firefox, , toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Orange Seminars Twist Accusingly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, True, [77, 16384, 2, 16384]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+firefox, , toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Orange Seminars Twist Accusingly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+firefox, , toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Random Answers Count Newly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Random Answers Count Newly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+notifications, Layer Shell, layer, True, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Random Answers Count Newly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+notifications, Layer Shell, layer, True, [9, 287, 112, 0, 2, 10, 132, 10, 10, 0]
+notifications, Layer Shell, layer, True, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+kitty, newm-panel-basic, toplevel, False, [0, 0, 0, 0]
+waybar, Layer Shell, layer, True, [13, 0, 34, 34, 1, 0, 0, 0, 0, 0]
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False, [0, 0, 0, 0]
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False, [580, 0, 138, 0]
+firefox, Random Answers Count Newly | Jitsi Meet — Mozilla Firefox, toplevel, False, [450, 16384, 120, 16384]
+kitty, ~, toplevel, False, [0, 0, 0, 0]
+firefox, Firefox - Compartir indicador, toplevel, False, [77, 16384, 2, 16384]
+Entre
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 0, 0, 0, 0, 0]
+notifications, Layer Shell, layer, False, [9, 287, 112, 0, 2, 10, 10, 10, 10, 0]
+pavucontrol, Control de Volumen, toplevel, False, [0, 0, 0, 0]
+[0, 0, 0, 0]
+pavucontrol, Control de Volumen, toplevel, True, [258, 0, 139, 0]
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+firefox, Random Answers Count Newly | Jitsi Meet — Mozilla Firefox, toplevel, False
+kitty, ~, toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+Entre
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+firefox, newm/view.py at bcea8953d722adec35cb1bcf611c985897ab08db · jbuchermn/newm — Mozilla Firefox, toplevel, False
+kitty, ~, toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+Entre
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+firefox, newm/config.md en d2856c151bb2b313bc05c269926693ee8219306a · jbuchermn/newm — Mozilla Firefox, toplevel, False
+kitty, ~, toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+Entre
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+java, Dbeaver, toplevel, False
+java, Dbeaver, toplevel, False
+DBeaver, DBeaver 22.2.0 , toplevel, False
+DBeaver, DBeaver 22.2.0 , toplevel, False
+DBeaver, Tip of the day , toplevel, False
+DBeaver, Tip of the day , toplevel, True
+DBeaver, Salir de DBeaver , toplevel, False
+DBeaver, Salir de DBeaver , toplevel, True
+DBeaver, Progress Information , toplevel, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, newm/config.md en d2856c151bb2b313bc05c269926693ee8219306a · jbuchermn/newm — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, segundos a minutos - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, newm/config.md en d2856c151bb2b313bc05c269926693ee8219306a · jbuchermn/newm — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, newm/config.md en d2856c151bb2b313bc05c269926693ee8219306a · jbuchermn/newm — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, newm/config.md en d2856c151bb2b313bc05c269926693ee8219306a · jbuchermn/newm — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, traductor - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, traductor - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, traductor - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, traductor - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, True
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, config.py...m) - NVIM, toplevel, False
+com.github.davidmhewitt.torrential, Torrential, toplevel, False
+kitty, music, toplevel, False
+firefox, traductor - Buscar con Google — Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+kitty, ~, toplevel, False
+kitty, config.py (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+firefox, newm/config.md en maestro · jbuchermn/newm — Mozilla Firefox, toplevel, False
+microsoft-edge, Infonomía (y) | Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False

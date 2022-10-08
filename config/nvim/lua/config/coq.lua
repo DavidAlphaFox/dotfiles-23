@@ -11,13 +11,13 @@ function M.setup()
         enabled = true,
         weight_adjust = 1.9
       },
-      snippets = {
-        enabled = true,
-        weight_adjust = 1.8
-      },
       lsp = {
         enabled = true,
         -- resolve_timeout = 0.04,
+        weight_adjust = 1.8
+      },
+      snippets = {
+        enabled = true,
         weight_adjust = 1.7
       },
       tree_sitter = {
