@@ -6,7 +6,6 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
-    auto_reload_compiled = true,
     profile = {
       enable = true,
       threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
@@ -35,13 +34,14 @@ function M.setup()
       }
       vim.cmd [[packadd packer.nvim]]
     end
+
+    -- Run PackerCompile if there are changes in this file
     -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
-    vim.api.nvim_create_autocmd("BufWritePost", {
-	    pattern = { "plugins.lua" },
-	    callback = function()
-		    vim.cmd "PackerCompile"
-	    end
-    })
+    local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+    vim.api.nvim_create_autocmd(
+      { "BufWritePost" },
+      { pattern = "init.lua", command = "source <afile> | PackerCompile", group = packer_grp }
+    )
   end
 
   -- Plugins
@@ -51,7 +51,8 @@ function M.setup()
     --
     -- Performance
     --
-    use "lewis6991/impatient.nvim"
+
+    use { "lewis6991/impatient.nvim" }
 
     --
     -- End Performance
@@ -76,6 +77,7 @@ function M.setup()
         "yioneko/nvim-yati",
         "p00f/nvim-ts-rainbow",
         "windwp/nvim-ts-autotag",
+        'David-Kunz/markid'
       },
     }
 
@@ -103,14 +105,21 @@ function M.setup()
     use {
       "catppuccin/nvim",
       as = "catppuccin",
-      run = ":CatppuccinCompile",
-      wants = { "hlargs.nvim" },
+      wants = "nvim-treesitter",
+      -- run = ":CatppuccinCompile",
       config = function()
         require("config.catppuccin").setup()
-        require('hlargs').setup({ color = '#fab387' })
-      end,
-      requires = { "m-demare/hlargs.nvim" }
+      end
     }
+
+    -- use {
+    --   'm-demare/hlargs.nvim',
+    --   wants = { "nvim-treesitter" },
+    --   requires = { 'nvim-treesitter/nvim-treesitter' },
+    --   config = function()
+    --     require('hlargs').setup({ color = '#fab387' })
+    --   end
+    -- }
 
     -- Icons
     -- use "kyazdani42/nvim-web-devicons"
@@ -126,12 +135,20 @@ function M.setup()
       config = function()
         require("config.lualine").setup()
       end,
-      -- disable = true
+      disable = true
+    }
+
+    use {
+      'feline-nvim/feline.nvim',
+      after = { "catppuccin" },
+      config = function()
+        require("config.feline").setup()
+      end
     }
 
     use {
       'jinh0/eyeliner.nvim',
-    config = function()
+      config = function()
         require('eyeliner').setup {
           bold = true, -- Default: false
           underline = true -- Default: false
@@ -300,6 +317,17 @@ function M.setup()
     -- Utils
     --
     use {
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
+
+    use {
       "max397574/better-escape.nvim",
       config = function()
         require("better_escape").setup()
@@ -407,8 +435,6 @@ function M.setup()
     use {
       "ms-jpq/coq_nvim",
       branch = "coq",
-      event = "VimEnter",
-      opt = true,
       run = ":COQdeps",
       config = function()
         require("config.coq").setup()
@@ -534,6 +560,7 @@ function M.setup()
 
   -- Performance
   pcall(require, "impatient")
+  -- pcall(require, "impatient")
   -- pcall(require, "packer_compiled")
 
   packer.init(conf)

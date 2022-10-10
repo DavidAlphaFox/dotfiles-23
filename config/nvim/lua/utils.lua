@@ -12,8 +12,15 @@ function M.map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  -- > v7
   vim.keymap.set(mode, lhs, rhs, options)
+end
+
+function M.maps(maps)
+  for _, map in pairs(maps) do
+    for _, mp in pairs(map.maps) do
+      M.map("n", map.prefix .. mp[1], mp[2], { desc = mp[3] })
+    end
+  end
 end
 
 function M.is_empty(s)

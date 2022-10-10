@@ -102,6 +102,7 @@ background = {
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
+    "time_scale": 0.125,
     "anim": True,
 }
 
@@ -134,16 +135,15 @@ def rules(view):
     )
     float_titles = ("Dialect",)
     blur_apps = ("kitty", "rofi", "Alacritty")
-    firefox_indicator = "Compartir indicador"
     app_rule = None
-    # os.system(
-    #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
-    # )
+    os.system(
+        f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
+    )
     # Set float common rules
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
-    elif firefox_indicator in view.title:
-        app_rule = common_rules
+    # elif view.title is not None and "compartir indicador" in view.title.lower():
+    #     return {"float": True, "float_size": (30, 20)}
     elif view.up_state.is_floating:
         app_rule = common_rules
     elif view.app_id in float_app_ids or view.title in float_titles:
@@ -157,8 +157,8 @@ view = {
     "padding": 10,
     "fullscreen_padding": 0,
     "send_fullscreen": False,
-    "sticky_fullscreen": False,
-    "accept_fullscreen": True,
+    "sticky_fullscreen": True,
+    "accept_fullscreen": False,
     "rules": rules,
     "floating_min_size": False,
     "debug_scaling": False,
@@ -179,8 +179,8 @@ swipe_zoom = {
     "grid_ovr": 0.02,
 }
 
-blend_time = 0.2
 anim_time = 0.25
+blend_time = 0.5
 
 wob_option = {
     "border": 2,
@@ -212,6 +212,44 @@ pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
+def goto_view(layout: Layout, index: int):
+    if index == 0:
+        return
+    workspace = layout.get_active_workspace()
+    views = layout.tiles(workspace)
+    num_w = len(views)
+    if index > num_w:
+        return
+    layout.focus_view(views[index - 1])
+
+
+def hook_prev_next_view(layout: Layout, fun, steps):
+    workspace = layout.get_active_workspace()
+    views = layout.tiles(workspace)
+    current_view = layout.find_focused_view()
+    if not current_view:
+        return
+    index = views.index(current_view) + steps
+    fun(index, views)
+
+
+def next_view(layout, steps=1):
+    def inner_next_view(index, views):
+        num_w = len(views)
+        if index == num_w:
+            index = 0
+        layout.focus_view(views[index])
+
+    hook_prev_next_view(layout, inner_next_view, steps)
+
+
+def prev_view(layout: Layout, steps=1):
+    def inner_prev_view(index, views):
+        layout.focus_view(views[index])
+
+    hook_prev_next_view(layout, inner_prev_view, -(steps))
+
+
 def key_bindings(layout: Layout):
     super = mod + "-"
     altgr = "3-"
@@ -220,6 +258,17 @@ def key_bindings(layout: Layout):
     rofi = "~/.config/rofi/scripts"
 
     return (
+        (alt + "S-Tab", lambda: prev_view(layout)),
+        (ctrl + "1", lambda: goto_view(layout, 1)),
+        (ctrl + "2", lambda: goto_view(layout, 2)),
+        (ctrl + "3", lambda: goto_view(layout, 3)),
+        (ctrl + "4", lambda: goto_view(layout, 4)),
+        (ctrl + "5", lambda: goto_view(layout, 5)),
+        (ctrl + "6", lambda: goto_view(layout, 6)),
+        (ctrl + "7", lambda: goto_view(layout, 7)),
+        (ctrl + "8", lambda: goto_view(layout, 8)),
+        (ctrl + "9", lambda: goto_view(layout, 9)),
+        (ctrl + "0", lambda: goto_view(layout, 10)),
         (super + "h", lambda: layout.move(-1, 0)),
         (super + "j", lambda: layout.move(0, 1)),
         (super + "k", lambda: layout.move(0, -1)),
@@ -228,7 +277,7 @@ def key_bindings(layout: Layout):
         (super + "m", lambda: layout.move(1, 1)),
         (super + "i", lambda: layout.move(1, -1)),
         (super + "n", lambda: layout.move(-1, 1)),
-        (super + "t", lambda: layout.move_in_stack(1)),
+        (super + "t", lambda: layout.move_in_stack(4)),
         (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
         (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
         (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
@@ -241,12 +290,12 @@ def key_bindings(layout: Layout):
         (altgr + "v", layout.toggle_focused_view_floating),
         # ("Henkan_Mode", layout.move_workspace),
         (alt + "Tab", layout.move_next_view),
-        (super + "comma", lambda: layout.basic_scale(-1)),
-        (super + "period", lambda: layout.basic_scale(1)),
+        (super + "comma", lambda: layout.basic_scale(1)),
+        (super + "period", lambda: layout.basic_scale(-1)),
         (super + "f", layout.toggle_fullscreen),
         (super + "p", lambda: layout.ensure_locked(dim=True)),
         (super + "P", layout.terminate),
-        ("XF86Close", layout.close_view),
+        ("XF86Close", layout.close_focused_view),
         ("XF86Reload", layout.update_config),
         (super, lambda: layout.toggle_overview(only_active_workspace=True)),
         (altgr + "z", layout.swallow_focused_view),

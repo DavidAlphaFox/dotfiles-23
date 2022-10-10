@@ -12,10 +12,8 @@ utils.map("n", "k", "gk")
 utils.map("n", "j", "gj")
 
 -- Search in the current buffer
-utils.map("n", "ñs", "/", opts)
 utils.map("n", "<leader>s", "?", opts)
 -- Search and  replace in the current buffer
-utils.map("n", "ñr", ":%s/", opts)
 utils.map({ "n", "v" }, "<leader>r", ":s/", opts)
 -- Set ; to end line
 utils.map("n", ";", "<esc>mzA;<esc>`z")
@@ -34,29 +32,66 @@ utils.map("n", "<F2>", ":setlocal spell! spelllang=es<CR>")
 utils.map("n", "<F3>", ":setlocal spell! spelllang=en_us<CR>")
 
 -- Search and replace word
-utils.map("n", "ñcw", [[:%s/\<<C-r><C-w>\>/]], opts) -- replace word
 utils.map("n", "cn", [[/\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn]]) -- replace world and nexts word with .
 utils.map("n", "cN", [[?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN]]) -- replace world and prev word with .
 
 -- sudo
-vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
+-- vim.cmd [[cmap w!! w !sudo tee > /dev/null %]]
 
 -- Tab mappings
-utils.map("n", "<leader>p", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]])
-utils.map("n", "ñtn", ":tabnew<CR>")
-utils.map("n", "ñto", ":tabonly<CR>")
-utils.map("n", "ñtd", ":tabclose<CR>")
-utils.map("n", "ñti", ":tabmove +1<CR>")
-utils.map("n", "ñtm", ":tabmove -1<CR>")
+
 for i = 9, 1, -1 do
   local kmap = string.format("<leader>%d", i)
   local command = string.format("%dgt", i)
-  utils.map("n", kmap, command)
-  utils.map("n", string.format("ñt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i))
+  utils.map("n", kmap, command, { desc = string.format("Jump Tab %d", i) })
+  utils.map("n", string.format("tt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i), { desc = string.format("Tab Move to %d", i) })
 end
-utils.map("n", "ñd", ":bd<CR>")
-utils.map("n", "ñw", ":bnext<CR>")
-utils.map("n", "ñq", ":bprev<CR>")
+local maps = {
+  {
+    prefix = "<leader>t",
+    maps = {
+      {"p", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs"},
+      {"tn", ":tabnew<CR>", "New Tab"},
+      {"to", ":tabonly<CR>", "Tab Only"},
+      {"td", ":tabclose<CR>", "Tab Close"},
+      {"ti", ":tabmove +1<CR>", "Tab Move Right"},
+      {"tm", ":tabmove -1<CR>", "Tab Move Left"}
+    }
+  },
+  {
+    prefix = "ñ",
+    maps = {
+      {"d", ":bd<CR>", "Buffer Delete"},
+      {"w", ":bnext<CR>", "Buffer Next"},
+      {"q", ":bprev<CR>", "Buffer Prev"},
+      {"s", "/", vim.tbl_extend("force", { desc = "Search" }, opts)},
+      {"r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts)},
+      {"cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts)},
+      {"m", require("harpoon.mark").add_file, "Mark File"},
+      {"g", require("harpoon.ui").toggle_quick_menu, "Show Files Marked"},
+      {"<Tab>", require("harpoon.ui").nav_next, "Next File Marked"},
+      {" <Tab>", require("harpoon.ui").nav_prev, "Prev File Marked"},
+      {
+        ".",
+        function()
+          require("harpoon.term").sendCommand(10, vim.api.nvim_replace_termcodes('<C-c> <C-l>', true, true, true))
+          vim.loop.sleep(100)
+          require("harpoon.term").sendCommand(10, require("code_runner.commands").get_filetype_command() .. "\n")
+        end,
+        "CodeRunner in Harpoon Term"
+      },
+
+      {
+        " ",
+        function()
+          require("harpoon.term").gotoTerminal(10)
+        end,
+        "Goto Buffer Term"
+      },
+    }
+  },
+}
+utils.maps(maps)
 
 -- Move between splits
 -- Better window navigation
@@ -92,46 +127,29 @@ utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) 
 -- Motions
 utils.map("n", "ç", "%")
 
--- PLUGINS
--- harpoon
-utils.map("n", "ñm", require("harpoon.mark").add_file)
-utils.map("n", "ñg", require("harpoon.ui").toggle_quick_menu)
-utils.map("n", "ñ<Tab>", require("harpoon.ui").nav_next)
-utils.map("n", "ñ <Tab>", require("harpoon.ui").nav_prev)
-
-utils.map("n", "ñ.", function()
-  require("harpoon.term").sendCommand(10, vim.api.nvim_replace_termcodes('<C-c> <C-l>', true, true, true))
-  vim.loop.sleep(100)
-  require("harpoon.term").sendCommand(10, require("code_runner.commands").get_filetype_command() .. "\n")
-end)
-
-utils.map("n", "ñ ", function()
-  require("harpoon.term").gotoTerminal(10)
-end)
-
 -- utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
 utils.map("n", "<leader>e", function()
   SingleTermSend(require("code_runner.commands").get_filetype_command(), true)
-end)
+end, { desc = "Excute File"})
 
-utils.map("n", "<leader>fo", ":TodoTelescope<CR>")
+utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
 
 local neogen = {
-  c = "class",
-  f = "func",
-  i = "file",
-  t = "type",
+  c = {"class", "Comment Class"},
+  f = {"func", "Comment Function"},
+  i = {"file", "Comment File"},
+  t = {"type", "Comment type"},
 }
 
 for k, v in pairs(neogen) do
   utils.map("n", string.format("<Leader>n%s", k), function()
-    require("neogen").generate { type = v }
-  end)
+    require("neogen").generate { type = v[1] }
+  end, { desc = v[2] })
 end
 
 -- diffview.nvim
-utils.map("n", "<leader>do", ":DiffviewOpen<CR>")
-utils.map("n", "<leader>dc", ":DiffviewClose<CR>")
+utils.map("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "Diff Open" })
+utils.map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Diff Close" })
 for i = 9, 1, -1 do
-  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i))
+  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i), { desc = string.format("Diff Open HEAD~%d<CR>", i) })
 end

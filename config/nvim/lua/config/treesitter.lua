@@ -74,6 +74,7 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
+    markid = { enable = true }
   }
 end
 

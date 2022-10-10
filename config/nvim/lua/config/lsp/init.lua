@@ -16,13 +16,13 @@ end
 local on_attach = function(client, bufnr)
   -- Lsp keymaps
   local opts = { buffer = bufnr, silent = true }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "<leader>bh", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", { desc = "Goto Declaration"}, opts))
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", { desc = "Goto Definition"}, opts))
+  vim.keymap.set("n", "<leader>bh", vim.lsp.buf.hover, vim.tbl_extend("force", { desc = "LSP Hover"}, opts))
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", { desc = "Goto Implementation"}, opts))
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", { desc = "LSP Add Folder"}, opts))
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, vim.tbl_extend("force", { desc = "LSP Type Definition"}, opts))
+  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic"}, opts))
 
   require("config.lsp.highlighter").setup(client, bufnr)
   require("config.lsp.null-ls.formatters").setup(client, bufnr)

@@ -32,7 +32,7 @@ local sources = {
   -- diagnostics
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
-  b.diagnostics.flake8,
+  b.diagnostics.flake8.with { extra_args = { "--max-line-length=120" } },
   b.diagnostics.tsc,
   -- b.diagnostics.selene,
   -- b.diagnostics.codespell,
@@ -52,7 +52,7 @@ local sources = {
 
 function M.setup(opts)
   nls.setup {
-    -- debug = true,
+    debug = false,
     debounce = 150,
     save_after_format = false,
     sources = sources,

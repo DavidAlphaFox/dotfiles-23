@@ -80,7 +80,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 3
-set.cmdheight = 2
+set.cmdheight = 10
 
 -- Search
 set.hlsearch = true

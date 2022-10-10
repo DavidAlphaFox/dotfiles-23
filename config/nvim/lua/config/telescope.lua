@@ -101,14 +101,7 @@ function M.setup()
   end
 
   local builtin = require "telescope.builtin"
-  utils.map("n", "<leader>fb", builtin.builtin)
-  -- Most used
   local ext = require("telescope").extensions
-  utils.map("n", "ñe", ext.file_browser.file_browser)
-  utils.map("n", "ñf", ext.frecency.frecency)
-  utils.map("n", "ñb", builtin.buffers)
-  utils.map("n", "ño", builtin.oldfiles)
-  utils.map("n", "ñt", builtin.treesitter)
 
   -- File Pickers
   local project_files = function()
@@ -118,42 +111,66 @@ function M.setup()
       builtin.find_files(opts)
     end
   end
-  utils.map("n", "ññ", project_files)
-  utils.map("n", "<leader>fm", ext.media_files.media_files)
-  utils.map("n", "<leader>fñ", ext.tele_tabby.list)
 
   local cwd_conf = {
     cwd = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1])
   }
-  utils.map("n", "<leader>fg", function() builtin.grep_string(cwd_conf) end)
-  utils.map("n", "<leader>fl", function() builtin.live_grep(cwd_conf) end)
 
-  -- Vim Pickers
-  utils.map("n", "<leader>fcc", builtin.commands)
-  utils.map("n", "<leader>fch", builtin.command_history)
-  utils.map("n", "<leader>fh", builtin.search_history)
+  local maps = {
+    {
+      prefix = "ñ",
+      maps = {
+        {"e", ext.file_browser.file_browser, "File Browser" },
+        {"f", ext.frecency.frecency, "Frequent Files" },
+        {"b", builtin.buffers, "List Buffers" },
+        {"o", builtin.oldfiles, "Old Files" },
+        {"t", builtin.treesitter, "TreeSitter Symbols" },
+        {"ñ", project_files, "Project Files"}
+      }
+    },
+    {
+      prefix = "<leader>f",
+      maps = {
+        {"b", builtin.builtin, "Telescope Builtin"},
+        {"ñ", ext.tele_tabby.list, "List Tabs"},
+        {"m", ext.media_files.media_files, "Media Files"},
+        {"g", function() builtin.grep_string(cwd_conf) end, "Find Grep"},
+        {"l", function() builtin.live_grep(cwd_conf) end, "Find Live Grep"},
+        {"h", builtin.search_history, "Search History"},
+        {"cc", builtin.colorscheme, "Select Colorscheme"},
+        {"cs", builtin.commands, "Search Commands"},
+        {"ch", builtin.command_history, "Search Commands History"},
+        {"k", builtin.keymaps, "Show All Keymaps"},
+        {"t", builtin.filetypes, "Select Filetype"},
+        {"f", builtin.current_buffer_fuzzy_find, "Buffer Fuzzy Find"},
+        {"r", builtin.lsp_references, "LSP References"},
+        {"s", builtin.lsp_document_symbols, "LSP Symbols"},
+        {"i", builtin.lsp_implementations, "LSP Implementations"},
+        {"d", builtin.diagnostics, "LSP diagnostics"},
+      },
+    },
+    {
+      prefix = "<leader>g",
+      maps = {
+        {"c", builtin.git_bcommits, "Git Buffer commits"},
+        {"b", builtin.git_branches, "Git Branches"},
+        {"s", builtin.git_status, "Git Status"},
+        {"t", builtin.git_stash, "Git Stash"},
+      },
+    },
+  }
+
+  utils.maps(maps)
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
-  utils.map("n", "<leader>m", builtin.marks)
-  utils.map("n", "<leader>fc", builtin.colorscheme)
-  utils.map("n", "<leader>ss", builtin.spell_suggest)
-  utils.map("n", "<leader>fk", builtin.keymaps)
-  utils.map("n", "<leader>ft", builtin.filetypes)
-  utils.map("n", "<leader>ff", builtin.current_buffer_fuzzy_find)
-  utils.map('n', '<leader>bt', builtin.current_buffer_tags)
+  utils.map("n", "<leader>m", builtin.marks, { desc = "Show Marks" })
+  utils.map("n", "<leader>ss", builtin.spell_suggest, { desc = "Spell Suggest" })
+  utils.map('n', '<leader>bt', builtin.current_buffer_tags, { desc = "Buffer Tags" })
 
   -- -- LSP Pickers
-  utils.map("n", "<leader>fr", builtin.lsp_references)
-  utils.map("n", "<leader>fs", builtin.lsp_document_symbols)
   -- utils.map('n', '<leader>fd', builtin.lsp_definitions)
-  utils.map("n", "<leader>fd", builtin.diagnostics)
-  utils.map("n", "<leader>fi", builtin.lsp_implementations)
   --
   -- Git Pickers
   -- utils.map("n", "<leader>gc", builtin.git_commits)
-  utils.map("n", "<leader>gc", builtin.git_bcommits)
-  utils.map("n", "<leader>gb", builtin.git_branches)
-  utils.map("n", "<leader>gs", builtin.git_status)
-  utils.map("n", "<leader>gt", builtin.git_stash)
 end
 
 return M

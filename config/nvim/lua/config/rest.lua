@@ -27,6 +27,6 @@ function M.setup()
     custom_dynamic_variables = {},
     yank_dry_run = true,
   })
-  utils.map("n", ",r", rest.run)
+  utils.map("n", ",r", rest.run, { desc = "Run Endpoint"})
 end
 return M
