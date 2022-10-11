@@ -69,6 +69,7 @@ local c = {
 		},
 		left_sep = "block",
 		right_sep = "block",
+    icon = " "
 	},
 	gitDiffRemoved = {
 		provider = "git_diff_removed",
@@ -78,6 +79,7 @@ local c = {
 		},
 		left_sep = "block",
 		right_sep = "block",
+    icon = " "
 	},
 	gitDiffChanged = {
 		provider = "git_diff_changed",
@@ -87,6 +89,7 @@ local c = {
 		},
 		left_sep = "block",
 		right_sep = "right_filled",
+    icon = " "
 	},
 	separator = {
 		provider = "",
@@ -109,21 +112,25 @@ local c = {
 		hl = {
 			fg = "red",
 		},
+    icon = "  "
 	},
 	diagnostic_warnings = {
 		provider = "diagnostic_warnings",
 		hl = {
 			fg = "yellow",
 		},
+    icon = "  "
 	},
 	diagnostic_hints = {
 		provider = "diagnostic_hints",
 		hl = {
 			fg = "sapphire",
 		},
+    icon = "  "
 	},
 	diagnostic_info = {
 		provider = "diagnostic_info",
+    icon = "  "
 	},
 	lsp_client_names = {
 		provider = "lsp_client_names",
@@ -134,6 +141,7 @@ local c = {
 		},
 		left_sep = "left_filled",
 		right_sep = "block",
+    icon = " "
 	},
 	file_type = {
 		provider = {

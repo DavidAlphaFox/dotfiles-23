@@ -22,8 +22,8 @@ function M.setup()
   -- -- preview definition
   utils.map('n', 'gp', ':Lspsaga peek_definition<CR>')
   -- -- navegate between errors
-  utils.map('n', '<leader>dk', function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end)
-  utils.map('n', '<leader>dj', function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end)
+  utils.map('n', '<leader>dk', function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Prev Error"})
+  utils.map('n', '<leader>dj', function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Next Error"})
   utils.map("n","<leader>o", "<cmd>LSoutlineToggle<CR>")
 end
 

@@ -512,7 +512,7 @@ function M.setup()
       "mfussenegger/nvim-dap",
       opt = true,
       -- event = "BufReadPre",
-      keys = { [[<leader>d]] },
+      keys = { [[<leader>da]] },
       module = { "dap" },
       wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui", "nvim-dap-python" },
       requires = {

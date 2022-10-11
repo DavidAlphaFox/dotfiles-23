@@ -9,8 +9,7 @@ from newm.layout import Layout
 logger = logging.getLogger(__name__)
 
 
-def notify(title: str, msg: str, icon="system-settings"):
-    os.system(f"notify-send -i '{icon}' -a '{title}' '{msg}'")
+def notify(title: str, msg: str, icon="system-settings"): os.system(f"notify-send -i '{icon}' -a '{title}' '{msg}'")
 
 
 def execute_iter(commands: tuple[str, ...]):
@@ -109,7 +108,7 @@ background = {
 corner_radius = 0
 
 pywm = {
-    "enable_xwayland": True,
+    "enable_xwayland": False,
     # "xkb_model": "PLACEHOLDER_xkb_model",
     "xkb_layout": "latam",
     # "xkb_layout": "es",
