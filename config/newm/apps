@@ -1382,3 +1382,27 @@ firefox, Mozilla Firefox, toplevel, False
 firefox, Mozilla Firefox, toplevel, False
 notifications, Layer Shell, layer, False
 notifications, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, True
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
