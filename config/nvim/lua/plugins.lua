@@ -112,15 +112,6 @@ function M.setup()
       end
     }
 
-    -- use {
-    --   'm-demare/hlargs.nvim',
-    --   wants = { "nvim-treesitter" },
-    --   requires = { 'nvim-treesitter/nvim-treesitter' },
-    --   config = function()
-    --     require('hlargs').setup({ color = '#fab387' })
-    --   end
-    -- }
-
     -- Icons
     -- use "kyazdani42/nvim-web-devicons"
     use {
@@ -402,7 +393,7 @@ function M.setup()
     use {
       "ThePrimeagen/refactoring.nvim",
       module = { "refactoring", "telescope" },
-      keys = { [[<leader>r]] },
+      keys = { [[<leader>re]] },
       wants = { "telescope.nvim" },
       config = function()
         require("config.refactoring").setup()
@@ -420,7 +411,7 @@ function M.setup()
       module = { "package-info" },
       ft = { "json" },
       config = function()
-        require("package-info").setup { package_manager = "npm" }
+        require("package-info").setup { package_manager = "yarn" }
       end,
     }
 
@@ -486,7 +477,6 @@ function M.setup()
     use {
       "glepnir/lspsaga.nvim",
       branch = 'main',
-      -- wants = { "nvim-lspconfig" },
       config = function()
         require("config.lsp.saga").setup()
       end,
@@ -494,7 +484,6 @@ function M.setup()
 
     use {
       "folke/trouble.nvim",
-      -- wants = { "nvim-lspconfig" },
       config = function()
         require("config.lsp.diagnostics").setup()
       end,
@@ -541,6 +530,7 @@ function M.setup()
     use {
       "elixir-editors/vim-elixir",
       ft = { "elixir" },
+      disable = true
     }
 
     --

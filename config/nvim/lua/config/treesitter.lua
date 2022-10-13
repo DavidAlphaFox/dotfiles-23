@@ -1,4 +1,21 @@
 local M = {}
+local theme = require("catppuccin.palettes").get_palette()
+local colors = {
+  theme.maroon,
+  theme.sapphire,
+  theme.peach,
+  theme.pink,
+  theme.sky,
+  theme.green,
+  theme.blue,
+  theme.flamingo,
+  theme.teal,
+  theme.red,
+  theme.mauve,
+  theme.yellow,
+  theme.lavender,
+  theme.rosewater
+}
 
 function M.setup()
   require("nvim-treesitter.configs").setup {
@@ -74,7 +91,10 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
-    markid = { enable = true }
+    markid = {
+      enable = true,
+      colors = colors
+    }
   }
 end
 

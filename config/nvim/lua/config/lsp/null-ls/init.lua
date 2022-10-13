@@ -3,12 +3,13 @@ local M = {}
 local nls = require "null-ls"
 local nls_utils = require "null-ls.utils"
 local b = nls.builtins
-
 -- local with_diagnostics_code = function(builtin)
 --   return builtin.with {
 --     diagnostics_format = "#{m} [#{c}]",
 --   }
 -- end
+
+local refurb = require "config.lsp.null-ls.diagnostics.refurb"
 
 local with_root_file = function(builtin, file)
   return builtin.with {
@@ -38,6 +39,7 @@ local sources = {
   -- b.diagnostics.codespell,
   with_root_file(b.diagnostics.selene, "selene.toml"),
   b.diagnostics.zsh,
+  refurb,
   -- b.diagnostics.cspell.with {
   --   filetypes = { "python", "rust", "typescript" },
   -- },

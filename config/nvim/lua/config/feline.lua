@@ -89,7 +89,7 @@ local c = {
 		},
 		left_sep = "block",
 		right_sep = "right_filled",
-    icon = " "
+    icon = " "
 	},
 	separator = {
 		provider = "",

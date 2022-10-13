@@ -886,3 +886,499 @@ wob, Layer Shell, layer, False
 wob, Layer Shell, layer, False
 wob, Layer Shell, layer, False
 wob, Layer Shell, layer, False
+, openfortivpn-webview, toplevel, False
+, openfortivpn-webview, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Nueva pestaña - Perfil 1: Microsoft​ Edge, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+microsoft-edge, Abrir archivo, toplevel, False
+microsoft-edge, Abrir archivo, toplevel, False
+microsoft-edge, Abrir archivo, toplevel, False
+microsoft-edge, Abrir archivo, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+, openfortivpn-webview, toplevel, False
+, openfortivpn-webview, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+microsoft-edge, Abrir archivos, toplevel, False
+microsoft-edge, Abrir archivos, toplevel, False
+microsoft-edge, Abrir archivos, toplevel, False
+microsoft-edge, Abrir archivos, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+firefox, Picture-in-Picture, toplevel, False
+firefox, Picture-in-Picture, toplevel, False
+firefox, Picture-in-Picture, toplevel, False
+firefox, Picture-in-Picture, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+blueman-manager, Dispositivos Bluetooth, toplevel, False
+blueman-manager, Dispositivos Bluetooth, toplevel, True
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+blueman-manager, Dispositivos Bluetooth, toplevel, False
+blueman-manager, Dispositivos Bluetooth, toplevel, True
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+pavucontrol, Control de Volumen, toplevel, False
+pavucontrol, Control de Volumen, toplevel, True
+firefox, , toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+code-url-handler, Visual Studio Code, toplevel, False
+code-url-handler, Visual Studio Code, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+blueman-manager, Dispositivos Bluetooth, toplevel, False
+blueman-manager, Dispositivos Bluetooth, toplevel, True
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Sin título y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, True
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, True
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+blueman-manager, Dispositivos Bluetooth, toplevel, False
+blueman-manager, Dispositivos Bluetooth, toplevel, True
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, , toplevel, False
+firefox, , toplevel, False
+firefox, Firefox - Compartir indicador, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Sin título y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+microsoft-edge, Abrir archivo, toplevel, False
+microsoft-edge, Abrir archivo, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+, teams.microsoft.com está compartiendo tu pantalla., toplevel, True
+, openfortivpn-webview, toplevel, False
+, openfortivpn-webview, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False

@@ -4,7 +4,7 @@ local set = vim.opt
 vim.opt.showtabline = 0
 set.scrolloff = 999 -- Lines of context
 set.sidescrolloff = 999
-set.scrolloff = 8
+set.scrolloff = 99
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true
@@ -80,7 +80,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 3
-set.cmdheight = 10
+set.cmdheight = 1
 
 -- Search
 set.hlsearch = true
@@ -91,8 +91,9 @@ set.grepformat = "%f:%l:%c:%m"
 set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
 vim.wo.foldcolumn = 'auto:1'
+-- set.foldnestmax = 0
 vim.wo.foldlevel = 99
 set.foldlevelstart = -1
 vim.wo.foldenable = true
@@ -103,10 +104,6 @@ vim.wo.foldenable = true
 --   foldsep = "",
 --   foldclose = ""
 -- }
--- set.foldlevelstart=10
--- set.foldnestmax = 10
--- set.foldnestmax=10
--- set.foldmethod = 'indent'
 
 -- Backup
 set.swapfile = false

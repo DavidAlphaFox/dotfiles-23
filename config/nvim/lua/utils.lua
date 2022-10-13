@@ -18,7 +18,11 @@ end
 function M.maps(maps)
   for _, map in pairs(maps) do
     for _, mp in pairs(map.maps) do
-      M.map("n", map.prefix .. mp[1], mp[2], { desc = mp[3] })
+      local opts = mp[3]
+      if (type(opts) == "string") then
+        opts = { desc = mp[3] }
+      end
+      M.map("n", map.prefix .. mp[1], mp[2], opts)
     end
   end
 end
