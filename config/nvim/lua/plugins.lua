@@ -463,9 +463,9 @@ function M.setup()
     -- }
 
     use  "neovim/nvim-lspconfig"
-    use { "folke/lua-dev.nvim" }
-    use { "jose-elias-alvarez/null-ls.nvim" }
-    use { "Decodetalkers/csharpls-extended-lsp.nvim" }
+    use "folke/neodev.nvim"
+    use "jose-elias-alvarez/null-ls.nvim"
+    use "Decodetalkers/csharpls-extended-lsp.nvim"
 
     use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",

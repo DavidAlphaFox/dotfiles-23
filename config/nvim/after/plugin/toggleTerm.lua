@@ -25,6 +25,7 @@ local function newTerm(num, wind_id)
   vim.o.number = false
   vim.bo.buflisted = false
   vim.wo.foldcolumn = '0'
+  vim.bo.readonly = true
   terms[num].bufid = vim.api.nvim_buf_get_number(0)
   terms[num].jobid = vim.b.terminal_job_id
   vim.cmd("startinsert")

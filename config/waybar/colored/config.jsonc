@@ -57,7 +57,7 @@
     "tooltip-format-wifi": "{essid}({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "~/.config/rofi/bin/wifi"
+    "on-click": "~/.config/rofi/scripts/wifi"
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",

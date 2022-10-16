@@ -60,7 +60,7 @@ function M.setup(server)
   require("config.lsp.null-ls").setup(defaults)
   local config = vim.tbl_deep_extend("force", defaults, server or {})
   if server.name == "sumneko_lua" then
-    require("lua-dev").setup({})
+    require("neodev").setup({})
   end
   config = coq.lsp_ensure_capabilities(config)
   vim.lsp.start(config)  -- vim.api.nvim_create_autocmd('FileType', {

@@ -37,7 +37,7 @@ class dragon(Command):
         th.join()
 
     def dragondaemon(self):
-        arguments = "kitty --class dragon-term -e dragon-daemon {}".format(
+        arguments = "kitty --class dragon-term -e dragon-drop {}".format(
             " ".join(self.args[1:])
         )
         self.fm.execute_command(arguments)
