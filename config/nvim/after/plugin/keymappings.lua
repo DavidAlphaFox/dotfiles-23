@@ -127,11 +127,6 @@ utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) 
 -- Motions
 utils.map("n", "ç", "%")
 
--- utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
-utils.map("n", "<leader>e", function()
-  SingleTermSend(require("code_runner.commands").get_filetype_command(), true)
-end, { desc = "Excute File"})
-
 utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
 
 local neogen = {
@@ -153,3 +148,10 @@ utils.map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Diff Close" })
 for i = 9, 1, -1 do
   utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i), { desc = string.format("Diff Open HEAD~%d<CR>", i) })
 end
+
+-- utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
+local betterTerm = require('betterTerm')
+utils.map("n", "<leader>e", function()
+  betterTerm.send(require("code_runner.commands").get_filetype_command(), 1, true)
+end, { desc = "Excute File" })
+utils.map({"n", "t"}, "<C-ñ>", betterTerm.open, { desc = "Open terminal"})

@@ -13,12 +13,12 @@ window {
     padding:    			25px;
     border:					0px;
     border-radius:          0px;
-    border-color:           @accent;
+    border-color:           @ac;
     location:               center;
     y-offset:               -20px;
 }
 
 entry {
     expand: 				true;
-    text-color:				@accent;
+    text-color:				@ac;
 }

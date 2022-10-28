@@ -96,11 +96,12 @@ function M.setup()
         require("noice").setup()
       end,
       requires = {
-        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
-      }
+        }
     })
+
+    use 'kvrohit/mellow.nvim'
 
     use {
       "catppuccin/nvim",
@@ -240,7 +241,6 @@ function M.setup()
         "telescope-zf-native.nvim",
         "telescope-frecency.nvim",
         "telescope-file-browser.nvim",
-        "telescope-tele-tabby",
         "trouble.nvim",
         "telescope-dap.nvim",
       },
@@ -255,8 +255,15 @@ function M.setup()
         },
         "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-media-files.nvim",
-        "TC72/telescope-tele-tabby.nvim"
       },
+    }
+
+    use {
+      'LukasPietzschmann/telescope-tabs',
+      requires = { 'nvim-telescope/telescope.nvim' },
+      config = function()
+        require'telescope-tabs'.setup{}
+      end
     }
 
     use {
@@ -310,11 +317,7 @@ function M.setup()
     use {
       "folke/which-key.nvim",
       config = function()
-        require("which-key").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
+        require("which-key").setup { window = { position = "top" } }
       end
     }
 
@@ -326,6 +329,13 @@ function M.setup()
     }
 
     use "gpanders/editorconfig.nvim"
+
+    use {
+      'CRAG666/betterTerm.nvim',
+      config = function()
+        require('betterTerm').setup()
+      end,
+    }
 
     use {
       "CRAG666/code_runner.nvim",

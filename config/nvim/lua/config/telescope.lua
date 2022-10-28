@@ -89,13 +89,10 @@ function M.setup()
           ["dotfiles"]    = "~/Git/dotfiles",
         }
       },
-      tele_tabby = {
-        use_highlighter = true,
-      }
     },
   }
 
-  local extensions = {"frecency", "zf-native", "dap", "media_files", "file_browser", "tele_tabby"}
+  local extensions = {"frecency", "zf-native", "dap", "media_files", "file_browser"}
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end
@@ -132,7 +129,7 @@ function M.setup()
       prefix = "<leader>f",
       maps = {
         {"b", builtin.builtin, "Telescope Builtin"},
-        {"ñ", ext.tele_tabby.list, "List Tabs"},
+        {"ñ", require('telescope-tabs').list_tabs, "List Tabs"},
         {"m", ext.media_files.media_files, "Media Files"},
         {"g", function() builtin.grep_string(cwd_conf) end, "Find Grep"},
         {"l", function() builtin.live_grep(cwd_conf) end, "Find Live Grep"},

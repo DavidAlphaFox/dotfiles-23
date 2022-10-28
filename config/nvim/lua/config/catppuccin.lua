@@ -26,37 +26,48 @@ local function SetThemeTelescope()
 end
 
 function M.setup()
-  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
   require("catppuccin").setup({
-    compile = {
-	    enabled = false,
-	    -- path = vim.fn.expand("~/.cache/catppuccin")
-    },
+    flavour = "mocha",
+    background = { light = "latte", dark = "mocha" },
+    term_colors = true,
     styles = {
-        comments = { "bold" },
-        conditionals = { "italic" },
-        loops = { "italic" },
-        functions = { "italic" },
-        numbers = { "bold" },
-        properties = { "bold" },
-        operators = { "italic" },
+      comments = { "bold" },
+      properties = { "italic" },
+      functions = { "italic" },
+      -- keywords = { "italic" },
+      operators = { "italic" },
+      conditionals = { "italic" },
+      loops = { "italic" },
+      booleans = {},
+      -- numbers = {},
+      types = { "bold" },
+      -- strings = {},
+      -- variables = {},
     },
     integrations = {
+      dashboard = false,
       treesitter = true,
+      notify = true,
+       	mini = true,
+      noice = true,
       coc_nvim = false,
-      lsp_trouble = true,
       cmp = false,
       lsp_saga = true,
       gitsigns = true,
       leap = true,
       telescope = false,
       nvimtree = false,
+      markdown = true,
       ts_rainbow = true,
       dap = {
         enabled = true,
         enable_ui = true,
       },
-      fidget = true,
+      lsp_trouble = true,
+      fidget = false,
+      harpoon = true,
+      which_key = true,
+      vimwiki = true
     }
   })
   SetThemeTelescope()

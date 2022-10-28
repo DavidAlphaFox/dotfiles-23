@@ -1,4 +1,4 @@
-music_dir = ["~/Música"]
+music_dir = ["/home/lvm/crag/Música"]
 loop_mode = "Queue"
 volume = 100
 speed = 10

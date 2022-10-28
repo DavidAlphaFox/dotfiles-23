@@ -188,7 +188,7 @@ alias Images="cd /$HOME/Imágenes"
 alias Music="cd /$HOME/Música"
 alias Videos="cd /$HOME/Vídeos"
 alias Git="cd /$HOME/Git"
-alias Usb="cd /run/media/crag"
+alias Usb="cd /run/media/$USER"
 # HACK: fzf alias
 alias paci="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"

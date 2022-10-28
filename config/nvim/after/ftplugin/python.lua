@@ -6,9 +6,18 @@ vim.bo.textwidth = 0
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 --LSP
+local root_files = {
+  "pyproject.toml",
+  "setup.py",
+  "setup.cfg",
+  "requirements.txt",
+  "Pipfile",
+  "pyrightconfig.json",
+}
 pyright = {
   name = "pyright",
   cmd = { "pyright-langserver", "--stdio" },
+  root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
   settings = {
     python = {
       analysis = {
