@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", vim.tbl_extend("force", { desc = "Goto Definition in new Tab"}, opts))
   vim.keymap.set("n", "gh", vim.lsp.buf.hover, vim.tbl_extend("force", { desc = "LSP Hover"}, opts))
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", { desc = "Goto Implementation"}, opts))
-  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", { desc = "LSP Add Folder"}, opts))
+  vim.keymap.set("n", "<leader>aw", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", { desc = "LSP Add Folder"}, opts))
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, vim.tbl_extend("force", { desc = "LSP Type Definition"}, opts))
   vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic"}, opts))
 

@@ -161,7 +161,7 @@ function M.setup()
   -- utils.map("n", "<Leader>ft", require('telescope.builtin').help_tags)
   utils.map("n", "<leader>m", builtin.marks, { desc = "Show Marks" })
   utils.map("n", "<leader>ss", builtin.spell_suggest, { desc = "Spell Suggest" })
-  utils.map('n', '<leader>bt', builtin.current_buffer_tags, { desc = "Buffer Tags" })
+  -- utils.map('n', '<leader>bt', builtin.current_buffer_tags, { desc = "Buffer Tags" })
 
   -- -- LSP Pickers
   -- utils.map('n', '<leader>fd', builtin.lsp_definitions)

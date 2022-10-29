@@ -50,27 +50,39 @@ local maps = {
   {
     prefix = "<leader>t",
     maps = {
-      {"p", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs"},
-      {"tn", ":tabnew<CR>", "New Tab"},
-      {"to", ":tabonly<CR>", "Tab Only"},
-      {"td", ":tabclose<CR>", "Tab Close"},
-      {"ti", ":tabmove +1<CR>", "Tab Move Right"},
-      {"tm", ":tabmove -1<CR>", "Tab Move Left"}
+      {"s", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs"},
+      {"n", ":tabnew<CR>", "New Tab"},
+      {"o", ":tabonly<CR>", "Tab Only"},
+      {"d", ":tabclose<CR>", "Tab Close"},
+      {"i", ":tabmove +1<CR>", "Tab Move Right"},
+      {"m", ":tabmove -1<CR>", "Tab Move Left"}
+    }
+  },
+  {
+    prefix = "<leader>",
+    maps = {
+      {"w", ":bnext<CR>", "Buffer Next"},
+      {"b", ":bprev<CR>", "Buffer Prev"},
+      -- Move between splits
+      {"k", ":wincmd k<CR>", "Move Up"},
+      {"l", ":wincmd l<CR>", "Move Right"},
+      {"j", ":wincmd j<CR>", "Move Down"},
+      {"h", ":wincmd h<CR>", "Move Left"},
+      --Delete search result
+      {"c", ':let @/=""<cr>'}
     }
   },
   {
     prefix = "ñ",
     maps = {
-      {"d", ":bd<CR>", "Buffer Delete"},
-      {"w", ":bnext<CR>", "Buffer Next"},
-      {"q", ":bprev<CR>", "Buffer Prev"},
       {"s", "/", vim.tbl_extend("force", { desc = "Search" }, opts)},
       {"r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts)},
       {"cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts)},
+      {"d", ":bd<CR>", "Buffer Delete"},
       {"m", require("harpoon.mark").add_file, "Mark File"},
       {"g", require("harpoon.ui").toggle_quick_menu, "Show Files Marked"},
-      {"<Tab>", require("harpoon.ui").nav_next, "Next File Marked"},
-      {" <Tab>", require("harpoon.ui").nav_prev, "Prev File Marked"},
+      {"w", require("harpoon.ui").nav_next, "Next File Marked"},
+      {"b", require("harpoon.ui").nav_prev, "Prev File Marked"},
       {
         ".",
         function()
@@ -93,12 +105,6 @@ local maps = {
 }
 utils.maps(maps)
 
--- Move between splits
--- Better window navigation
-utils.map("n", "<Leader>k", ":wincmd k<CR>")
-utils.map("n", "<Leader>l", ":wincmd l<CR>")
-utils.map("n", "<Leader>j", ":wincmd j<CR>")
-utils.map("n", "<Leader>h", ":wincmd h<CR>")
 
 -- Resize pane
 utils.map("n", "<A-Left>", ":vertical resize +5<CR>")
@@ -118,9 +124,6 @@ utils.map("v", "K", ":m '<-2<CR>gv=gv", opts)
 utils.map("t", "<Esc>", "<C-\\><C-n>")
 utils.map("t", "<M-[>", "<Esc>")
 utils.map("t", "<C-v><Esc>", "<Esc>")
-
---Delete search result
-utils.map("n", "<leader>c", ':let @/=""<cr>')
 -- utils.map('n', '<bs>', '<c-^>`”zz')
 utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>")
 
