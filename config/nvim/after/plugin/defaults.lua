@@ -4,7 +4,6 @@ local set = vim.opt
 vim.opt.showtabline = 0
 set.scrolloff = 999 -- Lines of context
 set.sidescrolloff = 999
-set.scrolloff = 99
 set.mouse = "a"
 set.clipboard = "unnamedplus"
 set.splitright = true

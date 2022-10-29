@@ -1,25 +1,5 @@
 feline = require("feline")
 
-local theme = require("catppuccin.palettes").get_palette()
-local colors = {
-  bg       = theme.base,
-  fg       = theme.flamingo,
-  rosewater = theme.rosewater,
-	flamingo  = theme.flamingo,
-  pink      = theme.pink,
-	mauve     = theme.mauve,
-	red       = theme.red,
-	maroon    = theme.maroon,
-  peach     = theme.peach,
-	yellow    = theme.yellow,
-	green     = theme.green,
-	teal      = theme.teal,
-	sky       = theme.sky,
-	sapphire  = theme.sapphire,
-	blue      = theme.blue,
-	lavender  = theme.lavender
-}
-
 local vi_mode_colors = {
 	NORMAL = "mauve",
 	OP = "green",
@@ -43,7 +23,7 @@ local c = {
 		hl = function()
 			return {
 				fg = require("feline.providers.vi_mode").get_mode_color(),
-				bg = "bg",
+				bg = "base",
 				style = "bold",
 				name = "NeovimModeHLColor",
 			}
@@ -55,7 +35,7 @@ local c = {
 		provider = "git_branch",
 		hl = {
 			fg = "red",
-			bg = "bg",
+			bg = "base",
 			style = "bold",
 		},
 		left_sep = "block",
@@ -65,7 +45,7 @@ local c = {
 		provider = "git_diff_added",
 		hl = {
 			fg = "green",
-			bg = "bg",
+			bg = "base",
 		},
 		left_sep = "block",
 		right_sep = "block",
@@ -75,7 +55,7 @@ local c = {
 		provider = "git_diff_removed",
 		hl = {
 			fg = "red",
-			bg = "bg",
+			bg = "base",
 		},
 		left_sep = "block",
 		right_sep = "block",
@@ -84,8 +64,8 @@ local c = {
 	gitDiffChanged = {
 		provider = "git_diff_changed",
 		hl = {
-			fg = "fg",
-			bg = "bg",
+			fg = "flamingo",
+			bg = "base",
 		},
 		left_sep = "block",
 		right_sep = "right_filled",
@@ -136,7 +116,7 @@ local c = {
 		provider = "lsp_client_names",
 		hl = {
 			fg = "yellow",
-			bg = "bg",
+			bg = "base",
 			style = "bold",
 		},
 		left_sep = "left_filled",
@@ -153,7 +133,7 @@ local c = {
 		},
 		hl = {
 			fg = "teal",
-			bg = "bg",
+			bg = "base",
 			style = "bold",
 		},
 		left_sep = "block",
@@ -163,7 +143,7 @@ local c = {
 		provider = "file_encoding",
 		hl = {
 			fg = "maroon",
-			bg = "bg",
+			bg = "base",
 			style = "italic",
 		},
 		left_sep = "block",
@@ -173,7 +153,7 @@ local c = {
 		provider = "position",
 		hl = {
 			fg = "green",
-			bg = "bg",
+			bg = "base",
 			style = "bold",
 		},
 		left_sep = "block",
@@ -183,7 +163,7 @@ local c = {
 		provider = "line_percentage",
 		hl = {
 			fg = "sapphire",
-			bg = "bg",
+			bg = "base",
 			style = "bold",
 		},
 		left_sep = "block",
@@ -237,8 +217,13 @@ local components = {
 	},
 }
 
-feline.setup({
-	components = components,
-	theme = colors,
-	vi_mode_colors = vi_mode_colors,
-})
+local colors = require("catppuccin.palettes").get_palette()
+local M = {}
+M.setup = function()
+  feline.setup({
+    components = components,
+    theme = colors,
+    vi_mode_colors = vi_mode_colors,
+  })
+end
+return M

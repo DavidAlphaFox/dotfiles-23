@@ -7,6 +7,7 @@
 local utils = require "utils"
 local opts = { noremap = true, silent = false }
 
+utils.map("n", "-", "`")
 utils.map("n", "Y", "yg$")
 utils.map("n", "k", "gk")
 utils.map("n", "j", "gj")
