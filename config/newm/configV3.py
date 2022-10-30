@@ -373,6 +373,5 @@ panels = {
         "visible_fullscreen": False,
     },
 }
-
 grid = {"throw_ps": [2, 10]}
 energy = {"idle_times": [300, 600, 1500], "idle_callback": backlight_manager.callback}

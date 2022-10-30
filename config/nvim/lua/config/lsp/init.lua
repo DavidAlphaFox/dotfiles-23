@@ -65,10 +65,10 @@ local defaults  = {
   },
 }
 
+local M = {}
+
 -- Setup LSP handlers
 require("config.lsp.handlers").setup()
-
-local M = {}
 
 function M.setup(server)
   -- null-ls

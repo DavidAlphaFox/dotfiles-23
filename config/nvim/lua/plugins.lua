@@ -93,6 +93,7 @@ function M.setup()
       "folke/noice.nvim",
       event = "VimEnter",
       config = function()
+        -- require("noice").setup({ popupmenu = { backend = "cmp" } })
         require("noice").setup()
       end,
       requires = {
@@ -213,6 +214,22 @@ function M.setup()
     }
 
     use {
+      "akinsho/git-conflict.nvim",
+      cmd = {
+        "GitConflictChooseTheirs",
+        "GitConflictChooseOurs",
+        "GitConflictChooseBoth",
+        "GitConflictChooseNone",
+        "GitConflictNextConflict",
+        "GitConflictPrevConflict",
+        "GitConflictListQf",
+      },
+      config = function()
+        require("git-conflict").setup()
+      end,
+    }
+
+    use {
       'sindrets/diffview.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
@@ -314,6 +331,7 @@ function M.setup()
     --
     -- Utils
     --
+
     use {
       "folke/which-key.nvim",
       config = function()
@@ -446,6 +464,19 @@ function M.setup()
         { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
     }
+
+    -- use {
+    --   'mendes-davi/coq_luasnip',
+    --   requires = {
+    --     {
+    --       "L3MON4D3/LuaSnip",
+    --       config = function()
+    --         require("config.snip").setup()
+    --       end,
+    --     },
+    --
+    --   }
+    -- }
 
     -- use {
     --   "neovim/nvim-lspconfig",

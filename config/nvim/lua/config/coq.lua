@@ -1,34 +1,37 @@
 local M = {}
 
 function M.setup()
+  vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
   vim.g.coq_settings = {
     keymap = {
-      recommended = true,
+      -- recommended = true,
       jump_to_mark = "<C-l>",
+      -- jump_to_mark = "",
     },
     clients = {
       tabnine = {
         enabled = true,
-        weight_adjust = 1.9
+        -- weight_adjust = 1.3
+        always_on_top = true
       },
       lsp = {
         enabled = true,
         -- resolve_timeout = 0.04,
-        weight_adjust = 1.8
+        weight_adjust = 1.3
       },
       snippets = {
         enabled = true,
-        weight_adjust = 1.7
+        weight_adjust = 1.2
       },
       tree_sitter = {
-        enabled = true,
-        weight_adjust = 1.6
+        enabled = false,
+        -- weight_adjust = 1.7
       },
-      paths = {
-        path_seps = {
-          "/"
-        }
-      },
+      -- paths = {
+      --   path_seps = {
+      --     "/"
+      --   }
+      -- },
       buffers = {
         match_syms = true,
         weight_adjust = - 1.9
@@ -39,7 +42,7 @@ function M.setup()
         mode = "short",
       },
       ghost_text = {
-        enabled = true
+        enabled = false
       }
     },
   }
