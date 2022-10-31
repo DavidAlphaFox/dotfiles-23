@@ -232,22 +232,6 @@ function M.setup()
     }
 
     use {
-      "akinsho/git-conflict.nvim",
-      cmd = {
-        "GitConflictChooseTheirs",
-        "GitConflictChooseOurs",
-        "GitConflictChooseBoth",
-        "GitConflictChooseNone",
-        "GitConflictNextConflict",
-        "GitConflictPrevConflict",
-        "GitConflictListQf",
-      },
-      config = function()
-        require("git-conflict").setup()
-      end,
-    }
-
-    use {
       'sindrets/diffview.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()

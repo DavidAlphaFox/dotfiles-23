@@ -227,7 +227,7 @@ def hook_prev_next_view(layout: Layout, fun, steps):
     workspace = layout.get_active_workspace()
     views = layout.tiles(workspace)
     current_view = layout.find_focused_view()
-    if not current_view:
+    if (not current_view) or (current_view not in views):
         return
     index = views.index(current_view) + steps
     fun(index, views)

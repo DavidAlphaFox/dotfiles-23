@@ -4411,3 +4411,79 @@ rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+wob, Layer Shell, layer, False
+mpv, 1.wav - mpv, toplevel, False
+mpv, 1.wav - mpv, toplevel, False
+imv, imv, toplevel, False
+imv, imv, toplevel, False
+mpv, Chocolate (2008).mkv - mpv, toplevel, False
+mpv, Chocolate (2008).mkv - mpv, toplevel, False
+mpv, Izabella - mpv, toplevel, False
+mpv, Izabella - mpv, toplevel, False
+mpv, 13 Beaches;13 Beaches - mpv, toplevel, False
+mpv, 13 Beaches;13 Beaches - mpv, toplevel, False
+mpv, 21 Guns - mpv, toplevel, False
+mpv, 21 Guns - mpv, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+firefox, Type Checking With Mypy – Real Python — Mozilla Firefox, toplevel, False
+kitty, music, toplevel, False
+kitty, scrollbar (noice://881) - NVIM, toplevel, False
+kitty, ~/Git/newm, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+microsoft-edge, Sin título y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+microsoft-edge, Microsoft Teams y 2 páginas más - Perfil 1: Microsoft​ Edge, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
