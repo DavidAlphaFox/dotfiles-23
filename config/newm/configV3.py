@@ -136,9 +136,9 @@ def rules(view):
     float_titles = ("Dialect",)
     blur_apps = ("kitty", "rofi", "Alacritty")
     app_rule = None
-    os.system(
-        f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
-    )
+    # os.system(
+    #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
+    # )
     # Set float common rules
     if view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
