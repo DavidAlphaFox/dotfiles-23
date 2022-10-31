@@ -4487,3 +4487,31 @@ kitty, kitty, toplevel, False
 kitty, kitty, toplevel, False
 firefox, Mozilla Firefox, toplevel, False
 firefox, Mozilla Firefox, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+microsoft-edge, Abrir archivos, toplevel, False
+microsoft-edge, Abrir archivos, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+org.pwmt.zathura, org.pwmt.zathura, toplevel, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+catapult, catapult, toplevel, False
+catapult, catapult, toplevel, True
+app.drey.Dialect, Dialect, toplevel, False
+app.drey.Dialect, Dialect, toplevel, True
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+selection, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+shotman, Layer Shell, layer, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False

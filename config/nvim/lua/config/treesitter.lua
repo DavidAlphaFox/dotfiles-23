@@ -1,18 +1,18 @@
 local M = {}
 local theme = require("catppuccin.palettes").get_palette()
 local colors = {
-  theme.maroon,
-  theme.peach,
-  theme.pink,
-  theme.sky,
+  theme.rosewater,
   theme.flamingo,
-  theme.teal,
+  theme.peach,
+  theme.maroon,
   theme.mauve,
   theme.yellow,
-  theme.rosewater,
+  theme.pink,
+  theme.teal,
+  theme.sky,
   theme.red,
-  theme.sapphire,
   theme.lavender,
+  theme.sapphire,
   theme.blue,
   theme.green,
 }
