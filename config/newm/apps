@@ -4387,3 +4387,27 @@ rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
 rofi, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+waybar, Layer Shell, layer, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+kitty, kitty, toplevel, False
+kitty, kitty, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+firefox, Mozilla Firefox, toplevel, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False
+rofi, Layer Shell, layer, False

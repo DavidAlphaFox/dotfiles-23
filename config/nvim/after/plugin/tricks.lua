@@ -1,18 +1,18 @@
 local utils = require "utils"
-local autopairs = {
-  ['('] = ')',
-  ['['] = ']',
-  ['{'] = '}',
-  ['<'] = '>',
-  [ [=[']=] ] = [=[']=],
-  [ [=["]=] ] = [=["]=],
-}
-local set_pairs = vim.keymap.set
-for k, v in pairs(autopairs) do
-  set_pairs('i', k, function()
-    return k .. v .. '<Left>'
-  end, { expr = true, noremap = true })
-end
+-- local autopairs = {
+--   ['('] = ')',
+--   ['['] = ']',
+--   ['{'] = '}',
+--   ['<'] = '>',
+--   [ [=[']=] ] = [=[']=],
+--   [ [=["]=] ] = [=["]=],
+-- }
+-- local set_pairs = vim.keymap.set
+-- for k, v in pairs(autopairs) do
+--   set_pairs('i', k, function()
+--     return k .. v .. '<Left>'
+--   end, { expr = true, noremap = true })
+-- end
 
 local set_quit_maps = function()
     vim.keymap.set('n', 'q', ':bd!<CR>', { buffer=true, silent=true })

@@ -102,6 +102,24 @@ function M.setup()
         }
     })
 
+
+    -- Mini plugins
+    use {
+      'echasnovski/mini.indentscope',
+      config = function()
+        require("mini.indentscope").setup()
+      end
+    }
+
+    use {
+      'echasnovski/mini.tabline',
+      config = function()
+        require("mini.tabline").setup()
+      end
+    }
+
+    -- Themes
+
     use 'kvrohit/mellow.nvim'
 
     use {
@@ -304,6 +322,13 @@ function M.setup()
     -- Text Edition
     --
 
+    use {
+	    "windwp/nvim-autopairs",
+      config = function()
+        require("config.autopairs").setup()
+      end
+    }
+
     use { "wellle/targets.vim", event = "CursorMoved" }
 
     use { "mg979/vim-visual-multi", branch = "master", config = [[require('config.multi_cursors')]] }
@@ -321,7 +346,6 @@ function M.setup()
     }
 
     -- Tim Pope docet
-    -- use "tpope/vim-surround"
     use { "tpope/vim-repeat", event = "CursorMoved" }
 
     --
@@ -476,32 +500,6 @@ function M.setup()
     --     },
     --
     --   }
-    -- }
-
-    -- use {
-    --   "neovim/nvim-lspconfig",
-    --   opt = true,
-    --   event = { "BufReadPre" },
-    --   wants = {
-    --     "coq_nvim",
-    --     "lua-dev.nvim",
-    --     "vim-illuminate",
-    --     "refactoring.nvim",
-    --     "null-ls.nvim",
-    --     "omnisharp-extended-lsp.nvim",
-    --     "csharpls-extended-lsp.nvim",
-    --   }, -- for coq.nvim
-    --   config = function()
-    --     require("config.lsp").setup()
-    --   end,
-    --   requires = {
-    --     "folke/lua-dev.nvim",
-    --     "RRethy/vim-illuminate",
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     "Hoffs/omnisharp-extended-lsp.nvim",
-    --     "Decodetalkers/csharpls-extended-lsp.nvim",
-    --   },
-    --   disable = true
     -- }
 
     use  "neovim/nvim-lspconfig"

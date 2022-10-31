@@ -35,4 +35,3 @@ end
 -- Init Packer Plugins
 --
 require("plugins").setup()
-require("config.indentscope").setup {}
