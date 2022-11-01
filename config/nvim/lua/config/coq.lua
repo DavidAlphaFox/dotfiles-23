@@ -10,23 +10,24 @@ function M.setup()
       -- jump_to_mark = "",
     },
     clients = {
-      tabnine = {
-        enabled = true,
-        -- weight_adjust = 1.3
-        always_on_top = true
-      },
       lsp = {
         enabled = true,
         -- resolve_timeout = 0.04,
-        weight_adjust = 1.3
+        weight_adjust = 1.1
+      },
+      tabnine = {
+        enabled = true,
+        weight_adjust = 1.2
+        -- always_on_top = true
       },
       snippets = {
         enabled = true,
-        weight_adjust = 1.2
+        weight_adjust = 1.3
       },
       tree_sitter = {
-        enabled = false,
+        enabled = true,
         -- weight_adjust = 1.7
+        always_on_top = true
       },
       -- paths = {
       --   path_seps = {
