@@ -19,7 +19,7 @@ local colors = {
 
 function M.setup()
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "bash", "c", "cpp", "c_sharp", "cmake", "comment", "css", "dockerfile", "elixir", "fennel", "gitignore", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "kotlin", "latex", "lua", "make", "markdown", "python", "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "yaml" },
+    ensure_installed = { "bash", "c", "cpp", "c_sharp", "cmake", "comment", "css", "dockerfile", "elixir", "fennel", "gitignore", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "kotlin", "latex", "lua", "make", "markdown", "php", "python", "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "yaml" },
     sync_install = false,
     highlight = {
       enable = true,
