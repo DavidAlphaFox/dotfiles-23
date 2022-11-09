@@ -26,14 +26,17 @@ local on_attach = function(client, bufnr)
 
   -- Lsp keymaps
   local opts = { buffer = bufnr, silent = true }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", { desc = "Goto Declaration"}, opts))
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", { desc = "Goto Definition"}, opts))
-  vim.keymap.set("n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", vim.tbl_extend("force", { desc = "Goto Definition in new Tab"}, opts))
-  vim.keymap.set("n", "gh", vim.lsp.buf.hover, vim.tbl_extend("force", { desc = "LSP Hover"}, opts))
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", { desc = "Goto Implementation"}, opts))
-  vim.keymap.set("n", "<leader>aw", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", { desc = "LSP Add Folder"}, opts))
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, vim.tbl_extend("force", { desc = "LSP Type Definition"}, opts))
-  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic"}, opts))
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", { desc = "Goto Declaration" }, opts))
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", { desc = "Goto Definition" }, opts))
+  vim.keymap.set("n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>",
+    vim.tbl_extend("force", { desc = "Goto Definition in new Tab" }, opts))
+  vim.keymap.set("n", "gh", vim.lsp.buf.hover, vim.tbl_extend("force", { desc = "LSP Hover" }, opts))
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", { desc = "Goto Implementation" }, opts))
+  vim.keymap.set("n", "<leader>aw", vim.lsp.buf.add_workspace_folder,
+    vim.tbl_extend("force", { desc = "LSP Add Folder" }, opts))
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition,
+    vim.tbl_extend("force", { desc = "LSP Type Definition" }, opts))
+  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic" }, opts))
 
   require("config.lsp.highlighter").setup(client, bufnr)
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
@@ -57,7 +60,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
-local defaults  = {
+local opts = {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = {
@@ -72,13 +75,13 @@ require("config.lsp.handlers").setup()
 
 function M.setup(server)
   -- null-ls
-  require("config.lsp.null-ls").setup(defaults)
-  local config = vim.tbl_deep_extend("force", defaults, server or {})
+  require("config.lsp.null-ls").setup(opts)
+  local config = vim.tbl_deep_extend("force", opts, server or {})
   if server.name == "sumneko_lua" then
-    require("neodev").setup({})
+    config.before_init = require("neodev.lsp").before_init
   end
   config = coq.lsp_ensure_capabilities(config)
-  vim.lsp.start(config)  -- vim.api.nvim_create_autocmd('FileType', {
+  vim.lsp.start(config) -- vim.api.nvim_create_autocmd('FileType', {
 end
 
 function M.remove_unused_imports()

@@ -64,8 +64,6 @@ function M.setup()
 
     use {
       "nvim-treesitter/nvim-treesitter",
-      opt = true,
-      event = "BufReadPre",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -89,6 +87,13 @@ function M.setup()
     -- Appearance
     --
 
+    use {
+      'rcarriga/nvim-notify',
+      config = function()
+        vim.notify = require("notify")
+      end
+    }
+
     use({
       "folke/noice.nvim",
       event = "VimEnter",
@@ -99,8 +104,10 @@ function M.setup()
       requires = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
-        }
-    })
+      },
+      disable = true
+    }
+  )
 
 
     -- Mini plugins
@@ -250,7 +257,7 @@ function M.setup()
 
     use {
       "nvim-telescope/telescope.nvim",
-      -- opt = true,
+      event = { "VimEnter" },
       config = function()
         require("config.telescope").setup()
       end,
@@ -342,6 +349,8 @@ function M.setup()
 
     use {
       "folke/which-key.nvim",
+      event = "VimEnter",
+      module = { "which-key" },
       config = function()
         -- require("which-key").setup { window = { position = "top" } }
         require("which-key").setup {}

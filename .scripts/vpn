@@ -3,4 +3,4 @@ host="vpn.ecosur.mx:10443"
 cookie=`cat ~/.scripts/cookie`
 # sudo openfortivpn vpn.ecosur.mx:10443 --cookie="$cookie" --realm=foo
 # sudo openfortivpn "$host" --cookie="$cookie"
-sudo openconnect --protocol=fortinet --cookie="SVPNCOOKIE=$cookie" $host
+sudo openfortivpn --cookie="SVPNCOOKIE=$cookie" $host

@@ -28,7 +28,7 @@ local sources = {
   b.formatting.black.with { extra_args = { "--fast" } },
   b.formatting.isort,
   -- b.formatting.stylua,
-  with_root_file(b.formatting.stylua, "stylua.toml"),
+  -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
   -- b.diagnostics.markdownlint,
@@ -37,7 +37,7 @@ local sources = {
   b.diagnostics.tsc,
   -- b.diagnostics.selene,
   -- b.diagnostics.codespell,
-  with_root_file(b.diagnostics.selene, "selene.toml"),
+  -- with_root_file(b.diagnostics.selene, "selene.toml"),
   b.diagnostics.zsh,
   -- refurb,
   -- b.diagnostics.cspell.with {

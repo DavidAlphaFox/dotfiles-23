@@ -3,21 +3,20 @@ local utils = require "utils"
 local function SetThemeTelescope()
   local colors = require("catppuccin.palettes").get_palette()
   -- Telescope
-  -- utils.fg_bg("TelescopeBorder", "NONE", "NONE")
-  -- utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
+  utils.fg_bg("TelescopePromptBorder", "NONE", "NONE")
   utils.fg_bg("TelescopePromptNormal", colors.flamingo, "NONE")
   utils.fg_bg("TelescopePromptPrefix", colors.sapphire, "NONE")
   utils.fg("TelescopePromptCounter", "white")
 
   utils.fg_bg("TelescopePromptTitle", "black", colors.mauve)
-  utils.fg_bg("TelescopePreviewTitle", "black", colors.lavender)
-  utils.fg_bg("TelescopeResultsTitle", "black", colors.red)
+  utils.fg_bg("TelescopePreviewTitle", "black", colors.teal)
+  utils.fg_bg("TelescopeResultsTitle", "black", colors.maroon)
 
   -- utils.bg("TelescopeResults", "NONE")
   -- utils.bg("TelescopeNormal", "NONE")
   utils.bg("TelescopeSelection", colors.mantle)
- -- TelescopeSelectionCaret = { fg = cp.flamingo },
- -- TelescopeMatching = { fg = cp.blue },
+  utils.fg("TelescopeSelectionCaret", colors.red)
+  utils.fg("TelescopeMatching", colors.green)
  -- TelescopeResultsNormal = { bg = cp.mantle},
  -- TelescopePreviewNormal = { bg = cp.crust },
  -- TelescopeResultsBorder = { bg = cp.mantle, fg = cp.crust },

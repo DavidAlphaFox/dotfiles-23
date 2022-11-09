@@ -4,4 +4,4 @@ dockerls = {
   root_dir = vim.fs.dirname(vim.fs.find("Dockerfile", { upward = true })[1]),
   single_file_support = true
 }
-require("config.lsp").setup(tsserver)
+require("config.lsp").setup(dockerls)

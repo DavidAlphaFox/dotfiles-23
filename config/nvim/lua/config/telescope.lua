@@ -25,7 +25,7 @@ function M.setup()
         "--trim", -- add this value
       },
       prompt_prefix = "  ",
-      selection_caret = " ",
+      selection_caret = "» ",
       initial_mode = "normal",
       selection_strategy = "reset",
       sorting_strategy = "ascending",
@@ -119,7 +119,7 @@ function M.setup()
       maps = {
         {"e", ext.file_browser.file_browser, "File Browser" },
         {"f", ext.frecency.frecency, "Frequent Files" },
-        {"b", builtin.buffers, "List Buffers" },
+        {"l", builtin.buffers, "List Buffers" },
         {"o", builtin.oldfiles, "Old Files" },
         {"t", builtin.treesitter, "TreeSitter Symbols" },
         {"ñ", project_files, "Project Files"}

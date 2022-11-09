@@ -55,8 +55,8 @@ local maps = {
       {"n", ":tabnew<CR>", "New Tab"},
       {"o", ":tabonly<CR>", "Tab Only"},
       {"d", ":tabclose<CR>", "Tab Close"},
-      {"i", ":tabmove +1<CR>", "Tab Move Right"},
-      {"m", ":tabmove -1<CR>", "Tab Move Left"}
+      {"l", ":tabmove +1<CR>", "Tab Move Right"},
+      {"h", ":tabmove -1<CR>", "Tab Move Left"}
     }
   },
   {
@@ -158,4 +158,15 @@ local betterTerm = require('betterTerm')
 utils.map("n", "<leader>e", function()
   betterTerm.send(require("code_runner.commands").get_filetype_command(), 1, true)
 end, { desc = "Excute File" })
+
 utils.map({"n", "t"}, "<C-ñ>", betterTerm.open, { desc = "Open terminal"})
+utils.map({"n", "t"}, "<leader>tt", betterTerm.select, { desc = "Select terminal"})
+local current = 2
+utils.map(
+    {"n", "t"}, "<leader>ti",
+    function()
+        betterTerm.open(current)
+        current = current + 1
+    end,
+    { desc = "New terminal"}
+)

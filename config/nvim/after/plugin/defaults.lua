@@ -5,7 +5,8 @@ vim.opt.showtabline = 0
 set.scrolloff = 999 -- Lines of context
 set.sidescrolloff = 999
 set.mouse = "a"
-set.clipboard = "unnamedplus"
+-- clipboard
+set.clipboard:append("unnamedplus")
 set.splitright = true
 set.splitbelow = true
 set.icm = "nosplit"
@@ -79,7 +80,7 @@ set.listchars = {
   nbsp = "␣",
 }
 set.laststatus = 3
-set.cmdheight = 1
+set.cmdheight = 0
 
 -- Search
 set.hlsearch = true

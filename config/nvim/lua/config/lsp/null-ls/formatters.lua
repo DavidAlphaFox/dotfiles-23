@@ -25,11 +25,11 @@ function M.format()
       async = true,
       filter = function(client)
         return client.name ~= "tsserver"
-          and client.name ~= "jsonls"
-          and client.name ~= "html"
-          and client.name ~= "sumneko_lua"
-          and client.name ~= "jdt.ls"
-          and client.name ~= ""
+            and client.name ~= "jsonls"
+            and client.name ~= "html"
+            -- and client.name ~= "sumneko_lua"
+            and client.name ~= "jdt.ls"
+            and client.name ~= ""
         -- and client.name ~= "kotlin_language_server"
       end,
     }
@@ -68,17 +68,6 @@ end
 function M.has_formatter(filetype)
   local available = nls_sources.get_available(filetype, method)
   return #available > 0
-end
-
-function M.list_registered(filetype)
-  local registered_providers = nls_utils.list_registered_providers_names(filetype)
-  return registered_providers[method] or {}
-end
-
-function M.list_supported(filetype)
-  local supported_formatters = nls_sources.get_supported(filetype, "formatting")
-  table.sort(supported_formatters)
-  return supported_formatters
 end
 
 return M

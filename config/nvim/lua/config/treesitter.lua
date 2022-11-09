@@ -1,5 +1,6 @@
 local M = {}
 local theme = require("catppuccin.palettes").get_palette()
+-- local colors = vim.tbl_values(theme)
 local colors = {
   theme.rosewater,
   theme.flamingo,
