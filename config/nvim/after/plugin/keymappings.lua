@@ -45,45 +45,46 @@ for i = 9, 1, -1 do
   local kmap = string.format("<leader>%d", i)
   local command = string.format("%dgt", i)
   utils.map("n", kmap, command, { desc = string.format("Jump Tab %d", i) })
-  utils.map("n", string.format("tt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i), { desc = string.format("Tab Move to %d", i) })
+  utils.map("n", string.format("tt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i),
+    { desc = string.format("Tab Move to %d", i) })
 end
 local maps = {
   {
     prefix = "<leader>t",
     maps = {
-      {"s", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs"},
-      {"n", ":tabnew<CR>", "New Tab"},
-      {"o", ":tabonly<CR>", "Tab Only"},
-      {"d", ":tabclose<CR>", "Tab Close"},
-      {"l", ":tabmove +1<CR>", "Tab Move Right"},
-      {"h", ":tabmove -1<CR>", "Tab Move Left"}
+      { "s", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs" },
+      { "n", ":tabnew<CR>", "New Tab" },
+      { "o", ":tabonly<CR>", "Tab Only" },
+      { "d", ":tabclose<CR>", "Tab Close" },
+      { "l", ":tabmove +1<CR>", "Tab Move Right" },
+      { "h", ":tabmove -1<CR>", "Tab Move Left" }
     }
   },
   {
     prefix = "<leader>",
     maps = {
-      {"w", ":bnext<CR>", "Buffer Next"},
-      {"b", ":bprev<CR>", "Buffer Prev"},
+      { "w", ":bnext<CR>", "Buffer Next" },
+      { "b", ":bprev<CR>", "Buffer Prev" },
       -- Move between splits
-      {"k", ":wincmd k<CR>", "Move Up"},
-      {"l", ":wincmd l<CR>", "Move Right"},
-      {"j", ":wincmd j<CR>", "Move Down"},
-      {"h", ":wincmd h<CR>", "Move Left"},
+      { "k", ":wincmd k<CR>", "Move Up" },
+      { "l", ":wincmd l<CR>", "Move Right" },
+      { "j", ":wincmd j<CR>", "Move Down" },
+      { "h", ":wincmd h<CR>", "Move Left" },
       --Delete search result
-      {"c", ':let @/=""<cr>'}
+      { "c", ':let @/=""<cr>' }
     }
   },
   {
     prefix = "ñ",
     maps = {
-      {"s", "/", vim.tbl_extend("force", { desc = "Search" }, opts)},
-      {"r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts)},
-      {"cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts)},
-      {"d", ":bd<CR>", "Buffer Delete"},
-      {"m", require("harpoon.mark").add_file, "Mark File"},
-      {"g", require("harpoon.ui").toggle_quick_menu, "Show Files Marked"},
-      {"w", require("harpoon.ui").nav_next, "Next File Marked"},
-      {"b", require("harpoon.ui").nav_prev, "Prev File Marked"},
+      { "s", "/", vim.tbl_extend("force", { desc = "Search" }, opts) },
+      { "r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts) },
+      { "cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts) },
+      { "d", ":bd<CR>", "Buffer Delete" },
+      { "m", require("harpoon.mark").add_file, "Mark File" },
+      { "g", require("harpoon.ui").toggle_quick_menu, "Show Files Marked" },
+      { "w", require("harpoon.ui").nav_next, "Next File Marked" },
+      { "b", require("harpoon.ui").nav_prev, "Prev File Marked" },
       {
         ".",
         function()
@@ -133,40 +134,11 @@ utils.map("n", "ç", "%")
 
 utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
 
-local neogen = {
-  c = {"class", "Comment Class"},
-  f = {"func", "Comment Function"},
-  i = {"file", "Comment File"},
-  t = {"type", "Comment type"},
-}
-
-for k, v in pairs(neogen) do
-  utils.map("n", string.format("<Leader>n%s", k), function()
-    require("neogen").generate { type = v[1] }
-  end, { desc = v[2] })
-end
-
 -- diffview.nvim
 utils.map("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "Diff Open" })
 utils.map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Diff Close" })
 for i = 9, 1, -1 do
-  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i), { desc = string.format("Diff Open HEAD~%d<CR>", i) })
+  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i),
+    { desc = string.format("Diff Open HEAD~%d<CR>", i) })
 end
-
 -- utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
-local betterTerm = require('betterTerm')
-utils.map("n", "<leader>e", function()
-  betterTerm.send(require("code_runner.commands").get_filetype_command(), 1, true)
-end, { desc = "Excute File" })
-
-utils.map({"n", "t"}, "<C-ñ>", betterTerm.open, { desc = "Open terminal"})
-utils.map({"n", "t"}, "<leader>tt", betterTerm.select, { desc = "Select terminal"})
-local current = 2
-utils.map(
-    {"n", "t"}, "<leader>ti",
-    function()
-        betterTerm.open(current)
-        current = current + 1
-    end,
-    { desc = "New terminal"}
-)

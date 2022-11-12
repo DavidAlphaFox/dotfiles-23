@@ -1,0 +1,22 @@
+telescope.lua:      prefix = "<leader>f",
+telescope.lua:      prefix = "<leader>g",
+telescope.lua:  utils.map("n", "<leader>m", builtin.marks, { desc = "Show Marks" })
+telescope.lua:  utils.map("n", "<leader>ss", builtin.spell_suggest, { desc = "Spell Suggest" })
+telescope.lua:  -- utils.map('n', '<leader>bt', builtin.current_buffer_tags, { desc = "Buffer Tags" })
+telescope.lua:  -- utils.map('n', '<leader>fd', builtin.lsp_definitions)
+telescope.lua:  -- utils.map("n", "<leader>gc", builtin.git_commits)
+multi_cursors.lua:-- vim.g.VM_leader = "ç"
+lsp/diagnostics.lua:  -- utils.map("n", "<leader>dx", "<cmd>TroubleToggle<cr>")
+lsp/diagnostics.lua:  utils.map("n", "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Workspace Diagnostics" })
+lsp/diagnostics.lua:  utils.map("n", "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>", { desc = "Show Diagnostics" })
+lsp/diagnostics.lua:  -- utils.map("n", "<leader>dq", "<cmd>TroubleToggle quickfix<cr>")
+lsp/diagnostics.lua:  -- utils.map("n", "<leader>dl", "<cmd>TroubleToggle loclist<cr>")
+dap/keymaps.lua:    utils.map("n", "<leader>d%" .. k, v)
+dap/keymaps.lua:  utils.map("v", "<leader>de", require 'dapui'.eval)
+lsp/init.lua:  vim.keymap.set("n", "<leader>aw", vim.lsp.buf.add_workspace_folder,
+lsp/init.lua:  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition,
+lsp/init.lua:  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic" }, opts))
+lsp/saga.lua:  -- vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+lsp/saga.lua:  utils.map('n', '<leader>dk', function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Prev Error"})
+lsp/saga.lua:  utils.map('n', '<leader>dj', function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Next Error"})
+lsp/saga.lua:  utils.map("n","<leader>o", "<cmd>LSoutlineToggle<CR>")

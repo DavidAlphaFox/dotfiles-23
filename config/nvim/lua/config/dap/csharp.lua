@@ -1,7 +1,6 @@
 local M = {}
 
 -- Debugger installation location
-local HOME = os.getenv "HOME"
 function M.setup()
   local dap = require "dap"
 

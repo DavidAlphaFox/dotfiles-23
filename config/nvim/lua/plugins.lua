@@ -94,21 +94,18 @@ function M.setup()
       end
     }
 
-    use({
+    use {
       "folke/noice.nvim",
-      event = "VimEnter",
       config = function()
-        -- require("noice").setup({ popupmenu = { backend = "cmp" } })
         require("noice").setup()
       end,
       requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
       disable = true
     }
-  )
-
 
     -- Mini plugins
     use {
@@ -143,7 +140,7 @@ function M.setup()
     -- use "kyazdani42/nvim-web-devicons"
     use {
       'yamatsum/nvim-nonicons',
-      requires = {'kyazdani42/nvim-web-devicons'}
+      requires = { 'kyazdani42/nvim-web-devicons' }
     }
 
     -- Status line
@@ -188,7 +185,7 @@ function M.setup()
     use {
       'chentoast/marks.nvim',
       config = function()
-         require'marks'.setup()
+        require 'marks'.setup()
       end
     }
 
@@ -213,7 +210,7 @@ function M.setup()
       config = function()
         require('ufo').setup({
           provider_selector = function(bufnr, filetype, buftype)
-              return {'treesitter', 'indent'}
+            return { 'treesitter', 'indent' }
           end
         })
       end
@@ -288,7 +285,7 @@ function M.setup()
       'LukasPietzschmann/telescope-tabs',
       requires = { 'nvim-telescope/telescope.nvim' },
       config = function()
-        require'telescope-tabs'.setup{}
+        require 'telescope-tabs'.setup {}
       end
     }
 
@@ -314,7 +311,7 @@ function M.setup()
     --
 
     use {
-	    "windwp/nvim-autopairs",
+      "windwp/nvim-autopairs",
       config = function()
         require("config.autopairs").setup()
       end
@@ -326,13 +323,13 @@ function M.setup()
 
     -- use { "m4xshen/autoclose.nvim", event = "InsertEnter" }
 
-    use { "chaoren/vim-wordmotion", event = "CursorMoved"}
+    use { "chaoren/vim-wordmotion", event = "CursorMoved" }
 
     use {
       "kylechui/nvim-surround",
       event = "CursorMoved",
       config = function()
-         require("nvim-surround").setup()
+        require("nvim-surround").setup()
       end
     }
 
@@ -369,7 +366,7 @@ function M.setup()
     use {
       'CRAG666/betterTerm.nvim',
       config = function()
-        require('betterTerm').setup()
+        require('config.betterTerm').setup()
       end,
     }
 
@@ -407,7 +404,7 @@ function M.setup()
       'numToStr/Comment.nvim',
       event = "CursorMoved",
       config = function()
-          require("config.comment").setup()
+        require("config.comment").setup()
       end
     }
 
@@ -431,7 +428,7 @@ function M.setup()
     use {
       'gen740/SmoothCursor.nvim',
       config = function()
-        require('smoothcursor').setup({fancy = { enable = true }})
+        require('smoothcursor').setup({ fancy = { enable = true } })
       end
     }
 
@@ -495,7 +492,7 @@ function M.setup()
     --   }
     -- }
 
-    use  "neovim/nvim-lspconfig"
+    use "neovim/nvim-lspconfig"
     use "folke/neodev.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "Decodetalkers/csharpls-extended-lsp.nvim"
@@ -529,26 +526,28 @@ function M.setup()
     --
     -- Debugging
     --
-
     use {
       "mfussenegger/nvim-dap",
       opt = true,
-      -- event = "BufReadPre",
-      keys = { [[<leader>da]] },
       module = { "dap" },
-      wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui", "nvim-dap-python" },
       requires = {
-        "alpha2phi/DAPInstall.nvim",
-        -- { "Pocco81/dap-buddy.nvim", branch = "dev" },
-        "theHamsta/nvim-dap-virtual-text",
-        "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap-python",
+        { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
+        { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+        { "mfussenegger/nvim-dap-python", module = { "dap-python" } },
         "nvim-telescope/telescope-dap.nvim",
         { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+        { "mxsdev/nvim-dap-vscode-js", module = { "dap-vscode-js" } },
+        {
+          "microsoft/vscode-js-debug",
+          opt = true,
+          run = "npm install --legacy-peer-deps && npm run compile",
+          disable = false,
+        },
       },
       config = function()
         require("config.dap").setup()
       end,
+      disable = false,
     }
 
     --

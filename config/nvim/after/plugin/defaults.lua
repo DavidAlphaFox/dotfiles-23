@@ -31,7 +31,8 @@ set.encoding = "utf-8"
 set.fileformat = "unix"
 set.formatoptions = "tcqrn1"
 set.errorformat:append "%f|%l col %c|%m"
-set.wildignore:append { ".git/**", "*.pyc", "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar", "*.DS_Store,**/", "node_modules/**", "**/bower_modules/**", "**/node_modules/**" }
+set.wildignore:append { ".git/**", "*.pyc", "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar",
+  "*.DS_Store,**/", "node_modules/**", "**/bower_modules/**", "**/node_modules/**" }
 
 -- Better search
 set.path:remove "/usr/include"
