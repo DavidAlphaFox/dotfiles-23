@@ -1,33 +1,42 @@
 local M = {}
 
 function M.setup()
-  vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+  vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
   vim.g.coq_settings = {
+    display = {
+      icons = { mode = 'short' },
+      preview = { positions = { north = null, south = null, west = 1, east = null } },
+      pum = {
+        fast_close = false,
+        y_max_len = 40,
+        x_max_len = 100,
+      }
+    },
     keymap = {
       recommended = false,
       -- recommended = true,
       jump_to_mark = "<C-l>",
     },
     clients = {
+      snippets = {
+        enabled = true,
+        -- weight_adjust = 1.3
+        always_on_top = true
+      },
       lsp = {
         enabled = true,
         -- resolve_timeout = 0.04,
         -- always_on_top = {}
-        weight_adjust = 1.1
+        weight_adjust = 1.3
       },
       tabnine = {
         enabled = true,
         weight_adjust = 1.2
         -- always_on_top = true
       },
-      snippets = {
-        enabled = true,
-        -- weight_adjust = 1.3
-        always_on_top = true
-      },
       tree_sitter = {
         enabled = true,
-        weight_adjust = 1.3
+        weight_adjust = 1.1
         -- always_on_top = true
       },
       -- paths = {
@@ -37,17 +46,9 @@ function M.setup()
       -- },
       buffers = {
         match_syms = true,
-        weight_adjust = - 1.9
+        weight_adjust = -1.9
       }
-    },
-    display = {
-      icons = {
-        mode = "short",
-      },
-      ghost_text = {
-        enabled = false
-      }
-    },
+    }
   }
 
   local coq = require "coq"

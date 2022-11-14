@@ -1,3 +1,9 @@
+--   __,
+--  /  |       _|_  _   _           _|
+-- |   |  |  |  |  / \_/   /|/|/|  / |
+--  \_/\_/ \/|_/|_/\_/ \__/ | | |_/\/|_/
+--
+
 local api = vim.api
 local cmd = vim.cmd
 --- Goto last position

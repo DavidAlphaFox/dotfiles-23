@@ -1,3 +1,11 @@
+--  _____  _             _
+-- |  __ \| |           (_)
+-- | |__) | |_   _  __ _ _ _ __  ___
+-- |  ___/| | | | |/ _` | | '_ \/ __|
+-- | |    | | |_| | (_| | | | | \__ \
+-- |_|    |_|\__,_|\__, |_|_| |_|___/
+--                  __/ |
+--                 |___/
 local M = {}
 
 function M.setup()
@@ -91,7 +99,8 @@ function M.setup()
       'rcarriga/nvim-notify',
       config = function()
         vim.notify = require("notify")
-      end
+      end,
+      -- disable = true
     }
 
     use {
@@ -102,7 +111,7 @@ function M.setup()
       requires = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        -- "rcarriga/nvim-notify",
       },
       disable = true
     }
@@ -391,12 +400,7 @@ function M.setup()
     use {
       "ThePrimeagen/harpoon",
       config = function()
-        require("harpoon").setup {
-          global_settings = {
-            save_on_toggle = true,
-            enter_on_sendcmd = true,
-          },
-        }
+        require("config.harpoon").setup()
       end
     }
 
@@ -450,7 +454,6 @@ function M.setup()
       requires = {
         "MunifTanjim/nui.nvim",
       },
-      wants = { "nui.nvim" },
       module = { "package-info" },
       ft = { "json" },
       config = function()

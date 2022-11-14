@@ -15,15 +15,19 @@ function M.map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+function M.pmaps(prefix, maps)
+  for _, map in pairs(maps) do
+    local opts = map[3]
+    if (type(opts) == "string") then
+      opts = { desc = map[3] }
+    end
+    M.map("n", prefix .. map[1], map[2], opts)
+  end
+end
+
 function M.maps(maps)
   for _, map in pairs(maps) do
-    for _, mp in pairs(map.maps) do
-      local opts = mp[3]
-      if (type(opts) == "string") then
-        opts = { desc = mp[3] }
-      end
-      M.map("n", map.prefix .. mp[1], mp[2], opts)
-    end
+    M.pmaps(map.prefix, map.maps)
   end
 end
 
@@ -43,22 +47,23 @@ end
 -- Highlights functions
 
 function M.get_highlight(hlname)
-    local hl = vim.api.nvim_get_hl_by_name(hlname, true)
-    setmetatable(hl, {
-        __index = function(t, k)
-            if k == "fg" then
-                return t.foreground
-            elseif k == "bg" then
-                return t.background
-            elseif k == "sp" then
-                return t.special
-            else
-                return rawget(t, k)
-            end
-        end,
-    })
-    return hl
+  local hl = vim.api.nvim_get_hl_by_name(hlname, true)
+  setmetatable(hl, {
+    __index = function(t, k)
+      if k == "fg" then
+        return t.foreground
+      elseif k == "bg" then
+        return t.background
+      elseif k == "sp" then
+        return t.special
+      else
+        return rawget(t, k)
+      end
+    end,
+  })
+  return hl
 end
+
 -- Define bg color
 -- @param group Group
 -- @param color Color
@@ -94,13 +99,12 @@ function M.info(msg, name)
   vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
-
 function M.simple_fold(...)
-    local fs, fe = vim.v.foldstart, vim.v.foldend
-    local start_line = vim.fn.getline(fs):gsub("\t", ("\t"):rep(vim.opt.ts:get()))
-    local end_line = vim.trim(vim.fn.getline(fe))
-    local spaces = (" "):rep( vim.o.columns - start_line:len() - end_line:len() - 7)
-    return start_line .. "  " .. end_line .. spaces
+  local fs, fe = vim.v.foldstart, vim.v.foldend
+  local start_line = vim.fn.getline(fs):gsub("\t", ("\t"):rep(vim.opt.ts:get()))
+  local end_line = vim.trim(vim.fn.getline(fe))
+  local spaces = (" "):rep(vim.o.columns - start_line:len() - end_line:len() - 7)
+  return start_line .. "  " .. end_line .. spaces
 end
 
 return M

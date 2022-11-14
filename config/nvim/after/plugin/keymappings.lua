@@ -81,27 +81,6 @@ local maps = {
       { "r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts) },
       { "cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts) },
       { "d", ":bd<CR>", "Buffer Delete" },
-      { "m", require("harpoon.mark").add_file, "Mark File" },
-      { "g", require("harpoon.ui").toggle_quick_menu, "Show Files Marked" },
-      { "w", require("harpoon.ui").nav_next, "Next File Marked" },
-      { "b", require("harpoon.ui").nav_prev, "Prev File Marked" },
-      {
-        ".",
-        function()
-          require("harpoon.term").sendCommand(10, vim.api.nvim_replace_termcodes('<C-c> <C-l>', true, true, true))
-          vim.loop.sleep(100)
-          require("harpoon.term").sendCommand(10, require("code_runner.commands").get_filetype_command() .. "\n")
-        end,
-        "CodeRunner in Harpoon Term"
-      },
-
-      {
-        " ",
-        function()
-          require("harpoon.term").gotoTerminal(10)
-        end,
-        "Goto Buffer Term"
-      },
     }
   },
 }
