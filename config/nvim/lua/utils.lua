@@ -17,9 +17,9 @@ end
 
 function M.pmaps(prefix, maps)
   for _, map in pairs(maps) do
-    local opts = map[3]
-    if (type(opts) == "string") then
-      opts = { desc = map[3] }
+    local opts = { desc = map[3] }
+    if map[4] then
+      opts = vim.tbl_extend("force", opts, map[4])
     end
     M.map("n", prefix .. map[1], map[2], opts)
   end

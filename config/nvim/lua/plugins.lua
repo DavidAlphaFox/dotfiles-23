@@ -146,11 +146,22 @@ function M.setup()
     }
 
     -- Icons
-    -- use "kyazdani42/nvim-web-devicons"
     use {
-      'yamatsum/nvim-nonicons',
-      requires = { 'kyazdani42/nvim-web-devicons' }
+      "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("config.icons").setup()
+      end,
+      requires = { {
+        'DaikyXendo/nvim-material-icon',
+        config = function()
+          require 'nvim-material-icon'.setup()
+        end,
+      } }
     }
+    -- use {
+    --   'yamatsum/nvim-nonicons',
+    --   requires = { 'kyazdani42/nvim-web-devicons' }
+    -- }
 
     -- Status line
     use {

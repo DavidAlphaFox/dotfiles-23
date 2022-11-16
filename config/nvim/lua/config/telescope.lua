@@ -84,15 +84,15 @@ function M.setup()
       frecency = {
         mappings = mappings,
         show_unindexed = false,
-        ignore_patterns = {"*.git/*", "*/tmp/*"},
+        ignore_patterns = { "*.git/*", "*/tmp/*" },
         workspaces = {
-          ["dotfiles"]    = "~/Git/dotfiles",
+          ["dotfiles"] = "~/Git/dotfiles",
         }
       },
     },
   }
 
-  local extensions = {"frecency", "zf-native", "dap", "media_files", "file_browser"}
+  local extensions = { "frecency", "zf-native", "dap", "media_files", "file_browser" }
   for _, extension in ipairs(extensions) do
     require("telescope").load_extension(extension)
   end
@@ -110,49 +110,49 @@ function M.setup()
   end
 
   local cwd_conf = {
-    cwd = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1])
+    cwd = vim.fs.dirname(vim.fs.find({ '.git' }, { upward = true })[1])
   }
 
   local maps = {
     {
       prefix = "ñ",
       maps = {
-        {"e", ext.file_browser.file_browser, "File Browser" },
-        {"f", ext.frecency.frecency, "Frequent Files" },
-        {"l", builtin.buffers, "List Buffers" },
-        {"o", builtin.oldfiles, "Old Files" },
-        {"t", builtin.treesitter, "TreeSitter Symbols" },
-        {"ñ", project_files, "Project Files"}
+        { "e", ext.file_browser.file_browser, "File Browser" },
+        { "f", ext.frecency.frecency, "Frequent Files" },
+        { "l", builtin.buffers, "List Buffers" },
+        { "o", builtin.oldfiles, "Old Files" },
+        { "t", builtin.treesitter, "TreeSitter Symbols" },
+        { "ñ", project_files, "Project Files" }
       }
     },
     {
       prefix = "<leader>f",
       maps = {
-        {"b", builtin.builtin, "Telescope Builtin"},
-        {"ñ", require('telescope-tabs').list_tabs, "List Tabs"},
-        {"m", ext.media_files.media_files, "Media Files"},
-        {"g", function() builtin.grep_string(cwd_conf) end, "Find Grep"},
-        {"l", function() builtin.live_grep(cwd_conf) end, "Find Live Grep"},
-        {"h", builtin.search_history, "Search History"},
-        {"cc", builtin.colorscheme, "Select Colorscheme"},
-        {"cs", builtin.commands, "Search Commands"},
-        {"ch", builtin.command_history, "Search Commands History"},
-        {"k", builtin.keymaps, "Show All Keymaps"},
-        {"t", builtin.filetypes, "Select Filetype"},
-        {"f", builtin.current_buffer_fuzzy_find, "Buffer Fuzzy Find"},
-        {"r", builtin.lsp_references, "LSP References"},
-        {"s", builtin.lsp_document_symbols, "LSP Symbols"},
-        {"i", builtin.lsp_implementations, "LSP Implementations"},
-        {"d", builtin.diagnostics, "LSP diagnostics"},
+        { "b", builtin.builtin, "Telescope Builtin" },
+        { "ñ", require('telescope-tabs').list_tabs, "List Tabs" },
+        { "m", ext.media_files.media_files, "Media Files" },
+        { "g", function() builtin.grep_string(cwd_conf) end, "Find Grep" },
+        { "l", function() builtin.live_grep(cwd_conf) end, "Find Live Grep" },
+        { "h", builtin.search_history, "Search History" },
+        { "cc", builtin.colorscheme, "Select Colorscheme" },
+        { "cs", builtin.commands, "Search Commands" },
+        { "ch", builtin.command_history, "Search Commands History" },
+        { "k", builtin.keymaps, "Show All Keymaps" },
+        { "t", builtin.filetypes, "Select Filetype" },
+        { "f", builtin.current_buffer_fuzzy_find, "Buffer Fuzzy Find" },
+        { "r", builtin.lsp_references, "LSP References" },
+        { "s", builtin.lsp_document_symbols, "LSP Symbols" },
+        { "i", builtin.lsp_implementations, "LSP Implementations" },
+        { "d", builtin.diagnostics, "LSP diagnostics" },
       },
     },
     {
       prefix = "<leader>g",
       maps = {
-        {"c", builtin.git_bcommits, "Git Buffer commits"},
-        {"b", builtin.git_branches, "Git Branches"},
-        {"s", builtin.git_status, "Git Status"},
-        {"t", builtin.git_stash, "Git Stash"},
+        { "c", builtin.git_bcommits, "Git Buffer commits" },
+        { "b", builtin.git_branches, "Git Branches" },
+        { "s", builtin.git_status, "Git Status" },
+        { "t", builtin.git_stash, "Git Stash" },
       },
     },
   }

@@ -66,10 +66,10 @@ local maps = {
       { "w", ":bnext<CR>", "Buffer Next" },
       { "b", ":bprev<CR>", "Buffer Prev" },
       -- Move between splits
-      { "k", ":wincmd k<CR>", "Move Up" },
-      { "l", ":wincmd l<CR>", "Move Right" },
-      { "j", ":wincmd j<CR>", "Move Down" },
-      { "h", ":wincmd h<CR>", "Move Left" },
+      -- { "k", ":wincmd k<CR>", "Move Up" },
+      -- { "l", ":wincmd l<CR>", "Move Right" },
+      -- { "j", ":wincmd j<CR>", "Move Down" },
+      -- { "h", ":wincmd h<CR>", "Move Left" },
       --Delete search result
       { "c", ':let @/=""<cr>' }
     }
@@ -77,10 +77,10 @@ local maps = {
   {
     prefix = "ñ",
     maps = {
-      { "s", "/", vim.tbl_extend("force", { desc = "Search" }, opts) },
-      { "r", ":%s/", vim.tbl_extend("force", { desc = "Search and Replace" }, opts) },
-      { "cw", [[:%s/\<<C-r><C-w>\>/]], vim.tbl_extend("force", { desc = "Replace Word" }, opts) },
-      { "d", ":bd<CR>", "Buffer Delete" },
+      { "s", "/", "Search", opts },
+      { "r", ":%s/", "Search and Replace", opts },
+      { "cw", [[:%s/\<<C-r><C-w>\>/]], "Replace Word", opts },
+      -- { "d", ":bd<CR>", "Buffer Delete" },
     }
   },
 }
@@ -114,8 +114,8 @@ utils.map("n", "ç", "%")
 utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
 
 -- diffview.nvim
-utils.map("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "Diff Open" })
-utils.map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Diff Close" })
+utils.map("n", "ñdo", ":DiffviewOpen<CR>", { desc = "Diff Open" })
+utils.map("n", "ñdc", ":DiffviewClose<CR>", { desc = "Diff Close" })
 for i = 9, 1, -1 do
   utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i),
     { desc = string.format("Diff Open HEAD~%d<CR>", i) })

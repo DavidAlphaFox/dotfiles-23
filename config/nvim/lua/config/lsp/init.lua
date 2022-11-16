@@ -2,15 +2,15 @@ local coq = require "coq"
 
 
 local diagnostics_active = true
-
-local function toggle_diagnostics()
-  diagnostics_active = not diagnostics_active
-  if diagnostics_active then
-    vim.diagnostic.show()
-  else
-    vim.diagnostic.hide()
-  end
-end
+--
+-- local function toggle_diagnostics()
+--   diagnostics_active = not diagnostics_active
+--   if diagnostics_active then
+--     vim.diagnostic.show()
+--   else
+--     vim.diagnostic.hide()
+--   end
+-- end
 
 -- Use an on_attach function to only map the following keys
 local on_attach = function(client, bufnr)
@@ -24,20 +24,39 @@ local on_attach = function(client, bufnr)
     vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
   end
 
+  local utils = require "utils"
+
   -- Lsp keymaps
   local opts = { buffer = bufnr, silent = true }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", { desc = "Goto Declaration" }, opts))
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", { desc = "Goto Definition" }, opts))
-  vim.keymap.set("n", "gdt", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>",
-    vim.tbl_extend("force", { desc = "Goto Definition in new Tab" }, opts))
-  vim.keymap.set("n", "gh", vim.lsp.buf.hover, vim.tbl_extend("force", { desc = "LSP Hover" }, opts))
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", { desc = "Goto Implementation" }, opts))
-  vim.keymap.set("n", "<leader>aw", vim.lsp.buf.add_workspace_folder,
-    vim.tbl_extend("force", { desc = "LSP Add Folder" }, opts))
-  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition,
-    vim.tbl_extend("force", { desc = "LSP Type Definition" }, opts))
-  vim.keymap.set("n", "<leader>dt", toggle_diagnostics, vim.tbl_extend("force", { desc = "Toggle Diagnostic" }, opts))
 
+  local maps = {
+    {
+      prefix = "g",
+      maps = {
+        { "D", vim.lsp.buf.declaration, "Goto Declaration", opts },
+        { "d", vim.lsp.buf.definition, "Goto Definition", opts },
+        { "dt", "<cmd>tab split | lua vim.lsp.buf.definition()<C}>", "Goto Definition in new Tab", opts },
+        { "h", vim.lsp.buf.hover, "LSP Hover", opts },
+        { "i", vim.lsp.buf.implementation, "Goto Implementation", opts }
+
+      }
+    },
+    {
+      prefix = "<leader>",
+      maps = {
+        { "D", vim.lsp.buf.type_definition, "LSP Type Definition", opts },
+        { "aw", vim.lsp.buf.add_workspace_folder, "LSP Add Folder", opts },
+        { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
+      }
+    },
+    {
+      prefix = "ñ",
+      maps = {
+        { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
+      }
+    }
+  }
+  utils.maps(maps)
   require("config.lsp.highlighter").setup(client, bufnr)
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
