@@ -507,9 +507,16 @@ function M.setup()
     -- }
 
     use "neovim/nvim-lspconfig"
+    use {
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup()
+      end,
+    }
     use "folke/neodev.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "Decodetalkers/csharpls-extended-lsp.nvim"
+    use "Hoffs/omnisharp-extended-lsp.nvim"
 
     use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",

@@ -1,4 +1,4 @@
-ccls = {
+local ccls = {
   name = "ccls",
   cmd = { "ccls" }
 }

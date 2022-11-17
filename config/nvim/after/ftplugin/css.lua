@@ -1,4 +1,4 @@
-cssls = {
+local cssls = {
   name = "cssls",
   cmd = { "vscode-css-languageserver", "--stdio" },
 }

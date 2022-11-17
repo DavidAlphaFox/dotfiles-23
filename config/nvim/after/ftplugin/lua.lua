@@ -9,7 +9,7 @@ vim.bo.autoindent = true
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-sumneko_lua = {
+local sumneko_lua = {
   name = "sumneko_lua",
   cmd = { "lua-language-server" },
   settings = {

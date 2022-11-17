@@ -1,4 +1,4 @@
-tsserver = {
+local tsserver = {
   name = "tsserver",
   cmd = { "typescript-language-server", "--stdio" },
   init_options = { hostInfo = "neovim" },

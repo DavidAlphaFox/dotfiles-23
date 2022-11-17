@@ -14,7 +14,7 @@ local root_files = {
   "Pipfile",
   "pyrightconfig.json",
 }
-pyright = {
+local pyright = {
   name = "pyright",
   cmd = { "pyright-langserver", "--stdio" },
   root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
