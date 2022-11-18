@@ -5,7 +5,7 @@ function M.setup()
   rest.setup({
     result_split_horizontal = false,
     result_split_in_place = false,
-    skip_ssl_verification = false,
+    skip_ssl_verification = true,
     encode_url = true,
     highlight = {
       enabled = true,
@@ -18,7 +18,7 @@ function M.setup()
       formatters = {
         json = "jq",
         html = function(body)
-          return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+          return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
         end
       },
     },
@@ -27,6 +27,7 @@ function M.setup()
     custom_dynamic_variables = {},
     yank_dry_run = true,
   })
-  utils.map("n", ",r", rest.run, { desc = "Run Endpoint"})
+  utils.map("n", ",r", rest.run, { desc = "Run Endpoint" })
 end
+
 return M
