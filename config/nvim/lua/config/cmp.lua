@@ -1,3 +1,5 @@
+local M = {}
+vim.o.completeopt = "menu,menuone,noselect"
 local types = require "cmp.types"
 local compare = require "cmp.config.compare"
 local lspkind = require "lspkind"
@@ -15,7 +17,6 @@ local source_mapping = {
   -- cmp_tabnine = "[TNine]",
 }
 
-local M = {}
 M.setup = function()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
