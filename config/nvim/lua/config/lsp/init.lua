@@ -1,4 +1,4 @@
-local coq = require "coq"
+-- local coq = require "coq"
 
 
 local diagnostics_active = true
@@ -79,15 +79,17 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+local M = {}
+
+M.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- for nvim-cmp
+
 local opts = {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = M.capabilities,
   flags = {
     debounce_text_changes = 150,
   },
 }
-
-local M = {}
 
 -- Setup LSP handlers
 require("config.lsp.handlers").setup()
@@ -99,7 +101,7 @@ function M.setup(server)
   if server.name == "sumneko_lua" then
     config.before_init = require("neodev.lsp").before_init
   end
-  config = coq.lsp_ensure_capabilities(config)
+  -- config = coq.lsp_ensure_capabilities(config)
   vim.lsp.start(config) -- vim.api.nvim_create_autocmd('FileType', {
 end
 
