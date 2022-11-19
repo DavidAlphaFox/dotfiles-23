@@ -8,16 +8,15 @@ local b = nls.builtins
 --     diagnostics_format = "#{m} [#{c}]",
 --   }
 -- end
-
 -- local refurb = require "config.lsp.null-ls.diagnostics.refurb"
 
-local with_root_file = function(builtin, file)
-  return builtin.with {
-    condition = function(utils)
-      return utils.root_has_file(file)
-    end,
-  }
-end
+-- local with_root_file = function(builtin, file)
+--   return builtin.with {
+--     condition = function(utils)
+--       return utils.root_has_file(file)
+--     end,
+--   }
+-- end
 
 local sources = {
   -- formatting
@@ -27,7 +26,7 @@ local sources = {
   b.formatting.fixjson,
   b.formatting.black.with { extra_args = { "--fast" } },
   b.formatting.isort,
-  -- b.formatting.stylua,
+  b.formatting.stylua,
   -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
@@ -38,6 +37,7 @@ local sources = {
   -- b.diagnostics.selene,
   -- b.diagnostics.codespell,
   -- with_root_file(b.diagnostics.selene, "selene.toml"),
+  -- with_diagnostics_code(b.diagnostics.shellcheck),
   b.diagnostics.zsh,
   -- refurb,
   -- b.diagnostics.cspell.with {

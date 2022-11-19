@@ -61,6 +61,7 @@ function M.setup()
     --
 
     use { "lewis6991/impatient.nvim" }
+    use "miversen33/import.nvim"
 
     --
     -- End Performance
@@ -491,7 +492,7 @@ function M.setup()
         { "ms-jpq/coq.artifacts", branch = "artifacts" },
         { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
-      disable = true
+      disable = vim.g.cmp_enable
     }
 
     use {
@@ -527,6 +528,7 @@ function M.setup()
         "honza/vim-snippets",
         { "tzachar/cmp-tabnine", run = "./install.sh", disable = true },
       },
+      disable = not vim.g.cmp_enable
     }
 
     -- use {

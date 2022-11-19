@@ -41,4 +41,5 @@ end
 --
 -- Init Packer Plugins
 --
+vim.g.cmp_enable = true
 require("plugins").setup()

@@ -1,6 +1,4 @@
--- local coq = require "coq"
-
-
+require "import"
 local diagnostics_active = true
 --
 -- local function toggle_diagnostics()
@@ -16,50 +14,28 @@ local diagnostics_active = true
 local on_attach = function(client, bufnr)
   local caps = client.server_capabilities
 
+  -- Enable completion triggered by <C-X><C-O>
+  -- See `:help omnifunc` and `:help ins-completion` for more information.
   if caps.completionProvider then
     vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
   end
 
+  -- Use LSP as the handler for formatexpr.
+  -- See `:help formatexpr` for more information.
   if caps.documentFormattingProvider then
     vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr()"
   end
 
-  local utils = require "utils"
+  -- Configure key mappings
+  require("config.lsp.keymaps").setup(client, bufnr)
 
-  -- Lsp keymaps
-  local opts = { buffer = bufnr, silent = true }
-
-  local maps = {
-    {
-      prefix = "g",
-      maps = {
-        { "D", vim.lsp.buf.declaration, "Goto Declaration", opts },
-        { "d", vim.lsp.buf.definition, "Goto Definition", opts },
-        { "dt", "<cmd>tab split | lua vim.lsp.buf.definition()<C}>", "Goto Definition in new Tab", opts },
-        { "h", vim.lsp.buf.hover, "LSP Hover", opts },
-        { "i", vim.lsp.buf.implementation, "Goto Implementation", opts }
-
-      }
-    },
-    {
-      prefix = "<leader>",
-      maps = {
-        { "D", vim.lsp.buf.type_definition, "LSP Type Definition", opts },
-        { "aw", vim.lsp.buf.add_workspace_folder, "LSP Add Folder", opts },
-        { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
-      }
-    },
-    {
-      prefix = "ñ",
-      maps = {
-        { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
-      }
-    }
-  }
-  utils.maps(maps)
+  -- Configure highlighting
   require("config.lsp.highlighter").setup(client, bufnr)
+
+  -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
+  -- tagfunc
   if caps.definitionProvider then
     vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
   end
@@ -73,23 +49,27 @@ capabilities.textDocument.foldingRange = {
 }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits'
-  }
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
 
 local M = {}
 
-M.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- for nvim-cmp
-
 local opts = {
   on_attach = on_attach,
-  capabilities = M.capabilities,
   flags = {
     debounce_text_changes = 150,
   },
 }
+if vim.g.cmp_enable then
+  import("cmp_nvim_lsp", function(cmp_nvim_lsp)
+    opts.capabilities = cmp_nvim_lsp.default_capabilities(capabilities) -- for nvim-cmp
+  end)
+else
+  opts.capabilities = capabilities
+end
 
 -- Setup LSP handlers
 require("config.lsp.handlers").setup()
@@ -101,7 +81,11 @@ function M.setup(server)
   if server.name == "sumneko_lua" then
     config.before_init = require("neodev.lsp").before_init
   end
-  -- config = coq.lsp_ensure_capabilities(config)
+  if vim.cmp_enable == false then
+    import("coq", function(coq)
+      config = coq.lsp_ensure_capabilities(config)
+    end)
+  end
   vim.lsp.start(config) -- vim.api.nvim_create_autocmd('FileType', {
 end
 
