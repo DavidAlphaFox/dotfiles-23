@@ -71,26 +71,25 @@ M.setup = function()
       },
     },
     formatting = {
-      format = lspkind.cmp_format {
-        mode = "symbol_text",
-        maxwidth = 40,
-        before = function(entry, vim_item)
-          vim_item.kind = lspkind.presets.default[vim_item.kind]
-          local source = entry.source.name
-          local menu = source_mapping[source]
-          -- if entry.source.name == "cmp_tabnine" then
-          --   if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          --     menu = entry.completion_item.data.detail .. " " .. menu
-          --   end
-          --   vim_item.kind = ""
-          -- end
-          if source == "nvim_lsp" then
-            vim_item.dup = 0
-          end
-          vim_item.menu = menu
-          return vim_item
-        end,
-      },
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+        local kind = require("lspkind").cmp_format { mode = "symbol_text", maxwidth = 40 }(entry, vim_item)
+        local source = entry.source.name
+        local menu = source_mapping[source]
+        local strings = vim.split(kind.kind, "%s", { trimempty = true })
+        kind.kind = " " .. strings[1] .. " "
+        kind.menu = menu
+        -- if entry.source.name == "cmp_tabnine" then
+        --   if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+        --     menu = entry.completion_item.data.detail .. " " .. menu
+        --   end
+        --   vim_item.kind = ""
+        -- end
+        if source == "nvim_lsp" then
+          kind.dup = 0
+        end
+        return kind
+      end,
     },
     mapping = {
       ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
@@ -121,21 +120,43 @@ M.setup = function()
         end
       end, { "i", "s" }),
 
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        local col = vim.fn.col "." - 1
+      -- ["<Tab>"] = cmp.mapping(function(fallback)
+      --   local col = vim.fn.col "." - 1
+      --
+      --   if cmp.visible() then
+      --     cmp.select_next_item(select_opts)
+      --   elseif col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
+      --     fallback()
+      --   else
+      --     cmp.complete()
+      --   end
+      -- end, { "i", "s" }),
 
+      ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item(select_opts)
-        elseif col == 0 or vim.fn.getline("."):sub(col, col):match "%s" then
-          fallback()
-        else
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
           cmp.complete()
+        else
+          fallback()
         end
       end, { "i", "s" }),
+
+      -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.select_prev_item(select_opts)
+      --   else
+      --     fallback()
+      --   end
+      -- end, { "i", "s" }),
 
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item(select_opts)
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
         else
           fallback()
         end
