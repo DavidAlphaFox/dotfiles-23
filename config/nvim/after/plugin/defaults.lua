@@ -6,7 +6,7 @@ set.scrolloff = 999 -- Lines of context
 set.sidescrolloff = 999
 set.mouse = "a"
 -- clipboard
-set.clipboard:append("unnamedplus")
+set.clipboard:append "unnamedplus"
 set.splitright = true
 set.splitbelow = true
 set.icm = "nosplit"
@@ -15,6 +15,7 @@ set.virtualedit = "block"
 set.undofile = false
 set.undolevels = 1000
 set.backspace = { "indent", "eol", "start", "nostop" } -- Better backspace.
+-- sow preview command
 set.inccommand = "split"
 set.matchtime = 2
 set.updatetime = 250
@@ -31,8 +32,21 @@ set.encoding = "utf-8"
 set.fileformat = "unix"
 set.formatoptions = "tcqrn1"
 set.errorformat:append "%f|%l col %c|%m"
-set.wildignore:append { ".git/**", "*.pyc", "*.pyc", "*.pyo", "*/__pycache__/*", "*.beam", "*.swp,~*", "*.zip", "*.tar",
-  "*.DS_Store,**/", "node_modules/**", "**/bower_modules/**", "**/node_modules/**" }
+set.wildignore:append {
+  ".git/**",
+  "*.pyc",
+  "*.pyc",
+  "*.pyo",
+  "*/__pycache__/*",
+  "*.beam",
+  "*.swp,~*",
+  "*.zip",
+  "*.tar",
+  "*.DS_Store,**/",
+  "node_modules/**",
+  "**/bower_modules/**",
+  "**/node_modules/**",
+}
 
 -- Better search
 set.path:remove "/usr/include"
@@ -93,7 +107,7 @@ set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
 vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
-vim.wo.foldcolumn = 'auto:1'
+vim.wo.foldcolumn = "auto:1"
 -- set.foldnestmax = 0
 vim.wo.foldlevel = 99
 set.foldlevelstart = -1

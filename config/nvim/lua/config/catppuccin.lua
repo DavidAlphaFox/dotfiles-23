@@ -8,9 +8,9 @@ local function SetStyle()
   utils.fg_bg("TelescopePromptPrefix", colors.sapphire, "NONE")
   utils.fg("TelescopePromptCounter", "white")
 
-  utils.fg_bg("TelescopePromptTitle", "black", colors.mauve)
-  utils.fg_bg("TelescopePreviewTitle", "black", colors.teal)
-  utils.fg_bg("TelescopeResultsTitle", "black", colors.maroon)
+  utils.fg_bg("TelescopePromptTitle", colors.base, colors.red)
+  utils.fg_bg("TelescopePreviewTitle", colors.base, colors.teal)
+  utils.fg_bg("TelescopeResultsTitle", colors.base, colors.peach)
 
   -- utils.bg("TelescopeResults", "NONE")
   -- utils.bg("TelescopeNormal", "NONE")
@@ -24,15 +24,19 @@ local function SetStyle()
   if vim.g.cmp_enable then
     utils.fg_bg("CmpItemKindClass", colors.base, colors.green)
     utils.fg_bg("CmpItemKindInterface", colors.base, colors.teal)
+    utils.fg_bg("CmpItemKindConstructor", colors.base, colors.sky)
     utils.fg_bg("CmpItemKindMethod", colors.base, colors.sapphire)
     utils.fg_bg("CmpItemKindFunction", colors.base, colors.red)
     utils.fg_bg("CmpItemKindVariable", colors.base, colors.peach)
     utils.fg_bg("CmpItemKindProperty", colors.base, colors.yellow)
     utils.fg_bg("CmpItemKindKeyword", colors.base, colors.blue)
+    utils.fg_bg("CmpItemKindField", colors.base, colors.rosewater)
     utils.fg_bg("CmpItemKindText", colors.base, colors.mauve)
     utils.fg_bg("CmpItemKindUnit", colors.base, colors.lavender)
-    --     " blue
-    -- highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+    utils.fg_bg("CmpItemKindValue", colors.base, colors.pink)
+    utils.fg_bg("CmpItemKindSnippet", colors.base, colors.maroon)
+    utils.fg_bg("CmpItemKindFile", colors.base, colors.flamingo)
+    utils.fg_bg("CmpItemKindFolder", colors.base, colors.subtext0)
   end
 end
 
@@ -91,7 +95,7 @@ function M.setup()
         enable_ui = true,
       },
       lsp_trouble = true,
-      fidget = false,
+      fidget = true,
       harpoon = true,
       which_key = true,
       vimwiki = true,

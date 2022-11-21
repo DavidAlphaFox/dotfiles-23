@@ -1,4 +1,8 @@
-local M = {}
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+end
+
 vim.o.completeopt = "menu,menuone,noselect"
 local types = require "cmp.types"
 local compare = require "cmp.config.compare"
@@ -16,6 +20,8 @@ local source_mapping = {
   nvim_lsp_signature_help = "[Sig]",
   -- cmp_tabnine = "[TNine]",
 }
+
+local M = {}
 
 M.setup = function()
   local cmp = require "cmp"
@@ -79,11 +85,11 @@ M.setup = function()
         local strings = vim.split(kind.kind, "%s", { trimempty = true })
         kind.kind = " " .. strings[1] .. " "
         kind.menu = menu
-        -- if entry.source.name == "cmp_tabnine" then
+        -- if source == "cmp_tabnine" then
         --   if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
         --     menu = entry.completion_item.data.detail .. " " .. menu
         --   end
-        --   vim_item.kind = ""
+        --   kind.kind = ""
         -- end
         if source == "nvim_lsp" then
           kind.dup = 0
@@ -166,6 +172,7 @@ M.setup = function()
 
   -- Use buffer source for `/`
   cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
     },
@@ -173,6 +180,7 @@ M.setup = function()
 
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
     }, {

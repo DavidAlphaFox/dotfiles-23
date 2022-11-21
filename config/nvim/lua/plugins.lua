@@ -84,7 +84,7 @@ function M.setup()
         "yioneko/nvim-yati",
         "p00f/nvim-ts-rainbow",
         "windwp/nvim-ts-autotag",
-        'David-Kunz/markid'
+        "David-Kunz/markid",
       },
     }
 
@@ -97,9 +97,9 @@ function M.setup()
     --
 
     use {
-      'rcarriga/nvim-notify',
+      "rcarriga/nvim-notify",
       config = function()
-        vim.notify = require("notify")
+        vim.notify = require "notify"
       end,
       -- disable = true
     }
@@ -114,27 +114,27 @@ function M.setup()
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
-      disable = true
+      disable = true,
     }
 
     -- Mini plugins
     use {
-      'echasnovski/mini.indentscope',
+      "echasnovski/mini.indentscope",
       config = function()
         require("mini.indentscope").setup()
-      end
+      end,
     }
 
     use {
-      'echasnovski/mini.tabline',
+      "echasnovski/mini.tabline",
       config = function()
         require("mini.tabline").setup()
-      end
+      end,
     }
 
     -- Themes
 
-    use 'kvrohit/mellow.nvim'
+    use "kvrohit/mellow.nvim"
 
     use {
       "catppuccin/nvim",
@@ -143,7 +143,7 @@ function M.setup()
       -- run = ":CatppuccinCompile",
       config = function()
         require("config.catppuccin").setup()
-      end
+      end,
     }
 
     -- Icons
@@ -152,12 +152,14 @@ function M.setup()
       config = function()
         require("config.icons").setup()
       end,
-      requires = { {
-        'DaikyXendo/nvim-material-icon',
-        config = function()
-          require 'nvim-material-icon'.setup()
-        end,
-      } }
+      requires = {
+        {
+          "DaikyXendo/nvim-material-icon",
+          config = function()
+            require("nvim-material-icon").setup()
+          end,
+        },
+      },
     }
     -- use {
     --   'yamatsum/nvim-nonicons',
@@ -171,25 +173,25 @@ function M.setup()
       config = function()
         require("config.lualine").setup()
       end,
-      disable = true
+      disable = true,
     }
 
     use {
-      'feline-nvim/feline.nvim',
+      "feline-nvim/feline.nvim",
       after = { "catppuccin" },
       config = function()
         require("config.feline").setup()
-      end
+      end,
     }
 
     use {
-      'jinh0/eyeliner.nvim',
+      "jinh0/eyeliner.nvim",
       config = function()
-        require('eyeliner').setup {
+        require("eyeliner").setup {
           bold = true, -- Default: false
-          underline = true -- Default: false
+          underline = true, -- Default: false
         }
-      end
+      end,
     }
 
     -- Highlight Color
@@ -197,17 +199,17 @@ function M.setup()
       "brenoprata10/nvim-highlight-colors",
       config = function()
         require("nvim-highlight-colors").setup {
-          render = 'background', -- or 'foreground' or 'first_column'
-          enable_tailwind = false
+          render = "background", -- or 'foreground' or 'first_column'
+          enable_tailwind = false,
         }
       end,
     }
 
     use {
-      'chentoast/marks.nvim',
+      "chentoast/marks.nvim",
       config = function()
-        require 'marks'.setup()
-      end
+        require("marks").setup()
+      end,
     }
 
     use "jeffkreeftmeijer/vim-numbertoggle"
@@ -226,15 +228,15 @@ function M.setup()
     }
 
     use {
-      'kevinhwang91/nvim-ufo',
-      requires = 'kevinhwang91/promise-async',
+      "kevinhwang91/nvim-ufo",
+      requires = "kevinhwang91/promise-async",
       config = function()
-        require('ufo').setup({
+        require("ufo").setup {
           provider_selector = function(bufnr, filetype, buftype)
-            return { 'treesitter', 'indent' }
-          end
-        })
-      end
+            return { "treesitter", "indent" }
+          end,
+        }
+      end,
     }
 
     --
@@ -257,12 +259,11 @@ function M.setup()
     }
 
     use {
-      'sindrets/diffview.nvim',
-      requires = 'nvim-lua/plenary.nvim',
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("diffview").setup()
-      end
-
+      end,
     }
 
     --
@@ -303,11 +304,11 @@ function M.setup()
     }
 
     use {
-      'LukasPietzschmann/telescope-tabs',
-      requires = { 'nvim-telescope/telescope.nvim' },
+      "LukasPietzschmann/telescope-tabs",
+      requires = { "nvim-telescope/telescope.nvim" },
       config = function()
-        require 'telescope-tabs'.setup {}
-      end
+        require("telescope-tabs").setup {}
+      end,
     }
 
     use {
@@ -335,7 +336,7 @@ function M.setup()
       "windwp/nvim-autopairs",
       config = function()
         require("config.autopairs").setup()
-      end
+      end,
     }
 
     use { "wellle/targets.vim", event = "CursorMoved" }
@@ -351,7 +352,7 @@ function M.setup()
       event = "CursorMoved",
       config = function()
         require("nvim-surround").setup()
-      end
+      end,
     }
 
     -- Tim Pope docet
@@ -372,7 +373,7 @@ function M.setup()
       config = function()
         -- require("which-key").setup { window = { position = "top" } }
         require("which-key").setup {}
-      end
+      end,
     }
 
     use {
@@ -385,9 +386,9 @@ function M.setup()
     use "gpanders/editorconfig.nvim"
 
     use {
-      'CRAG666/betterTerm.nvim',
+      "CRAG666/betterTerm.nvim",
       config = function()
-        require('config.betterTerm').setup()
+        require("config.betterTerm").setup()
       end,
     }
 
@@ -406,22 +407,22 @@ function M.setup()
       requires = { "nvim-lua/plenary.nvim" },
       config = function()
         require("config.rest").setup()
-      end
+      end,
     }
 
     use {
       "ThePrimeagen/harpoon",
       config = function()
         require("config.harpoon").setup()
-      end
+      end,
     }
 
     use {
-      'numToStr/Comment.nvim',
+      "numToStr/Comment.nvim",
       event = "CursorMoved",
       config = function()
         require("config.comment").setup()
-      end
+      end,
     }
 
     use {
@@ -442,10 +443,10 @@ function M.setup()
     }
 
     use {
-      'gen740/SmoothCursor.nvim',
+      "gen740/SmoothCursor.nvim",
       config = function()
-        require('smoothcursor').setup({ fancy = { enable = true } })
-      end
+        require("smoothcursor").setup { fancy = { enable = true } }
+      end,
     }
 
     -- Refactoring
@@ -492,7 +493,7 @@ function M.setup()
         { "ms-jpq/coq.artifacts", branch = "artifacts" },
         { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
       },
-      disable = vim.g.cmp_enable
+      disable = vim.g.cmp_enable,
     }
 
     use {
@@ -528,7 +529,7 @@ function M.setup()
         "honza/vim-snippets",
         { "tzachar/cmp-tabnine", run = "./install.sh", disable = true },
       },
-      disable = not vim.g.cmp_enable
+      disable = not vim.g.cmp_enable,
     }
 
     -- use {
@@ -556,16 +557,16 @@ function M.setup()
     use "Decodetalkers/csharpls-extended-lsp.nvim"
     use "Hoffs/omnisharp-extended-lsp.nvim"
 
-    use({
+    use {
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function()
         require("lsp_lines").setup()
       end,
-    })
+    }
 
     use {
       "glepnir/lspsaga.nvim",
-      branch = 'main',
+      branch = "main",
       config = function()
         require("config.lsp.saga").setup()
       end,
@@ -621,7 +622,7 @@ function M.setup()
     use {
       "elixir-editors/vim-elixir",
       ft = { "elixir" },
-      disable = true
+      disable = true,
     }
 
     --
