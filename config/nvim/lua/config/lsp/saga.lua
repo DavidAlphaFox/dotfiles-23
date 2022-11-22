@@ -1,30 +1,50 @@
-local utils = require 'utils'
+local utils = require "utils"
 local M = {}
 
 function M.setup()
-  local saga = require 'lspsaga'
-  saga.init_lsp_saga({
+  local saga = require "lspsaga"
+  saga.init_lsp_saga {
+    symbol_in_winbar = {
+      in_custom = true,
+    },
     code_action_lightbulb = { sign = false },
     finder_action_keys = {
-      open = 'o', vsplit = 'v', split = 's', quit = 'q', scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+      vsplit = "v",
+      split = "s",
     },
-    rename_action_quit = 'q',
-  })
+  }
 
   -- lspsaga
-  utils.map('n', ',f', ':Lspsaga lsp_finder<CR>')
-  utils.map('n', '<C-.>', ':Lspsaga code_action<CR>')
-  -- vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
-  -- show hover doc
-  utils.map('n', ',h', require("lspsaga.hover").render_hover_doc)
-  -- -- Rename
-  utils.map('n', 'gr', ':Lspsaga rename<CR>')
-  -- -- preview definition
-  utils.map('n', 'gp', ':Lspsaga peek_definition<CR>')
-  -- -- navegate between errors
-  utils.map('n', '<leader>dk', function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Prev Error"})
-  utils.map('n', '<leader>dj', function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { desc = "Next Error"})
-  utils.map("n","<leader>o", "<cmd>LSoutlineToggle<CR>")
+  utils.map("n", ",f", ":Lspsaga lsp_finder<CR>")
+
+  -- Code action
+  utils.map({ "n", "v" }, "<C-.>", ":Lspsaga code_action<CR>")
+
+  -- Rename
+  utils.map("n", "gr", ":Lspsaga rename<CR>")
+
+  -- Peek definition
+  utils.map("n", "gp", ":Lspsaga peek_definition<CR>")
+
+  -- navegate between errors
+  utils.map("n", "ñdk", function()
+    require("lspsaga.diagnostic").goto_prev { severity = vim.diagnostic.severity.ERROR }
+  end, { desc = "Prev Error" })
+  utils.map("n", "ñdj", function()
+    require("lspsaga.diagnostic").goto_next { severity = vim.diagnostic.severity.ERROR }
+  end, { desc = "Next Error" })
+
+  -- Outline
+  utils.map("n", "<leader>o", "<cmd>LSoutlineToggle<CR>")
+
+  -- Show line diagnostics
+  utils.map("n", "ñdl", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
+
+  -- Show cursor diagnostic
+  utils.map("n", "ñds", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
+
+  -- Hover Doc
+  utils.map("n", "gh", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 end
 
 return M

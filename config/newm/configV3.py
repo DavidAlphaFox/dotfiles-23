@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 import os
 
-# from newm.helper import BacklightManager, PaCtl, WobRunner
 from newm.helper import BacklightManager
 from newm.layout import Layout
 
@@ -25,15 +24,6 @@ def set_value(keyval, file):
 
 
 def on_startup():
-    # "hash dbus-update-activation-environment 2>/dev/null && \
-    # "dbus-update-activation-environment --systemd \
-    # DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-    # "systemctl --user import-environment \
-    #     DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-    # "/home/crag/Git/dotfiles/etc/dnscrypt-proxy/get_blocklist",
-    # "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots",
-    # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
-
     INIT_SERVICE = (
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY"
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
@@ -185,21 +175,6 @@ swipe_zoom = {
 anim_time = 0.25
 blend_time = 0.5
 
-# wob_option = {
-#     "border": 2,
-#     "anchor": "top",
-#     "margin": 100,
-#     "border-color": "#94E2D5FF",
-#     "background-color": "#1E1E2EFF",
-#     "bar-color": "#A6E3A1FF",
-#     "overflow-border-color": "#EBA0ACFF",
-#     "overflow-background-color": "#1E1E2EFF",
-#     "overflow-bar-color": "#F38BA8FF",
-# }
-# wob_args = " ".join((f"--{k} {v}" for (k, v) in wob_option.items()))
-# wob_runner = WobRunner(f"wob {wob_args}")
-
-# backlight_manager = BacklightManager(anim_time=1.0, bar_display=wob_runner)
 backlight_manager = BacklightManager(anim_time=1.0)
 # # Config for keyboard light
 # kbdlight_manager = BacklightManager(
@@ -212,7 +187,6 @@ def synchronous_update() -> None:
     backlight_manager.update()
 
 
-# pactl = PaCtl(0, wob_runner)
 term = "kitty"
 
 
@@ -312,14 +286,6 @@ def key_bindings(layout: Layout):
         ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
         ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
         ("XF86AudioMicMute", lambda: os.system("volumectl -m toggle-mute &")),
-        # (
-        #     "XF86MonBrightnessUp",
-        #     lambda: backlight_manager.set(backlight_manager.get() + 0.03),
-        # ),
-        # (
-        #     "XF86MonBrightnessDown",
-        #     lambda: backlight_manager.set(backlight_manager.get() - 0.03),
-        # ),
         (
             "XF86MonBrightnessUp",
             lambda: os.system("lightctl up &"),
@@ -334,13 +300,9 @@ def key_bindings(layout: Layout):
         # (
         # "XF86KbdBrightnessDown",
         # lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
-        # ("XF86AudioRaiseVolume", lambda: pactl.volume_adj(5)),
         ("XF86AudioRaiseVolume", lambda: os.system("volumectl -u up &")),
-        # ("XF86AudioLowerVolume", lambda: pactl.volume_adj(-5)),
         ("XF86AudioLowerVolume", lambda: os.system("volumectl -u down &")),
-        # ("XF86AudioMute", pactl.mute),
         ("XF86AudioMute", lambda: os.system("volumectl toggle-mute &")),
-        # ("XF86Display", lambda: os.system("toggle_wcam uvcvideo &")),
         (
             "XF86Tools",
             lambda: os.system("kitty nvim ~/.config/newm/config.py &"),

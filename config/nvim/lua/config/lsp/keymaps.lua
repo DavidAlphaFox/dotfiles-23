@@ -13,10 +13,9 @@ function M.setup(client, bufnr)
         { "D", vim.lsp.buf.declaration, "Goto Declaration", opts },
         { "d", vim.lsp.buf.definition, "Goto Definition", opts },
         { "dt", "<cmd>tab split | lua vim.lsp.buf.definition()<C}>", "Goto Definition in new Tab", opts },
-        { "h", vim.lsp.buf.hover, "LSP Hover", opts },
-        { "i", vim.lsp.buf.implementation, "Goto Implementation", opts }
-
-      }
+        -- { "h", vim.lsp.buf.hover, "LSP Hover", opts },
+        { "i", vim.lsp.buf.implementation, "Goto Implementation", opts },
+      },
     },
     {
       prefix = "<leader>",
@@ -24,14 +23,14 @@ function M.setup(client, bufnr)
         { "D", vim.lsp.buf.type_definition, "LSP Type Definition", opts },
         { "aw", vim.lsp.buf.add_workspace_folder, "LSP Add Folder", opts },
         { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
-      }
+      },
     },
     {
       prefix = "ñ",
       maps = {
         { "dt", require("lsp_lines").toggle, "Toggle Diagnostic", opts },
-      }
-    }
+      },
+    },
   }
   utils.maps(maps)
 end

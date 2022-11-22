@@ -45,8 +45,12 @@ for i = 9, 1, -1 do
   local kmap = string.format("<leader>%d", i)
   local command = string.format("%dgt", i)
   utils.map("n", kmap, command, { desc = string.format("Jump Tab %d", i) })
-  utils.map("n", string.format("tt%d", i), string.format(":tabmove %d<CR>", i == 1 and 0 or i),
-    { desc = string.format("Tab Move to %d", i) })
+  utils.map(
+    "n",
+    string.format("tt%d", i),
+    string.format(":tabmove %d<CR>", i == 1 and 0 or i),
+    { desc = string.format("Tab Move to %d", i) }
+  )
 end
 local maps = {
   {
@@ -57,8 +61,8 @@ local maps = {
       { "o", ":tabonly<CR>", "Tab Only" },
       { "d", ":tabclose<CR>", "Tab Close" },
       { "l", ":tabmove +1<CR>", "Tab Move Right" },
-      { "h", ":tabmove -1<CR>", "Tab Move Left" }
-    }
+      { "h", ":tabmove -1<CR>", "Tab Move Left" },
+    },
   },
   {
     prefix = "<leader>",
@@ -71,8 +75,8 @@ local maps = {
       -- { "j", ":wincmd j<CR>", "Move Down" },
       -- { "h", ":wincmd h<CR>", "Move Left" },
       --Delete search result
-      { "c", ':let @/=""<cr>' }
-    }
+      { "c", ':let @/=""<cr>' },
+    },
   },
   {
     prefix = "ñ",
@@ -81,11 +85,10 @@ local maps = {
       { "r", ":%s/", "Search and Replace", opts },
       { "cw", [[:%s/\<<C-r><C-w>\>/]], "Replace Word", opts },
       -- { "d", ":bd<CR>", "Buffer Delete" },
-    }
+    },
   },
 }
 utils.maps(maps)
-
 
 -- Resize pane
 utils.map("n", "<A-Left>", ":vertical resize +5<CR>")
@@ -117,7 +120,11 @@ utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
 utils.map("n", "ñdo", ":DiffviewOpen<CR>", { desc = "Diff Open" })
 utils.map("n", "ñdc", ":DiffviewClose<CR>", { desc = "Diff Close" })
 for i = 9, 1, -1 do
-  utils.map("n", string.format("<leader>d%d", i), string.format(":DiffviewOpen HEAD~%d<CR>", i),
-    { desc = string.format("Diff Open HEAD~%d<CR>", i) })
+  utils.map(
+    "n",
+    string.format("<leader>d%d", i),
+    string.format(":DiffviewOpen HEAD~%d<CR>", i),
+    { desc = string.format("Diff Open HEAD~%d<CR>", i) }
+  )
 end
 -- utils.map("n", "<leader>e", require("code_runner.commands").run_code, opts)
