@@ -72,7 +72,11 @@ function M.setup()
       },
     },
     indent = { enable = false },
-    yati = { enable = true },
+    yati = {
+      enable = true,
+      default_lazy = false,
+      default_fallback = "auto",
+    },
     matchup = {
       enable = true,
     },
