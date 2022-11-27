@@ -1,4 +1,4 @@
-export PATH := ${HOME}/.cargo/bin:/bin:/usr/local/bin:/usr/local/sbin
+export PATH := ${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin
 export GOPATH := ${HOME}
 
 
