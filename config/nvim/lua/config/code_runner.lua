@@ -17,12 +17,15 @@ function M.setup()
       python = "python -u",
       sh = "bash",
       typescript = "deno run",
+      typescriptreact = function(...)
+        return 'echo "$fileName" && yarn dev'
+      end,
       rust = "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
       dart = "dart",
-      cs = function (...)
-        local root_dir = require'lspconfig'.util.root_pattern('*.csproj')(vim.loop.cwd())
+      cs = function(...)
+        local root_dir = require("lspconfig").util.root_pattern "*.csproj" (vim.loop.cwd())
         return "cd " .. root_dir .. " && dotnet run"
-      end
+      end,
     },
     project_path = vim.fn.expand "~/.config/nvim/project_manager.json",
   }

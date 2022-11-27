@@ -25,12 +25,12 @@ def set_value(keyval, file):
 
 def on_startup():
     INIT_SERVICE = (
-        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+        "dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "wlsunset -l 16.0867 -L -93.7561 -t 2500 -T 6000",
         "nm-applet --indicator",
         "fnott",
-        # "powerprofilesctl set performance",
         os.path.expanduser("~/.scripts/battery-status.sh"),
         "wl-paste --watch cliphist store",
         "avizo-service",

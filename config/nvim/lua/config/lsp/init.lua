@@ -86,7 +86,8 @@ function M.setup(server)
       config = coq.lsp_ensure_capabilities(config)
     end)
   end
-  vim.lsp.start(config) -- vim.api.nvim_create_autocmd('FileType', {
+  vim.lsp.start(config)
+  -- vim.api.nvim_create_autocmd('FileType', {
 end
 
 function M.remove_unused_imports()

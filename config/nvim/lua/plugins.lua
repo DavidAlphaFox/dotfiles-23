@@ -96,25 +96,47 @@ function M.setup()
     -- Appearance
     --
 
-    use {
-      "rcarriga/nvim-notify",
-      config = function()
-        vim.notify = require "notify"
-      end,
-      -- disable = true
-    }
+    -- use {
+    --   "rcarriga/nvim-notify",
+    --   config = function()
+    --     vim.notify = require "notify"
+    --   end,
+    -- disable = true
+    -- }
 
     use {
       "folke/noice.nvim",
+      after = { "nvim-cmp" },
       config = function()
-        require("noice").setup()
+        require("noice").setup {
+          popupmenu = {
+            enabled = true,
+            backend = "cmp",
+          },
+          lsp = {
+            -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
+            },
+          },
+          -- you can enable a preset for easier configuration
+          presets = {
+            bottom_search = false, -- use a classic bottom cmdline for search
+            command_palette = true, -- position the cmdline and popupmenu together
+            long_message_to_split = true, -- long messages will be sent to a split
+            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = false, -- add a border to hover docs and signature help
+          },
+        }
       end,
       requires = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
-      disable = true,
+      -- disable = true,
     }
 
     -- Mini plugins
@@ -557,12 +579,12 @@ function M.setup()
     use "Decodetalkers/csharpls-extended-lsp.nvim"
     use "Hoffs/omnisharp-extended-lsp.nvim"
 
-    use {
+    use({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function()
         require("lsp_lines").setup()
       end,
-    }
+    })
 
     use {
       "glepnir/lspsaga.nvim",
