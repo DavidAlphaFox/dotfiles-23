@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-cat "$HOME"/Git/dotfiles/wayland/electron-flags.conf | xargs -0 -i echo {} "$2" | xargs "$1"

@@ -10,39 +10,37 @@ help:
 	| sort \
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-yay: ## Install yay
-	sudo pacman -S --needed --noconfirm yay
-
 install: ## Install arch linux packages using yay
+	sudo pacman -S --needed --noconfirm yay
 	cat ${PWD}/pkglist.txt | xargs -L 1 yay -S --needed --noconfirm
 
 cli-tools: ## Add cli tools to local bin
 	ln -vsf ${PWD}/commands/* ${HOME}/.local/bin/
 
 init: ## Initial deploy dotfiles
-	for item in zshrc zshfunc zimrc myclirc tmux.conf gtkrc-2.0 noderc pyrc tridactylrc; do
+	for item in kitty mpv nvim ranger rofi starship.toml zathura; do
+		test -L ${HOME}/.config/$$item || rm -rf ${HOME}/.config/$$item
+		ln -vsf {${PWD}/config,${HOME}/.config}/$$item
+	done
+	chsh -s $(which zsh)
+	for item in gitconfig gtkrc-2 myclirc noderc profile pyrc tmux.conf tridactylrc Xresources zimrc zshrc zshfunc scripts; do
 		ln -vsf {${PWD},${HOME}}/.$$item
 	done
-	# ln -vsf ${PWD}/config/* ${HOME}/.config/
 
-wayland:
-	sudo ln -vsf ${PWD}/$@/* /usr/local/bin/
-	ln -vsf ${PWD}/etc/greetd /etc/
+newm: ## config for newm(wayland)
+	sudo cp ${PWD}/wayland/scripts/* /usr/local/bin/
 	yay -S --needed --noconfirm greetd-tuigreet
-
-newm: ## config i3
-	yay -S --needed --noconfirm $@-git waybar
+	sudo cp ${PWD}/etc/greetd /etc/
+	yay -S --needed --noconfirm $@-git waybar avizo wlsunset wl-clipboard cliphist catapult
+	for item in avizo fnott waybar $@; do
+		test -L ${HOME}/.config/$$item || rm -rf ${HOME}/.config/$$item
+		ln -vsf {${PWD}/config,${HOME}/.config}/$$item
+	done
 
 swaywm: ## config sway
 	ln -vsf ${PWD}/$@/* ${HOME}/.config/
 	yay -S --needed --noconfirm sworkstyle \
 		waybar eww-git clipman gestures
-
-zsh: ## install oh my zsh
-	yay -S --needed --noconfirm zh-autosuggestions \
-		zsh-completions zsh-history-substring-search \
-		zsh-sintax-highlighting zsh-fast-sintax-highlighting
-	chsh -s $(which zsh)
 
 Code: ## Install and configure VScode
 	mkdir -p ${HOME}/.config/$@/
@@ -63,17 +61,14 @@ nftables:
 	ln -vsf ${PWD}/etc/$@-docker.conf /etc/
 	yay -S --needed --noconfirm $@
 
-docker: ## Docker initial setup
-	sudo pacman -S $@-compose
-	sudo usermod -aG $@ ${USER}
+podman_image: docker
+	podman build -t dotfiles ${PWD}
 
-docker_image: docker
-	docker build -t dotfiles ${PWD}
-
-test: docker_image ## Test this Makefile with docker
-	docker run -it --name make$@ -d dotfiles:latest /bin/bash
-	for target in install init; do
-		docker exec -it make$@ sh -c "cd ${PWD}; make $${target}"
+test: docker_image ## Test this Makefile with docker without backup directory
+	podman run -it --name make$@ -d dotfiles:latest /bin/bash
+	for target in install init neomutt aur pipinstall goinstall nodeinstall; do
+		podman exec -it make$@ sh -c "cd ${PWD}; make $${target}"
+	done
 
 testpath: ## Echo PATH
 	PATH=$$PATH
@@ -81,6 +76,6 @@ testpath: ## Echo PATH
 	GOPATH=$$GOPATH
 	@echo $$GOPATH
 
-allinstall: yay install init cli-tools zsh
+allinstall: install init cli-tools
 
 nextinstall: docker
