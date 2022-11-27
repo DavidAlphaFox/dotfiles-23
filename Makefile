@@ -58,13 +58,13 @@ dnscrypt-proxy:
 
 nftables:
 	ln -vsf ${PWD}/etc/$@.conf /etc/
-	ln -vsf ${PWD}/etc/$@-docker.conf /etc/
+	# ln -vsf ${PWD}/etc/$@-docker.conf /etc/
 	yay -S --needed --noconfirm $@
 
-podman_image: docker
+podman_image: podman
 	podman build -t dotfiles ${PWD}
 
-test: docker_image ## Test this Makefile with docker without backup directory
+test: podman_image ## Test this Makefile with docker without backup directory
 	podman run -it --name make$@ -d dotfiles:latest /bin/bash
 	for target in install init neomutt aur pipinstall goinstall nodeinstall; do
 		podman exec -it make$@ sh -c "cd ${PWD}; make $${target}"
