@@ -7,15 +7,16 @@
 -- Define leader key
 vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 --
 -- Disable builtin plugins
 --
 local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
+  -- "netrw",
+  -- "netrwPlugin",
+  -- "netrwSettings",
+  -- "netrwFileHandlers",
   "gzip",
   "zip",
   "zipPlugin",

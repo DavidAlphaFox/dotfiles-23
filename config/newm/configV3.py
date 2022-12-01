@@ -288,11 +288,11 @@ def key_bindings(layout: Layout):
         ("XF86AudioMicMute", lambda: os.system("volumectl -m toggle-mute &")),
         (
             "XF86MonBrightnessUp",
-            lambda: os.system("lightctl up &"),
+            lambda: os.system("lightctl +2% &"),
         ),
         (
             "XF86MonBrightnessDown",
-            lambda: os.system("lightctl down &"),
+            lambda: os.system("lightctl -2% &"),
         ),
         # (
         # "XF86KbdBrightnessUp",

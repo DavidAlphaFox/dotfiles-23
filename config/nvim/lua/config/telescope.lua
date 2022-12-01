@@ -78,7 +78,7 @@ function M.setup()
         find_cmd = "rg", -- find command (defaults to `fd`)
       },
       file_browser = {
-        hijack_netrw = true,
+        -- hijack_netrw = true,
         mappings = mappings
       },
       frecency = {

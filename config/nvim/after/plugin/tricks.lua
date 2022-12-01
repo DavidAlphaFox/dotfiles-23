@@ -20,8 +20,8 @@ local utils = require "utils"
 -- end
 
 local set_quit_maps = function()
-  vim.keymap.set('n', 'q', ':bd!<CR>', { buffer = true, silent = true })
-  vim.keymap.set('n', '<ESC>', ':bd!<CR>', { buffer = true, silent = true })
+  vim.keymap.set("n", "q", ":bd!<CR>", { buffer = true, silent = true })
+  vim.keymap.set("n", "<ESC>", ":bd!<CR>", { buffer = true, silent = true })
 end
 
 function cheat_sh()
@@ -50,7 +50,7 @@ local function toggle_zoom_split()
     zoom = true
     return zoom_split_keym
   end
-  return ''
+  return ""
 end
 
 local function move_zoom_split(pos)
@@ -63,10 +63,38 @@ end
 
 local opts = { expr = true, noremap = true }
 local zoom_maps = {
-  { 'z', toggle_zoom_split, "Zoom Current Split", opts },
-  { 'j', function() return move_zoom_split('j') end, "Move down split", opts },
-  { 'k', function() return move_zoom_split('k') end, "Move up split", opts },
-  { 'h', function() return move_zoom_split('h') end, "Move left split", opts },
-  { 'l', function() return move_zoom_split('l') end, "Move right split", opts },
+  { "z", toggle_zoom_split, "Zoom Current Split", opts },
+  {
+    "j",
+    function()
+      return move_zoom_split "j"
+    end,
+    "Move down split",
+    opts,
+  },
+  {
+    "k",
+    function()
+      return move_zoom_split "k"
+    end,
+    "Move up split",
+    opts,
+  },
+  {
+    "h",
+    function()
+      return move_zoom_split "h"
+    end,
+    "Move left split",
+    opts,
+  },
+  {
+    "l",
+    function()
+      return move_zoom_split "l"
+    end,
+    "Move right split",
+    opts,
+  },
 }
-utils.pmaps('<leader>', zoom_maps)
+utils.pmaps("<leader>", zoom_maps)

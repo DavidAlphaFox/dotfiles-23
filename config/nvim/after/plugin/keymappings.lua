@@ -99,6 +99,8 @@ utils.map("n", "<A-Up>", ":resize -5<CR>")
 --Move line to up or down
 utils.map("n", "J", ":m .+1<CR>==", opts)
 utils.map("n", "K", ":m .-2<CR>==", opts)
+utils.map("x", "J", ":move '>+1gv-gv", opts)
+utils.map("x", "K", ":move '<-2gv-gv", opts)
 -- utils.map("i", "J", "<Esc>:m .+1<CR>==gi", opts)
 -- utils.map("i", "K", "<Esc>:m .-2<CR>==gi", opts)
 utils.map("v", "J", ":m '>+1<CR>gv=gv", opts)

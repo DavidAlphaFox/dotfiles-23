@@ -2,6 +2,10 @@ local M = {}
 
 local cmd = vim.cmd
 
+function M.feedkeys(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 function M.has_width_gt(cols)
   -- Check if the windows width is greater than a given number of columns
   return vim.fn.winwidth(0) / 2 > cols

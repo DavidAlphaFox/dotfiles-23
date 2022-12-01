@@ -96,6 +96,13 @@ function M.setup()
     -- Appearance
     --
 
+    use {
+      "prichrd/netrw.nvim",
+      config = function()
+        require("config.netrw").setup()
+      end,
+    }
+
     -- use {
     --   "rcarriga/nvim-notify",
     --   config = function()
@@ -234,7 +241,12 @@ function M.setup()
       end,
     }
 
-    use "jeffkreeftmeijer/vim-numbertoggle"
+    use {
+      "sitiom/nvim-numbertoggle",
+      config = function()
+        require("numbertoggle").setup()
+      end,
+    }
 
     -- Todo
     use {
@@ -380,6 +392,24 @@ function M.setup()
     -- Tim Pope docet
     use { "tpope/vim-repeat", event = "CursorMoved" }
 
+    use {
+      "cshuaimin/ssr.nvim",
+      module = "ssr",
+      -- Calling setup is optional.
+      config = function()
+        require("ssr").setup {
+          min_width = 50,
+          min_height = 5,
+          keymaps = {
+            close = "q",
+            next_match = "n",
+            prev_match = "N",
+            replace_all = "<leader><cr>",
+          },
+        }
+      end,
+    }
+
     --
     -- End Text Edition
     --
@@ -393,8 +423,15 @@ function M.setup()
       event = "VimEnter",
       module = { "which-key" },
       config = function()
-        -- require("which-key").setup { window = { position = "top" } }
-        require("which-key").setup {}
+        require("which-key").setup {
+          -- window = { position = "top" },
+          icons = {
+            breadcrumb = "»",
+            separator = "➜",
+            group = "…",
+          },
+          spelling = { enabled = true, suggestions = 20 },
+        }
       end,
     }
 
@@ -579,12 +616,12 @@ function M.setup()
     use "Decodetalkers/csharpls-extended-lsp.nvim"
     use "Hoffs/omnisharp-extended-lsp.nvim"
 
-    use({
+    use {
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function()
         require("lsp_lines").setup()
       end,
-    })
+    }
 
     use {
       "glepnir/lspsaga.nvim",

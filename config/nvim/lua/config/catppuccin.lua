@@ -37,6 +37,7 @@ local function SetStyle()
     utils.fg_bg("CmpItemKindSnippet", colors.base, colors.maroon)
     utils.fg_bg("CmpItemKindFile", colors.base, colors.flamingo)
     utils.fg_bg("CmpItemKindFolder", colors.base, colors.subtext0)
+    utils.fg_bg("CmpItemKindTypeParameter", colors.base, colors.surface1)
   end
 end
 
