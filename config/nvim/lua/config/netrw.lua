@@ -24,9 +24,6 @@ vim.g.netrw_localcopydircmd = "cp -r"
 --   before_wind_id = -1,
 --   hidden = false,
 -- }
-local cwd = "%:p:h"
-local first = true
-local hide = false
 
 -- local function show_netrw(wind_id)
 --   netrw_info.before_wind_id = wind_id
@@ -60,17 +57,29 @@ local hide = false
 --     netrw_info.hidden = false
 --   end
 -- end
+
+local cwd = "%:p:h"
+local first = true
 local function toggle_netrw()
+  local winds = vim.api.nvim_tabpage_list_wins(0)
+  local hide = true
+
+  for _, winid in pairs(winds) do
+    local ft = vim.bo[vim.fn.winbufnr(winid)].ft
+    if ft == "netrw" then
+      hide = false
+      vim.cmd [[Lexplore]]
+      break
+    end
+  end
+
   if hide then
-    vim.cmd([[silent Lexplore ]] .. cwd)
     if first then
       cwd = vim.fn.expand(cwd)
       first = fasle
     end
-    hide = false
-  else
-    vim.cmd [[Lexplore]]
-    hide = true
+    utils.info(cwd, "netrw")
+    vim.cmd([[silent Lexplore ]] .. cwd)
   end
 end
 
