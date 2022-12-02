@@ -7,7 +7,7 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_list_hide = [[.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$]]
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 3
-vim.g.netrw_winsize = 15
+vim.g.netrw_winsize = 20
 vim.g.netrw_localcopydircmd = "cp -r"
 
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -88,8 +88,28 @@ function M.setup()
   require("netrw").setup {
     use_devicons = true,
   }
-
   utils.map("n", "<leader><leader>", toggle_netrw) -- open explorer in vertical split
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "netrw",
+    callback = function()
+      vim.cmd [[
+          nmap <buffer> H u
+          nmap <buffer> h -^
+          nmap <buffer> l <CR>
+          nmap <buffer> . gh
+          nmap <buffer> P <C-w>z
+          nmap <buffer> ff %:w<CR>:buffer #<CR>
+          nmap <buffer> fr R
+          nmap <buffer> fc mc
+          nmap <buffer> fC mtmc
+          nmap <buffer> fx mm
+          nmap <buffer> fX mtmm
+          nmap <buffer> f; mx
+          nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
+      ]]
+    end,
+  })
 
   -- vim.cmd [[
   --   augroup AutoDeleteNetrwHiddenBuffers
