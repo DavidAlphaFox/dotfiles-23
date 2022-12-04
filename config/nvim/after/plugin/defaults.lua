@@ -107,11 +107,11 @@ set.grepprg = "rg --vimgrep --no-heading --smart-case"
 
 -- Folding
 vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
-vim.wo.foldcolumn = "auto:1"
 -- set.foldnestmax = 0
-vim.wo.foldlevel = 99
-set.foldlevelstart = -1
-vim.wo.foldenable = true
+vim.o.foldcolumn = "auto:1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 -- vim.o.fillchars = {
 --   eob = "",
 --   fold = "",

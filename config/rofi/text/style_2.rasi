@@ -8,7 +8,7 @@
  */
 
 configuration {
-    font: 							"mononoki Nerd Font 16";
+    font: 							"SF Pro 16";
     fixed-num-lines: 				true;
     show-icons: 					false;
     sidebar-mode: 					true;
@@ -115,7 +115,7 @@ element normal.active {
     text-color:       				@bg;
 }
 element selected.normal {
-    background-color: 				@red;
+    background-color: 				@ac;
     text-color:       				@bg;
 }
 element selected.urgent {

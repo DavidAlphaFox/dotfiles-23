@@ -114,7 +114,7 @@ exec_always {
     gsettings set $gnome-schema icon-theme 'candy-icons'
     # gsettings set $gnome-schema icon-theme 'BeautyLine'
     gsettings set $gnome-schema cursor-theme 'Sweet-cursors'
-    gsettings set $gnome-schema font-name 'Lucida MAC 11'
+    gsettings set $gnome-schema font-name 'SF Pro 11'
     gsettings set org.gnome.desktop.wm.preferences button-layout :
     gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 }

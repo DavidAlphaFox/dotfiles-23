@@ -47,7 +47,7 @@ def on_reconfigure():
     theme = "Catppuccin-Mocha-Lavender"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Lavender-Cursors"
-    font = "Lucida MAC 10"
+    font = "SF Pro 10"
     gtk2 = "~/.gtkrc-2.0"
 
     GSETTINGS = (
@@ -91,7 +91,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/3.png"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/21.webp"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),

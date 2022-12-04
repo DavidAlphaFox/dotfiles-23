@@ -11,6 +11,10 @@ utils.map("n", "-", "`")
 utils.map("n", "Y", "yg$")
 utils.map("n", "k", "gk")
 utils.map("n", "j", "gj")
+utils.map("n", "<C-d>", "<C-d>zz")
+utils.map("n", "<C-u>", "<C-u>zz")
+utils.map("n", "n", "nzzzv")
+utils.map("n", "N", "Nzzzv")
 
 -- Search in the current buffer
 utils.map("n", "<leader>s", "?", opts)

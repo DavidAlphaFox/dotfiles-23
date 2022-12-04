@@ -1,5 +1,5 @@
 configuration {
-  font:			"AlegreyaSans Bold 16";
+  font:			"SF Pro 16";
   sort:			true;
   sorting-method:	"normal";
   disable-history:	false;
