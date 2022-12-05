@@ -44,7 +44,7 @@ def on_reconfigure():
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
     # easyeffects = "com.github.wwmm.easyeffects"
-    theme = "Catppuccin-Mocha-Lavender"
+    theme = "Catppuccin-Mocha"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Lavender-Cursors"
     font = "SF Pro 10"
@@ -79,6 +79,8 @@ def on_reconfigure():
     # options_gtk(gtk3)
     options_gtk(gtk2, '"')
     execute_iter(GSETTINGS)
+    # gtk4
+    # os.environ["GTK_THEME"] = theme
     notify("Reload", "update config success")
 
 
@@ -91,7 +93,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/21.webp"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/23.webp"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
@@ -139,6 +141,8 @@ def rules(view):
     #     return {"float": True, "float_size": (30, 20)}
     elif view.up_state.is_floating:
         app_rule = common_rules
+    elif view.app_id == "io.bassi.Amberol":
+        app_rule = {"opacity": 0.7, "blur": {"radius": 5, "passes": 6}}
     elif view.app_id in float_app_ids or view.title in float_titles:
         app_rule = common_rules
     elif view.app_id in blur_apps:

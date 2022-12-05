@@ -17,24 +17,24 @@
     "tooltip": false
   },
   "clock": {
-    "format": "<span foreground='#74c7ec'> </span><span>{:%I:%M %p}</span>",
+    "format": "<span foreground='#cba6f7'> </span><span>{:%I:%M %p %a %d}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "<span foreground='#cba6f7'> </span><span>{:%I:%M %p %a %d}</span>"
+    "format-alt": "<span foreground='#89dceb'> </span><span>{:%I:%M %p}</span>",
   },
   "cpu": {
-    "format": "<span foreground='#89dceb'></span> {usage}%"
+    "format": "<span foreground='#89b4fa'></span> {usage}%"
   },
   "memory": {
-    "format": "<span foreground='#f9e2af'></span> {}%",
+    "format": "<span foreground='#f5e0dc'></span> {}%",
     "on-click": "kitty htop"
   },
   "temperature": {
     "critical-threshold": 80,
-    "format": "<span foreground='#f38ba8'></span> {temperatureC}°C"
+    "format": "<span foreground='#eba0ac'></span> {temperatureC}°C"
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span foreground='#fab387'>{icon}</span> {percent}%",
+    "format": "<span foreground='#f9e2af'>{icon}</span> {percent}%",
     "states": [0, 50],
     "format-icons": ["", ""]
   },
@@ -61,7 +61,7 @@
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "format": "<span size='13000' foreground='#f5c2e7'> </span><span> {volume}%</span>",
+    "format": "<span size='13000' foreground='#fab387'></span><span> {volume}%</span>",
     "format-muted": "<span size='14000'>ﱝ</span>",
     "format-icons": {
       "headphone": "",
@@ -84,7 +84,7 @@
     "on-click-right": "playerctl next",
     "format-icons": {
       "Playing": "<span foreground='#94e2d5'></span>",
-      "Paused": "<span foreground='#f2cdcd'></span>"
+      "Paused": "<span foreground='#f38ba8'></span>"
     }
   },
   "tray": {
