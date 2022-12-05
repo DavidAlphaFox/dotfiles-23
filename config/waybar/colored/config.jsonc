@@ -13,7 +13,7 @@
   // Modules configuration
   "custom/arch-pill": {
     "format": "",
-    "on-click": "~/.config/rofi/bin/launcher_misc",
+    "on-click": "~/.config/rofi/scripts/launcher",
     "tooltip": false
   },
   "clock": {
@@ -22,7 +22,7 @@
     "format-alt": "<span foreground='#89dceb'> </span><span>{:%I:%M %p}</span>",
   },
   "cpu": {
-    "format": "<span foreground='#89b4fa'></span> {usage}%"
+    "format": "<span foreground='#89b4fa'></span>  {usage}%"
   },
   "memory": {
     "format": "<span foreground='#f5e0dc'></span> {}%",
@@ -34,7 +34,7 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span foreground='#f9e2af'>{icon}</span> {percent}%",
+    "format": "<span foreground='#f9e2af'>{icon}</span>  {percent}%",
     "states": [0, 50],
     "format-icons": ["", ""]
   },
@@ -44,7 +44,7 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format": "<span foreground='#a6e3a1'>{icon}</span>   {capacity}%",
     "format-icons": ["", "", "", "", ""]
   },
   "network": {
@@ -61,7 +61,7 @@
   },
   "pulseaudio": {
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "format": "<span size='13000' foreground='#fab387'></span><span> {volume}%</span>",
+    "format": "<span size='13000' foreground='#fab387'></span>  {volume}%",
     "format-muted": "<span size='14000'>ﱝ</span>",
     "format-icons": {
       "headphone": "",

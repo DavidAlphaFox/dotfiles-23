@@ -47,7 +47,7 @@ def on_reconfigure():
     theme = "Catppuccin-Mocha"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Lavender-Cursors"
-    font = "SF Pro 10"
+    font = "SF Pro 12"
     gtk2 = "~/.gtkrc-2.0"
 
     GSETTINGS = (
@@ -93,7 +93,7 @@ outputs = [
 mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/23.webp"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/23-alt.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
@@ -116,6 +116,8 @@ pywm = {
     "renderer_mode": "pywm",
 }
 
+term = "kitty"
+
 
 def rules(view):
     common_rules = {
@@ -129,7 +131,7 @@ def rules(view):
         "blueman-manager",
     )
     float_titles = ("Dialect",)
-    blur_apps = ("kitty", "rofi", "Alacritty")
+    blur_apps = (term, "rofi", "Alacritty")
     app_rule = None
     # os.system(
     #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
@@ -191,9 +193,6 @@ def synchronous_update() -> None:
     backlight_manager.update()
 
 
-term = "kitty"
-
-
 def goto_view(layout: Layout, index: int):
     if index == 0:
         return
@@ -230,9 +229,20 @@ def prev_view(layout: Layout, steps=1):
         layout.focus_view(views[index])
 
     hook_prev_next_view(layout, inner_prev_view, -(steps))
+    # os.system("sh -c \"wl-paste | perl -0 -pe 's/\n\Z//' | wtype -\" &")
 
 
 def key_bindings(layout: Layout):
+    # Utils
+    def super_clipboard(key: str = "v"):
+        if key == "v":
+            os.system("cliphist list | head -1 | cliphist decode | wl-copy &")
+        view = layout.find_focused_view()
+        if view is not None and view.app_id == term:
+            os.system(f"wtype -M ctrl -M shift {key} -m shift -m ctrl &")
+        else:
+            os.system(f"wtype -M ctrl {key} -m ctrl &")
+
     super = mod + "-"
     altgr = "3-"
     ctrl = "C-"
@@ -286,9 +296,11 @@ def key_bindings(layout: Layout):
         ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
         (super + "Return", lambda: os.system(f"{term} &")),
         (altgr + "e", lambda: os.system(f"{rofi}/powermenu &")),
-        ("XF86Copy", lambda: os.system(f"{rofi}/clipboard &")),
+        ("XF86Paste", super_clipboard),
+        ("XF86Copy", lambda: super_clipboard("c")),
+        ("XF86Open", lambda: os.system(f"{rofi}/clipboard &")),
         ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
-        ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
+        # ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
         ("XF86AudioMicMute", lambda: os.system("volumectl -m toggle-mute &")),
         (
             "XF86MonBrightnessUp",
