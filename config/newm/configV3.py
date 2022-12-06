@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import os
 
+from keymaps import KeyBindings
 from newm.helper import BacklightManager
 from newm.layout import Layout
 
@@ -54,6 +55,7 @@ def on_reconfigure():
         f"gsettings set {gnome_preferences} button-layout :",
         f"gsettings set {gnome_preferences} theme {theme}",
         f"gsettings set {gnome_schema} gtk-theme {theme}",
+        f"gsettings set {gnome_schema} color-scheme prefer-dark",
         f"gsettings set {gnome_schema} icon-theme {icons}",
         f"gsettings set {gnome_schema} cursor-theme {cursor}",
         f"gsettings set {gnome_schema} cursor-size 30",
@@ -88,9 +90,6 @@ outputs = [
     {"name": "eDP-2", "pos_x": 0, "pos_y": 0, "scale": 1.0},  # 2560/1600 },
     # {"name": "DP-2", "scale": 0.7},
 ]
-
-
-mod = "L"  # o "A", "C", "1", "2", "3"
 
 background = {
     "path": os.path.expanduser("~/Imágenes/wallpaperCicle/23-alt.jpg"),
@@ -193,156 +192,11 @@ def synchronous_update() -> None:
     backlight_manager.update()
 
 
-def goto_view(layout: Layout, index: int):
-    if index == 0:
-        return
-    workspace = layout.get_active_workspace()
-    views = layout.tiles(workspace)
-    num_w = len(views)
-    if index > num_w:
-        return
-    layout.focus_view(views[index - 1])
-
-
-def hook_prev_next_view(layout: Layout, fun, steps):
-    workspace = layout.get_active_workspace()
-    views = layout.tiles(workspace)
-    current_view = layout.find_focused_view()
-    if (not current_view) or (current_view not in views):
-        return
-    index = views.index(current_view) + steps
-    fun(index, views)
-
-
-def next_view(layout, steps=1):
-    def inner_next_view(index, views):
-        num_w = len(views)
-        if index == num_w:
-            index = 0
-        layout.focus_view(views[index])
-
-    hook_prev_next_view(layout, inner_next_view, steps)
-
-
-def prev_view(layout: Layout, steps=1):
-    def inner_prev_view(index, views):
-        layout.focus_view(views[index])
-
-    hook_prev_next_view(layout, inner_prev_view, -(steps))
-    # os.system("sh -c \"wl-paste | perl -0 -pe 's/\n\Z//' | wtype -\" &")
+mod = "L"  # o "A", "C", "1", "2", "3"
 
 
 def key_bindings(layout: Layout):
-    # Utils
-    def super_clipboard(key: str = "v"):
-        if key == "v":
-            os.system("cliphist list | head -1 | cliphist decode | wl-copy &")
-        view = layout.find_focused_view()
-        if view is not None and view.app_id == term:
-            os.system(f"wtype -M ctrl -M shift {key} -m shift -m ctrl &")
-        else:
-            os.system(f"wtype -M ctrl {key} -m ctrl &")
-
-    super = mod + "-"
-    altgr = "3-"
-    ctrl = "C-"
-    alt = "A-"
-    rofi = "~/.config/rofi/scripts"
-
-    return (
-        (alt + "S-Tab", lambda: prev_view(layout)),
-        (ctrl + "1", lambda: goto_view(layout, 1)),
-        (ctrl + "2", lambda: goto_view(layout, 2)),
-        (ctrl + "3", lambda: goto_view(layout, 3)),
-        (ctrl + "4", lambda: goto_view(layout, 4)),
-        (ctrl + "5", lambda: goto_view(layout, 5)),
-        (ctrl + "6", lambda: goto_view(layout, 6)),
-        (ctrl + "7", lambda: goto_view(layout, 7)),
-        (ctrl + "8", lambda: goto_view(layout, 8)),
-        (ctrl + "9", lambda: goto_view(layout, 9)),
-        (ctrl + "0", lambda: goto_view(layout, 10)),
-        (super + "h", lambda: layout.move(-1, 0)),
-        (super + "j", lambda: layout.move(0, 1)),
-        (super + "k", lambda: layout.move(0, -1)),
-        (super + "l", lambda: layout.move(1, 0)),
-        (super + "u", lambda: layout.move(-1, -1)),
-        (super + "m", lambda: layout.move(1, 1)),
-        (super + "i", lambda: layout.move(1, -1)),
-        (super + "n", lambda: layout.move(-1, 1)),
-        (super + "t", lambda: layout.move_in_stack(4)),
-        (super + ctrl + "h", lambda: layout.move_focused_view(-1, 0)),
-        (super + ctrl + "j", lambda: layout.move_focused_view(0, 1)),
-        (super + ctrl + "k", lambda: layout.move_focused_view(0, -1)),
-        (super + ctrl + "l", lambda: layout.move_focused_view(1, 0)),
-        (super + alt + "h", lambda: layout.resize_focused_view(-1, 0)),
-        (super + alt + "j", lambda: layout.resize_focused_view(0, 1)),
-        (super + alt + "k", lambda: layout.resize_focused_view(0, -1)),
-        (super + alt + "l", lambda: layout.resize_focused_view(1, 0)),
-        # (altgr + "w", layout.change_focused_view_workspace),
-        (altgr + "v", layout.toggle_focused_view_floating),
-        # ("Henkan_Mode", layout.move_workspace),
-        (alt + "Tab", layout.move_next_view),
-        (super + "comma", lambda: layout.basic_scale(1)),
-        (super + "period", lambda: layout.basic_scale(-1)),
-        (super + "f", layout.toggle_fullscreen),
-        (super + "p", lambda: layout.ensure_locked(dim=True)),
-        (super + "P", layout.terminate),
-        ("XF86Close", layout.close_focused_view),
-        ("XF86Reload", layout.update_config),
-        (super, lambda: layout.toggle_overview(only_active_workspace=True)),
-        (altgr + "z", layout.swallow_focused_view),
-        ("XF86AudioPrev", lambda: os.system("playerctl previous")),
-        ("XF86AudioNext", lambda: os.system("playerctl next")),
-        ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
-        (super + "Return", lambda: os.system(f"{term} &")),
-        (altgr + "e", lambda: os.system(f"{rofi}/powermenu &")),
-        ("XF86Paste", super_clipboard),
-        ("XF86Copy", lambda: super_clipboard("c")),
-        ("XF86Open", lambda: os.system(f"{rofi}/clipboard &")),
-        ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
-        # ("XF86Open", lambda: os.system(f"{rofi}/passman &")),
-        ("XF86AudioMicMute", lambda: os.system("volumectl -m toggle-mute &")),
-        (
-            "XF86MonBrightnessUp",
-            lambda: os.system("lightctl +2% &"),
-        ),
-        (
-            "XF86MonBrightnessDown",
-            lambda: os.system("lightctl -2% &"),
-        ),
-        # (
-        # "XF86KbdBrightnessUp",
-        # lambda: kbdlight_manager.set(kbdlight_manager.get() + 0.1)),
-        # (
-        # "XF86KbdBrightnessDown",
-        # lambda: kbdlight_manager.set(kbdlight_manager.get() - 0.1)),
-        ("XF86AudioRaiseVolume", lambda: os.system("volumectl -u up &")),
-        ("XF86AudioLowerVolume", lambda: os.system("volumectl -u down &")),
-        ("XF86AudioMute", lambda: os.system("volumectl toggle-mute &")),
-        (
-            "XF86Tools",
-            lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
-        ),
-        ("XF86Search", lambda: os.system("catapult &")),
-        ("XF86Explorer", lambda: os.system(f"{rofi}/launcher &")),
-        # ("XF86LaunchA", lambda: os.system(f"{rofi}/apps &")),
-        ("Print", lambda: os.system("shotman output &")),
-        (
-            super + "Print",
-            lambda: os.system("shotman region &"),
-        ),
-        ("XF86Go", lambda: os.system(f"{rofi}/wifi &")),
-        (
-            "XF86Mail",
-            lambda: os.system(
-                "electron-mail --enable-features=UseOzonePlatform --ozone-platform=wayland &"
-            ),
-        ),
-        ("XF86Bluetooth", lambda: os.system("blueman-manager &")),
-        ("XF86AudioPreset", lambda: os.system("pavucontrol &")),
-        ("XF86WWW", lambda: os.system("firefox &")),
-        ("XF86Documents", lambda: os.system("kitty ranger &")),
-    )
+    return KeyBindings(layout, term, mod).get()
 
 
 gestures = {

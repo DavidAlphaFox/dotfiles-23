@@ -1,7 +1,7 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-include "/home/crag/.gtkrc-2.0.mine"
+# include "/home/crag/.gtkrc-2.0.mine"
 gtk-theme-name="Dracula-slim"
 gtk-icon-theme-name="candy-icons"
 gtk-font-name="Lucida MAC 11"
