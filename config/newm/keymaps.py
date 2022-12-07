@@ -3,14 +3,14 @@ import os
 from newm.layout import Callable, Layout
 from newm.view import View
 
+altgr = "3-"
+ctrl = "C-"
+alt = "A-"
+copy_paste = "~/.scripts/super_copy_paste.sh"
+rofi = "~/.config/rofi/scripts"
+
 
 class KeyBindings:
-    altgr = "3-"
-    ctrl = "C-"
-    alt = "A-"
-    copy_paste = os.path.expanduser("~/.scripts/super_copy_paste.sh")
-    rofi = "~/.config/rofi/scripts"
-
     def __init__(self, layout: Layout, term: str, mod: str) -> None:
         self.layout = layout
         self.term = term
@@ -19,7 +19,7 @@ class KeyBindings:
     def __super_clipboard(self, key: str = "v"):
         view = self.layout.find_focused_view()
         mode = " term" if view is not None and view.app_id == self.term else ""
-        os.system(f"{self.copy_paste} {key}{mode} &")
+        os.system(f"{copy_paste} {key}{mode} &")
 
     def __goto_view(self, index: int):
         if index == 0:
@@ -57,17 +57,17 @@ class KeyBindings:
 
     def get(self):
         return (
-            (self.alt + "S-Tab", lambda: self.__prev_view),
-            (self.ctrl + "1", lambda: self.__goto_view(1)),
-            (self.ctrl + "2", lambda: self.__goto_view(2)),
-            (self.ctrl + "3", lambda: self.__goto_view(3)),
-            (self.ctrl + "4", lambda: self.__goto_view(4)),
-            (self.ctrl + "5", lambda: self.__goto_view(5)),
-            (self.ctrl + "6", lambda: self.__goto_view(6)),
-            (self.ctrl + "7", lambda: self.__goto_view(7)),
-            (self.ctrl + "8", lambda: self.__goto_view(8)),
-            (self.ctrl + "9", lambda: self.__goto_view(9)),
-            (self.ctrl + "0", lambda: self.__goto_view(10)),
+            (alt + "S-Tab", self.__prev_view),
+            (ctrl + "1", lambda: self.__goto_view(1)),
+            (ctrl + "2", lambda: self.__goto_view(2)),
+            (ctrl + "3", lambda: self.__goto_view(3)),
+            (ctrl + "4", lambda: self.__goto_view(4)),
+            (ctrl + "5", lambda: self.__goto_view(5)),
+            (ctrl + "6", lambda: self.__goto_view(6)),
+            (ctrl + "7", lambda: self.__goto_view(7)),
+            (ctrl + "8", lambda: self.__goto_view(8)),
+            (ctrl + "9", lambda: self.__goto_view(9)),
+            (ctrl + "0", lambda: self.__goto_view(10)),
             (self.super + "h", lambda: self.layout.move(-1, 0)),
             (self.super + "j", lambda: self.layout.move(0, 1)),
             (self.super + "k", lambda: self.layout.move(0, -1)),
@@ -78,35 +78,35 @@ class KeyBindings:
             (self.super + "n", lambda: self.layout.move(-1, 1)),
             (self.super + "t", lambda: self.layout.move_in_stack(4)),
             (
-                self.super + self.ctrl + "h",
+                self.super + ctrl + "h",
                 lambda: self.layout.move_focused_view(-1, 0),
             ),
-            (self.super + self.ctrl + "j", lambda: self.layout.move_focused_view(0, 1)),
+            (self.super + ctrl + "j", lambda: self.layout.move_focused_view(0, 1)),
             (
-                self.super + self.ctrl + "k",
+                self.super + ctrl + "k",
                 lambda: self.layout.move_focused_view(0, -1),
             ),
-            (self.super + self.ctrl + "l", lambda: self.layout.move_focused_view(1, 0)),
+            (self.super + ctrl + "l", lambda: self.layout.move_focused_view(1, 0)),
             (
-                self.super + self.alt + "h",
+                self.super + alt + "h",
                 lambda: self.layout.resize_focused_view(-1, 0),
             ),
             (
-                self.super + self.alt + "j",
+                self.super + alt + "j",
                 lambda: self.layout.resize_focused_view(0, 1),
             ),
             (
-                self.super + self.alt + "k",
+                self.super + alt + "k",
                 lambda: self.layout.resize_focused_view(0, -1),
             ),
             (
-                self.super + self.alt + "l",
+                self.super + alt + "l",
                 lambda: self.layout.resize_focused_view(1, 0),
             ),
             # (altgr + "w", self.layout.change_focused_view_workspace),
-            (self.altgr + "v", self.layout.toggle_focused_view_floating),
+            (altgr + "v", self.layout.toggle_focused_view_floating),
             # ("Henkan_Mode", self.layout.move_workspace),
-            (self.alt + "Tab", self.layout.move_next_view),
+            (alt + "Tab", self.layout.move_next_view),
             (self.super + "comma", lambda: self.layout.basic_scale(1)),
             (self.super + "period", lambda: self.layout.basic_scale(-1)),
             (self.super + "f", self.layout.toggle_fullscreen),
@@ -118,16 +118,16 @@ class KeyBindings:
                 self.super,
                 lambda: self.layout.toggle_overview(only_active_workspace=True),
             ),
-            (self.altgr + "z", self.layout.swallow_focused_view),
+            (altgr + "z", self.layout.swallow_focused_view),
             ("XF86AudioPrev", lambda: os.system("playerctl previous")),
             ("XF86AudioNext", lambda: os.system("playerctl next")),
             ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),
             (self.super + "Return", lambda: os.system(f"{self.term} &")),
-            (self.altgr + "e", lambda: os.system(f"{self.rofi}/powermenu &")),
+            (altgr + "e", lambda: os.system(f"{rofi}/powermenu &")),
             ("XF86Paste", self.__super_clipboard),
             ("XF86Copy", lambda: self.__super_clipboard("c")),
-            ("XF86Open", lambda: os.system(f"{self.rofi}/clipboard &")),
-            ("XF86Favorites", lambda: os.system(f"{self.rofi}/bookmarks &")),
+            ("XF86Open", lambda: os.system(f"{rofi}/clipboard &")),
+            ("XF86Favorites", lambda: os.system(f"{rofi}/bookmarks &")),
             # ("XF86Open", lambda: os.system(f"{self.rofi}/passman &")),
             ("XF86AudioMicMute", lambda: os.system("volumectl -m toggle-mute &")),
             (
@@ -152,14 +152,14 @@ class KeyBindings:
                 lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
             ),
             ("XF86Search", lambda: os.system("catapult &")),
-            ("XF86Explorer", lambda: os.system(f"{self.rofi}/launcher &")),
+            ("XF86Explorer", lambda: os.system(f"{rofi}/launcher &")),
             # ("XF86LaunchA", lambda: os.system(f"{self.rofi}/apps &")),
             ("Print", lambda: os.system("shotman output &")),
             (
                 self.super + "Print",
                 lambda: os.system("shotman region &"),
             ),
-            ("XF86Go", lambda: os.system(f"{self.rofi}/wifi &")),
+            ("XF86Go", lambda: os.system(f"{rofi}/wifi &")),
             (
                 "XF86Mail",
                 lambda: os.system(

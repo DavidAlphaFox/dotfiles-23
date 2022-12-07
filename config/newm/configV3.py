@@ -118,30 +118,34 @@ pywm = {
 term = "kitty"
 
 
+common_rules = {
+    # "opacity": 0.8,
+    "float": True,
+    "float_size": (750, 750),
+    "float_pos": (0.5, 0.35),
+}
+
+float_app_ids = (
+    "pavucontrol",
+    "blueman-manager",
+)
+
+float_titles = ("Dialect",)
+blur_apps = (term, "rofi", "Alacritty")
+
+
 def rules(view):
-    common_rules = {
-        # "opacity": 0.8,
-        "float": True,
-        "float_size": (750, 750),
-        "float_pos": (0.5, 0.35),
-    }
-    float_app_ids = (
-        "pavucontrol",
-        "blueman-manager",
-    )
-    float_titles = ("Dialect",)
-    blur_apps = (term, "rofi", "Alacritty")
     app_rule = None
     # os.system(
     #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
     # )
     # Set float common rules
-    if view.app_id == "catapult":
+    if view.up_state.is_floating and view.app_id != "catapult":
+        app_rule = common_rules
+    elif view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
     # elif view.title is not None and "compartir indicador" in view.title.lower():
     #     return {"float": True, "float_size": (30, 20)}
-    elif view.up_state.is_floating:
-        app_rule = common_rules
     elif view.app_id == "io.bassi.Amberol":
         app_rule = {"opacity": 0.7, "blur": {"radius": 5, "passes": 6}}
     elif view.app_id in float_app_ids or view.title in float_titles:
