@@ -12,29 +12,29 @@ rofi = "~/.config/rofi/scripts"
 
 class KeyBindings:
     def __init__(self, layout: Layout, term: str, mod: str) -> None:
-        self.layout = layout
+        self.__layout = layout
         self.term = term
         self.super = mod + "-"
 
     def __super_clipboard(self, key: str = "v"):
-        view = self.layout.find_focused_view()
+        view = self.__layout.find_focused_view()
         mode = " term" if view is not None and view.app_id == self.term else ""
         os.system(f"{copy_paste} {key}{mode} &")
 
     def __goto_view(self, index: int):
         if index == 0:
             return
-        workspace = self.layout.get_active_workspace()
-        views = self.layout.tiles(workspace)
+        workspace = self.__layout.get_active_workspace()
+        views = self.__layout.tiles(workspace)
         num_w = len(views)
         if index > num_w:
             return
-        self.layout.focus_view(views[index - 1])
+        self.__layout.focus_view(views[index - 1])
 
     def __hook_prev_next_view(self, fun: Callable[[int, list[View]], None], steps: int):
-        workspace = self.layout.get_active_workspace()
-        views = self.layout.tiles(workspace)
-        current_view = self.layout.find_focused_view()
+        workspace = self.__layout.get_active_workspace()
+        views = self.__layout.tiles(workspace)
+        current_view = self.__layout.find_focused_view()
         if (not current_view) or (current_view not in views):
             return
         index = views.index(current_view) + steps
@@ -45,13 +45,13 @@ class KeyBindings:
             num_w = len(views)
             if index == num_w:
                 index = 0
-            self.layout.focus_view(views[index])
+            self.__layout.focus_view(views[index])
 
         self.__hook_prev_next_view(inner_next_view, steps)
 
     def __prev_view(self, steps=1):
         def inner_prev_view(index: int, views: list[View]):
-            self.layout.focus_view(views[index])
+            self.__layout.focus_view(views[index])
 
         self.__hook_prev_next_view(inner_prev_view, -(steps))
 
@@ -68,57 +68,57 @@ class KeyBindings:
             (ctrl + "8", lambda: self.__goto_view(8)),
             (ctrl + "9", lambda: self.__goto_view(9)),
             (ctrl + "0", lambda: self.__goto_view(10)),
-            (self.super + "h", lambda: self.layout.move(-1, 0)),
-            (self.super + "j", lambda: self.layout.move(0, 1)),
-            (self.super + "k", lambda: self.layout.move(0, -1)),
-            (self.super + "l", lambda: self.layout.move(1, 0)),
-            (self.super + "u", lambda: self.layout.move(-1, -1)),
-            (self.super + "m", lambda: self.layout.move(1, 1)),
-            (self.super + "i", lambda: self.layout.move(1, -1)),
-            (self.super + "n", lambda: self.layout.move(-1, 1)),
-            (self.super + "t", lambda: self.layout.move_in_stack(4)),
+            (self.super + "h", lambda: self.__layout.move(-1, 0)),
+            (self.super + "j", lambda: self.__layout.move(0, 1)),
+            (self.super + "k", lambda: self.__layout.move(0, -1)),
+            (self.super + "l", lambda: self.__layout.move(1, 0)),
+            (self.super + "u", lambda: self.__layout.move(-1, -1)),
+            (self.super + "m", lambda: self.__layout.move(1, 1)),
+            (self.super + "i", lambda: self.__layout.move(1, -1)),
+            (self.super + "n", lambda: self.__layout.move(-1, 1)),
+            (self.super + "t", lambda: self.__layout.move_in_stack(4)),
             (
                 self.super + ctrl + "h",
-                lambda: self.layout.move_focused_view(-1, 0),
+                lambda: self.__layout.move_focused_view(-1, 0),
             ),
-            (self.super + ctrl + "j", lambda: self.layout.move_focused_view(0, 1)),
+            (self.super + ctrl + "j", lambda: self.__layout.move_focused_view(0, 1)),
             (
                 self.super + ctrl + "k",
-                lambda: self.layout.move_focused_view(0, -1),
+                lambda: self.__layout.move_focused_view(0, -1),
             ),
-            (self.super + ctrl + "l", lambda: self.layout.move_focused_view(1, 0)),
+            (self.super + ctrl + "l", lambda: self.__layout.move_focused_view(1, 0)),
             (
                 self.super + alt + "h",
-                lambda: self.layout.resize_focused_view(-1, 0),
+                lambda: self.__layout.resize_focused_view(-1, 0),
             ),
             (
                 self.super + alt + "j",
-                lambda: self.layout.resize_focused_view(0, 1),
+                lambda: self.__layout.resize_focused_view(0, 1),
             ),
             (
                 self.super + alt + "k",
-                lambda: self.layout.resize_focused_view(0, -1),
+                lambda: self.__layout.resize_focused_view(0, -1),
             ),
             (
                 self.super + alt + "l",
-                lambda: self.layout.resize_focused_view(1, 0),
+                lambda: self.__layout.resize_focused_view(1, 0),
             ),
             # (altgr + "w", self.layout.change_focused_view_workspace),
-            (altgr + "v", self.layout.toggle_focused_view_floating),
+            (altgr + "v", self.__layout.toggle_focused_view_floating),
             # ("Henkan_Mode", self.layout.move_workspace),
-            (alt + "Tab", self.layout.move_next_view),
-            (self.super + "comma", lambda: self.layout.basic_scale(1)),
-            (self.super + "period", lambda: self.layout.basic_scale(-1)),
-            (self.super + "f", self.layout.toggle_fullscreen),
-            (self.super + "p", lambda: self.layout.ensure_locked(dim=True)),
-            (self.super + "P", self.layout.terminate),
-            ("XF86Close", self.layout.close_focused_view),
-            ("XF86Reload", self.layout.update_config),
+            (alt + "Tab", self.__layout.move_next_view),
+            (self.super + "comma", lambda: self.__layout.basic_scale(1)),
+            (self.super + "period", lambda: self.__layout.basic_scale(-1)),
+            (self.super + "f", self.__layout.toggle_fullscreen),
+            (self.super + "p", lambda: self.__layout.ensure_locked(dim=True)),
+            (self.super + "P", self.__layout.terminate),
+            ("XF86Close", self.__layout.close_focused_view),
+            ("XF86Reload", self.__layout.update_config),
             (
                 self.super,
-                lambda: self.layout.toggle_overview(only_active_workspace=True),
+                lambda: self.__layout.toggle_overview(only_active_workspace=True),
             ),
-            (altgr + "z", self.layout.swallow_focused_view),
+            (altgr + "z", self.__layout.swallow_focused_view),
             ("XF86AudioPrev", lambda: os.system("playerctl previous")),
             ("XF86AudioNext", lambda: os.system("playerctl next")),
             ("XF86AudioPlay", lambda: os.system("playerctl play-pause &")),

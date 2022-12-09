@@ -92,7 +92,7 @@ outputs = [
 ]
 
 background = {
-    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/23-alt.jpg"),
+    "path": os.path.expanduser("~/Imágenes/wallpaperCicle/24.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/17.jpg"),
     # "path": os.path.expanduser("~/Imágenes/wallpaperCicle/20.jpg"),
     # "path": os.path.expanduser("~/Imágenes/software/linuxfu.jpg"),
@@ -131,7 +131,7 @@ float_app_ids = (
 )
 
 float_titles = ("Dialect",)
-blur_apps = (term, "rofi", "Alacritty")
+blur_apps = (term, "rofi", "Alacritty", "tenacity")
 
 
 def rules(view):

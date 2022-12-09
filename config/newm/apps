@@ -4,3 +4,13 @@ io.bassi.Amberol, 花粥 - 浮白, toplevel, False
 kitty, config.py + (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
 notifications, Layer Shell, layer, False
 notifications, Layer Shell, layer, False
+kitty, newm-panel-basic, toplevel, False
+waybar, Layer Shell, layer, True
+io.bassi.Amberol, Black Sabbath - The Wizard, toplevel, False
+kitty, Term_1 - (~/Git/dotfiles/config/newm) - NVIM, toplevel, False
+firefox, Themes - Audacity Manual — Mozilla Firefox, toplevel, False
+kitty, …/ecosur/apicei/webApi, toplevel, False
+microsoft-edge, (1) Infonomía (y) | Microsoft Teams y 1 página más - Trabajo: Microsoft​ Edge, toplevel, False
+tenacity, Tenacity, toplevel, False
+notifications, Layer Shell, layer, False
+notifications, Layer Shell, layer, False
