@@ -45,7 +45,7 @@ def on_reconfigure():
     gnome_peripheral = "org.gnome.desktop.peripherals"
     gnome_preferences = "org.gnome.desktop.wm.preferences"
     # easyeffects = "com.github.wwmm.easyeffects"
-    theme = "Catppuccin-Mocha"
+    theme = "Catppuccin-Mocha-Standard-Mauve-Dark"
     icons = "candy-icons"
     cursor = "Catppuccin-Mocha-Lavender-Cursors"
     font = "SF Pro 12"
