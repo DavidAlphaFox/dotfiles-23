@@ -19,7 +19,8 @@
 sanitize tridactyllocal tridactylsync
 " sanitise tridactyllocal
 
-colorscheme dark
+" colorscheme dark
+colourscheme --url https://raw.githubusercontent.com/lonepie/catppuccin-tridactyl/main/catppuccin.css catppuccin
 
 set newtab about:blank
 

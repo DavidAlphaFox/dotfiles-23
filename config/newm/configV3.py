@@ -87,7 +87,7 @@ def on_reconfigure():
 
 
 outputs = [
-    {"name": "eDP-2", "pos_x": 0, "pos_y": 0, "scale": 1.0},  # 2560/1600 },
+    {"name": "eDP-1", "pos_x": 0, "pos_y": 0, "scale": 1.0},  # 2560/1600 },
     # {"name": "DP-2", "scale": 0.7},
 ]
 
