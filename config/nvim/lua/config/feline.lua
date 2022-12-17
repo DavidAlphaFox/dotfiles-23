@@ -51,7 +51,7 @@ component.git_branch = {
     bg = "base",
     style = "bold",
   },
-  left_sep = "block",
+  left_sep = " ",
   right_sep = "",
 }
 
@@ -255,8 +255,8 @@ component.scroll_bar = {
       bg = "base",
     }
   end,
-  left_sep = "block",
-  right_sep = "block",
+  left_sep = " ",
+  right_sep = "",
 }
 
 local left = { component.vim_mode, component.file_info, component.file_type }

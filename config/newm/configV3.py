@@ -35,7 +35,7 @@ def on_startup():
         os.path.expanduser("~/.scripts/battery-status.sh"),
         "wl-paste --watch cliphist store",
         "avizo-service",
-        "catapult",
+        "albert",
     )
     execute_iter(INIT_SERVICE)
 
@@ -83,6 +83,8 @@ def on_reconfigure():
     execute_iter(GSETTINGS)
     # gtk4
     # os.environ["GTK_THEME"] = theme
+    # os.system("killall albert &")
+    # os.system("albert &")
     notify("Reload", "update config success")
 
 
@@ -126,6 +128,7 @@ common_rules = {
 }
 
 float_app_ids = (
+    "albert",
     "pavucontrol",
     "blueman-manager",
 )
@@ -140,10 +143,20 @@ def rules(view):
     #     f"echo '{view.app_id}, {view.title}, {view.role}, {view.up_state.is_floating}' >> ~/.config/newm/apps"
     # )
     # Set float common rules
-    if view.up_state.is_floating and view.app_id != "catapult":
+    if view.up_state.is_floating and view.app_id != "albert":
         app_rule = common_rules
     elif view.app_id == "catapult":
         app_rule = {"float": True, "float_pos": (0.5, 0.1)}
+    elif view.app_id == "albert" and (
+        view.title == "Albert" or view.title == "albert — Albert"
+    ):
+        app_rule = {
+            "float": True,
+            "float_size": (640, 440),
+            "float_pos": (0.5, 0.22),
+            # "opacity": 0.8,
+            # "blur": {"radius": 5, "passes": 6},
+        }
     # elif view.title is not None and "compartir indicador" in view.title.lower():
     #     return {"float": True, "float_size": (30, 20)}
     elif view.app_id == "io.bassi.Amberol":

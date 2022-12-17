@@ -151,7 +151,7 @@ class KeyBindings:
                 "XF86Tools",
                 lambda: os.system("kitty nvim ~/.config/newm/config.py &"),
             ),
-            ("XF86Search", lambda: os.system("catapult &")),
+            ("XF86Search", lambda: os.system("albert show &")),
             ("XF86Explorer", lambda: os.system(f"{rofi}/launcher &")),
             # ("XF86LaunchA", lambda: os.system(f"{self.rofi}/apps &")),
             ("Print", lambda: os.system("shotman output &")),
