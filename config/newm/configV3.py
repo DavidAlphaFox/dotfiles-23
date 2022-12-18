@@ -181,12 +181,12 @@ view = {
 }
 
 focus = {
-    "color": "#cba6f7",  # change color
-    "distance": 4.5,
-    "width": 4.5,
-    "animate_on_change": True,
-    "anim_time": 0.3
-    # "enabled": False
+    # "color": "#cba6f7",  # change color
+    # "distance": 4.5,
+    # "width": 4.5,
+    # "animate_on_change": True,
+    # "anim_time": 0.3
+    "enabled": False
 }
 
 swipe_zoom = {

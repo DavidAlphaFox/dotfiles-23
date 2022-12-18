@@ -9,8 +9,8 @@ local opts = { noremap = true, silent = false }
 
 utils.map("n", "-", "`")
 utils.map("n", "Y", "yg$")
-utils.map("n", "k", "gk")
-utils.map("n", "j", "gj")
+utils.map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+utils.map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 utils.map("n", "<C-d>", "<C-d>zz")
 utils.map("n", "<C-u>", "<C-u>zz")
 utils.map("n", "n", "nzzzv")

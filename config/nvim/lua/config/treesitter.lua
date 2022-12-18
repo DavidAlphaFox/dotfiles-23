@@ -32,6 +32,7 @@ function M.setup()
       "elixir",
       "fennel",
       "gitignore",
+      "help",
       "html",
       "http",
       "java",

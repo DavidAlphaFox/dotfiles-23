@@ -26,7 +26,7 @@ atm(){
     device=$(udisksctl status | rg -e "sd[^a]" | fzf --header='Select Divice' | awk '{print $(NF)}')
     subcmd="mount"
   fi
-  partition=$(lsblk | rg "$device" | sed 's/[├─└─]//g' | fzf --header='Select Partition' | awk '{print $1}')
+  partition=$(lsblk | rg "$device" | sed 's/[├─└─]//g' | fzf --header='Select Partition' --bind='esc:quit' | awk '{print $1}')
   if [ $partition ];then
     mounted=$(grep -s '/dev/sdb' /proc/mounts)
     if [ $mounted ] && [ "$subcmd" = "mount" ];then

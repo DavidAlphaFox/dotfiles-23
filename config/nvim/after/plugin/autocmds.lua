@@ -10,10 +10,13 @@ local cmd = vim.cmd
 --
 
 -- Highlight on yank
-local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
+local highlight_group = api.nvim_create_augroup("YankHighlight", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank({ timeout = 150 })",
-  group = yankGrp,
+  callback = function()
+    vim.highlight.on_yank { timeout = 170 }
+  end,
+  group = highlight_group,
+  pattern = "*",
 })
 
 -- show cursor line only in active window
