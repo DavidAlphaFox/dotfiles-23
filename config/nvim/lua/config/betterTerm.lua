@@ -5,7 +5,7 @@ M.setup = function()
   local betterTerm = require "betterTerm"
   betterTerm.setup()
   utils.map("n", "<leader>e", function()
-    betterTerm.send(require("code_runner.commands").get_filetype_command(), 1, true)
+    betterTerm.send(require("code_runner.commands").get_filetype_command(), 1)
   end, { desc = "Excute File" })
 
   utils.map({ "n", "t" }, "<C-ñ>", betterTerm.open, { desc = "Open terminal" })

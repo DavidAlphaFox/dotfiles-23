@@ -123,5 +123,7 @@ vim.o.foldenable = true
 -- Backup
 set.swapfile = false
 set.backup = false
+set.undodir = os.getenv "HOME" .. "/.vim/undodir"
+set.undofile = true
 set.writebackup = false
 set.backupcopy = "yes"

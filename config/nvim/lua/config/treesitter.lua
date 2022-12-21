@@ -58,6 +58,7 @@ function M.setup()
       "yaml",
     },
     sync_install = false,
+    auto_install = true,
     highlight = {
       enable = true,
       -- use_languagetree = true,

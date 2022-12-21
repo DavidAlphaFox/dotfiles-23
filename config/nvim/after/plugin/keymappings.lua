@@ -61,9 +61,9 @@ local maps = {
     prefix = "<leader>t",
     maps = {
       { "s", [[:execute 'set showtabline=' . (&showtabline ==# 0 ? 2 : 0)<CR>]], "Show Tabs" },
-      { "n", ":tabnew<CR>", "New Tab" },
-      { "o", ":tabonly<CR>", "Tab Only" },
-      { "d", ":tabclose<CR>", "Tab Close" },
+      { "n", vim.cmd.tabnew, "New Tab" },
+      { "o", vim.cmd.tabonly, "Tab Only" },
+      { "d", vim.cmd.tabclose, "Tab Close" },
       { "l", ":tabmove +1<CR>", "Tab Move Right" },
       { "h", ":tabmove -1<CR>", "Tab Move Left" },
     },
@@ -71,8 +71,8 @@ local maps = {
   {
     prefix = "<leader>",
     maps = {
-      { "w", ":bnext<CR>", "Buffer Next" },
-      { "b", ":bprev<CR>", "Buffer Prev" },
+      { "w", vim.cmd.bnext, "Buffer Next" },
+      { "b", vim.cmd.bprev, "Buffer Prev" },
       -- Move between splits
       -- { "k", ":wincmd k<CR>", "Move Up" },
       -- { "l", ":wincmd l<CR>", "Move Right" },
@@ -103,8 +103,8 @@ utils.map("n", "<A-Up>", ":resize -5<CR>")
 --Move line to up or down
 utils.map("n", "J", ":m .+1<CR>==", opts)
 utils.map("n", "K", ":m .-2<CR>==", opts)
-utils.map("x", "J", ":move '>+1gv-gv", opts)
-utils.map("x", "K", ":move '<-2gv-gv", opts)
+-- utils.map("x", "J", ":move '>+1gv-gv", opts)
+-- utils.map("x", "K", ":move '<-2gv-gv", opts)
 -- utils.map("i", "J", "<Esc>:m .+1<CR>==gi", opts)
 -- utils.map("i", "K", "<Esc>:m .-2<CR>==gi", opts)
 utils.map("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -120,11 +120,11 @@ utils.map("n", "<bs>", ":<c-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) 
 -- Motions
 utils.map("n", "ç", "%")
 
-utils.map("n", "<leader>fo", ":TodoTelescope<CR>", { desc = "Todo List" })
+utils.map("n", "<leader>fo", vim.cmd.TodoTelescope, { desc = "Todo List" })
 
 -- diffview.nvim
-utils.map("n", "ñdo", ":DiffviewOpen<CR>", { desc = "Diff Open" })
-utils.map("n", "ñdc", ":DiffviewClose<CR>", { desc = "Diff Close" })
+utils.map("n", "ñdo", vim.cmd.DiffviewOpen, { desc = "Diff Open" })
+utils.map("n", "ñdc", vim.cmd.DiffviewClose, { desc = "Diff Close" })
 for i = 9, 1, -1 do
   utils.map(
     "n",
