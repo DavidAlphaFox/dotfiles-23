@@ -512,8 +512,8 @@ function M.setup()
     use {
       "tpope/vim-dadbod",
       requires = {
-       "kristijanhusak/vim-dadbod-ui",
-       "kristijanhusak/vim-dadbod-completion"
+        "kristijanhusak/vim-dadbod-ui",
+        "kristijanhusak/vim-dadbod-completion",
       },
       config = function()
         require("config.dadbod").setup()
